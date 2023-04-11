@@ -10,7 +10,13 @@
             <div class="left-block" >
                 <div class="upper-left-block">
                     <h1>Chats</h1>
-                    <button class="new-chat-button"><i class="fa fa-plus"></i></button>
+                    <img src="profile_pics/my_pic.png" alt="Your Image">
+                    <button class="new-chat-button" onclick="openPopup()"><i class="fa fa-plus"></i></button>
+                    <script>
+                        function openPopup() {
+                          window.open("popup.html", "Popup", "width=400,height=400");
+                        }
+                    </script>
                 </div>
                 <form class="example">
                     <input type="text" placeholder="search" name="search">

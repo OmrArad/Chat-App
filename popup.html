@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Popup</title>
+	<style>
+		.popup-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+			font-size: 1.2em;
+		}
+
+		.popup-header {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			padding: 0.5em 1em;
+			background-color: #f0f0f0;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.popup-header h2 {
+			margin: 0;
+			font-weight: normal;
+			font-size: 1.2em;
+		}
+
+		.popup-header button {
+			background-color: transparent;
+			border: none;
+			font-size: 1.2em;
+			cursor: pointer;
+		}
+
+		.popup-body {
+			padding: 1em;
+		}
+
+		.contact-form {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			max-width: 400px;
+		}
+
+		.contact-form label {
+			margin-bottom: 0.5em;
+		}
+
+		.contact-form input[type="text"],
+		.contact-form input[type="email"] {
+			padding: 0.5em;
+			font-size: 1em;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			margin-bottom: 1em;
+		}
+
+		.contact-form button {
+			padding: 0.5em;
+			background-color: #0b528c;
+			color: #fff;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+			margin-top: 1em;
+		}
+	</style>
+</head>
+<body>
+	<div class="popup-container">
+		<div class="popup-header">
+			<h2>Add Contact</h2>
+			<button onclick="window.close()">X</button>
+		</div>
+		<div class="popup-body">
+			<form class="contact-form">
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name" required>
+
+				<button type="submit">Add</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
