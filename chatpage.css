@@ -169,7 +169,6 @@ form.example::after {
   background-color: #FFFFFF;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
   border-radius: 5px;
-  margin: 10px;
 }
 
 .message {
@@ -185,5 +184,5 @@ form.example::after {
 
 .received {
   align-self: flex-start;
-  background-color: #FFFFFF;
+  background-color: #ffcdcdc8;
 }
