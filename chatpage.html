@@ -11,13 +11,29 @@
                 <div class="upper-left-block">
                     <h1>Chats</h1>
                     <img src="profile_pics/my_pic.png" alt="Your Image">
-                    <button class="new-chat-button" onclick="openPopup()"><i class="fa fa-plus"></i></button>
+                    <button class="new-chat-button" onclick="openDialog()"><i class="fa fa-plus"></i></button>
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeDialog()">&times;</span>
+                            <form>
+                                <p>Add new contact</p>
+                                <input type="text" placeholder="Enter name" name="name">
+                                <button type="submit">Add</button>
+                            </form>
+                        </div>
+                    </div>
                     <script>
-                        function openPopup() {
-                          window.open("popup.html", "Popup", "width=400,height=400");
+                        function openDialog() {
+                            var modal = document.getElementById("myModal");
+                            modal.style.display = "block";
+                        }
+                
+                        function closeDialog() {
+                            var modal = document.getElementById("myModal");
+                            modal.style.display = "none";
                         }
                     </script>
-                </div>
+                </div>                               
                 <form class="example">
                     <input type="text" placeholder="search" name="search">
                     <button type="submit"><i class="fa fa-search"></i></button>
