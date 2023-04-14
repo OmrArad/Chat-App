@@ -5,7 +5,7 @@ body {
 }
 
 .top {
-    background-color: #009900;
+    background-color: #0d59aa;
     height: 150px;
     position: absolute;
     width: 100%;
@@ -37,7 +37,7 @@ input[type=text], input[type=password] {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #0b528c;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;    
@@ -49,7 +49,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0d59aa;
 }
 
 .cancelbtn {
@@ -65,8 +65,8 @@ button:hover {
 }
 
 img.avatar {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    /* height: 100px; */
 }
 
 .container > span.psw {
