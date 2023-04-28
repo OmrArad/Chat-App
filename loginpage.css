@@ -69,15 +69,15 @@ img.avatar {
     /* height: 100px; */
 }
 
-.container > span.psw {
-    float: right;
-    padding-top: 16px;
-    margin-top: 20px;
+span.psw {
+    text-align: left;
+    padding-top: 2px;
+    margin-top: 0px;
 }
 
-.registerlink {
-    text-align: left;
-    margin-top: 20px;
+#registerlink {
+    text-align: right;
+    margin-top: 0px;
 }
 
 .register-card {
