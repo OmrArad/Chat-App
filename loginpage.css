@@ -80,6 +80,17 @@ img.avatar {
     margin-top: 20px;
 }
 
+.register-card {
+    max-width: 640px;
+    margin: 70px auto;
+    min-width: 0;
+    padding: 20px;
+
+    border-radius: 5px;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.3);
+    background-color: #fff;
+}
+
 /* Change styles for cancel button on extra small screens */
 @media screen and (max-width: 300px) {
     .cancelbtn {
