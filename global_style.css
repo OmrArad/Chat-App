@@ -26,10 +26,3 @@ button {
 button:hover {
     background-color: #0d59aa;
 }
-
-.top {
-    background-color: #0d59aa;
-    height: 150px;
-    position: absolute;
-    width: 100%;
-}
