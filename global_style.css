@@ -1,5 +1,14 @@
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: auto;
+}
+
+.top {
+    background-color: #0d59aa;
+    height: 150px;
+    position: absolute;
+    width: 100%;
 }
 
 button {
