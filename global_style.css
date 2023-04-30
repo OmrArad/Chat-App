@@ -8,7 +8,6 @@ body {
     position: absolute;
     width: 100%;
 }
-
 button {
     background-color: #0b528c;
     margin-top: 8px;
@@ -29,6 +28,34 @@ input[type=text], input[type=password] {
     font-size: 16px;
 }
 
-/* label {
-    font-weight: 600;
-} */
+button {
+    background-color: #0b528c;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+
+.button:hover {
+    background-color: #0d59aa;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 7px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+form {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    position: relative;
+}
