@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
   font-family: 'Nexa', sans-serif;
 }
@@ -7,7 +7,7 @@ body {
 }
 
 .container-fluid {
-  display: flex;
+  float: left;
 }
 
 .card {
@@ -115,4 +115,8 @@ body {
   max-width: 50%;
   background-color: #e2e3e5;
   border-color: #d6d8db;
+} */
+
+.card {
+    height: 100%;
 }
