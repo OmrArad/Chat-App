@@ -2,21 +2,21 @@
 
 This is a our implementation of a chat app that allows users to register and login to a chat room where they can exchange messages with other users.
 
-# Features
+## Features
 
 - User registration: Users can create an account with their email and a password.
 - User login: Registered users can log in to the app with their email and password.
 - Chat page: Once logged in, users can access the chat page where they can send and receive messages.
 - Simple UI: The app has a simple and user-friendly UI.
 
-# Technologies Used
+## Technologies Used
 
 - HTML
 - CSS
 - JavaScript
 - Node.js (Later)
 
-# Installation
+## Installation
 
 1. Clone the repository:
    ```
@@ -33,13 +33,13 @@ This is a our implementation of a chat app that allows users to register and log
    ```
 4. Open your browser and go to http://localhost:3000 to access the app.
 
-# Usage
+## Usage
 
 1. Register a new account by clicking the "Register" button on the login page.
 2. Log in to the app with your email and password.
 3. Access the chat page and start sending messages.
 
-# Contributors
+## Contributors
 
 - [Erez Gilat](https://github.com/...)
 - [Akiva Zev](https://github.com/...)
