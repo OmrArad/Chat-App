@@ -15,131 +15,151 @@
 <body>
     <div class="top">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="container-fluid"></div>
+            <div class="card col-md-3">
+                <div class="container-fluid col-md-6">
                     <div class="d-flex flex-column align-items-center mb-3">
                         <h1 class="mb-3">Chats</h1>
-                        <img src="profile_pics/my_pic.png" class="rounded-circle mb-3" alt="Your Image" width="100"
-                            height="100">
-                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#addContactModal">+</button>
+                        <img src="profile_pics/my_pic.png" class="rounded-circle mb-3" alt="Your Image" width="100" height="100">
+                        <button type="submit" class="btn btn-primary" onclick="openDialog()" data-bs-toggle="modal" data-bs-target="#addContactModal">+</button>
                     </div>
-
-                    <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addContactModalLabel">Add new contact</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" placeholder="Enter name"
-                                                name="name">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Add</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <form class="mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" name="search">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-                        </div>
-                    </form>
-
-                    <div class="list-group">
-                        <!-- Add more list items as needed -->
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <img src="profile_pics/p1.png" alt="Your Image" class="rounded-circle me-3" width="50"
-                                height="50">
-                            <div>
-                                <h5 class="mb-1">Sapir Mosi</h5>
-                                <small>12/1/2023 16:45</small>
-                                <p class="mb-0">Hey!!!</p>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <img src="profile_pics/p1.png" alt="Your Image" class="rounded-circle me-3" width="50"
-                                height="50">
-                            <div>
-                                <h5 class="mb-1">Sapir Mosi</h5>
-                                <small>12/1/2023 16:45</small>
-                                <p class="mb-0">Hey!!!</p>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <img src="profile_pics/p1.png" alt="Your Image" class="rounded-circle me-3" width="50"
-                                height="50">
-                            <div>
-                                <h5 class="mb-1">Sapir Mosi</h5>
-                                <small>12/1/2023 16:45</small>
-                                <p class="mb-0">Hey!!!</p>
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <img src="profile_pics/p1.png" alt="Your Image" class="rounded-circle me-3" width="50"
-                                height="50">
-                            <div>
-                                <h5 class="mb-1">Sapir Mosi</h5>
-                                <small>12/1/2023 16:45</small>
-                                <p class="mb-0">Hey!!!</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-header">
-                            <img src="profile_pics/p2.png" alt="contact-image" class="rounded-circle me-3" width="50"
-                                height="50">
-                            <h5>Hami Horworitz</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <div class="d-flex flex-column align-items-end">
-                                    <span class="badge bg-primary">This is a sent message</span>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex flex-column align-items-start">
-                                    <span class="badge bg-secondary">This is a received message</span>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex flex-column align-items-end">
-                                    <span class="badge bg-primary">Another sent message</span>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex flex-column align-items-end">
-                                    <span class="badge bg-primary">Another sent message</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeDialog()">&times;</span>
                             <form>
-                                <div class="input-group">
-                                    <input name="usermsg" type="text" class="form-control" id="usermsg"
-                                        placeholder="Type your message">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i></button>
-                                </div>
+                                <p>Add new contact</p>
+                                <input type="text" placeholder="Enter name" name="name">
+                                <button type="submit" class="button">Add</button>
                             </form>
                         </div>
+                    </div>
+                    <script>
+                        function openDialog() {
+                            var modal = document.getElementById("myModal");
+                            modal.style.display = "block";
+                        }
+    
+                        function closeDialog() {
+                            var modal = document.getElementById("myModal");
+                            modal.style.display = "none";
+                        }
+                    </script>
+                </div>                               
+                <form class="mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="search">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+                <div class="card chats-list">
+                    <div class="card">
+                        <img src="profile_pics/p1.png" alt="Your Image">
+                        <h2>Sapir Mosi</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>Sapir: Hey!!!</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p2.png" alt="Your Image">
+                        <h2>Ido Moshe</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>You: Are you coming today?</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p3.png" alt="Your Image">
+                        <h2>Yoav Raz</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>You: What? No way!</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p4.png" alt="Your Image">
+                        <h2>Shira Dan</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>Shira: I love that song</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p5.png" alt="Your Image">
+                        <h2>Sara Paz</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>You: Are you going to the party?</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p6.png" alt="Your Image">
+                        <h2>Ido Katzir</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>Ido: I talked with him</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p7.png" alt="Your Image">
+                            <h2>Jackie Jones</h2>
+                            <p>12/1/2023 16:45</p>
+                            <p>Jackie: We had a second date, it was horrible</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p8.png" alt="Your Image">
+                        <h2>Moris Mor</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>Moris: Are you ok? I heard you had a difficult test</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p9.png" alt="Your Image">
+                        <h2>Sigal Oren</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>You: Sigal!! Quickly please answer.</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p1.png" alt="Your Image">
+                        <h2>Shiri Shir</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>Shiri: We are on our way</p>
+                    </div>
+                    <div class="card">
+                        <img src="profile_pics/p2.png" alt="Your Image">
+                        <h2>Hami Horworitz</h2>
+                        <p>12/1/2023 16:45</p>
+                        <p>Hami: I will let you know about your grade</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="profile_pics/p2.png" alt="contact-image" class="rounded-circle me-3" width="50"
+                            height="50">
+                        <h5>Hami Horworitz</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex flex-column align-items-end">
+                                <span class="badge bg-primary">This is a sent message</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex flex-column align-items-start">
+                                <span class="badge bg-secondary">This is a received message</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex flex-column align-items-end">
+                                <span class="badge bg-primary">Another sent message</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex flex-column align-items-end">
+                                <span class="badge bg-primary">Another sent message</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <form>
+                            <div class="input-group">
+                                <input name="usermsg" type="text" class="form-control" id="usermsg"
+                                    placeholder="Type your message">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
-
-</html>
-
