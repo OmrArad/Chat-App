@@ -19,13 +19,15 @@
 			<img src="chat-06.jpg" class="rounded mx-auto d-block avatar" alt="Avatar">
 			
 			<!-- Username input field -->
-			<label for="username"><b>Username</b></label>
-			<input type="text" id="username-input" class="form-control form-floating" placeholder="Enter username" required>
-
+			<div class="form-label-group mb-3">
+				<label for="username-input">Username</label>
+				<input type="text" id="username-input" class="form-control form-floating" placeholder="Enter username" required>
+			</div>
 			<!-- Password input field -->
-			<label for="password"><b>Password</b></label>
-			<input type="text" id="username-input" class="form-control form-floating" placeholder="Enter username" required>
-			
+			<div class="form-label-group mb-3">
+				<label for="password-input">Password</label>
+				<input type="text" id="password-input" class="form-control form-floating" placeholder="Enter password" required>
+			</div>
 			<!-- Login button -->
 			<div class="d-grid gap-2">
 				<button class="btn btn-primary" type="submit" id="login-button">Login</button>
@@ -40,11 +42,13 @@
 			</div>
 			
 			<!-- Forgot password link -->
-			<span class="psw">Forgot <a href="#">password?</a></span>
-			
-			<!-- Link to registration page -->
-        	<div id="registerlink">
-				<p>Not registered? <a href="registration.html">Click here</a> to register</p>
+			<div class="row mt-3">
+				<div class="psw col">Forgot <a href="#">password?</a></div>
+
+				<!-- Link to registration page -->
+				<div id="registerlink" class="col">
+					Not registered? <a href="registration.html">Click here</a> to register
+				</div>
 			</div>
 		</form>     
 		

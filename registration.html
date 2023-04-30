@@ -24,28 +24,28 @@
                     <label id="username-label" for="username-input">
                         Username
                     </label>
-                    <input type="text" id="username-input" class="form-control form-floating" placeholder="Enter username">
+                    <input type="text" id="username-input" class="form-control form-floating" placeholder="Enter username" required>
                 </div>
                 <!-- Input field for password -->
-                <div id="password-row" class="form-label-group mb-3">
+                <div id="password-group" class="form-label-group mb-3">
                     <label id="password-label" for="password-input" class="input-title col">
                         Password
                     </label>
-                    <input id="password-input" type="password" class="form-control form-floating" placeholder="Enter password">
+                    <input id="password-input" type="password" class="form-control form-floating" placeholder="Enter password" required>
                 </div>
                 <!-- Input field for password confirmation -->
-                <div id="password-row" class="form-label-group mb-3">
+                <div id="conf-pass-group" class="form-label-group mb-3">
                     <label id="conf-pass" for="conf-pass-input" class="input-title col">
                         Verify Password
                     </label>
-                    <input id="conf-pass-input" type="password" class="form-control form-floating" placeholder="Reenter password">
+                    <input id="conf-pass-input" type="password" class="form-control form-floating" placeholder="Reenter password" required>
                 </div>
                 <!-- Input field for display name -->
                 <div id="displayname-row" class="form-label-group mb-3">
                     <label id="displayname-label" for="displayname-input" class="input-title col">
                         Display name
                     </label>
-                    <input id="displayname-input" type="text" class="form-control form-floating" placeholder="Enter display name">
+                    <input id="displayname-input" type="text" class="form-control form-floating" placeholder="Enter display name" required>
                 </div>
                 <!-- Input field for uploading profile picture -->
                 <div id="upload-picture-row" class="form-label-group mb-3">
@@ -56,6 +56,7 @@
                 </div>
                 <!-- Div to display uploaded image -->
                 <div id="image-row" class="row mb-3">
+                    <img id="profile_img" src="profile_pics/rabbit.jpeg" alt="placeholder pic">
                 </div>
                 <!-- Button for registration submission -->
                 <div id="register-row" class="row">
@@ -70,3 +71,5 @@
             <!--</div>-->
         </form>
     </div>
+    </div>
+</body>
