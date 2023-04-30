@@ -1,121 +1,38 @@
-/* * {
+* {
   box-sizing: border-box;
   font-family: 'Nexa', sans-serif;
 }
+
 body {
   display: flex;
 }
 
-.container-fluid {
-  float: left;
-}
-
-.card {
-  background-color: white;
-  margin: 2px;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.card img {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.card h2 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.card p {
-  margin: 5px 0;
-  font-size: 14px;
-  color: #888;
-}
-
-.example {
-  position: relative;
-  margin: 20px 0;
-}
-
-.alert {
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.alert-primary {
-  background-color: #cce5ff;
-  color: #004085;
-  align-self: flex-end;
-  border-radius: 10px;
-}
-
-.alert-secondary {
-  background-color: #e2e3e5;
-  color: #383d41;
-  align-self: flex-start;
-  border-radius: 10px;
-}
-
-.col-md-3 {
-  width: 25%;
-  max-height: 90vh;
-  max-width: 25%;
-  margin: 2%;
-  flex: 0 0 25%;
-}
-
-.col-md-9 {
-  width: 75%;
-  max-height: 90vh;
-  max-width: 75%;
-  flex: 0 0 75%;
-  background-color: #3d3d3d;
-  padding: 20px;
-  margin: 1.5vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.chat-card {
-  max-height: 100%;
-  overflow-y: auto;
-}
-
-.transparent-background {
-  background-color: transparent;
-}
-
-.chats-list {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 100%;
-  height: 100%;
+.list-group {
   overflow-y: scroll;
+  height: calc(100vh - 56px);
 }
 
-.sent-message {
-  text-align: left;
-  margin-left: 0;
-  margin-right: auto;
-  max-width: 50%;
-  background-color: #cce5ff;
-  border-color: #b8daff;
+.container-fluid {
+    height: 100%;
+    padding: 20px;
+
+    border-radius: 5px;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.3);
 }
 
-.received-message {
-  text-align: left;
-  margin-left: auto;
-  margin-right: 0;
-  max-width: 50%;
-  background-color: #e2e3e5;
-  border-color: #d6d8db;
-} */
+form {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    align-self: center;
+    padding: 2px;
+    max-width: none;
+    border-radius: 10px;
+}
+
+#chat-card {
+    height: calc(100vh - 25px);
+}
 
 .card {
     height: 100%;
