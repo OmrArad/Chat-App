@@ -1,6 +1,8 @@
 import './ChatPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import inputs from '../InputFieldItem/inputs';
+import SentMessageItem from './SentMessageItem/SentMessageItem';
+import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem';
 
 function ChatPage() {
 
@@ -20,7 +22,7 @@ function ChatPage() {
                                     height="100"></img>
                                 <button type="button" className="btn btn-primary" data-toggle="modal"
                                     data-target="#addContactModal">+</button>
-                                <div className="modal fade" id="addContactModal" tabindex="-1" role="dialog"
+                                <div className="modal fade" id="addContactModal" tabIndex="-1" role="dialog"
                                     aria-labelledby="addContactModalLabel" aria-hidden="true">
                                     <div className="modal-dialog" role="document">
                                         <div className="modal-content">
@@ -110,26 +112,10 @@ function ChatPage() {
                                 <h5>Hami Horworitz</h5>
                             </div>
                             <div className="card-body">
-                                <div className="mb-3">
-                                    <div className="d-flex flex-column align-items-end">
-                                        <span className="badge bg-primary">This is a sent message</span>
-                                    </div>
-                                </div>
-                                <div className="mb-3">
-                                    <div className="d-flex flex-column align-items-start">
-                                        <span className="badge bg-secondary">This is a received message</span>
-                                    </div>
-                                </div>
-                                <div className="mb-3">
-                                    <div className="d-flex flex-column align-items-end">
-                                        <span className="badge bg-primary">Another sent message</span>
-                                    </div>
-                                </div>
-                                <div className="mb-3">
-                                    <div className="d-flex flex-column align-items-end">
-                                        <span className="badge bg-primary">Another sent message</span>
-                                    </div>
-                                </div>
+                                <SentMessageItem message={'This is a sent message'} />
+                                <ReceivedMessageItem message={'This is a received message'} />
+                                <SentMessageItem message={'Another sent message'} />
+                                <SentMessageItem message={'Another sent message'} />
                             </div>
                             <div className="card-footer">
                                 <form className="input-message">
