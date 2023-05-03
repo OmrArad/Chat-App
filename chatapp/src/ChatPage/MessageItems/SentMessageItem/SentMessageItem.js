@@ -1,4 +1,4 @@
-function MessageItem({message}) {
+function SentMessageItem({message}) {
     return (
         <div className="mb-3">
             <div className="d-flex flex-column align-items-end">
@@ -8,4 +8,4 @@ function MessageItem({message}) {
     );
 }
 
-export default MessageItem
+export default SentMessageItem
