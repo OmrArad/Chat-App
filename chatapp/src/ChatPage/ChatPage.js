@@ -5,13 +5,9 @@ import LeftColumn from './LeftColumn/LeftColumn';
 function ChatPage() {
 
     return (
-        <div className="top">
-            <div className="container-fluid">
-                <div className="row">
-                    <LeftColumn />
-                    <ChatWindow />
-                </div>
-            </div>
+        <div className="row">
+            <LeftColumn />
+            <ChatWindow />
         </div>
     );
 }
