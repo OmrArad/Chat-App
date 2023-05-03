@@ -1,4 +1,4 @@
-import my_pic from '../../ContactItem/profile_pics/my_pic.png';
+import my_pic from '../../ContactItem/profile_pics/my_pic.png'
 
 function UpperSection() {
 

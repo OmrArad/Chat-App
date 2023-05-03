@@ -1,28 +1,25 @@
-import ContactItem from '../ContactItem/ContactItem';
+import { useState } from 'react';
 import contacts from '../ContactItem/contacts';
+import Search from './Search/Search';
 import UpperSection from './UpperSection/UpperSection';
+import ContactListResults from './ContactListResults/ContactListResults';
 
 function LeftColumn() {
 
-    const contactList = contacts.map((contact, key) => {
-        return <ContactItem {...contact} key={key} />
-    })
+    const [contactList, setContactList] = useState(contacts);
+
+    const doSearch = function(q){ 
+        setContactList(contacts.filter((contact) => contact.name.includes(q)));
+    };
 
     return (
         <div className="col-md-3">
             <div className="card" id="chat-card">
                 <UpperSection />
 
-                <form className="mb-3">
-                    <div className="input-group">
-                        <input type="text" className="form-control" placeholder="Search" name="search"></input>
-                        <button className="btn btn-primary" type="submit"><i className="fa fa-search"></i></button>
-                    </div>
-                </form>
+                <Search doSearch={doSearch} />
 
-                <ul className="list-group">
-                    {contactList}
-                </ul>
+                <ContactListResults contacts={contactList} />
             </div>
         </div>
     );
