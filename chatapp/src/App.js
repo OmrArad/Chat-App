@@ -11,13 +11,13 @@ function App() {
   return (
     <div className="top">
       <div className="container-fluid">
-        <BrowserRouter>
+        <Router>
           <Routes>
             <Route path='/login' element={<LoginPage />} ></Route>
             <Route path='/register' element={<RegisreationPage />} ></Route>
             <Route path='/' element={<ChatPage />} ></Route>
           </Routes>
-        </BrowserRouter>
+        </Router>
       </div>
     </div>
   );

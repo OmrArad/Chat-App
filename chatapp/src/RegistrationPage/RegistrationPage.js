@@ -1,4 +1,5 @@
 import './RegistrationPage.css';
+import { Link } from 'react-router-dom'
 
 function RegisreationPage() {
     return (
@@ -93,9 +94,9 @@ function RegisreationPage() {
                     {/* Link for already registered users to login */}
                     <div id="already-registered-txt" className="col text-sm-center">
                         Already registered?{" "}
-                        <a id="login-link" href="loginpage.html">
+                        <Link id="login-link" to='/login'>
                             Click here
-                        </a>{" "}
+                        </Link>{" "}
                         to login
                     </div>
                 </div>

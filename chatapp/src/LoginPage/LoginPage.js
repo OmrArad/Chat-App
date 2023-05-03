@@ -1,6 +1,8 @@
 import './LoginPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import inputs from '../InputFieldItem/inputs';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+
 
 function LoginPage() {
 
@@ -38,8 +40,10 @@ function LoginPage() {
 
         {/* <!-- Link to registration page --> */}
         <div id="registerlink" className="col">
-          Not registered? <a href="registration.html">Click here</a> to register
+          Not registered? <Link to='/register'>Click here</Link> to register
         </div>
+
+
       </div>
     </form>
   );
