@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.top {
+    background-color: #0d59aa;
+    height: 150px;
+    position: absolute;
+    width: 100%;
+}
+
+button {
+    background-color: #0b528c;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+
+.button:hover {
+    background-color: #0d59aa;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 7px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+form {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    position: relative;
+}
+
+.register-card {
+    max-width: 640px;
+    margin: 70px auto;
+    min-width: 0;
+    padding: 20px;
+
+    border-radius: 5px;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.3);
+    background-color: #fff;
+}
+
+label {
+    font-weight: bold;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Nexa', sans-serif;
+}
+
+body {
+    display: flex;
+}
+
+.list-group {
+    overflow-y: scroll;
+    height: calc(100vh - 56px);
+}
+
+.container-fluid {
+    height: 100%;
+    padding: 20px;
+
+    border-radius: 5px;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+form {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    align-self: center;
+    padding: 2px;
+    max-width: none;
+    border-radius: 10px;
+}
+
+#chat-card {
+    height: calc(100vh - 25px);
+}
+
+.card {
+    height: 100%;
+}
+
+.card:img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
