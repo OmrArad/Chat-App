@@ -5,7 +5,7 @@ import p2 from '../ContactItem/profile_pics/p2.png'
 function ChatWindow() {
     return (
         <div className="col-md-9">
-            <div className="card">
+            <div id="chat-window" className="card">
                 <div className="card-header">
                     <img src={p2} alt="contact-image" className="rounded-circle me-3" width="50"
                         height="50"></img>
