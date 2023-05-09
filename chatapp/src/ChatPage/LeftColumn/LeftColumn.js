@@ -4,7 +4,7 @@ import Search from './Search/Search';
 import UpperSection from './UpperSection/UpperSection';
 import ContactListResults from './ContactListResults/ContactListResults';
 
-function LeftColumn() {
+function LeftColumn( {auth} ) {
 
     const [contactList, setContactList] = useState(contacts);
 
@@ -13,9 +13,9 @@ function LeftColumn() {
     };
 
     return (
-        <div className="col-md-3">
+        <div className="col-md-3 col-sm-3 col-3 px-1">
             <div className="card" id="chat-card">
-                <UpperSection />
+                <UpperSection auth={auth}/>
 
                 <Search doSearch={doSearch} />
 
