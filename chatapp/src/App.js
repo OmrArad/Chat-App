@@ -1,8 +1,8 @@
 import './App.css';
 import LoginPage from './LoginPage/LoginPage';
-import RegisreationPage from './RegistrationPage/RegistrationPage';
 import ChatPage from './ChatPage/ChatPage';
 import { BrowserRouter as Router, Route, NavLink, BrowserRouter, Routes } from 'react-router-dom'
+import RegistrationPage from "./RegistrationPage/RegistrationPage";
 
 
 
@@ -14,7 +14,7 @@ function App() {
         <Router>
           <Routes>
             <Route path='/login' element={<LoginPage />} ></Route>
-            <Route path='/register' element={<RegisreationPage />} ></Route>
+            <Route path='/register' element={<RegistrationPage />} ></Route>
             <Route path='/' element={<ChatPage />} ></Route>
           </Routes>
         </Router>
