@@ -1,11 +1,56 @@
 import './RegistrationPage.css';
-import { Link } from 'react-router-dom'
+import Validation from '../LoginPage/Validation';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import ChatPage from '../ChatPage/ChatPage';
+import { useNavigate } from "react-router-dom";
 
-function RegisreationPage() {
+function RegisreationPage({ setDB }) {
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [verify, setVerify] = useState("");
+    const [displayname, setDisplayName] = useState("");
+    const [picture, setPicture] = useState("");
+    const navigate = useNavigate();
+
+    const usernameRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const [errors, setError] = useState({
+        name: '',
+        password: '',
+        verify: '',
+        displayName: '',
+        picture: ''
+    });
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const newErrors = Validation({ username, password, verify, displayname, picture });
+
+        setError(newErrors);
+
+        // authenticate username and password
+        if (!newErrors) {
+            setDB({ username, password, displayname, picture });
+
+            navigate('/', { state: { username } });
+
+            // setLoggedIn(true);
+            // setUsername("");
+            // setPassword("");
+            // usernameRef.current.focus();
+        } else {
+            passwordRef.current.focus();
+        }
+    };
+
     return (
         <>
             {/* Registration form */}
-            <form className="register-card">
+            <form className="register-card" onSubmit={handleSubmit}>
                 {/*<div class="card-body">*/}
                 {/* Input field for username */}
                 <div id="username-row" className="form-label-group mb-3">
@@ -15,6 +60,7 @@ function RegisreationPage() {
                     <input
                         type="text"
                         id="username-input"
+                        ref={usernameRef}
                         className="form-control form-floating"
                         placeholder="Enter username"
                         required=""
