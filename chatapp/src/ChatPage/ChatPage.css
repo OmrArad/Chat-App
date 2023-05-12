@@ -89,7 +89,7 @@ body {
 
 #chat-card {
     height: calc(100vh - 25px);
-    min-width: 200px;
+    min-width: 240px;
     max-width: 320px;
     z-index: 2;
 }
