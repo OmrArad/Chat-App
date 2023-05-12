@@ -2,19 +2,21 @@ import { useState } from 'react';
 
 function InputMessageForm({ onSubmit }) {
   const [message, setMessage] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newMessage = {
-      sender: 'JohnDoe',
-      recipient: 'JaneDoe',
-      message,
-      timestamp: new Date().toISOString(),
+    if (message.trim() === '') return;
+
+    const messageObject = {
+      sender: 'Your sender identifier', // Replace with your sender identifier logic
+      receiver: 'Your receiver identifier', // Replace with your receiver identifier logic
+      content: message,
+      time: new Date(),
     };
-    // Add the new message to the localStorage
-    const messages = JSON.parse(localStorage.getItem('../messages.json') || '[]');
-    messages.push(newMessage);
-    localStorage.setItem('../messages.json', JSON.stringify(messages));
-    // Clear the message input
+    // Call the onSubmit function passed down as a prop
+    onSubmit(messageObject);
+
+    // Clear the input field
     setMessage('');
   };
 
