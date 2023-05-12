@@ -1,4 +1,4 @@
-const ChatComponent = () => {
+const UserComponent = () => {
   const data = [
     {
       name: 'Sapir Mosi',
@@ -60,6 +60,18 @@ const ChatComponent = () => {
       message: 'Are you going to the party?',
       time: '12/1/2023 16:45',
       pic: 'profile_pics/p2.png',
+    },
+    {
+      name: 'Shira Dan',
+      message: 'I love that song',
+      time: '12/1/2023 16:45',
+      pic: 'profile_pics/p1.png',
+    },
+    {
+      name: 'Sara Paz',
+      message: 'Are you going to the party?',
+      time: '12/1/2023 16:45',
+      pic: 'profile_pics/p2.png',
     }
   ];
   
@@ -87,4 +99,4 @@ const ChatComponent = () => {
     })
   );
   }
-  export default ChatComponent;
+  export default UserComponent;
