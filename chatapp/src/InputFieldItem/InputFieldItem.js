@@ -1,4 +1,4 @@
-function InputFieldItem({ title, id, type, placeholder, handleFileUpload }){
+function InputFieldItem({ title, id, type, placeholder, handleFileUpload, ref }){
     const handleChange = (event) => {
         if (handleFileUpload) {
             handleFileUpload(event);
@@ -9,7 +9,7 @@ function InputFieldItem({ title, id, type, placeholder, handleFileUpload }){
         <div className="form-label-group mb-3">
             <label htmlFor={id}>{title}</label>
             <input type={type} id={id} className="form-control form-floating" placeholder={placeholder}
-                   onChange={handleChange} required></input>
+                   onChange={handleChange} ref={ref} required></input>
         </div>
     );
 }

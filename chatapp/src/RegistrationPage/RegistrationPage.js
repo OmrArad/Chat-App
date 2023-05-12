@@ -1,12 +1,11 @@
 import './RegistrationPage.css';
 import InputFieldItem from "../InputFieldItem/InputFieldItem";
+import Validation from '../LoginPage/Validation';
+import { Link } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
 import SubmitButton from "../SubmitButton/SubmitButton";
-import React, {useState} from "react";
 import ProfilePicDisplay from "./ProfilePicDisplay/ProfilePicDisplay";
 import { useNavigate } from "react-router-dom";
-import ChatPage from '../ChatPage/ChatPage';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-
 
 function RegistrationPage({ setDB }) {
     const [username, setUsername] = useState("");
@@ -47,7 +46,7 @@ function RegistrationPage({ setDB }) {
         } else {
             passwordRef.current.focus();
         }
-    };
+    }
 
     const [profilePicPath, setProfilePicPath] = useState("");
 
@@ -68,7 +67,7 @@ function RegistrationPage({ setDB }) {
                 Register
             </h1>
             {/* Input field for username */}
-            <InputFieldItem title={"Username"} type={"text"} id={"username-input"} placeholder={"Enter username"}/>
+            <InputFieldItem title={"Username"} type={"text"} id={"username-input"} ref={usernameRef} placeholder={"Enter username"} />
             {/* Input field for password */}
             <InputFieldItem title={"Password"} type={"password"} id={"password-input"} placeholder={"Enter password"}/>
             {/* Input field for password confirmation */}

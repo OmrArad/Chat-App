@@ -1,7 +1,7 @@
 import './App.css';
 import LoginPage from './LoginPage/LoginPage';
 import ChatPage from './ChatPage/ChatPage';
-import { BrowserRouter as Router, Route, NavLink, BrowserRouter, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import React, { useState } from 'react';
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
 
@@ -18,7 +18,7 @@ function App() {
           <Routes>
             <Route path='/' element={<LoginPage setAuth={setAuth}/>} ></Route>
             <Route path='/login' element={<LoginPage setAuth={setAuth}/>} ></Route>
-            <Route path='/register' element={<RegisreationPage />} ></Route>
+            <Route path='/register' element={<RegistrationPage />} ></Route>
           </Routes>
         </Router>
       </div>
@@ -33,7 +33,7 @@ function App() {
         <Router>
           <Routes>
             <Route path='/login' element={<LoginPage />} ></Route>
-            <Route path='/register' element={<RegisreationPage />} ></Route>
+            <Route path='/register' element={<RegistrationPage />} ></Route>
             <Route path='/' element={<ChatPage auth={auth}/>} ></Route>
           </Routes>
         </Router>
