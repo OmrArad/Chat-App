@@ -23,7 +23,6 @@ button {
 input[type=text], input[type=password] {
     width: 100%;
     padding: 10px 20px;
-    margin: 7px 0;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -36,7 +35,6 @@ form {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     width: 100%;
-    max-width: 500px;
     padding: 20px;
     position: relative;
 }
@@ -89,7 +87,6 @@ button:hover {
 input[type=text], input[type=password] {
     width: 100%;
     padding: 8px 20px;
-    margin: 6px 0;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;

@@ -1,11 +1,54 @@
 import './RegistrationPage.css';
-import { Link } from 'react-router-dom'
 import InputFieldItem from "../InputFieldItem/InputFieldItem";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import React, {useState} from "react";
 import ProfilePicDisplay from "./ProfilePicDisplay/ProfilePicDisplay";
+import { useNavigate } from "react-router-dom";
+import ChatPage from '../ChatPage/ChatPage';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
-function RegistrationPage() {
+
+function RegistrationPage({ setDB }) {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [verify, setVerify] = useState("");
+    const [displayname, setDisplayName] = useState("");
+    const [picture, setPicture] = useState("");
+    const navigate = useNavigate();
+
+    const usernameRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const [errors, setError] = useState({
+        name: '',
+        password: '',
+        verify: '',
+        displayName: '',
+        picture: ''
+    });
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const newErrors = Validation({ username, password, verify, displayname, picture });
+
+        setError(newErrors);
+
+        // authenticate username and password
+        if (!newErrors) {
+            setDB({ username, password, displayname, picture });
+
+            navigate('/', { state: { username } });
+
+            // setLoggedIn(true);
+            // setUsername("");
+            // setPassword("");
+            // usernameRef.current.focus();
+        } else {
+            passwordRef.current.focus();
+        }
+    };
+
     const [profilePicPath, setProfilePicPath] = useState("");
 
     const handleFileUpload = (event) => {
@@ -20,7 +63,7 @@ function RegistrationPage() {
 
     return (
         /* Registration form */
-        <form className="register-card">
+        <form className="register-card" onSubmit={handleSubmit}>
             <h1>
                 Register
             </h1>

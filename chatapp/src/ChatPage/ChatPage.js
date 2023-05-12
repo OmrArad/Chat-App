@@ -2,11 +2,11 @@ import './ChatPage.css';
 import ChatWindow from './ChatWindow/ChatWindow';
 import LeftColumn from './LeftColumn/LeftColumn';
 
-function ChatPage() {
+function ChatPage( {auth} ) {
 
     return (
         <div className="row">
-            <LeftColumn />
+            <LeftColumn auth={auth}/>
             <ChatWindow />
         </div>
     );

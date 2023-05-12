@@ -15,6 +15,13 @@ button {
     margin-bottom: 8px;
 }
 
+.username {
+    position: relative;
+    text-align: left;
+    height: inherit;
+    margin-top: 50px;
+}
+
 
 .button:hover {
     background-color: #0d59aa;
@@ -23,7 +30,6 @@ button {
 input[type=text], input[type=password] {
     width: 100%;
     padding: 10px 20px;
-    margin: 7px 0;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -32,13 +38,16 @@ input[type=text], input[type=password] {
 
 form {
     background-color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     width: 100%;
     max-width: none;
     padding: 20px;
     position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    align-self: center;
 }
 
 .register-card {
@@ -78,22 +87,23 @@ body {
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
 }
 
-form {
-    width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    align-self: center;
-    padding: 2px;
-    max-width: none;
-    border-radius: 10px;
-}
-
 #chat-card {
     height: calc(100vh - 25px);
+    min-width: 240px;
+    max-width: 320px;
+    z-index: 2;
 }
 
 #chat-window {
     height: 100%;
+    position: relative;
+    z-index: 1;
+    min-width: 300px;
+}
+
+.chat-window {
+    z-index: 1;
+    min-width: 300px;
 }
 
 #chat-window:img {
@@ -102,4 +112,13 @@ form {
     height: 50px;
     object-fit: cover;
     margin-right: 10px;
+}
+
+.profile {
+    border-radius: 50%;
+    width: 40%;
+    max-width: 100px;
+    max-height: 70px;
+    object-fit: cover;
+    margin-left: 2px;
 }
