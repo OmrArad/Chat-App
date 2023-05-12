@@ -91,7 +91,9 @@ const UserComponent = () => {
             </div>
             <div className="d-flex flex-column">
               <p className="mb-0">{item.time}</p>
-              <span className="badge bg-primary">1</span>
+              <div className="d-flex justify-content-end">
+                <span className="badge bg-primary" style={{ width: '30px', height: '20px', textAlign: 'center' }}>1</span>
+              </div>
             </div>
           </div>
         </li>
