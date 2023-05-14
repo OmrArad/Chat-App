@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Formik, formik } from "formik";
-import * as Yup from Yup;
+import { Formik } from "formik";
+
 
 const [values, setValues] = useState({
     username: '',
     password: ''
-})
+});
 
 const ValidatedLoginForm = () => (
     <Formik>

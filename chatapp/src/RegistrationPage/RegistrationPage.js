@@ -1,13 +1,14 @@
 import './RegistrationPage.css';
 import InputFieldItem from "../InputFieldItem/InputFieldItem";
-import Validation from '../LoginPage/Validation';
+import validateRegistrationForm from './validateRegistrationForm';
 import { Link } from 'react-router-dom';
 import React, { useRef, useState } from 'react';
 import SubmitButton from "../SubmitButton/SubmitButton";
 import ProfilePicDisplay from "./ProfilePicDisplay/ProfilePicDisplay";
 import { useNavigate } from "react-router-dom";
+import userDatabase from "../userArray";
 
-function RegistrationPage({ setDB }) {
+function RegistrationPage({ setDB, setUser }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [verify, setVerify] = useState("");
@@ -15,37 +16,31 @@ function RegistrationPage({ setDB }) {
     const [picture, setPicture] = useState("");
     const navigate = useNavigate();
 
-    const usernameRef = useRef(null);
-    const passwordRef = useRef(null);
+    /*const usernameRef = useRef(null);
+    const passwordRef = useRef(null);*/
 
-    const [errors, setError] = useState({
-        name: '',
-        password: '',
-        verify: '',
-        displayName: '',
-        picture: ''
-    });
+    const [errors, setError] = useState(null);
 
     function handleSubmit(e) {
         e.preventDefault();
 
-        const newErrors = Validation({ username, password, verify, displayname, picture });
+        const newErrors = validateRegistrationForm({ username, password, verify, displayname, picture });
 
         setError(newErrors);
 
         // authenticate username and password
-        if (!newErrors) {
-            setDB({ username, password, displayname, picture });
-
+        if (newErrors.length === 0) {
+            let newUser = userDatabase.addUser({username, password, displayname, picture});
+            setUser(newUser);
             navigate('/', { state: { username } });
 
             // setLoggedIn(true);
             // setUsername("");
             // setPassword("");
             // usernameRef.current.focus();
-        } else {
+        } /*else {
             passwordRef.current.focus();
-        }
+        }*/
     }
 
     const [profilePicPath, setProfilePicPath] = useState("");
@@ -67,7 +62,7 @@ function RegistrationPage({ setDB }) {
                 Register
             </h1>
             {/* Input field for username */}
-            <InputFieldItem title={"Username"} type={"text"} id={"username-input"} ref={usernameRef} placeholder={"Enter username"} />
+            <InputFieldItem title={"Username"} type={"text"} id={"username-input"} placeholder={"Enter username"} />
             {/* Input field for password */}
             <InputFieldItem title={"Password"} type={"password"} id={"password-input"} placeholder={"Enter password"}/>
             {/* Input field for password confirmation */}
@@ -76,7 +71,7 @@ function RegistrationPage({ setDB }) {
             <InputFieldItem title={"Display name"} type={"text"} id={"displayname-input"} placeholder={"Enter display name"}/>
             {/* Input field for uploading profile picture */}
             <InputFieldItem title={"Picture"} type={"file"} id={"upload-picture-input"} placeholder={""}
-                            handleFileUpload={handleFileUpload} />
+                            handleChange={handleFileUpload} />
             {/* Display uploaded image */}
             <ProfilePicDisplay path={profilePicPath} />
             {/* Button for registration submission */}

@@ -8,17 +8,18 @@ import RegistrationPage from "./RegistrationPage/RegistrationPage";
 
 
 function App() {
-  const [auth, setAuth] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const getCurrentUser = () => currentUser;
 
-  if(!auth) {
+  if(currentUser === undefined) {
     return (
       <div className="top">
       <div className="container-fluid">
         <Router>
           <Routes>
-            <Route path='/' element={<LoginPage setAuth={setAuth}/>} ></Route>
-            <Route path='/login' element={<LoginPage setAuth={setAuth}/>} ></Route>
-            <Route path='/register' element={<RegistrationPage />} ></Route>
+            <Route path='/' element={<LoginPage setAuth={setCurrentUser}/>} ></Route>
+            <Route path='/login' element={<LoginPage setAuth={setCurrentUser}/>} ></Route>
+            <Route path='/register' element={<RegistrationPage setUser={setCurrentUser} />} ></Route>
           </Routes>
         </Router>
       </div>
@@ -34,7 +35,7 @@ function App() {
           <Routes>
             <Route path='/login' element={<LoginPage />} ></Route>
             <Route path='/register' element={<RegistrationPage />} ></Route>
-            <Route path='/' element={<ChatPage auth={auth}/>} ></Route>
+            <Route path='/' element={<ChatPage auth={currentUser}/>} ></Route>
           </Routes>
         </Router>
       </div>

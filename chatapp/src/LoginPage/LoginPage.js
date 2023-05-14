@@ -4,11 +4,35 @@ import inputs from '../InputFieldItem/inputs';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import React, { useRef, useState } from 'react';
 import ChatPage from '../ChatPage/ChatPage';
-import Validation from './Validation';
 import { useNavigate } from "react-router-dom";
+import CheckBox from "./CheckBox";
+import userDatabase from "../userArray";
 
+function validateLoginForm(values) {
+  let errors = {};
+
+  /* check for password */
+  if(!values.password) {
+    errors.password = "Password required"
+  }
+
+  /* check for username */
+  if (!values.username) {
+    errors.username = "Username required";
+  } else if (!userDatabase.containsUser(values.username)) {
+    errors.username = "User " + values.username + " does not exist";
+  } else {
+    let user = userDatabase.getUser(values.username);
+    if (user.password !== values.password) {
+      errors.password = "Password is incorrect"
+    }
+  }
+
+  return errors;
+}
 
 function LoginPage({ setAuth }) {
+
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,8 +43,8 @@ function LoginPage({ setAuth }) {
   const passwordRef = useRef(null);
 
   const [errors, setError] = useState({
-    name: '',
-    password: ''
+    'username' : '',
+    'password' : ''
   });
 
   function handleUsernameChange(e) {
@@ -38,23 +62,24 @@ function LoginPage({ setAuth }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const newErrors = Validation({ username, password });
+    const newErrors = validateLoginForm({ username, password });
 
     setError(newErrors);
 
     // authenticate username and password
-    if (!newErrors.username && !newErrors.password) {
-      setAuth({ username, password });
+    if (newErrors === {}) {
+      const user = userDatabase.getUser(username);
+      setAuth(user);
 
       navigate('/', {state: {username}});
 
       setLoggedIn(true);
       setUsername("");
       setPassword("");
-      usernameRef.current.focus();
-    } else {
+      //usernameRef.current.focus();
+    } /* else {
       passwordRef.current.focus();
-    }
+    }*/
   };
 
   const inputList = inputs.map((input, key) => {
@@ -70,37 +95,12 @@ function LoginPage({ setAuth }) {
       <img src="chat-06.jpg" className="rounded mx-auto d-block avatar" alt="Avatar"></img>
 
       {/* <!-- Username and Password input fields --> */}
-      {/* {inputList} */}
-      <div className="form-label-group mb-3">
-        <label htmlFor='username-input'>Username</label>
-        <input
-          type="text" 
-          id='username-input' 
-          ref={usernameRef}
-          value={username}
-          className="form-control form-floating" 
-          placeholder='Enter username' 
-          name='Username' 
-          required 
-          onChange={handleUsernameChange}>
-        </input>
-      </div>
-      {errors.username && <p style={{ color: "red", fontsize: "13px" }}>{errors.username}</p>}
-
-      <div className="form-label-group mb-3">
-        <label htmlFor='password-input'>Password</label>
-        <input 
-          type="password" 
-          id='password-input' 
-          ref={passwordRef}
-          value={password}
-          className="form-control form-floating" 
-          placeholder='Enter password' 
-          name='Password' 
-          required 
-          onChange={handlePasswordChange}></input>
-      </div>
-      {errors.password && <p style={{ color: "red", fontsize: "13px" }}>{errors.password}</p>}
+      <InputFieldItem title={"Username"} id={"username-input"} type={"text"} placeholder={"Enter username"}
+                      handleChange={handleUsernameChange} error={errors.username} />
+      {errors.username && <p className={'inputErrorText'}>{errors.username}</p>}
+      <InputFieldItem title={'Password'} id={'password-input'} type={'password'} placeholder={'Enter password'}
+                      handleChange={handlePasswordChange} error={errors.password} />
+      {errors.password && <p className={'inputErrorText'} >{errors.password}</p>}
 
       {/* <!-- Login button --> */}
       <div className="d-grid gap-2">
@@ -108,12 +108,7 @@ function LoginPage({ setAuth }) {
       </div>
 
       {/* <!-- Checkbox to remember user login details --> */}
-      <div className="form-check">
-        <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" defaultChecked></input>
-        <label className="form-check-label" htmlFor="flexCheckChecked">
-          Remember me
-        </label>
-      </div>
+      <CheckBox title={"Remember me"} id={"flexCheckChecked"} defaultChecked={true} />
 
       {/* <!-- Forgot password link --> */}
       <div className="row mt-3">
@@ -123,8 +118,6 @@ function LoginPage({ setAuth }) {
         <div id="registerlink" className="col">
           Not registered? <Link to='/register'>Click here</Link> to register
         </div>
-
-
       </div>
     </form>
   );

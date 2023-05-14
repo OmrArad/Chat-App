@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 } */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.top {
+    background-color: #0d59aa;
+    height: 150px;
+    position: absolute;
+    width: 100%;
+}
+
+button {
+    background-color: #0b528c;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+
+button:hover {
+    background-color: #0d59aa;
+}
