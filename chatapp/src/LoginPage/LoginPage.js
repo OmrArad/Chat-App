@@ -8,30 +8,7 @@ import { useNavigate } from "react-router-dom";
 import CheckBox from "./CheckBox";
 import userDatabase from "../userArray";
 
-function validateLoginForm(values) {
-  let errors = {};
-
-  /* check for password */
-  if(!values.password) {
-    errors.password = "Password required"
-  }
-
-  /* check for username */
-  if (!values.username) {
-    errors.username = "Username required";
-  } else if (!userDatabase.containsUser(values.username)) {
-    errors.username = "User " + values.username + " does not exist";
-  } else {
-    let user = userDatabase.getUser(values.username);
-    if (user.password !== values.password) {
-      errors.password = "Password is incorrect"
-    }
-  }
-
-  return errors;
-}
-
-function LoginPage({ setAuth }) {
+function LoginPage({ setUser }) {
 
 
   const [username, setUsername] = useState("");
@@ -46,6 +23,7 @@ function LoginPage({ setAuth }) {
     'username' : '',
     'password' : ''
   });
+  const [errorCondition, setErrorCondition] = useState(false);
 
   function handleUsernameChange(e) {
     setUsername(e.target.value);
@@ -59,17 +37,47 @@ function LoginPage({ setAuth }) {
     return <ChatPage />
   }
 
+  function validateLoginForm(values) {
+    const newErrors = {};
+
+    console.log("values: " + values);
+    /* check for password */
+    if(!values.password) {
+      newErrors.password = "Password required"
+      setErrorCondition(true);
+    }
+
+    /* check for username */
+    if (!values.username) {
+      newErrors.username = "Username required";
+      setErrorCondition(true);
+    } else if (!userDatabase.containsUser(values.username)) {
+      newErrors.username = "User " + values.username + " does not exist";
+      setErrorCondition(true);
+    } else {
+      let user = userDatabase.getUser(values.username);
+      if (user.password !== values.password) {
+        newErrors.password = "Password is incorrect"
+        setErrorCondition(true);
+      }
+    }
+    console.log("errors: " + newErrors);
+    return newErrors;
+  }
+
+
   function handleSubmit(e) {
     e.preventDefault();
 
+    console.log("login submit");
     const newErrors = validateLoginForm({ username, password });
-
+    console.log("errors: " + newErrors);
     setError(newErrors);
 
     // authenticate username and password
-    if (newErrors === {}) {
+    if (errorCondition === false) {
       const user = userDatabase.getUser(username);
-      setAuth(user);
+      setUser(user);
 
       navigate('/', {state: {username}});
 
@@ -80,7 +88,7 @@ function LoginPage({ setAuth }) {
     } /* else {
       passwordRef.current.focus();
     }*/
-  };
+  }
 
   const inputList = inputs.map((input, key) => {
     return <InputFieldItem {...input} key={key} />
@@ -88,7 +96,7 @@ function LoginPage({ setAuth }) {
 
   return (
     // Login form
-    <form action="" method="post" className="register-card" onSubmit={handleSubmit}>
+    <form id="login-form" action="" method="post" className="register-card" onSubmit={handleSubmit}>
       <h1>Login</h1>
 
       {/* <!-- ChatApp image --> */}
@@ -97,14 +105,11 @@ function LoginPage({ setAuth }) {
       {/* <!-- Username and Password input fields --> */}
       <InputFieldItem title={"Username"} id={"username-input"} type={"text"} placeholder={"Enter username"}
                       handleChange={handleUsernameChange} error={errors.username} />
-      {errors.username && <p className={'inputErrorText'}>{errors.username}</p>}
       <InputFieldItem title={'Password'} id={'password-input'} type={'password'} placeholder={'Enter password'}
                       handleChange={handlePasswordChange} error={errors.password} />
-      {errors.password && <p className={'inputErrorText'} >{errors.password}</p>}
-
       {/* <!-- Login button --> */}
       <div className="d-grid gap-2">
-        <button className="btn btn-primary" type="submit" id="login-button">Login</button>
+        <button className="btn btn-primary" type="submit" id="login-button" form="login-form" >Login</button>
       </div>
 
       {/* <!-- Checkbox to remember user login details --> */}
