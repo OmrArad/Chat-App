@@ -1,36 +1,59 @@
-const validateRegistrationForm = (values) => {
-    let errors = {}
+import userDatabase from "../user_db";
 
-    if(!values.username) {
-        errors.username = "Username required"
+function validateRegistrationForm(values) {
+    const newErrors = {};
+
+    let hasError = false;
+
+    // Validate username
+    if(values.username === '') {
+        newErrors.username = "Username required";
+        hasError = true;
     }
     else if (values.username.length < 5) {
-        errors.username = "Name must contain at least 5 characters"
+        newErrors.username = "Name must contain at least 5 characters";
+        hasError = true;
+    } else if (userDatabase.containsUser(values.username)) {
+        newErrors.username = "User already exists, please choose a different username";
+        hasError = true;
     }
 
-    if(!values.password) {
-        errors.password = "Password required"
+    // Validate password
+    if(values.password === '') {
+        newErrors.password = "Password required"
+        hasError = true;
     }
     else if (values.password.length < 8) {
-        errors.password = "Password must contain 8 characters"
+        newErrors.password = "Password must contain 8 characters"
+        hasError = true;
     }
 
-    if(!values.verify) {
-        errors.verify = "Please verify password"
+    // Verify password
+    if(values.verify === '') {
+        newErrors.verify = "Please verify password"
+        hasError = true;
     }
     else if (values.password !== values.verify) {
-        errors.verify = "Given passwords do not match"
+        newErrors.verify = "Given passwords do not match"
+        hasError = true;
     }
 
-    if(!values.displayname) {
-        errors.displayname = "Display name required"
+    // Validate display name
+    if(values.displayname === '') {
+        newErrors.displayname = "Display name required"
+        hasError = true;
     }
 
-    if(!values.picture) {
-        errors.picture = "Picture required"
+    // Validate picture
+    if(values.picture === null) {
+        newErrors.picture = "Picture required"
+        hasError = true;
+    } else if (values.picture.type.startsWith('image') === false) {
+        newErrors.picture = "Given file is not an image"
+        hasError = true;
     }
 
-    return errors;
+    return {newErrors, hasError};
 }
 
 export default validateRegistrationForm;

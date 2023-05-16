@@ -1,17 +1,33 @@
-// import React, { useState } from 'react';
-// import { Formik } from "formik";
+import userDatabase from "../user_db";
 
+function validateLoginForm(values) {
+    const newErrors = {};
+    let hasError = false;
+    
+    // Check for password
+    if(values.password === '') {
+        newErrors.password = "Password required"
+        hasError = true;
+    }
 
-// const [values, setValues] = useState({
-//     username: '',
-//     password: ''
-// });
+    // Validate username
+    if (!values.username) {
+        newErrors.username = "Username required";
+        hasError = true;
+    } else if (!userDatabase.containsUser(values.username)) {
+        newErrors.username = "User " + values.username + " does not exist";
+        hasError = true;
+    } else {
 
-// const ValidatedLoginForm = () => (
-//     <Formik>
-//         initialValues={{username: "", password: ""}}
-//         onSubmit={handleSubmit}
-//     </Formik>
-// );
+        // check that given password is the same as user's
+        let user = userDatabase.getUser(values.username);
+        if (user.password !== values.password) {
+            newErrors.password = "Password is incorrect"
+            hasError = true;
+        }
+    }
+    console.log("errors: " + newErrors);
+    return {newErrors, hasError};
+}
 
-// export default ValidatedLoginForm;
+export default validateLoginForm;

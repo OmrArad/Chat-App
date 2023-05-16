@@ -1,13 +1,16 @@
 import './RegistrationPage.css';
 import InputFieldItem from "../InputFieldItem/InputFieldItem";
 import { Link } from 'react-router-dom';
-import React, { useRef, useState } from 'react';
-import SubmitButton from "../SubmitButton/SubmitButton";
+import React, { useState } from 'react';
+import SubmitButton from "./SubmitButton/SubmitButton";
 import ProfilePicDisplay from "./ProfilePicDisplay/ProfilePicDisplay";
 import { useNavigate } from "react-router-dom";
 import userDatabase from "../user_db";
+import validateRegistrationForm from "./validateRegistrationForm";
 
 function RegistrationPage() {
+
+    // state variables to hold form input values and profile picture
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [verify, setVerify] = useState("");
@@ -16,20 +19,7 @@ function RegistrationPage() {
     const navigate = useNavigate();
     const [profilePicPath, setProfilePicPath] = useState("");
 
-    function handleUsernameChange(e) {
-        setUsername(e.target.value);
-    }
-    function handlePasswordChange(e) {
-        setPassword(e.target.value);
-    }
-    function handleVerifyChange(e) {
-        setVerify(e.target.value);
-    }
-    function handleDisplayNameChange(e) {
-        setDisplayName(e.target.value);
-    }
-
-
+    // state variable and function to hold and update form validation errors
     const [errors, setError] = useState({
         'username':'',
         'password':'',
@@ -38,75 +28,25 @@ function RegistrationPage() {
         'picture':''
     });
 
+    // flag to track whether form has errors
     let errorCondition = false;
 
-    function validateRegistrationForm(values) {
-        const newErrors = {};
+    // event handlers to update state variables on input change
+    const handleUsernameChange = e => {
+        setUsername(e.target.value);
+    };
+    const handlePasswordChange = e => {
+        setPassword(e.target.value);
+    };
+    const handleVerifyChange = e => {
+        setVerify(e.target.value);
+    };
+    const handleDisplayNameChange = e => {
+        setDisplayName(e.target.value);
+    };
 
-        console.log(values)
-
-        if(values.username === '') {
-            newErrors.username = "Username required";
-            errorCondition = true;
-        }
-        else if (values.username.length < 5) {
-            newErrors.username = "Name must contain at least 5 characters";
-            errorCondition = true;
-        } else if (userDatabase.containsUser(values.username)) {
-            newErrors.username = "User already exists, please choose a different username";
-            errorCondition = true;
-        }
-
-        if(values.password === '') {
-            newErrors.password = "Password required"
-            errorCondition = true;
-        }
-        else if (values.password.length < 8) {
-            newErrors.password = "Password must contain 8 characters"
-            errorCondition = true;
-        }
-
-        if(values.verify === '') {
-            newErrors.verify = "Please verify password"
-            errorCondition = true;
-        }
-        else if (values.password !== values.verify) {
-            newErrors.verify = "Given passwords do not match"
-            errorCondition = true;
-        }
-
-        if(values.displayname === '') {
-            newErrors.displayname = "Display name required"
-            errorCondition = true;
-        }
-
-        if(values.picture === null) {
-            newErrors.picture = "Picture required"
-        } else if (values.picture.type.startsWith('image') === false) {
-            newErrors.picture = "Given file is not an image"
-            errorCondition = true;
-        }
-
-        return newErrors;
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault();
-
-        const newErrors = validateRegistrationForm({ username, password, verify, displayname, picture });
-
-        setError(newErrors);
-
-        if (errorCondition === false) {
-            userDatabase.addUser({username, password, "displayName": displayname, picture});
-
-            // navigate to login page
-            navigate('/login', {state: {username}});
-            alert("Registration successful");
-        }
-    }
-
-    const handleFileUpload = (event) => {
+    // function to handle profile picture upload
+    const handlePictureUpload = (event) => {
         if (event.target.files[0]) {
             const file = event.target.files[0];
             const filePath = URL.createObjectURL(file);
@@ -114,6 +54,26 @@ function RegistrationPage() {
             setProfilePicPath(filePath);
         }
     };
+
+    // function to handle form submission
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        // validate form input and update errors state variable
+        const validationResult = validateRegistrationForm({ username, password, verify, displayname, picture });
+        errorCondition = validationResult.hasError;
+        setError(validationResult.newErrors);
+
+        // if there are no errors, add user to database and navigate to login page
+        if (errorCondition === false) {
+            userDatabase.addUser({username, password, "displayName": displayname, picture});
+
+            // navigate to login page
+            navigate('/login', {state: {username}});
+            alert("Registration successful");
+        }
+    };
+
 
     return (
         /* Registration form */
@@ -123,19 +83,19 @@ function RegistrationPage() {
             </h1>
             {/* Input field for username */}
             <InputFieldItem title={"Username"} type={"text"} id={"username-input"} placeholder={"Enter username"}
-                            handleChange={handleUsernameChange} error={errors.username} />
+                            handleBlur={handleUsernameChange} error={errors.username} />
             {/* Input field for password */}
             <InputFieldItem title={"Password"} type={"password"} id={"password-input"} placeholder={"Enter password"}
-                            handleChange={handlePasswordChange} error={errors.password} />
+                            handleBlur={handlePasswordChange} error={errors.password} />
             {/* Input field for password confirmation */}
             <InputFieldItem title={"Verify password"} type={"password"} id={"conf-pass-input"} placeholder={"Reenter password"}
-                            handleChange={handleVerifyChange} error={errors.verify} />
+                            handleBlur={handleVerifyChange} error={errors.verify} />
             {/* Input field for display name */}
             <InputFieldItem title={"Display name"} type={"text"} id={"displayname-input"} placeholder={"Enter display name"}
-                            handleChange={handleDisplayNameChange} error={errors.displayname}/>
+                            handleBlur={handleDisplayNameChange} error={errors.displayname}/>
             {/* Input field for uploading profile picture */}
             <InputFieldItem title={"Picture"} type={"file"} id={"upload-picture-input"} placeholder={""}
-                            handleChange={handleFileUpload} error={errors.picture} />
+                            handleChange={handlePictureUpload} error={errors.picture} />
             {/* Display uploaded image */}
             <ProfilePicDisplay path={profilePicPath} />
             {/* Button for registration submission */}

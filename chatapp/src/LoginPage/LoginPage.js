@@ -1,94 +1,60 @@
 import './LoginPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
-import inputs from '../InputFieldItem/inputs';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import React, { useRef, useState } from 'react';
-import ChatPage from '../ChatPage/ChatPage';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import CheckBox from "./CheckBox";
 import userDatabase from "../user_db";
+import validateLoginForm from "./validateLoginForm";
 
 function LoginPage({ setUser, loggedIn, setLoggedIn }) {
-
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const usernameRef = useRef(null);
-  const passwordRef = useRef(null);
-
-  const [errors, setError] = useState({
-    'username' : '',
-    'password' : ''
-  });
-  
-  let errorCondition = false;
-  
-  function handleUsernameChange(e) {
-    setUsername(e.target.value);
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-
+  // redirects to chat page if user is logged in
   if(loggedIn) {
     navigate('/');
   }
 
-  function validateLoginForm(values) {
-    const newErrors = {};
+  // state variables to hold username and password
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    console.log("values: " + values);
-    /* check for password */
-    if(!values.password) {
-      newErrors.password = "Password required"
-      errorCondition = true;
-    }
+  // state variable to hold form validation errors
+  const [errors, setError] = useState({
+    'username' : '',
+    'password' : ''
+  });
 
-    /* check for username */
-    if (!values.username) {
-      newErrors.username = "Username required";
-      errorCondition = true;
-    } else if (!userDatabase.containsUser(values.username)) {
-      newErrors.username = "User " + values.username + " does not exist";
-      errorCondition = true;
-    } else {
-      let user = userDatabase.getUser(values.username);
-      if (user.password !== values.password) {
-        newErrors.password = "Password is incorrect"
-        errorCondition = true;;
-      }
-    }
-    console.log("errors: " + newErrors);
-    return newErrors;
-  }
+  // flag to track whether form has errors
+  let errorCondition = false;
 
+  // event handlers to update state variables on input change
+  const handleUsernameChange = e => {
+    setUsername(e.target.value);
+  };
 
-  function handleSubmit(e) {
+  const handlePasswordChange = e => {
+    setPassword(e.target.value);
+  };
+
+  // function to handle form submission
+  const handleSubmit = e => {
     e.preventDefault();
 
-    console.log("login submit");
-    const newErrors = validateLoginForm({username, password});
-    console.log("errors: " + newErrors);
-    setError(newErrors);
+    // validate form input and update errors state variable
+    const validationResult = validateLoginForm({username, password});
+    setError(validationResult.newErrors);
+    errorCondition = validationResult.hasError;
 
-    // authenticate username and password
+    // if username and password are correct, logs in user
     if (errorCondition === false) {
       let user = userDatabase.getUser(username);
       setUser(user);
       setLoggedIn(true);
 
-
       navigate('/', {state: {username}});
-
     }
-  }
-
-  const inputList = inputs.map((input, key) => {
-    return <InputFieldItem {...input} key={key} />
-  })
+  };
 
   return (
     // Login form
@@ -100,9 +66,9 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
 
       {/* <!-- Username and Password input fields --> */}
       <InputFieldItem title={"Username"} id={"username-input"} type={"text"} placeholder={"Enter username"}
-                      handleChange={handleUsernameChange} error={errors.username} />
+                      handleBlur={handleUsernameChange} error={errors.username} />
       <InputFieldItem title={'Password'} id={'password-input'} type={'password'} placeholder={'Enter password'}
-                      handleChange={handlePasswordChange} error={errors.password} />
+                      handleBlur={handlePasswordChange} error={errors.password} />
       {/* <!-- Login button --> */}
       <div className="d-grid gap-2">
         <button className="btn btn-primary" type="submit" id="login-button" form="login-form" >Login</button>

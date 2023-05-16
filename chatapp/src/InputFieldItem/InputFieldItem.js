@@ -1,6 +1,6 @@
 import './InputFieldItem.css'
 
-function InputFieldItem({ title, id, type, placeholder, handleChange, error }){
+function InputFieldItem({ title, id, type, placeholder, handleChange, handleBlur, error }){
     if (handleChange === undefined) {
         handleChange = () => null;
     }
@@ -9,7 +9,7 @@ function InputFieldItem({ title, id, type, placeholder, handleChange, error }){
         <div className="form-label-group mb-3">
             <label htmlFor={id}>{title}</label>
             <input type={type} id={id} className="form-control form-floating" placeholder={placeholder}
-                   onChange={handleChange} required></input>
+                   onChange={handleChange} onBlur={handleBlur}></input>
             <div className={'inputErrorText'} >{error}</div>
         </div>
     );

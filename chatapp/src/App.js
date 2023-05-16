@@ -8,10 +8,13 @@ import RegistrationPage from "./RegistrationPage/RegistrationPage";
 
 
 function App() {
+
+  // state variable that holds the current user
   const [currentUser, setCurrentUser] = useState(null);
+  // state variable flag for whether a user is logged in
   const [loggedIn, setLoggedIn] = useState(false);
 
-  if(currentUser === null) {
+  if(loggedIn === false) {
     return (
       <div className="top">
       <div className="container-fluid">
@@ -26,7 +29,6 @@ function App() {
     </div>
     );
   }
-
 
   return (
     <div className="top">
