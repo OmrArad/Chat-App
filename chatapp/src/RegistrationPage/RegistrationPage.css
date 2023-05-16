@@ -1,0 +1,19 @@
+
+form {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px;
+    position: relative;
+}
+
+#register-row {
+    padding-left: 12px;
+}
+
+#profile_img {
+    width: 100px;
+    height: 100px;
+}
