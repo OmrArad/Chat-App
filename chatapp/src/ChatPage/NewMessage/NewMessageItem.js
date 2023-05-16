@@ -1,42 +1,34 @@
 import { useState } from 'react';
 
-function InputMessageForm({ onSubmit }) {
-  const [message, setMessage] = useState('');
+function InputMessageForm(props) {
+  const [content, setContent] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (message.trim() === '') return;
+  const handleContentChange = (event) => {
+    setContent(event.target.value);
+  };
 
-    const messageObject = {
-      sender: 'Your sender identifier', // Replace with your sender identifier logic
-      receiver: 'Your receiver identifier', // Replace with your receiver identifier logic
-      content: message,
-      time: new Date(),
-    };
-    // Call the onSubmit function passed down as a prop
-    onSubmit(messageObject);
-
-    // Clear the input field
-    setMessage('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newMessage = { content: content, timestamp: new Date() };
+    props.onSubmit(newMessage); // Call the onSubmit function with the new message
+    setContent(''); // Clear the content state
   };
 
   return (
-    <form className="input-message" onSubmit={handleSubmit}>
-      <div className="input-group">
-        <input
-          name="usermsg"
-          type="text"
-          className="form-control"
-          id="usermsg"
-          placeholder="Type your message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button type="submit" className="btn btn-primary">
-          <i className="fa fa-send"></i>
-        </button>
-      </div>
-    </form>
+    <form onSubmit={handleSubmit}>
+    <div className="input-group">
+      <button type="submit" className="btn btn-primary">
+        <i className="fa fa-paper-plane" aria-hidden="true"></i>
+      </button>
+      <input
+        type="text"
+        placeholder="Type a message"
+        value={content}
+        onChange={handleContentChange}
+        className="form-control"
+      />
+    </div>
+  </form>
   );
 }
 

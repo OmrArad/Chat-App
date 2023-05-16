@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function AddContact() {
+function AddContact({ setContacts }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logic for adding a new contact
+    const name = e.target.name.value;
+    const randomPicIndex = Math.floor(Math.random() * 5) + 1; // Generate a random index from 1 to 5
+    const newContact = { name, picture: `profile_pics/pic${randomPicIndex}.png` };
+    setContacts((prevContacts) => [...prevContacts, newContact]);
+    e.target.reset();
   };
 
   return (
@@ -13,7 +17,7 @@ function AddContact() {
         className="btn btn-primary"
         data-toggle="modal"
         data-target="#addContactModal"
-        style={{position: 'absolute', right: '10px', top: '10px'}}
+        style={{ position: 'absolute', right: '10px', top: '10px' }}
       >
         +
       </button>
@@ -31,22 +35,12 @@ function AddContact() {
               <h5 className="modal-title" id="addContactModalLabel">
                 Add new contact
               </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
               <form onSubmit={handleSubmit}>
                 <div className="mb-3 input-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter name"
-                    name="name"
-                  ></input>
+                  <input type="text" className="form-control" placeholder="Enter name" name="name"></input>
                   <button type="submit" className="btn btn-primary">
                     Add
                   </button>
