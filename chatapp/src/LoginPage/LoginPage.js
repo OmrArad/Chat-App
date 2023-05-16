@@ -6,14 +6,13 @@ import React, { useRef, useState } from 'react';
 import ChatPage from '../ChatPage/ChatPage';
 import { useNavigate } from "react-router-dom";
 import CheckBox from "./CheckBox";
-import userDatabase from "../userArray";
+import userDatabase from "../user_db";
 
-function LoginPage({ setUser }) {
+function LoginPage({ setUser, loggedIn, setLoggedIn }) {
 
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const usernameRef = useRef(null);
@@ -23,8 +22,9 @@ function LoginPage({ setUser }) {
     'username' : '',
     'password' : ''
   });
-  const [errorCondition, setErrorCondition] = useState(false);
-
+  
+  let errorCondition = false;
+  
   function handleUsernameChange(e) {
     setUsername(e.target.value);
   }
@@ -34,7 +34,7 @@ function LoginPage({ setUser }) {
   }
 
   if(loggedIn) {
-    return <ChatPage />
+    navigate('/');
   }
 
   function validateLoginForm(values) {
@@ -44,21 +44,21 @@ function LoginPage({ setUser }) {
     /* check for password */
     if(!values.password) {
       newErrors.password = "Password required"
-      setErrorCondition(true);
+      errorCondition = true;
     }
 
     /* check for username */
     if (!values.username) {
       newErrors.username = "Username required";
-      setErrorCondition(true);
+      errorCondition = true;
     } else if (!userDatabase.containsUser(values.username)) {
       newErrors.username = "User " + values.username + " does not exist";
-      setErrorCondition(true);
+      errorCondition = true;
     } else {
       let user = userDatabase.getUser(values.username);
       if (user.password !== values.password) {
         newErrors.password = "Password is incorrect"
-        setErrorCondition(true);
+        errorCondition = true;;
       }
     }
     console.log("errors: " + newErrors);
@@ -70,24 +70,20 @@ function LoginPage({ setUser }) {
     e.preventDefault();
 
     console.log("login submit");
-    const newErrors = validateLoginForm({ username, password });
+    const newErrors = validateLoginForm({username, password});
     console.log("errors: " + newErrors);
     setError(newErrors);
 
     // authenticate username and password
     if (errorCondition === false) {
-      const user = userDatabase.getUser(username);
+      let user = userDatabase.getUser(username);
       setUser(user);
+      setLoggedIn(true);
+
 
       navigate('/', {state: {username}});
 
-      setLoggedIn(true);
-      setUsername("");
-      setPassword("");
-      //usernameRef.current.focus();
-    } /* else {
-      passwordRef.current.focus();
-    }*/
+    }
   }
 
   const inputList = inputs.map((input, key) => {

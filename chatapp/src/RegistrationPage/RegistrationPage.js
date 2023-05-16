@@ -5,14 +5,14 @@ import React, { useRef, useState } from 'react';
 import SubmitButton from "../SubmitButton/SubmitButton";
 import ProfilePicDisplay from "./ProfilePicDisplay/ProfilePicDisplay";
 import { useNavigate } from "react-router-dom";
-import userDatabase from "../userArray";
+import userDatabase from "../user_db";
 
-function RegistrationPage({ setUser }) {
+function RegistrationPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [verify, setVerify] = useState("");
     const [displayname, setDisplayName] = useState("");
-    const [picture, setPicture] = useState("");
+    const [picture, setPicture] = useState(null);
     const navigate = useNavigate();
     const [profilePicPath, setProfilePicPath] = useState("");
 
@@ -30,48 +30,60 @@ function RegistrationPage({ setUser }) {
     }
 
 
-    const [errors, setError] = useState(null);
-    const [errorCondition, setErrorCondition] = useState(false);
+    const [errors, setError] = useState({
+        'username':'',
+        'password':'',
+        'validate':'',
+        'displayName':'',
+        'picture':''
+    });
+
+    let errorCondition = false;
 
     function validateRegistrationForm(values) {
         const newErrors = {};
 
         console.log(values)
 
-        if(values.username === undefined) {
+        if(values.username === '') {
             newErrors.username = "Username required";
-            setErrorCondition(true);
+            errorCondition = true;
         }
         else if (values.username.length < 5) {
             newErrors.username = "Name must contain at least 5 characters";
-            setErrorCondition(true);
+            errorCondition = true;
+        } else if (userDatabase.containsUser(values.username)) {
+            newErrors.username = "User already exists, please choose a different username"
         }
 
-        if(values.password === undefined) {
+        if(values.password === '') {
             newErrors.password = "Password required"
-            setErrorCondition(true);
+            errorCondition = true;
         }
         else if (values.password.length < 8) {
             newErrors.password = "Password must contain 8 characters"
-            setErrorCondition(true);
+            errorCondition = true;
         }
 
-        if(values.verify === undefined) {
+        if(values.verify === '') {
             newErrors.verify = "Please verify password"
-            setErrorCondition(true);
+            errorCondition = true;
         }
         else if (values.password !== values.verify) {
             newErrors.verify = "Given passwords do not match"
-            setErrorCondition(true);
+            errorCondition = true;
         }
 
-        if(values.displayname === undefined) {
+        if(values.displayname === '') {
             newErrors.displayname = "Display name required"
-            setErrorCondition(true);
+            errorCondition = true;
         }
 
-        if(values.profilePicPath === undefined) {
+        if(values.picture === null) {
             newErrors.picture = "Picture required"
+        } else if (values.picture.type.startsWith('image') === false) {
+            newErrors.picture = "Given file is not an image"
+            errorCondition = true;
         }
 
         return newErrors;
@@ -80,31 +92,24 @@ function RegistrationPage({ setUser }) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const newErrors = validateRegistrationForm({ username, password, verify, displayname, profilePicPath });
+        const newErrors = validateRegistrationForm({ username, password, verify, displayname, picture });
 
         setError(newErrors);
 
-        // authenticate username and password
         if (errorCondition === false) {
-            let newUser = userDatabase.addUser({username, password, displayname, "picture":{profilePicPath}});
-            setUser(newUser);
-            navigate('/', { state: { username } });
+            userDatabase.addUser({username, password, "displayName": displayname, picture});
 
-            // setLoggedIn(true);
-            // setUsername("");
-            // setPassword("");
-            // usernameRef.current.focus();
-        } /*else {
-            passwordRef.current.focus();
-        }*/
+            // navigate to login page
+            navigate('/login', {state: {username}});
+            alert("Registration successful");
+        }
     }
 
     const handleFileUpload = (event) => {
         if (event.target.files[0]) {
             const file = event.target.files[0];
-            console.log(file);
             const filePath = URL.createObjectURL(file);
-            console.log(filePath)
+            setPicture(file)
             setProfilePicPath(filePath);
         }
     };
