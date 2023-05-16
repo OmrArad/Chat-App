@@ -53,7 +53,8 @@ function RegistrationPage() {
             newErrors.username = "Name must contain at least 5 characters";
             errorCondition = true;
         } else if (userDatabase.containsUser(values.username)) {
-            newErrors.username = "User already exists, please choose a different username"
+            newErrors.username = "User already exists, please choose a different username";
+            errorCondition = true;
         }
 
         if(values.password === '') {
