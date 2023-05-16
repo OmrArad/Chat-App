@@ -1,36 +1,3 @@
-/*body {
-    font-family: Arial, sans-serif;
-}
-
-.top {
-    background-color: #0d59aa;
-    height: 150px;
-    position: absolute;
-    width: 100%;
-}
-
-button {
-    background-color: #0b528c;
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
-
-button:hover {
-    background-color: #0d59aa;
-}*/
-
-/* form {
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    width: 100%;
-    
-    padding: 20px;
-    position: relative;
-} */
-
 .register-card {
     max-width: 640px;
     margin: 40px auto;
@@ -44,7 +11,7 @@ button:hover {
 
 h1 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 #login-button {

@@ -52,7 +52,7 @@ form {
 
 .register-card {
     max-width: 640px;
-    margin: 70px auto;
+    margin: 40px auto;
     min-width: 0;
     padding: 20px;
 
@@ -88,7 +88,7 @@ body {
 }
 
 #chat-card {
-    height: calc(100vh - 25px);
+    height: calc(100vh - 30px);
     min-width: 240px;
     max-width: 320px;
     z-index: 2;
