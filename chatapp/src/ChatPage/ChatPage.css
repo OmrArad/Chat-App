@@ -87,13 +87,6 @@ body {
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
 }
 
-#chat-card {
-    height: calc(100vh - 30px);
-    min-width: 240px;
-    max-width: 320px;
-    z-index: 2;
-}
-
 #chat-window {
     height: 100%;
     position: relative;

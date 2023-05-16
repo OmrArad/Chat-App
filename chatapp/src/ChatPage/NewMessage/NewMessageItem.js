@@ -10,10 +10,12 @@ function InputMessageForm(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newMessage = { content: content, timestamp: new Date() };
-    props.onSubmit(newMessage); // Call the onSubmit function with the new message
+    if (props.onSubmit && typeof props.onSubmit === 'function') {
+      props.onSubmit(newMessage); // Call the onSubmit function with the new message
+    }
     setContent(''); // Clear the content state
   };
-
+  
   return (
     <form onSubmit={handleSubmit}>
     <div className="input-group">

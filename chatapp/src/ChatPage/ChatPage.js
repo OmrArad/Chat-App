@@ -8,7 +8,7 @@ import SearchContact from './SearcheAndAddAcountItems/SearcItem.js';
 import AddContact from './SearcheAndAddAcountItems/AddItem.js';
 import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
 import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
-import CurrentFriend from './CurrentFriend/CurrentFriend.js';
+import ChatWindow from './ChatWindow/ChatWindow.js';
 
 const ChatPage = (user) => {
   const inputList = inputs.map((input, key) => {
@@ -50,8 +50,6 @@ const ChatPage = (user) => {
   });
 
   return (
-    <div className="top">
-      <div className="container-fluid">
         <div className="row">
           <div className="col-md-3">
             <div className="card" id="chat-card">
@@ -106,18 +104,14 @@ const ChatPage = (user) => {
             >
             {messageList}
             </div>
-            <InputMessageForm
-                            selectedUser={selectedUser}
-                            handleNewMessage={handleNewMessage}
-                          />
+            <InputMessageForm selectedUser={selectedUser} onSubmit={handleNewMessage} />
             </div>
             )
             }
       </div>
     </div>
     </div>
-   </div>
-  </div>
+
 );
 };
 

@@ -1,3 +1,4 @@
+/*
 import p1 from './profile_pics/p1.png'
 import p2 from './profile_pics/p2.png'
 import p3 from './profile_pics/p3.png'
@@ -11,3 +12,4 @@ const contacts = [{ profile_pic: p1, name: 'Sapir Mosi', time_and_date: '12/1/20
                     { profile_pic: p5, name: 'Sara Paz', time_and_date: '12/1/2023 16:45', last_message: 'You: Are you going to the party?' }];
 
 export default contacts;
+*/
