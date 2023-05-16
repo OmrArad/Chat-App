@@ -10,11 +10,44 @@ import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMess
 import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
 import CurrentFriend from './CurrentFriend/CurrentFriend.js';
 
-function ChatPage() {
+const ChatPage = (user) => {
+  const inputList = inputs.map((input, key) => {
+    return <InputFieldItem {...input} key={key} />;
+  });
+  const [messages, setMessages] = useState([]);
+  const [contacts, setContacts] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const messageListRef = useRef(null);
 
-    const inputList = inputs.map((input, key) => {
-        return <InputFieldItem {...input} key={key} />
-    })
+  const handleNewMessage = (newMessage) => {
+    if (newMessage.content.trim() !== '') {
+      const updatedMessages = [...messages, newMessage];
+      setMessages(updatedMessages);
+      localStorage.setItem('messages', JSON.stringify(updatedMessages));
+    }
+  };
+
+  useEffect(() => {
+    const storedMessages = localStorage.getItem('messages');
+    if (storedMessages) {
+      setMessages(JSON.parse(storedMessages));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Scroll to the bottom of the message list when new messages are added
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  const messageList = messages.map((message, index) => {
+    if (message.type === 'received') {
+      return <ReceivedMessageItem key={index} message={message.content} />;
+    } else {
+      return <SentMessageItem key={index} message={message.content} />;
+    }
+  });
 
   return (
     <div className="top">
@@ -89,4 +122,3 @@ function ChatPage() {
 };
 
 export default ChatPage;
-
