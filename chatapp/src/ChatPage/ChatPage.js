@@ -10,7 +10,7 @@ function ChatPage() {
     const inputList = inputs.map((input, key) => {
         return <InputFieldItem {...input} key={key} />
     })
-    
+
     return (
         <div className="top">
             <div className="container-fluid">
