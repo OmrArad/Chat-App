@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ChatPage.css';
 import UserPanel from './UsersPanel/usersPanel.js';
-import InputMessageForm from './NewMessage/NewMessageItem.js';
+import InputMessageForm from './NewMessageItem/NewMessageItem.js';
 import SearchContact from './SearchAndAddAcountItems/SearchItem.js';
 import AddContact from './SearchAndAddAcountItems/AddItem.js';
 import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
@@ -72,7 +72,7 @@ const ChatPage = ({user, loggedIn, logout}) => {
         <div className="card" id="chat-card">
           <span className="d-flex flex-column mb-3">
             <LogoutButton logout={logout} />
-            <h3 className="text-center">Chats</h3>
+            <h3 className="text-center">{user.displayname}</h3>
             <AddContact setContacts={setContacts} />
             <img
               src={user.picture}
