@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import './ChatPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import inputs from '../InputFieldItem/inputs';
@@ -9,15 +9,32 @@ import SearchContact from './SearcheAndAddAcountItems/SearcItem.js';
 import AddContact from './SearcheAndAddAcountItems/AddItem.js';
 import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
 import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
+import LoginPage from '../LoginPage/LoginPage';
+import { useNavigate } from "react-router-dom";
+import LogoutButton from './LogoutButton/LogoutButton';
 
-const ChatPage = ({user}) => {
-  const inputList = inputs.map((input, key) => {
-    return <InputFieldItem {...input} key={key} />;
-  });
+const ChatPage = ({ username, setCurrentUser, loggedIn, setLoggedIn }) => {
+
   const [messages, setMessages] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const messageListRef = useRef(null);
+  const navigate = useNavigate();
+
+  console.log(loggedIn)
+
+  useEffect(() => {
+    if (username === null) {
+      navigate('/login', { state: { setCurrentUser, loggedIn, setLoggedIn } })
+    }
+  })
+
+
+  const inputList = inputs.map((input, key) => {
+    return <InputFieldItem {...input} key={key} />;
+  });
+
+
 
   const handleNewMessage = (newMessage) => {
     if (newMessage.content.trim() !== '') {
@@ -26,7 +43,7 @@ const ChatPage = ({user}) => {
       localStorage.setItem('messages', JSON.stringify(updatedMessages));
     }
   };
-  
+
   useEffect(() => {
     const storedMessages = localStorage.getItem('messages');
     if (storedMessages) {
@@ -44,15 +61,17 @@ const ChatPage = ({user}) => {
 
 
 
-  const handleLogout = () => {
-    localStorage.removeItem('messages');
-    localStorage.removeItem('contacts');
-    // Clear any user-related data from local storage except for the user object
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    localStorage.clear();
-    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+  function handleLogout(e) {
+    e.preventDefault();
+
+    // setLoggedIn(false);
+
+    // navigate to login page
+    navigate('/login');
+    alert("Logging out");
+
   };
-  
+
   const filteredMessages = messages.filter((message) => message.user === selectedUser);
 
   const messageList = filteredMessages.map((message, index) => {
@@ -62,17 +81,14 @@ const ChatPage = ({user}) => {
       return <SentMessageItem key={index} message={message.content} />;
     }
   });
-  
+
   return (
     <div className="row" style={{ maxHeight: '100%' }}>
       <div className="col-md-3">
-        <div className="card" id="chat-card" style={{ height:"80%" }}>
+        <div className="card" id="chat-card" style={{ height: "80%" }}>
           <span className="d-flex flex-column mb-3">
-            <button className="btn btn-danger" style={{ position: 'absolute', left: '10px', top: '10px' }}>
-              <Link to="/login">
-                <i className="fa fa-sign-out" style={{color:"white"}}></i>
-              </Link>
-            </button>
+            <LogoutButton/>
+
             <h3 className="text-center">Chats</h3>
             <AddContact setContacts={setContacts} />
             <img

@@ -19,12 +19,12 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
   const passwordRef = useRef(null);
 
   const [errors, setError] = useState({
-    'username' : '',
-    'password' : ''
+    'username': '',
+    'password': ''
   });
-  
+
   let errorCondition = false;
-  
+
   function handleUsernameChange(e) {
     setUsername(e.target.value);
   }
@@ -33,16 +33,16 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
     setPassword(e.target.value);
   }
 
-  if(loggedIn) {
-    navigate('/');
-  }
+  // if (loggedIn) {
+  //   navigate('/');
+  // }
 
   function validateLoginForm(values) {
     const newErrors = {};
 
     console.log("values: " + values);
     /* check for password */
-    if(!values.password) {
+    if (!values.password) {
       newErrors.password = "Password required"
       errorCondition = true;
     }
@@ -70,7 +70,7 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
     e.preventDefault();
 
     console.log("login submit");
-    const newErrors = validateLoginForm({username, password});
+    const newErrors = validateLoginForm({ username, password });
     console.log("errors: " + newErrors);
     setError(newErrors);
 
@@ -81,7 +81,7 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
       setLoggedIn(true);
 
 
-      navigate('/', {state: {username}});
+      navigate('/', { state: { username } });
 
     }
   }
@@ -100,9 +100,9 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
 
       {/* <!-- Username and Password input fields --> */}
       <InputFieldItem title={"Username"} id={"username-input"} type={"text"} placeholder={"Enter username"}
-                      handleChange={handleUsernameChange} error={errors.username} />
+        handleChange={handleUsernameChange} error={errors.username} />
       <InputFieldItem title={'Password'} id={'password-input'} type={'password'} placeholder={'Enter password'}
-                      handleChange={handlePasswordChange} error={errors.password} />
+        handleChange={handlePasswordChange} error={errors.password} />
       {/* <!-- Login button --> */}
       <div className="d-grid gap-2">
         <button className="btn btn-primary" type="submit" id="login-button" form="login-form" >Login</button>
