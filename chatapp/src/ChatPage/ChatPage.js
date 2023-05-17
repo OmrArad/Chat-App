@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
 import './ChatPage.css';
-import InputFieldItem from '../InputFieldItem/InputFieldItem';
-import inputs from '../InputFieldItem/inputs';
 import UserComponent from './UsersPanel/usersPanel.js';
 import InputMessageForm from './NewMessage/NewMessageItem.js';
 import SearchContact from './SearcheAndAddAcountItems/SearcItem.js';
 import AddContact from './SearcheAndAddAcountItems/AddItem.js';
 import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
 import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
-import LoginPage from '../LoginPage/LoginPage';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
 
@@ -26,13 +22,6 @@ const ChatPage = (user) => {
       navigate('/login', { state: { user } })
     }
   })
-
-
-  const inputList = inputs.map((input, key) => {
-    return <InputFieldItem {...input} key={key} />;
-  });
-
-
 
   const handleNewMessage = (newMessage) => {
     if (newMessage.content.trim() !== '') {
