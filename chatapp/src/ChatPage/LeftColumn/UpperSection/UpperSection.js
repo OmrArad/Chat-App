@@ -1,6 +1,6 @@
 import my_pic from '../../ContactItem/profile_pics/my_pic.png'
 
-function UpperSection({ auth }) {
+function Profile({ auth }) {
 
     return (
         <div className="d-flex flex-column">
@@ -13,4 +13,4 @@ function UpperSection({ auth }) {
     );
 }
 
-export default UpperSection;
+export default Profile;

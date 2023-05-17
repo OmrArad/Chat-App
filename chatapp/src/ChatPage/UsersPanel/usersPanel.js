@@ -7,7 +7,7 @@ const UserComponent = ({ contacts, setSelectedUser }) => {
         <li className="list-group-item" key={index} onClick={() => setSelectedUser(item)}>
           <div className="d-flex flex-row justify-content-between">
             <div className="d-flex flex-row">
-              <img src={item.pic} className="rounded-circle me-3" alt="Your Image" width="50" height="50" />
+              <img src={item.picture} className="rounded-circle me-3" alt="Your Image" width="50" height="50" />
               <div className="d-flex flex-column">
                 <h5 className="mb-0">{item.name}</h5>
                 <p className="mb-0">{item.message}</p>

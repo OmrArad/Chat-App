@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 function AddContact({ setContacts }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    const name = e.target.name.value;
+    const name = e.target.name.value.trim(); // Trim any leading or trailing whitespace
+    if (name === '') {
+      return; // Return early if the name is empty
+    }
     const randomPicIndex = Math.floor(Math.random() * 5) + 1; // Generate a random index from 1 to 5
-    const newContact = { name, picture: `profile_pics/pic${randomPicIndex}.png` };
+    const newContact = { name, picture: `profile_pics/p${randomPicIndex}.png` };
     setContacts((prevContacts) => [...prevContacts, newContact]);
     e.target.reset();
   };

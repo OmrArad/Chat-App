@@ -1,5 +1,3 @@
-import p1 from './ChatPage/ContactItem/profile_pics/p1.png'
-
 /*
 List of users with each user object having the following format:
 {
@@ -14,7 +12,7 @@ const userList = [
         "username": "user1",
         "password": "12345678",
         "display-name": "Hemi Horowitz",
-        "picture": p1
+        "picture": "profile_pics/p1.png"
     }
 ];
 
