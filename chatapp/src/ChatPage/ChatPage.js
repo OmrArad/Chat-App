@@ -1,5 +1,5 @@
 import './ChatPage.css';
-import ChatWindow from './ChatWindow/ChatWindow';
+import ChatWindow from './ChatWindow/ChatWindow'
 import LeftColumn from './LeftColumn/LeftColumn';
 
 function ChatPage( {auth} ) {
