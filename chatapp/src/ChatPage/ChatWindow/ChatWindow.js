@@ -1,6 +1,6 @@
 import SentMessageItem from '../MessageItems/SentMessageItem/SentMessageItem';
 import ReceivedMessageItem from '../MessageItems/ReceivedMessageItem/ReceivedMessageItem';
-import p2 from '../ContactItem/profile_pics/p2.png'
+import p2 from '../../../public/profile_pics/p2.png'
 
 function ChatWindow() {
     return (
