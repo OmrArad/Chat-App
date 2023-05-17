@@ -1,15 +1,22 @@
-import React from 'react';
+import { React, useRef } from 'react';
 
-function SearchContact() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Logic for searching a contact
-  };
+
+function SearchItem({ doSearch }) {
+
+
+  const searchBox = useRef(null);
+
+  const search = function (e) {
+    doSearch(searchBox.current.value);
+  }
+
 
   return (
-    <form className="mb-3" onSubmit={handleSubmit}>
+    <form className="mb-3">
       <div className="input-group">
         <input
+          ref={searchBox}
+          onKeyUp={search}
           type="text"
           className="form-control"
           placeholder="Search"
@@ -23,4 +30,4 @@ function SearchContact() {
   );
 }
 
-export default SearchContact;
+export default SearchItem;

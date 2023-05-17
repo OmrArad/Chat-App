@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import './ChatPage.css';
 import UserComponent from './UsersPanel/usersPanel.js';
 import InputMessageForm from './NewMessage/NewMessageItem.js';
-import SearchContact from './SearcheAndAddAcountItems/SearcItem.js';
-import AddContact from './SearcheAndAddAcountItems/AddItem.js';
+import SearchContact from './SearchAndAddAcountItems/SearchItem.js';
+import AddContact from './SearchAndAddAcountItems/AddItem.js';
 import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
 import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
+import SearchItem from './SearchAndAddAcountItems/SearchItem.js';
 
 const ChatPage = (user) => {
 
@@ -16,6 +17,12 @@ const ChatPage = (user) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const messageListRef = useRef(null);
   const navigate = useNavigate();
+
+  const [contactList, setContactList] = useState(contacts);
+
+  const doSearch = function (q) {
+    setContactList(contacts.filter((contact) => contact.name.includes(q)));
+  };
 
   useEffect(() => {
     if (user === null) {
@@ -30,7 +37,7 @@ const ChatPage = (user) => {
       localStorage.setItem('messages', JSON.stringify(updatedMessages));
     }
   };
-  
+
   useEffect(() => {
     const storedMessages = localStorage.getItem('messages');
     if (storedMessages) {
@@ -60,7 +67,7 @@ const ChatPage = (user) => {
       <div className="col-md-3">
         <div className="card" id="chat-card" style={{ height: "80%" }}>
           <span className="d-flex flex-column mb-3">
-            <LogoutButton/>
+            <LogoutButton />
 
             <h3 className="text-center">Chats</h3>
             <AddContact setContacts={setContacts} />
@@ -73,9 +80,9 @@ const ChatPage = (user) => {
               style={{ display: 'block', margin: 'auto' }}
             />
           </span>
-          <SearchContact setSelectedUser={setSelectedUser} />
+          <SearchItem doSearch={doSearch} />
           <ul className="list list-group">
-          <UserComponent
+            <UserComponent
               contacts={contacts}
               setSelectedUser={setSelectedUser}
               setMessages={setMessages}
