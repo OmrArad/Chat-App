@@ -13,7 +13,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
 
-const ChatPage = ({ username, setCurrentUser, loggedIn, setLoggedIn }) => {
+const ChatPage = (user) => {
 
   const [messages, setMessages] = useState([]);
   const [contacts, setContacts] = useState([]);
@@ -21,11 +21,9 @@ const ChatPage = ({ username, setCurrentUser, loggedIn, setLoggedIn }) => {
   const messageListRef = useRef(null);
   const navigate = useNavigate();
 
-  console.log(loggedIn)
-
   useEffect(() => {
-    if (username === null) {
-      navigate('/login', { state: { setCurrentUser, loggedIn, setLoggedIn } })
+    if (user === null) {
+      navigate('/login', { state: { user } })
     }
   })
 
@@ -58,20 +56,6 @@ const ChatPage = ({ username, setCurrentUser, loggedIn, setLoggedIn }) => {
     }
   }, [messages]);
 
-
-
-
-  function handleLogout(e) {
-    e.preventDefault();
-
-    // setLoggedIn(false);
-
-    // navigate to login page
-    navigate('/login');
-    alert("Logging out");
-
-  };
-
   const filteredMessages = messages.filter((message) => message.user === selectedUser);
 
   const messageList = filteredMessages.map((message, index) => {
@@ -92,7 +76,7 @@ const ChatPage = ({ username, setCurrentUser, loggedIn, setLoggedIn }) => {
             <h3 className="text-center">Chats</h3>
             <AddContact setContacts={setContacts} />
             <img
-              src="profile_pics/my_pic.png"
+              src={user.user.picture}
               className="rounded-circle mb-3"
               alt="Your Image"
               width="50"

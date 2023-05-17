@@ -21,7 +21,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
         <Route path='/register' element={<RegistrationPage setUser={setCurrentUser} />} ></Route>
-        <Route path='/' element={<ChatPage auth={currentUser} />} ></Route>
+        <Route path='/' element={<ChatPage user={currentUser} />} ></Route>
       </Routes>
     }
   })
@@ -49,7 +49,7 @@ function App() {
           <Routes>
             <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
             <Route path='/register' element={<RegistrationPage setUser={setCurrentUser} />} ></Route>
-            <Route path='/' element={<ChatPage auth={currentUser} />} ></Route>
+            <Route path='/' element={<ChatPage user={currentUser} />} ></Route>
           </Routes>
         </Router>
       </div>

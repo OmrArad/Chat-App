@@ -81,7 +81,7 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
       setLoggedIn(true);
 
 
-      navigate('/', { state: { username } });
+      navigate('/', user);
 
     }
   }
