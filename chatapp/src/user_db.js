@@ -12,7 +12,7 @@ const userList = [
     {
         "username": "user1",
         "password": "12345678",
-        "display-name": "Hemi Horowitz",
+        "displayname": "Hemi Horowitz",
         "picture": "profile_pics/p1.png",
         "messages": []
     }
@@ -31,7 +31,7 @@ const userDatabase = {
       let newUser = {
         "username": username,
         "password": password,
-        "display-name": displayName,
+        "displayname": displayName,
         "picture": picture,
         "messages": []
       };
