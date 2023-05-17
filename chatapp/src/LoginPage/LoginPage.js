@@ -11,9 +11,10 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
   const navigate = useNavigate();
 
   // redirects to chat page if user is logged in
-  if (loggedIn) {
-    navigate('/');
-  }
+  // if (loggedIn) {
+  //   navigate('/');
+  // }
+
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -22,22 +23,10 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
     'password': ''
   });
 
-  // if (loggedIn) {
-  //   navigate('/');
-  // }
-
   // state variables to hold username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // state variable to hold form validation errors
-
-  // console.log("values: " + values);
-  // /* check for password */
-  // if (!values.password) {
-  //   newErrors.password = "Password required"
-  //   errorCondition = true;
-  // }
 
   // flag to track whether form has errors
   let errorCondition = false;
@@ -59,10 +48,6 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
     const validationResult = validateLoginForm({ username, password });
     setError(validationResult.newErrors);
     errorCondition = validationResult.hasError;
-    console.log("login submit");
-    const newErrors = validateLoginForm({ username, password });
-    console.log("errors: " + newErrors);
-    setError(newErrors);
 
     // if username and password are correct, logs in user
     if (errorCondition === false) {
