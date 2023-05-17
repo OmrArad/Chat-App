@@ -13,7 +13,6 @@ function AddContact() {
         className="btn btn-primary"
         data-toggle="modal"
         data-target="#addContactModal"
-        style={{position: 'absolute', right: '10px', top: '10px'}}
       >
         +
       </button>
