@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './usersPanel.css';
 const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
   
   const getLastMessage = (contact) => {
@@ -51,11 +51,7 @@ const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
                   {lastMessage.unread && ( // Only display badge if unread is true
                     <span
                       className="badge bg-primary"
-                      style={{
-                        width: '30px',
-                        height: '20px',
-                        textAlign: 'center',
-                      }}
+                      id="new-message"
                     >
                       1
                     </span>

@@ -120,9 +120,13 @@ body {
     margin-left: 2px;
 }
 
-#user_picture {
-    display: 'block';
+#user-picture {
+    display: block;
     margin: auto;
     align-items: center;
+}
 
+#message-list {
+    height: calc(100vh - 200px);
+    overflow-y: auto;
 }
