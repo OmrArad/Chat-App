@@ -1,32 +1,29 @@
 import './LoginPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import { Link } from 'react-router-dom';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import CheckBox from "./CheckBox";
 import userDatabase from "../user_db";
 import validateLoginForm from "./validateLoginForm";
 
-function LoginPage({ setUser, loggedIn, setLoggedIn }) {
+function LoginPage({ loggedIn, login }) {
   const navigate = useNavigate();
 
   // redirects to chat page if user is logged in
-  // if (loggedIn) {
-  //   navigate('/');
-  // }
-
-  const usernameRef = useRef(null);
-  const passwordRef = useRef(null);
-
-  const [errors, setError] = useState({
-    'username': '',
-    'password': ''
-  });
+  if(loggedIn) {
+    navigate('/');
+  }
 
   // state variables to hold username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  // state variable to hold form validation errors
+  const [errors, setError] = useState({
+    'username' : '',
+    'password' : ''
+  });
 
   // flag to track whether form has errors
   let errorCondition = false;
@@ -45,20 +42,16 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
     e.preventDefault();
 
     // validate form input and update errors state variable
-    const validationResult = validateLoginForm({ username, password });
+    const validationResult = validateLoginForm({username, password});
     setError(validationResult.newErrors);
     errorCondition = validationResult.hasError;
 
     // if username and password are correct, logs in user
     if (errorCondition === false) {
       let user = userDatabase.getUser(username);
-      setUser(user);
-      setLoggedIn(true);
-
-      // navigate('/', {state: {username}});
+      login(user);
 
       navigate('/', user);
-
     }
   };
 
@@ -72,9 +65,9 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
 
       {/* <!-- Username and Password input fields --> */}
       <InputFieldItem title={"Username"} id={"username-input"} type={"text"} placeholder={"Enter username"}
-        handleBlur={handleUsernameChange} error={errors.username} />
+                      handleBlur={handleUsernameChange} error={errors.username} />
       <InputFieldItem title={'Password'} id={'password-input'} type={'password'} placeholder={'Enter password'}
-        handleBlur={handlePasswordChange} error={errors.password} />
+                      handleBlur={handlePasswordChange} error={errors.password} />
       {/* <!-- Login button --> */}
       <div className="d-grid gap-2">
         <button className="btn btn-primary" type="submit" id="login-button" form="login-form" >Login</button>
