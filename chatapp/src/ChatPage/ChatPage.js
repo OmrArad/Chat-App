@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import './ChatPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import inputs from '../InputFieldItem/inputs';
@@ -13,11 +12,6 @@ function ChatPage() {
   const inputList = inputs.map((input, key) => {
     return <InputFieldItem {...input} key={key} />;
   });
-  const [messages, setMessages] = useState([]);
-
-  const handleNewMessage = (message) => {
-    setMessages([...messages, message]);
-  };
 
   return (
     <div className="top">
@@ -47,7 +41,7 @@ function ChatPage() {
             <div className="card">
               <CurrentChatItem />
               <div className="card-footer">
-                <InputMessageForm onSubmit={handleNewMessage}/>
+                <InputMessageForm />
               </div>
             </div>
           </div>
