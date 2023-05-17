@@ -17,7 +17,7 @@ function LogoutButton({logout}) {
     }
 
     return (
-        <button className="btn btn-danger fa fa-sign-out" onClick={handleLogout} style={{ position: 'absolute', left: '10px', top: '10px' }}>
+        <button className="btn btn-danger fa fa-sign-out" onClick={handleLogout} id="logout">
             <i className="fa fa-sign-out" style={{ color: "white" }}></i>
         </button>
     );

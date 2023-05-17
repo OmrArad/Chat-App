@@ -124,3 +124,15 @@ body {
     align-items: center;
 
 }
+
+#logout{
+    position: absolute;
+    left: 15px;
+    top: 25px;
+}
+
+#addContact{
+    position: absolute;
+    right: 10px;
+    top: 25px;
+}
