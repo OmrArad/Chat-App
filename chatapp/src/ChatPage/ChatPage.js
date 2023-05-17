@@ -41,7 +41,7 @@ const ChatPage = (user) => {
       localStorage.setItem('messages', JSON.stringify(updatedMessages));
     }
   };
-
+  
   useEffect(() => {
     const storedMessages = localStorage.getItem('messages');
     if (storedMessages) {
@@ -86,7 +86,12 @@ const ChatPage = (user) => {
           </span>
           <SearchContact setSelectedUser={setSelectedUser} />
           <ul className="list list-group">
-            <UserComponent contacts={contacts} setSelectedUser={setSelectedUser} />
+          <UserComponent
+              contacts={contacts}
+              setSelectedUser={setSelectedUser}
+              setMessages={setMessages}
+              messages={messages}
+            />
           </ul>
         </div>
       </div>
