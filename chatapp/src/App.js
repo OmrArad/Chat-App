@@ -2,9 +2,8 @@ import './App.css';
 import LoginPage from './LoginPage/LoginPage';
 import ChatPage from './ChatPage/ChatPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
-
 
 
 function App() {
@@ -14,19 +13,35 @@ function App() {
   // state variable flag for whether a user is logged in
   const [loggedIn, setLoggedIn] = useState(false);
 
+  /*useEffect(() => {
+    if (currentUser === null) {
+      <Routes>
+        <Route path='/' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
+        <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
+        <Route path='/register' element={<RegistrationPage />} ></Route>
+      </Routes>
+    } else {
+      <Routes>
+        <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
+        <Route path='/register' element={<RegistrationPage setUser={setCurrentUser} />} ></Route>
+        <Route path='/' element={<ChatPage user={currentUser} />} ></Route>
+      </Routes>
+    }
+  })*/
+
   if(loggedIn === false) {
     return (
       <div className="top">
-      <div className="container-fluid">
-        <Router>
-          <Routes>
-            <Route path='/' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} ></Route>
-            <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} ></Route>
-            <Route path='/register' element={<RegistrationPage />} ></Route>
-          </Routes>
-        </Router>
+        <div className="container-fluid">
+          <Router>
+            <Routes>
+              <Route path='/' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
+              <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
+              <Route path='/register' element={<RegistrationPage />} ></Route>
+            </Routes>
+          </Router>
+        </div>
       </div>
-    </div>
     );
   }
 
@@ -35,9 +50,9 @@ function App() {
       <div className="container-fluid">
         <Router>
           <Routes>
-            <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} ></Route>
-            <Route path='/register' element={<RegistrationPage setUser={setCurrentUser}/>} ></Route>
-            <Route path='/' element={<ChatPage auth={currentUser}/>} ></Route>
+            <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
+            <Route path='/register' element={<RegistrationPage setUser={setCurrentUser} />} ></Route>
+            <Route path='/' element={<ChatPage user={currentUser} />} ></Route>
           </Routes>
         </Router>
       </div>

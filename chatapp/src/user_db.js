@@ -1,5 +1,3 @@
-import p1 from './ChatPage/ContactItem/profile_pics/p1.png'
-
 /*
 List of users with each user object having the following format:
 {
@@ -7,6 +5,7 @@ List of users with each user object having the following format:
     "password": "#password#",
     "display-name": "#display name#",
     "picture": #image object#
+    "messages": #list of messages#
 }
  */
 const userList = [
@@ -14,44 +13,41 @@ const userList = [
         "username": "user1",
         "password": "12345678",
         "display-name": "Hemi Horowitz",
-        "picture": p1
+        "picture": "profile_pics/p1.png",
+        "messages": []
     }
 ];
-
-
 const userDatabase = {
-
-    // returns if user with given username exists in the database
     containsUser(username) {
-        for (let user of userList) {
-            if (user.username === username) {
-                return true; // user exists
-            }
+      for (let user of userList) {
+        if (user.username === username) {
+          return true; // user exists
         }
-        return false; // user doesn't exist
+      }
+      return false; // user doesn't exist
     },
-
-    // creates new user, adds it to the database and then returns it to the caller
-    addUser({username, password, displayName, picture}) {
-        let newUser = {
-            "username": username,
-            "password": password,
-            "display-name": displayName,
-            "picture": picture
-        }
-        userList.push(newUser);
-        return newUser;
+  
+    addUser({ username, password, displayName, picture }) {
+      let newUser = {
+        "username": username,
+        "password": password,
+        "display-name": displayName,
+        "picture": picture,
+        "messages": []
+      };
+      userList.push(newUser);
+      return newUser;
     },
-
-    // returns user with given username if it exists in the database, otherwise returns undefined
+  
     getUser(username) {
-        for (let user of userList) {
-            if (user.username === username) {
-                return user;
-            }
+      for (let user of userList) {
+        if (user.username === username) {
+          return user;
         }
-        return undefined;
+      }
+      return undefined;
     },
-};
-
-export default userDatabase;
+  };
+  
+  export default userDatabase;
+  

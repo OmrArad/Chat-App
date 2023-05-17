@@ -1,11 +1,15 @@
-function SentMessageItem({message}) {
-    return (
-        <div className="mb-3">
-            <div className="d-flex flex-column align-items-end">
-                <span className="badge bg-primary">{message}</span>
-            </div>
+function MessageItem({ message }) {
+  return (
+    <div className="mb-3">
+      <div className="d-flex flex-column align-items-end" style={{ maxWidth: '100%' }}>
+        <div className="badge bg-primary" style={{ maxWidth: '40%', overflow: 'hidden'
+        , textOverflow: 'ellipsis',
+        whiteSpace: 'break-spaces' }}>
+        {message}
         </div>
-    );
-}
-
-export default SentMessageItem
+      </div>
+    </div>
+  );
+  }
+  
+  export default MessageItem;
