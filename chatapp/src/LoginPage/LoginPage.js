@@ -7,7 +7,7 @@ import CheckBox from "./CheckBox";
 import userDatabase from "../user_db";
 import validateLoginForm from "./validateLoginForm";
 
-function LoginPage({ setUser, loggedIn, setLoggedIn }) {
+function LoginPage({ loggedIn, login }) {
   const navigate = useNavigate();
 
   // redirects to chat page if user is logged in
@@ -49,8 +49,7 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
     // if username and password are correct, logs in user
     if (errorCondition === false) {
       let user = userDatabase.getUser(username);
-      setUser(user);
-      setLoggedIn(true);
+      login(user);
 
       navigate('/', user);
     }

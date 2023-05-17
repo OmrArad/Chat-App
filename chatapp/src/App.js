@@ -13,6 +13,16 @@ function App() {
   // state variable flag for whether a user is logged in
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const doLogout = () => {
+    setLoggedIn(false);
+    setCurrentUser(null);
+  }
+
+  const doLogin = (user) => {
+    setCurrentUser(user);
+    setLoggedIn(true);
+  }
+
   /*useEffect(() => {
     if (currentUser === null) {
       <Routes>
@@ -35,8 +45,8 @@ function App() {
         <div className="container-fluid">
           <Router>
             <Routes>
-              <Route path='/' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
-              <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
+              <Route path='/' element={<LoginPage loggedIn={loggedIn} login={doLogin} />} ></Route>
+              <Route path='/login' element={<LoginPage loggedIn={loggedIn} login={doLogin} />} ></Route>
               <Route path='/register' element={<RegistrationPage />} ></Route>
             </Routes>
           </Router>
@@ -50,9 +60,9 @@ function App() {
       <div className="container-fluid">
         <Router>
           <Routes>
-            <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
-            <Route path='/register' element={<RegistrationPage setUser={setCurrentUser} />} ></Route>
-            <Route path='/' element={<ChatPage user={currentUser} />} ></Route>
+            <Route path='/login' element={<LoginPage setUser={setCurrentUser} login={doLogin} />} ></Route>
+            <Route path='/register' element={<RegistrationPage />} ></Route>
+            <Route path='/' element={<ChatPage user={currentUser} loggedIn={loggedIn} logout={doLogout} />} ></Route>
           </Routes>
         </Router>
       </div>
