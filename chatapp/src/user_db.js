@@ -15,7 +15,7 @@ const userList = [
         "displayname": "Hemi Horowitz",
         "picture": "profile_pics/p1.png",
         "messages": []
-    }
+     }
 ];
 
 

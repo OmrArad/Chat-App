@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function AddContact({ setContacts }) {
   const handleSubmit = (e) => {
@@ -8,7 +8,7 @@ function AddContact({ setContacts }) {
       return; // Return early if the name is empty
     }
     const randomPicIndex = Math.floor(Math.random() * 5) + 1; // Generate a random index from 1 to 5
-    const newContact = { name, picture: `profile_pics/p${randomPicIndex}.png` };
+    const newContact = { name, picture: `./profile_pics/p${randomPicIndex}.png` };
     setContacts((prevContacts) => [...prevContacts, newContact]);
     e.target.reset();
   };
