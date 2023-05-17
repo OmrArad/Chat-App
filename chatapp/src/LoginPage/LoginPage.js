@@ -10,20 +10,53 @@ import validateLoginForm from "./validateLoginForm";
 function LoginPage({ setUser, loggedIn, setLoggedIn }) {
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   // redirects to chat page if user is logged in
   if(loggedIn) {
     navigate('/');
   }
+=======
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  const [errors, setError] = useState({
+    'username': '',
+    'password': ''
+  });
+
+  let errorCondition = false;
+
+  function handleUsernameChange(e) {
+    setUsername(e.target.value);
+  }
+
+  function handlePasswordChange(e) {
+    setPassword(e.target.value);
+  }
+
+  // if (loggedIn) {
+  //   navigate('/');
+  // }
+>>>>>>> chat_objecting
 
   // state variables to hold username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+<<<<<<< HEAD
   // state variable to hold form validation errors
   const [errors, setError] = useState({
     'username' : '',
     'password' : ''
   });
+=======
+    console.log("values: " + values);
+    /* check for password */
+    if (!values.password) {
+      newErrors.password = "Password required"
+      errorCondition = true;
+    }
+>>>>>>> chat_objecting
 
   // flag to track whether form has errors
   let errorCondition = false;
@@ -41,10 +74,17 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
   const handleSubmit = e => {
     e.preventDefault();
 
+<<<<<<< HEAD
     // validate form input and update errors state variable
     const validationResult = validateLoginForm({username, password});
     setError(validationResult.newErrors);
     errorCondition = validationResult.hasError;
+=======
+    console.log("login submit");
+    const newErrors = validateLoginForm({ username, password });
+    console.log("errors: " + newErrors);
+    setError(newErrors);
+>>>>>>> chat_objecting
 
     // if username and password are correct, logs in user
     if (errorCondition === false) {
@@ -52,7 +92,13 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
       setUser(user);
       setLoggedIn(true);
 
+<<<<<<< HEAD
       navigate('/', {state: {username}});
+=======
+
+      navigate('/', user);
+
+>>>>>>> chat_objecting
     }
   };
 
@@ -66,9 +112,15 @@ function LoginPage({ setUser, loggedIn, setLoggedIn }) {
 
       {/* <!-- Username and Password input fields --> */}
       <InputFieldItem title={"Username"} id={"username-input"} type={"text"} placeholder={"Enter username"}
+<<<<<<< HEAD
                       handleBlur={handleUsernameChange} error={errors.username} />
       <InputFieldItem title={'Password'} id={'password-input'} type={'password'} placeholder={'Enter password'}
                       handleBlur={handlePasswordChange} error={errors.password} />
+=======
+        handleChange={handleUsernameChange} error={errors.username} />
+      <InputFieldItem title={'Password'} id={'password-input'} type={'password'} placeholder={'Enter password'}
+        handleChange={handlePasswordChange} error={errors.password} />
+>>>>>>> chat_objecting
       {/* <!-- Login button --> */}
       <div className="d-grid gap-2">
         <button className="btn btn-primary" type="submit" id="login-button" form="login-form" >Login</button>
