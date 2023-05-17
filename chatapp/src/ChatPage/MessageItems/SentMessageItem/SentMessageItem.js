@@ -8,4 +8,4 @@ function MessageItem({message}) {
     );
 }
 
-export default MessageItem;
+export default MessageItem

@@ -1,9 +1,8 @@
 import './ChatPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import inputs from '../InputFieldItem/inputs';
-import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem';
+import SentMessageItem from './SentMessageItem/SentMessageItem';
 import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem';
-import ChatComponent from './UsersItem/UsersItem.js';
 
 function ChatPage() {
 
@@ -53,8 +52,54 @@ function ChatPage() {
                                     <button className="btn btn-primary" type="submit"><i className="fa fa-search"></i></button>
                                 </div>
                             </form>
+
                             <ul className="list-group">
-                                <ChatComponent/>
+                                {/* <!-- Add more list items as needed --> */}
+                                <li className="list-group-item list-group-item-action">
+                                    <img src="profile_pics/p1.png" alt="Your Image" className="rounded-circle me-3" width="50"
+                                        height="50"></img>
+                                    <div>
+                                        <h5 className="mb-1">Sapir Mosi</h5>
+                                        <small>12/1/2023 16:45</small>
+                                        <p className="mb-0">Hey!!!</p>
+                                    </div>
+                                </li>
+                                <li className="list-group-item list-group-item-action">
+                                    <img className="chat-icon rounded-circle me-3" src="profile_pics/p2.png" alt="Your Image" width="50"
+                                        height="50"></img>
+                                    <div>
+                                        <h5 className="mb-1">Ido Moshe</h5>
+                                        <small>12/1/2023 16:45</small>
+                                        <p className="mb-0">You: Are you coming today?</p>
+                                    </div>
+                                </li>
+                                <li className="list-group-item list-group-item-action">
+                                    <img className="chat-icon rounded-circle me-3" src="profile_pics/p3.png" alt="Your Image" width="50"
+                                        height="50"></img>
+                                    <div>
+                                        <h5 className="mb-1">Yoav Raz</h5>
+                                        <small>12/1/2023 16:45</small>
+                                        <p className="mb-0">You: What? No way!</p>
+                                    </div>
+                                </li>
+                                <li className="list-group-item list-group-item-action">
+                                    <img className="chat-icon rounded-circle me-3" src="profile_pics/p4.png" alt="Your Image" width="50"
+                                        height="50"></img>
+                                    <div>
+                                        <h5 className="mb-1">Shira Dan</h5>
+                                        <small>12/1/2023 16:45</small>
+                                        <p className="mb-0">Shira: I love that song</p>
+                                    </div>
+                                </li>
+                                <li className="list-group-item list-group-item-action">
+                                    <img className="chat-icon rounded-circle me-3" src="profile_pics/p5.png" alt="Your Image" width="50"
+                                        height="50"></img>
+                                    <div>
+                                        <h5 className="mb-1">Sara Paz</h5>
+                                        <small>12/1/2023 16:45</small>
+                                        <p className="mb-0">You: Are you going to the party?</p>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
