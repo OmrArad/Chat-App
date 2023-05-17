@@ -94,12 +94,10 @@ body {
 #chat-window {
     min-height: calc(96vh - 0px);
     position: relative;
-    z-index: 1;
     min-width: 300px;
 }
 
 .chat-window {
-    z-index: 1;
     min-width: 300px;
 }
 
