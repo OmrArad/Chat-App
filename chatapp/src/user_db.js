@@ -4,7 +4,7 @@ List of users with each user object having the following format:
     "username": "#username#",
     "password": "#password#",
     "display-name": "#display name#",
-    "picture": #image object#
+    "picture": "#path/to/image#"
     "messages": #list of messages#
 }
  */
