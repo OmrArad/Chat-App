@@ -15,7 +15,7 @@ function RegistrationPage() {
     const [password, setPassword] = useState("");
     const [verify, setVerify] = useState("");
     const [displayname, setDisplayName] = useState("");
-    const [picture, setPicture] = useState(null);
+    const [picture_obj, setPicture_obj] = useState(null);
     const navigate = useNavigate();
     const [profilePicPath, setProfilePicPath] = useState("");
 
@@ -50,7 +50,7 @@ function RegistrationPage() {
         if (event.target.files[0]) {
             const file = event.target.files[0];
             const filePath = URL.createObjectURL(file);
-            setPicture(file)
+            setPicture_obj(file)
             setProfilePicPath(filePath);
         }
     };
@@ -60,13 +60,13 @@ function RegistrationPage() {
         e.preventDefault();
 
         // validate form input and update errors state variable
-        const validationResult = validateRegistrationForm({ username, password, verify, displayname, picture });
+        const validationResult = validateRegistrationForm({ username, password, verify, displayname, picture: picture_obj });
         errorCondition = validationResult.hasError;
         setError(validationResult.newErrors);
 
         // if there are no errors, add user to database and navigate to login page
         if (errorCondition === false) {
-            userDatabase.addUser({username, password, "displayName": displayname, picture});
+            userDatabase.addUser({username, password, displayName: displayname, picture: profilePicPath});
 
             // navigate to login page
             navigate('/login', {state: {username}});

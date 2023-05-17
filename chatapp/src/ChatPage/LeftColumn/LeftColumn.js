@@ -1,28 +1,43 @@
-import { useState } from 'react';
-import contacts from '../ContactItem/contacts';
-import Search from './Search/Search';
-import UpperSection from './UpperSection/UpperSection';
-import ContactListResults from './ContactListResults/ContactListResults';
+// import exp from 'constants';
+// import LogoutButton from './LeftColumn/LeftColumn';
+// import AddContact from './SearchAndAddAcountItems/AddItem.js';
 
-function LeftColumn( {auth} ) {
 
-    const [contactList, setContactList] = useState(contacts);
 
-    const doSearch = function(q){ 
-        setContactList(contacts.filter((contact) => contact.name.includes(q)));
-    };
+// function LeftColumn({  }) {
 
-    return (
-        <div className="col-md-3 col-sm-3 col-3 px-1">
-            <div className="card" id="chat-card">
-                <UpperSection auth={auth}/>
+//     const [contacts, setContacts] = useState([]);
 
-                <Search doSearch={doSearch} />
+//     return (
+//         <div className="col-md-3">
+//             <div className="card" id="chat-card" style={{ height: "80%" }}>
+//                 <span className="d-flex flex-column mb-3">
+//                     <LogoutButton />
 
-                <ContactListResults contacts={contactList} />
-            </div>
-        </div>
-    );
-}
+//                     <h3 className="text-center">Chats</h3>
+//                     <AddContact setContacts={setContacts} />
+//                     <img
+//                         src={user.user.picture}
+//                         className="rounded-circle mb-3"
+//                         alt="Your Image"
+//                         width="50"
+//                         height="50"
+//                         style={{ display: 'block', margin: 'auto' }}
+//                     />
+//                 </span>
+//                 {/* <SearchItem doSearch={doSearch} /> */}
+//                 <ul className="list list-group">
+//                     <UserPanel
+//                         contacts={contacts}
+//                         setSelectedUser={setSelectedUser}
+//                         setMessages={setMessages}
+//                         messages={messages}
+//                     />
+//                 </ul>
+//             </div>
+//         </div>
+//     );
 
-export default LeftColumn
+// }
+
+// export default LeftColumn
