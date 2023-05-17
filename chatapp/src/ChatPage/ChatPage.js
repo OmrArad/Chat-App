@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ChatPage.css';
-import UserComponent from './UsersPanel/usersPanel.js';
+import UserPanel from './UsersPanel/usersPanel.js';
 import InputMessageForm from './NewMessage/NewMessageItem.js';
-import SearchContact from './SearcheAndAddAcountItems/SearcItem.js';
-import AddContact from './SearcheAndAddAcountItems/AddItem.js';
+import SearchContact from './SearchAndAddAcountItems/SearchItem.js';
+import AddContact from './SearchAndAddAcountItems/AddItem.js';
 import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
 import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
+import SearchItem from './SearchAndAddAcountItems/SearchItem.js';
+import LeftColumn from './LeftColumn/LeftColumn';
 
 const ChatPage = ({user, loggedIn, logout}) => {
 
@@ -16,6 +18,10 @@ const ChatPage = ({user, loggedIn, logout}) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const messageListRef = useRef(null);
   const navigate = useNavigate();
+
+  // const doSearch = function (q) {
+  //   setContacts(contacts.filter((contact) => contact.name.includes(q)));
+  // };
 
   useEffect(() => {
     if (loggedIn === false) {
@@ -30,7 +36,7 @@ const ChatPage = ({user, loggedIn, logout}) => {
       localStorage.setItem('messages', JSON.stringify(updatedMessages));
     }
   };
-  
+
   useEffect(() => {
     const storedMessages = localStorage.getItem('messages');
     if (storedMessages) {
@@ -56,9 +62,14 @@ const ChatPage = ({user, loggedIn, logout}) => {
   });
 
   return (
-    <div className="row" style={{ maxHeight: '100%' }}>
+    <div className="row">
+      {/* <LeftColumn
+        setSelectedUser={setSelectedUser}
+        setMessages={setMessages}
+        message={messages}
+      /> */}
       <div className="col-md-3">
-        <div className="card" id="chat-card" style={{ height: "80%" }}>
+        <div className="card" id="chat-card">
           <span className="d-flex flex-column mb-3">
             <LogoutButton logout={logout} />
             <h3 className="text-center">Chats</h3>
@@ -72,9 +83,9 @@ const ChatPage = ({user, loggedIn, logout}) => {
               style={{ display: 'block', margin: 'auto' }}
             />
           </span>
-          <SearchContact setSelectedUser={setSelectedUser} />
+          {/* <SearchItem doSearch={doSearch} /> */}
           <ul className="list list-group">
-          <UserComponent
+            <UserPanel
               contacts={contacts}
               setSelectedUser={setSelectedUser}
               setMessages={setMessages}
@@ -84,7 +95,7 @@ const ChatPage = ({user, loggedIn, logout}) => {
         </div>
       </div>
       <div className="col-md-9">
-        <div className="card">
+        <div className="card" id='chat-window'>
           {selectedUser && (
             <div>
               <div className="card-header">

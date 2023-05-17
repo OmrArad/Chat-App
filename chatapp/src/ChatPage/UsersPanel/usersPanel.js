@@ -1,6 +1,7 @@
 import React from 'react';
 
-const UserComponent = ({ contacts, setSelectedUser, messages }) => {
+const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
+  
   const getLastMessage = (contact) => {
     const filteredMessages = messages.filter(
       (message) => message.user === contact
@@ -21,7 +22,7 @@ const UserComponent = ({ contacts, setSelectedUser, messages }) => {
   };
 
   return (
-    <ul className="list-group">
+    <div>
       {contacts.map((item, index) => {
         const lastMessage = getLastMessage(item);
         return (
@@ -65,8 +66,8 @@ const UserComponent = ({ contacts, setSelectedUser, messages }) => {
           </li>
         );
       })}
-    </ul>
+    </div>
   );
 };
 
-export default UserComponent;
+export default UsersPanel;
