@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ChatPage.css';
-import UserComponent from './UsersPanel/usersPanel.js';
+import UserPanel from './UsersPanel/usersPanel.js';
 import InputMessageForm from './NewMessage/NewMessageItem.js';
 import SearchContact from './SearchAndAddAcountItems/SearchItem.js';
 import AddContact from './SearchAndAddAcountItems/AddItem.js';
@@ -18,11 +18,9 @@ const ChatPage = (user) => {
   const messageListRef = useRef(null);
   const navigate = useNavigate();
 
-  const [contactList, setContactList] = useState(contacts);
-
-  const doSearch = function (q) {
-    setContactList(contacts.filter((contact) => contact.name.includes(q)));
-  };
+  // const doSearch = function (q) {
+  //   setContacts(contacts.filter((contact) => contact.name.includes(q)));
+  // };
 
   useEffect(() => {
     if (user === null) {
@@ -80,9 +78,9 @@ const ChatPage = (user) => {
               style={{ display: 'block', margin: 'auto' }}
             />
           </span>
-          <SearchItem doSearch={doSearch} />
+          {/* <SearchItem doSearch={doSearch} /> */}
           <ul className="list list-group">
-            <UserComponent
+            <UserPanel
               contacts={contacts}
               setSelectedUser={setSelectedUser}
               setMessages={setMessages}

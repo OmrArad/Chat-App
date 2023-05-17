@@ -22,9 +22,6 @@ function SearchItem({ doSearch }) {
           placeholder="Search"
           name="search"
         ></input>
-        <button className="btn btn-primary" type="submit">
-          <i className="fa fa-search"></i>
-        </button>
       </div>
     </form>
   );

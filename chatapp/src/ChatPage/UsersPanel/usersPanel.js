@@ -1,6 +1,7 @@
 import React from 'react';
 
-const UserComponent = ({ contacts, setSelectedUser, messages }) => {
+const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
+  
   const getLastMessage = (contact) => {
     const filteredMessages = messages.filter(
       (message) => message.user === contact
@@ -69,4 +70,4 @@ const UserComponent = ({ contacts, setSelectedUser, messages }) => {
   );
 };
 
-export default UserComponent;
+export default UsersPanel;
