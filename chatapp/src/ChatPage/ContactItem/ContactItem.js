@@ -10,7 +10,6 @@ function ContactItem({ profile_pic, name, time_and_date, last_message }) {
                     <h5 className="mb-0 text-align-left">{name}</h5>
                     <small>{time_and_date}</small>
                 </div>
-
             </div>
             <div>
                 <p className="mb-0">{last_message}</p>

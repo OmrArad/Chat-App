@@ -2,14 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import './ChatPage.css';
 import UserPanel from './UsersPanel/usersPanel.js';
 import InputMessageForm from './NewMessageItem/NewMessageItem.js';
-import SearchContact from './SearchAndAddAcountItems/SearchItem.js';
-import AddContact from './SearchAndAddAcountItems/AddItem.js';
+import AddContact from './LeftColumn/Add/AddContact.js';
 import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
 import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
-import SearchItem from './SearchAndAddAcountItems/SearchItem.js';
-import LeftColumn from './LeftColumn/LeftColumn';
 
 const ChatPage = ({user, loggedIn, logout}) => {
 
@@ -73,14 +70,13 @@ const ChatPage = ({user, loggedIn, logout}) => {
           <span className="d-flex flex-column mb-3">
             <LogoutButton logout={logout} />
             <h3 className="text-center">{user.displayname}</h3>
-            <AddContact setContacts={setContacts} />
+            <AddContact setContacts={setContacts}/>
             <img
               src={user.picture}
               className="rounded-circle mb-3"
               alt="Your Image"
               width="50"
               height="50"
-              style={{ display: 'block', margin: 'auto' }}
             />
           </span>
           {/* <SearchItem doSearch={doSearch} /> */}
@@ -104,6 +100,7 @@ const ChatPage = ({user, loggedIn, logout}) => {
                     <img
                       src={selectedUser.picture}
                       className="rounded-circle me-3"
+                      id = "user_picture"
                       alt="Your Image"
                       width="50"
                       height="50"
@@ -117,8 +114,7 @@ const ChatPage = ({user, loggedIn, logout}) => {
               <div
                 className="card-body"
                 style={{ height: 'calc(100vh - 200px)', overflowY: 'auto' }}
-                ref={messageListRef}
-              >
+                ref={messageListRef} >
                 {messageList}
               </div>
               <InputMessageForm selectedUser={selectedUser} onSubmit={handleNewMessage} />
