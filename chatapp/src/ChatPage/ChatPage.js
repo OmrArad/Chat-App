@@ -43,7 +43,7 @@ const ChatPage = ({ username, setCurrentUser, loggedIn, setLoggedIn }) => {
       localStorage.setItem('messages', JSON.stringify(updatedMessages));
     }
   };
-
+  
   useEffect(() => {
     const storedMessages = localStorage.getItem('messages');
     if (storedMessages) {
@@ -92,7 +92,7 @@ const ChatPage = ({ username, setCurrentUser, loggedIn, setLoggedIn }) => {
             <h3 className="text-center">Chats</h3>
             <AddContact setContacts={setContacts} />
             <img
-              src="profile_pics/my_pic.png"
+              src={picture}
               className="rounded-circle mb-3"
               alt="Your Image"
               width="50"
@@ -102,7 +102,12 @@ const ChatPage = ({ username, setCurrentUser, loggedIn, setLoggedIn }) => {
           </span>
           <SearchContact setSelectedUser={setSelectedUser} />
           <ul className="list list-group">
-            <UserComponent contacts={contacts} setSelectedUser={setSelectedUser} />
+          <UserComponent
+              contacts={contacts}
+              setSelectedUser={setSelectedUser}
+              setMessages={setMessages}
+              messages={messages}
+            />
           </ul>
         </div>
       </div>
