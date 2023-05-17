@@ -9,6 +9,7 @@ import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
 import SearchItem from './SearchAndAddAcountItems/SearchItem.js';
+import LeftColumn from './LeftColumn/LeftColumn';
 
 const ChatPage = (user) => {
 
@@ -61,9 +62,14 @@ const ChatPage = (user) => {
   });
 
   return (
-    <div className="row" style={{ maxHeight: '100%' }}>
+    <div className="row">
+      {/* <LeftColumn
+        setSelectedUser={setSelectedUser}
+        setMessages={setMessages}
+        message={messages}
+      /> */}
       <div className="col-md-3">
-        <div className="card" id="chat-card" style={{ height: "80%" }}>
+        <div className="card" id="chat-card">
           <span className="d-flex flex-column mb-3">
             <LogoutButton />
 
@@ -90,7 +96,7 @@ const ChatPage = (user) => {
         </div>
       </div>
       <div className="col-md-9">
-        <div className="card">
+        <div className="card" id='chat-window'>
           {selectedUser && (
             <div>
               <div className="card-header">

@@ -22,7 +22,7 @@ const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
   };
 
   return (
-    <ul className="list-group">
+    <div>
       {contacts.map((item, index) => {
         const lastMessage = getLastMessage(item);
         return (
@@ -66,7 +66,7 @@ const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
           </li>
         );
       })}
-    </ul>
+    </div>
   );
 };
 
