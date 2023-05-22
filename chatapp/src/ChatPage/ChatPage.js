@@ -77,6 +77,7 @@ const ChatPage = ({user, loggedIn, logout}) => {
               alt="Your Image"
               width="50"
               height="50"
+              id="user-picture"
             />
           </span>
           {/* <SearchItem doSearch={doSearch} /> */}
@@ -113,7 +114,7 @@ const ChatPage = ({user, loggedIn, logout}) => {
               </div>
               <div
                 className="card-body"
-                style={{ height: 'calc(100vh - 200px)', overflowY: 'auto' }}
+                id = "message-list"
                 ref={messageListRef} >
                 {messageList}
               </div>

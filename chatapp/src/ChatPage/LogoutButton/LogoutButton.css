@@ -1,0 +1,8 @@
+#sign-out-btn {
+    color: "white";
+}
+#sign-out-btn-main {
+    position: absolute;
+    left: 10px; 
+    top: 10px;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './AddContact.css';
 function AddContact({ setContacts }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ function AddContact({ setContacts }) {
         className="btn btn-primary"
         data-toggle="modal"
         data-target="#addContactModal"
-        id='addContact'
+        id="add-contact-btn"
       >
         +
       </button>
