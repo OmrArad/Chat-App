@@ -28,8 +28,6 @@ function RegistrationPage() {
     // flag to track whether form has errors
     let errorCondition = false;
 
-
-
     // function to handle form submission
     const handleSubmit = e => {
         e.preventDefault();
@@ -56,14 +54,6 @@ function RegistrationPage() {
         return newData
     }
 
-    function existingUserError() {
-        const newErrors = {}
-        newErrors.username = "User already exists, please choose a different username";
-        setError(newErrors)
-        alert('User already exists, please choose a different username')
-        errorCondition = true;
-    }
-
     // function to handle user registration
     async function handleRegister(data) {
 
@@ -83,11 +73,18 @@ function RegistrationPage() {
         else {
             // Correct username/password
             // Navigate to login page
-            navigate('/login', { state: { username } });
+            navigate('/login', { state: { username } }); // Remove state once communicating via server
             alert("Registration successful")
         }
     };
 
+    function existingUserError() {
+        const newErrors = {}
+        newErrors.username = "User already exists, please choose a different username";
+        setError(newErrors)
+        alert('User already exists, please choose a different username')
+        errorCondition = true;
+    }
 
     return (
         <RegistrationForm
