@@ -40,21 +40,10 @@ function RegistrationPage() {
 
         // if there are no errors, add user to database and navigate to login page
         if (errorCondition === false) {
-            // userDatabase.addUser({ username, password, displayName: displayname, picture: profilePicPath });
             const data = { username, password, displayName: displayname, profilePic: profilePicPath }
             handleRegister(data)
         }
     };
-
-    // adapt the data to fit the servers API
-    // function adaptData(data) {
-    //     const newData = {}
-    //     newData.username = data.username
-    //     newData.password = data.password
-    //     newData.displayName = data.displayname
-    //     newData.profilePic = data.picture
-    //     return newData
-    // }
 
     // function to handle user registration
     async function handleRegister(data) {
@@ -75,7 +64,7 @@ function RegistrationPage() {
         else {
             // Successful registration
             // Navigate to login page
-            navigate('/login', { state: { username } }); // Remove state once communicating via server
+            navigate('/login');
             alert("Registration successful")
         }
     };

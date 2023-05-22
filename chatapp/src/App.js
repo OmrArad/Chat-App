@@ -46,7 +46,7 @@ function App() {
           <Routes>
             <Route path='/login' element={<LoginPage setUser={setCurrentUser} login={doLogin} />} ></Route>
             <Route path='/register' element={<RegistrationPage />} ></Route>
-            <Route path='/' element={<ChatPage user={currentUser} loggedIn={loggedIn} logout={doLogout} />} ></Route>
+            <Route path='/' element={<ChatPage userDetails={currentUser} loggedIn={loggedIn} logout={doLogout} />} ></Route>
           </Routes>
         </Router>
       </div>

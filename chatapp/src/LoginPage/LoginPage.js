@@ -48,9 +48,7 @@ function LoginPage({ loggedIn, login }) {
 
     // if username and password are correct, logs in user
     if (errorCondition === false) {
-      // let user = userDatabase.getUser(username);
-      // login(user);
-
+      
       const data = {}
       data.username = username
       data.password = password
@@ -77,14 +75,40 @@ function LoginPage({ loggedIn, login }) {
       alert('Something went wrong') // if this case arises it will be added to conditions
     else {
       // Correct username/password
-      // Navigate to chat page
+      // Fetch user details and navigate to chat page
       // The server's response
       const token = await res.json()
       console.log(token)
       const loginData = { username, token }
-      login(loginData)
-      navigate('/', loginData); // attach the token
+      fetchUserDetails(loginData)
+      
     }
+  }
+
+  const fetchUserDetails = async (loginData) => {
+    const token = loginData.token
+    const res = await fetch('http://localhost:5000/api/Users/'+ loginData.username, {
+      'method': 'get',
+      'headers': {
+        'accept': 'text/plain',
+        'Authorization': 'bearer ' + loginData.token,
+      }
+    })
+
+    if (res.status == 401)
+      alert('Invalid token')
+    else if (res.status == 403)
+      alert('Token required')
+    else if (res.status != 200)
+      alert('Something went wrong') // if this case arises it will be added to conditions
+    else {
+      const user = await res.json()
+      login({user, token})
+      navigate('/', {user, token}); // attach the token
+      // return user;
+    }
+
+    
   }
 
   return (
