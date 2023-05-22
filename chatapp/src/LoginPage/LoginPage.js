@@ -11,7 +11,7 @@ function LoginPage({ loggedIn, login }) {
   const navigate = useNavigate();
 
   // redirects to chat page if user is logged in
-  if(loggedIn) {
+  if (loggedIn) {
     navigate('/');
   }
 
@@ -21,8 +21,8 @@ function LoginPage({ loggedIn, login }) {
 
   // state variable to hold form validation errors
   const [errors, setError] = useState({
-    'username' : '',
-    'password' : ''
+    'username': '',
+    'password': ''
   });
 
   // flag to track whether form has errors
@@ -42,18 +42,50 @@ function LoginPage({ loggedIn, login }) {
     e.preventDefault();
 
     // validate form input and update errors state variable
-    const validationResult = validateLoginForm({username, password});
+    const validationResult = validateLoginForm({ username, password });
     setError(validationResult.newErrors);
     errorCondition = validationResult.hasError;
 
     // if username and password are correct, logs in user
     if (errorCondition === false) {
-      let user = userDatabase.getUser(username);
-      login(user);
+      // let user = userDatabase.getUser(username);
+      // login(user);
 
-      navigate('/', user);
+      const data = {}
+      data.username = username
+      data.password = password
+
+      handleLogin(data)
+
     }
   };
+
+  const handleLogin = async (data) => {
+    const res = await fetch('http://localhost:5000/api/Tokens', {
+      'method': 'post',
+      'headers': {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      'body': JSON.stringify(data)
+    })
+
+    if (res.status == 404) {
+      alert('Invalid username and/or password')
+    }
+    else if (res.status != 200)
+      alert('Something went wrong') // if this case arises it will be added to conditions
+    else {
+      // Correct username/password
+      // Navigate to chat page
+      // The server's response
+      const token = await res.json()
+      console.log(token)
+      const loginData = { username, token }
+      login(loginData)
+      navigate('/', loginData); // attach the token
+    }
+  }
 
   return (
     // Login form
@@ -65,9 +97,9 @@ function LoginPage({ loggedIn, login }) {
 
       {/* <!-- Username and Password input fields --> */}
       <InputFieldItem title={"Username"} id={"username-input"} type={"text"} placeholder={"Enter username"}
-                      handleBlur={handleUsernameChange} error={errors.username} />
+        handleBlur={handleUsernameChange} error={errors.username} />
       <InputFieldItem title={'Password'} id={'password-input'} type={'password'} placeholder={'Enter password'}
-                      handleBlur={handlePasswordChange} error={errors.password} />
+        handleBlur={handlePasswordChange} error={errors.password} />
       {/* <!-- Login button --> */}
       <div className="d-grid gap-2">
         <button className="btn btn-primary" type="submit" id="login-button" form="login-form" >Login</button>

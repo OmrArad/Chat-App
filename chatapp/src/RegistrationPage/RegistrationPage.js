@@ -5,6 +5,7 @@ import userDatabase from "../user_db";
 import validateRegistrationForm from "./validateRegistrationForm";
 import RegistrationForm from './RegistrationForm';
 
+// Define the logic of the registration form
 function RegistrationPage() {
 
     // state variables to hold form input values and profile picture
@@ -39,20 +40,21 @@ function RegistrationPage() {
 
         // if there are no errors, add user to database and navigate to login page
         if (errorCondition === false) {
-            const data = userDatabase.addUser({ username, password, displayName: displayname, picture: profilePicPath });
-            handleRegister(adaptData(data))
+            // userDatabase.addUser({ username, password, displayName: displayname, picture: profilePicPath });
+            const data = { username, password, displayName: displayname, profilePic: profilePicPath }
+            handleRegister(data)
         }
     };
 
     // adapt the data to fit the servers API
-    function adaptData(data) {
-        const newData = {}
-        newData.username = data.username
-        newData.password = data.password
-        newData.displayName = data.displayname
-        newData.profilePic = data.picture
-        return newData
-    }
+    // function adaptData(data) {
+    //     const newData = {}
+    //     newData.username = data.username
+    //     newData.password = data.password
+    //     newData.displayName = data.displayname
+    //     newData.profilePic = data.picture
+    //     return newData
+    // }
 
     // function to handle user registration
     async function handleRegister(data) {
@@ -71,7 +73,7 @@ function RegistrationPage() {
         else if (res.status != 200)
             alert('Something went wrong') // if this case arises it will be added to conditions
         else {
-            // Correct username/password
+            // Successful registration
             // Navigate to login page
             navigate('/login', { state: { username } }); // Remove state once communicating via server
             alert("Registration successful")
