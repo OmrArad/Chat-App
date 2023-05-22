@@ -13,10 +13,7 @@ function validateRegistrationForm(values) {
     else if (values.username.length < 5) {
         newErrors.username = "Name must contain at least 5 characters";
         hasError = true;
-    } else if (userDatabase.containsUser(values.username)) {
-        newErrors.username = "User already exists, please choose a different username";
-        hasError = true;
-    }
+    } // User-Already-Exists case is handled in handleRegistration
 
     // Validate password
     if(values.password === '') {
