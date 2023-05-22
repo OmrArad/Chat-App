@@ -32,7 +32,7 @@ function RegistrationForm(values) {
 
     return (
         /* Registration form */
-        <form className="register-card" onSubmit={values.handleSubmit}>
+        <form className="register-card">
             <h1>
                 Register
             </h1>
@@ -55,7 +55,7 @@ function RegistrationForm(values) {
             <ProfilePicDisplay path={values.profilePicPath} />
             {/* Button for registration submission */}
             <div id="register-row" className="row">
-                <SubmitButton title={"Register"} type={"submit"} id={"register-button"} />
+                <SubmitButton title={"Register"} type={"submit"} id={"register-button"} onSubmit={values.handleSubmit}/>
                 {/* Link for already registered users to login */}
                 <div id="already-registered-txt" className="col text-sm-center">
                     Already registered?{" "}
