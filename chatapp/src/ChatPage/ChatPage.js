@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ChatPage.css';
 import UserPanel from './UsersPanel/usersPanel.js';
-import InputMessageForm from './NewMessageItem/NewMessageItem.js';
 import AddContact from './LeftColumn/Add/AddContact.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';

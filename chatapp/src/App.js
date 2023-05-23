@@ -2,7 +2,7 @@ import './App.css';
 import LoginPage from './LoginPage/LoginPage';
 import ChatPage from './ChatPage/ChatPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
 
 

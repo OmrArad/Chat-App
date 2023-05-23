@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReceivedMessageItem from '../MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
 import SentMessageItem from '../MessageItems/SentMessageItem/SentMessageItem.js';
-import InputMessageForm from '../NewMessageItem/NewMessageItem.js';
+import InputMessageForm from './InputMessageForm/InputMessageForm.js'
 
 function ChatBody({ selectedUser, token }) {
     const [messages, setMessages] = useState([]);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './NewMessageItem.css'
+import './InputMessageForm.css'
 
 
 function InputMessageForm(props) {
