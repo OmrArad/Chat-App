@@ -92,7 +92,7 @@ function RegistrationPage() {
                             handleBlur={handleVerifyChange} error={errors.verify} />
             {/* Input field for display name */}
             <InputFieldItem title={"Display name"} type={"text"} id={"displayname-input"} placeholder={"Enter display name"}
-                            handleBlur={handleDisplayNameChange} error={errors.displayname}/>
+                            handleBlur={handleDisplayNameChange} error={errors.displayName}/>
             {/* Input field for uploading profile picture */}
             <InputFieldItem title={"Picture"} type={"file"} id={"upload-picture-input"} placeholder={""}
                             handleChange={handlePictureUpload} error={errors.picture} />
