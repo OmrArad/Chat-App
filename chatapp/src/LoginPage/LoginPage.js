@@ -2,9 +2,9 @@ import './LoginPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import CheckBox from "./CheckBox";
-import validateLoginForm from "./validateLoginForm";
-import RegisterLink from './RegisterLink';
+import CheckBox from "./CheckBox/CheckBox";
+import validateLoginForm from "./ValidateLoginForm/validateLoginForm";
+import RegisterLink from './RegisterLink/RegisterLink';
 
 function LoginPage({ loggedIn, login }) {
   const navigate = useNavigate();

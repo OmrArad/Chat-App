@@ -1,4 +1,4 @@
-import userDatabase from "../user_db";
+import userDatabase from "../../user_db";
 
 function validateRegistrationForm(values) {
     const newErrors = {};

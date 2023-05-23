@@ -1,7 +1,7 @@
 import './RegistrationPage.css';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import validateRegistrationForm from "./validateRegistrationForm";
+import validateRegistrationForm from "./ValidateLoginForm/validateRegistrationForm";
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import { Link } from 'react-router-dom';
 import SubmitButton from "./SubmitButton/SubmitButton";
