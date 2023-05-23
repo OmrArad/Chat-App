@@ -1,4 +1,3 @@
-import userDatabase from "../user_db";
 
 function validateLoginForm(values) {
     const newErrors = {};

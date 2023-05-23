@@ -80,7 +80,6 @@ function LoginPage({ loggedIn, login }) {
       console.log(token)
       const loginData = { username, token }
       fetchUserDetails(loginData)
-
     }
   }
 
@@ -107,8 +106,6 @@ function LoginPage({ loggedIn, login }) {
       // return user;
     }
   }
-
-
 
   return (
     // Login form

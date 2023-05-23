@@ -25,6 +25,31 @@ const ChatPage = ({userDetails, loggedIn, logout}) => {
   // };
 
   useEffect(() => {
+    const fetchContactList = async () => {
+      const res = await fetch('http://localhost:5000/api/Chats/', {
+      'method': 'get',
+      'headers': {
+        'accept': 'text/plain',
+        'Authorization': 'bearer ' + token,
+      }
+    })
+
+    if (res.status == 401)
+      alert('Invalid token')
+    else if (res.status == 403)
+      alert('Token required')
+    else if (res.status != 200)
+      alert('Something went wrong') // if this case arises it will be added to conditions
+    else {
+      const contactList = await res.json()
+      setContacts(contactList)
+    }
+    }
+
+    fetchContactList();
+  }, [])
+
+  useEffect(() => {
     if (loggedIn === false) {
       navigate('/login');
     }
