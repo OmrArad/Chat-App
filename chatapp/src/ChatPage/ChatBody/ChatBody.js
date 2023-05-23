@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReceivedMessageItem from '../MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
 import SentMessageItem from '../MessageItems/SentMessageItem/SentMessageItem.js';
 import InputMessageForm from './InputMessageForm/InputMessageForm.js'
+import Header from './Header/Header.js';
 
 function ChatBody({ selectedUser, token }) {
     const [messages, setMessages] = useState([]);
@@ -84,27 +85,8 @@ function ChatBody({ selectedUser, token }) {
 
     return (
         <>
-            <div className="card-header">
-                <div className="d-flex flex-row justify-content-between">
-                    <div className="d-flex flex-row">
-                        <img
-                            src={user.profilePic}
-                            className="rounded-circle me-3"
-                            id="user_picture"
-                            alt="Your Image"
-                            width="50"
-                            height="50"
-                        />
-                        <div className="d-flex flex-column">
-                            <h5 className="mb-0">{user.displayName}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                className="card-body"
-                id="message-list"
-                ref={messageListRef} >
+            <Header user={user} />
+            <div className="card-body" id="message-list" ref={messageListRef} >
                 {messageList}
             </div>
             <InputMessageForm selectedUser={selectedUser} onSubmit={handleNewMessage} />
