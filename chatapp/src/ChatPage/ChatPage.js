@@ -9,7 +9,7 @@ import ChatBody from './ChatBody/ChatBody';
 
 const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const messageListRef = useRef(null);
@@ -17,9 +17,11 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
   const user = userDetails.user
   const token = userDetails.token
 
+
   // const doSearch = function (q) {
   //   setContacts(contacts.filter((contact) => contact.name.includes(q)));
   // };
+
 
   useEffect(() => {
     // Fetch user's contacts from server
@@ -43,9 +45,9 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
         setContacts(contactList)
       }
     }
-
     fetchContactList();
   }, [])
+
 
   useEffect(() => {
     if (loggedIn === false) {
@@ -53,23 +55,17 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
     }
   })
 
-  const handleNewMessage = (newMessage) => {
-    if (newMessage.content.trim() !== '') {
-      const updatedMessages = [...messages, { ...newMessage, user: selectedUser }];
-      setMessages(updatedMessages);
-      localStorage.setItem('messages', JSON.stringify(updatedMessages));
-    }
-  };
 
   // Also implemented in ChatBody
   // Haven't checked if it works so did not delete
   // Might be deleted later
-  useEffect(() => {
-    // Scroll to the bottom of the message list when new messages are added
-    if (messageListRef.current) {
-      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
-    }
-  }, [messages]);
+  // useEffect(() => {
+  //   // Scroll to the bottom of the message list when new messages are added
+  //   if (messageListRef.current) {
+  //     messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+  //   }
+  // }, [messages]);
+
 
   return (
     <div className="row">
@@ -106,25 +102,7 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
         <div className="card" id='chat-window'>
           {selectedUser && (
             <div>
-              <div className="card-header">
-                <div className="d-flex flex-row justify-content-between">
-                  <div className="d-flex flex-row">
-                    <img
-                      src={selectedUser.user.profilePic}
-                      className="rounded-circle me-3"
-                      id="user_picture"
-                      alt="Your Image"
-                      width="50"
-                      height="50"
-                    />
-                    <div className="d-flex flex-column">
-                      <h5 className="mb-0">{selectedUser.user.displayName}</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <ChatBody selectedUser={selectedUser} token={token}/>
-              <InputMessageForm selectedUser={selectedUser} onSubmit={handleNewMessage} />
             </div>
           )}
         </div>
