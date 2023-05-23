@@ -33,7 +33,6 @@ function ChatBody({ selectedUser, token }) {
             fetchMessages()
         }
     }, [selectedUser, token])
-    
 
     useEffect(() => {
         // Scroll to the bottom of the message list when new messages are added

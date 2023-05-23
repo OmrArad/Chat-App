@@ -3,8 +3,6 @@ import './ChatPage.css';
 import UserPanel from './UsersPanel/usersPanel.js';
 import InputMessageForm from './NewMessageItem/NewMessageItem.js';
 import AddContact from './LeftColumn/Add/AddContact.js';
-import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMessageItem.js';
-import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
 import ChatBody from './ChatBody/ChatBody';
@@ -63,22 +61,15 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
     }
   };
 
+  // Also implemented in ChatBody
+  // Haven't checked if it works so did not delete
+  // Might be deleted later
   useEffect(() => {
     // Scroll to the bottom of the message list when new messages are added
     if (messageListRef.current) {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
   }, [messages]);
-
-  // const filteredMessages = messages.filter((message) => message.user === selectedUser);
-
-  // const messageList = filteredMessages.map((message, index) => {
-  //   if (message.type === 'received') {
-  //     return <ReceivedMessageItem key={index} message={message.content} />;
-  //   } else {
-  //     return <SentMessageItem key={index} message={message.content} />;
-  //   }
-  // });
 
   return (
     <div className="row">
@@ -133,12 +124,6 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
                 </div>
               </div>
               <ChatBody selectedUser={selectedUser} token={token}/>
-              {/* <div
-                className="card-body"
-                id="message-list"
-                ref={messageListRef} >
-                {messageList}
-              </div> */}
               <InputMessageForm selectedUser={selectedUser} onSubmit={handleNewMessage} />
             </div>
           )}
