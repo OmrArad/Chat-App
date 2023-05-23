@@ -1,11 +1,11 @@
 import React from 'react';
 import './usersPanel.css';
 const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
-  
+
   const getLastMessage = (contact) => {
     if (contact.lastMessage !== null) {
       const lastMessage = contact.lastMessage;
-      const stringDate = isSameDay(new Date(Date.parse(lastMessage.created)))
+      const stringDate = isSameDay(new Date(Date.parse(lastMessage.created)), true)
       return {
         content: lastMessage.content,
         time: stringDate,
@@ -20,16 +20,19 @@ const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
   };
 
   // only shows date if the message was sent ealrier than today
-  const isSameDay = date => {
-    const now = new Date()
-    if (date.toLocaleDateString() == now.toLocaleDateString())
-      return date.toLocaleTimeString()
+  const isSameDay = (date, apply) => {
+    if (apply) {
+      const now = new Date()
+      if (date.toLocaleDateString() == now.toLocaleDateString())
+        return date.toLocaleTimeString()
+    }
     return date.toLocaleString()
   }
 
   return (
     <div>
       {contacts.map((item, index) => {
+        const user = item.user
         const lastMessage = getLastMessage(item);
         return (
           <li
@@ -40,14 +43,14 @@ const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
             <div className="d-flex flex-row justify-content-between">
               <div className="d-flex flex-row">
                 <img
-                  src={item.picture}
+                  src={user.profilePic}
                   className="rounded-circle me-3"
                   alt="Your Image"
                   width="50"
                   height="50"
                 />
                 <div className="d-flex flex-column">
-                  <h5 className="mb-0">{item.name}</h5>
+                  <h5 className="mb-0">{user.displayName}</h5>
                   <p className="mb-0">{lastMessage.content}</p>
                 </div>
               </div>
