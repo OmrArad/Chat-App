@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './NewMessageItem.css'
 
 
 function InputMessageForm(props) {
@@ -8,28 +9,38 @@ function InputMessageForm(props) {
     setContent(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newMessage = { content: content, timestamp: new Date(), type: 'sent' };
+  const sendMessage = e => {
+    e.preventDefault();
+    // const newMessage = { content: content, timestamp: new Date(), type: 'sent' };
     if (props.onSubmit && typeof props.onSubmit === 'function') {
-      props.onSubmit(newMessage); // Call the onSubmit function with the new message
+      props.onSubmit(content); // Call the onSubmit function with the new message
     }
     setContent(''); // Clear the content state
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="input-message">
       <div className="input-group">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" id="send" onClick={sendMessage}>
           <i className="fa fa-paper-plane" aria-hidden="true"></i>
         </button>
-        <input
-          type="text"
+        <textarea
+          name="text"
+          cols="40" 
+          rows="3"
+          // oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
           placeholder="Type a message"
           value={content}
           onChange={handleContentChange}
           className="form-control"
         />
+        {/* <input
+          type="text"
+          placeholder="Type a message"
+          value={content}
+          onChange={handleContentChange}
+          className="form-control"
+        /> */}
       </div>
     </form>
   );
