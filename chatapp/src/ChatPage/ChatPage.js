@@ -7,8 +7,9 @@ import ReceivedMessageItem from './MessageItems/ReceivedMessageItem/ReceivedMess
 import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
+import ChatBody from './ChatBody/ChatBody';
 
-const ChatPage = ({userDetails, loggedIn, logout}) => {
+const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
   const [messages, setMessages] = useState([]);
   const [contacts, setContacts] = useState([]);
@@ -18,32 +19,31 @@ const ChatPage = ({userDetails, loggedIn, logout}) => {
   const user = userDetails.user
   const token = userDetails.token
 
-  
-
   // const doSearch = function (q) {
   //   setContacts(contacts.filter((contact) => contact.name.includes(q)));
   // };
 
   useEffect(() => {
+    // Fetch user's contacts from server
     const fetchContactList = async () => {
       const res = await fetch('http://localhost:5000/api/Chats/', {
-      'method': 'get',
-      'headers': {
-        'accept': 'text/plain',
-        'Authorization': 'bearer ' + token,
-      }
-    })
+        'method': 'get',
+        'headers': {
+          'accept': 'text/plain',
+          'Authorization': 'bearer ' + token,
+        }
+      })
 
-    if (res.status == 401)
-      alert('Invalid token')
-    else if (res.status == 403)
-      alert('Token required')
-    else if (res.status != 200)
-      alert('Something went wrong') // if this case arises it will be added to conditions
-    else {
-      const contactList = await res.json()
-      setContacts(contactList)
-    }
+      if (res.status == 401)
+        alert('Invalid token')
+      else if (res.status == 403)
+        alert('Token required')
+      else if (res.status != 200)
+        alert('Something went wrong') // if this case arises it will be added to conditions
+      else {
+        const contactList = await res.json()
+        setContacts(contactList)
+      }
     }
 
     fetchContactList();
@@ -64,28 +64,21 @@ const ChatPage = ({userDetails, loggedIn, logout}) => {
   };
 
   useEffect(() => {
-    const storedMessages = localStorage.getItem('messages');
-    if (storedMessages) {
-      setMessages(JSON.parse(storedMessages));
-    }
-  }, []);
-
-  useEffect(() => {
     // Scroll to the bottom of the message list when new messages are added
     if (messageListRef.current) {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
   }, [messages]);
 
-  const filteredMessages = messages.filter((message) => message.user === selectedUser);
+  // const filteredMessages = messages.filter((message) => message.user === selectedUser);
 
-  const messageList = filteredMessages.map((message, index) => {
-    if (message.type === 'received') {
-      return <ReceivedMessageItem key={index} message={message.content} />;
-    } else {
-      return <SentMessageItem key={index} message={message.content} />;
-    }
-  });
+  // const messageList = filteredMessages.map((message, index) => {
+  //   if (message.type === 'received') {
+  //     return <ReceivedMessageItem key={index} message={message.content} />;
+  //   } else {
+  //     return <SentMessageItem key={index} message={message.content} />;
+  //   }
+  // });
 
   return (
     <div className="row">
@@ -99,7 +92,7 @@ const ChatPage = ({userDetails, loggedIn, logout}) => {
           <span className="d-flex flex-column mb-3">
             <LogoutButton logout={logout} />
             <h3 className="text-center">{user.displayName}</h3>
-            <AddContact setContacts={setContacts}/>
+            <AddContact setContacts={setContacts} />
             <img
               src={user.profilePic}
               className="rounded-circle mb-3"
@@ -114,8 +107,6 @@ const ChatPage = ({userDetails, loggedIn, logout}) => {
             <UserPanel
               contacts={contacts}
               setSelectedUser={setSelectedUser}
-              setMessages={setMessages}
-              messages={messages}
             />
           </ul>
         </div>
@@ -128,25 +119,26 @@ const ChatPage = ({userDetails, loggedIn, logout}) => {
                 <div className="d-flex flex-row justify-content-between">
                   <div className="d-flex flex-row">
                     <img
-                      src={selectedUser.picture}
+                      src={selectedUser.user.profilePic}
                       className="rounded-circle me-3"
-                      id = "user_picture"
+                      id="user_picture"
                       alt="Your Image"
                       width="50"
                       height="50"
                     />
                     <div className="d-flex flex-column">
-                      <h5 className="mb-0">{selectedUser.name}</h5>
+                      <h5 className="mb-0">{selectedUser.user.displayName}</h5>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
+              <ChatBody selectedUser={selectedUser} token={token}/>
+              {/* <div
                 className="card-body"
-                id = "message-list"
+                id="message-list"
                 ref={messageListRef} >
                 {messageList}
-              </div>
+              </div> */}
               <InputMessageForm selectedUser={selectedUser} onSubmit={handleNewMessage} />
             </div>
           )}

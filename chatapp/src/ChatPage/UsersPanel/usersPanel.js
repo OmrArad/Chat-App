@@ -1,6 +1,6 @@
 import React from 'react';
 import './usersPanel.css';
-const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
+const UsersPanel = ({ contacts, setSelectedUser}) => {
 
   const getLastMessage = (contact) => {
     if (contact.lastMessage !== null) {
