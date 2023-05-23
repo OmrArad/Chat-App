@@ -1,11 +1,10 @@
 import './LoginPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
-import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import CheckBox from "./CheckBox";
-import userDatabase from "../user_db";
 import validateLoginForm from "./validateLoginForm";
+import RegisterLink from './RegisterLink';
 
 function LoginPage({ loggedIn, login }) {
   const navigate = useNavigate();
@@ -81,13 +80,13 @@ function LoginPage({ loggedIn, login }) {
       console.log(token)
       const loginData = { username, token }
       fetchUserDetails(loginData)
-      
+
     }
   }
 
   const fetchUserDetails = async (loginData) => {
     const token = loginData.token
-    const res = await fetch('http://localhost:5000/api/Users/'+ loginData.username, {
+    const res = await fetch('http://localhost:5000/api/Users/' + loginData.username, {
       'method': 'get',
       'headers': {
         'accept': 'text/plain',
@@ -103,17 +102,17 @@ function LoginPage({ loggedIn, login }) {
       alert('Something went wrong') // if this case arises it will be added to conditions
     else {
       const user = await res.json()
-      login({user, token})
-      navigate('/', {user, token}); // attach the token
+      login({ user, token })
+      navigate('/', { user, token }); // attach the token
       // return user;
     }
-
-    
   }
+
+
 
   return (
     // Login form
-    <form id="login-form" action="" method="post" className="register-card" onSubmit={handleSubmit}>
+    <form id="login-form" action="" method="post" className="register-card">
       <h1>Login</h1>
 
       {/* <!-- ChatApp image --> */}
@@ -126,7 +125,7 @@ function LoginPage({ loggedIn, login }) {
         handleBlur={handlePasswordChange} error={errors.password} />
       {/* <!-- Login button --> */}
       <div className="d-grid gap-2">
-        <button className="btn btn-primary" type="submit" id="login-button" form="login-form" >Login</button>
+        <button className="btn btn-primary" type="submit" id="login-button" form="login-form" onClick={handleSubmit}>Login</button>
       </div>
 
       {/* <!-- Checkbox to remember user login details --> */}
@@ -137,9 +136,7 @@ function LoginPage({ loggedIn, login }) {
         <div className="psw col">Forgot <a href="#">password?</a></div>
 
         {/* <!-- Link to registration page --> */}
-        <div id="registerlink" className="col">
-          Not registered? <Link to='/register'>Click here</Link> to register
-        </div>
+        <RegisterLink />
       </div>
     </form>
   );
