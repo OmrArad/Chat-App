@@ -7,7 +7,7 @@ import Header from './Header/Header.js';
 function ChatBody({ selectedUser, token }) {
     const [messages, setMessages] = useState([]);
     const messageListRef = useRef(null);
-    const user = selectedUser.user
+    const contact = selectedUser.user
     const id = selectedUser.id
 
     const fetchMessages = async () => {
@@ -46,7 +46,7 @@ function ChatBody({ selectedUser, token }) {
     }, [messages]);
 
     const messageList = messages.slice(0).reverse().map((message, index) => {
-        if (message.sender !== user.username) {
+        if (message.sender.username === contact.username) {
             return <ReceivedMessageItem key={index} message={message.content} />; // add time and date to messages
         } else {
             return <SentMessageItem key={index} message={message.content} />; // add time and date to messages
@@ -85,7 +85,7 @@ function ChatBody({ selectedUser, token }) {
 
     return (
         <>
-            <Header user={user} />
+            <Header contact={contact} />
             <div className="card-body" id="message-list" ref={messageListRef} >
                 {messageList}
             </div>
