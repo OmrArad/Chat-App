@@ -3,15 +3,13 @@ import './usersPanel.css';
 const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
   
   const getLastMessage = (contact) => {
-    const filteredMessages = messages.filter(
-      (message) => message.user === contact
-    );
-    if (filteredMessages.length > 0) {
-      const lastMessage = filteredMessages[filteredMessages.length - 1];
+    if (contact.lastMessage !== null) {
+      const lastMessage = contact.lastMessage;
+      const stringDate = isSameDay(new Date(Date.parse(lastMessage.created)))
       return {
         content: lastMessage.content,
-        time: lastMessage.timestamp.toLocaleTimeString(),
-        unread: lastMessage.unread, // New property to determine if the message is unread
+        time: stringDate,
+        unread: false, // New property to determine if the message is unread
       };
     }
     return {
@@ -20,6 +18,14 @@ const UsersPanel = ({ contacts, setSelectedUser, messages }) => {
       unread: false, // Default value for unread property
     };
   };
+
+  // only shows date if the message was sent ealrier than today
+  const isSameDay = date => {
+    const now = new Date()
+    if (date.toLocaleDateString() == now.toLocaleDateString())
+      return date.toLocaleTimeString()
+    return date.toLocaleString()
+  }
 
   return (
     <div>
