@@ -5,16 +5,22 @@ import AddContact from './LeftColumn/Add/AddContact.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
 import ChatBody from './ChatBody/ChatBody';
+import ChatContact from './ChatContact/ChatContact';
 
 const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
   // const [messages, setMessages] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [lastMessage, setLastMessage] = useState('');
   const messageListRef = useRef(null);
   const navigate = useNavigate();
   const user = userDetails.user
   const token = userDetails.token
+
+  const contactList = contacts.map((contact) =>
+    <ChatContact contact={contact} setSelectedUser={setSelectedUser} />
+  )
 
 
   // const doSearch = function (q) {
@@ -55,17 +61,6 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
   })
 
 
-  // Also implemented in ChatBody
-  // Haven't checked if it works so did not delete
-  // Might be deleted later
-  // useEffect(() => {
-  //   // Scroll to the bottom of the message list when new messages are added
-  //   if (messageListRef.current) {
-  //     messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
-  //   }
-  // }, [messages]);
-
-
   return (
     <div className="row">
       {/* <LeftColumn
@@ -90,10 +85,11 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
           </span>
           {/* <SearchItem doSearch={doSearch} /> */}
           <ul className="list list-group">
-            <UserPanel
+            {contactList}
+            {/* <UserPanel
               contacts={contacts}
               setSelectedUser={setSelectedUser}
-            />
+            /> */}
           </ul>
         </div>
       </div>
@@ -101,7 +97,7 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
         <div className="card" id='chat-window'>
           {selectedUser && (
             <div>
-              <ChatBody selectedUser={selectedUser} token={token}/>
+              <ChatBody selectedUser={selectedUser} token={token} setLastMessage={setLastMessage}/>
             </div>
           )}
         </div>

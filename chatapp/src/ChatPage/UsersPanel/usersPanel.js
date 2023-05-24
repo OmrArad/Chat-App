@@ -1,39 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './usersPanel.css';
 const UsersPanel = ({ contacts, setSelectedUser}) => {
 
-  const getLastMessage = (contact) => {
-    if (contact.lastMessage !== null) {
-      const lastMessage = contact.lastMessage;
-      const stringDate = isSameDay(new Date(Date.parse(lastMessage.created)), true)
-      return {
-        content: lastMessage.content,
-        time: stringDate,
-        unread: false, // New property to determine if the message is unread
-      };
-    }
-    return {
-      content: '',
-      time: '',
-      unread: false, // Default value for unread property
-    };
-  };
+  // const getLastMessage = (contact) => {
+  //   if (contact.lastMessage !== null) {
+  //     const lastMessage = contact.lastMessage;
+  //     const stringDate = isSameDay(new Date(Date.parse(lastMessage.created)), true)
+  //     return {
+  //       content: lastMessage.content,
+  //       time: stringDate,
+  //       unread: false, // New property to determine if the message is unread
+  //     };
+  //   }
+  //   return {
+  //     content: '',
+  //     time: '',
+  //     unread: false, // Default value for unread property
+  //   };
+  // };
 
-  // only shows date if the message was sent ealrier than today
-  const isSameDay = (date, apply) => {
-    if (apply) {
-      const now = new Date()
-      if (date.toLocaleDateString() == now.toLocaleDateString())
-        return date.toLocaleTimeString()
-    }
-    return date.toLocaleString()
-  }
+  // // Returns time for messages sent today, otherwise returns date
+  // const isSameDay = (date, apply) => {
+  //   if (apply) {
+  //     const now = new Date()
+  //     if (date.toLocaleDateString() == now.toLocaleDateString())
+  //       return date.toLocaleTimeString()
+  //   }
+  //   return date.toLocaleDateString()
+  // }
 
   return (
     <div>
       {contacts.map((item, index) => {
         const user = item.user
-        const lastMessage = getLastMessage(item);
+        const lastMessage = getLastMessage(item)
         return (
           <li
             className="list-group-item"
@@ -55,7 +55,7 @@ const UsersPanel = ({ contacts, setSelectedUser}) => {
                 </div>
               </div>
               <div className="d-flex flex-column">
-                <p className="mb-0">{lastMessage.time}</p>
+                <p className="mb-0 time">{lastMessage.time}</p>
                 <div className="d-flex justify-content-end">
                   {lastMessage.unread && ( // Only display badge if unread is true
                     <span
