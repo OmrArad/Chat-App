@@ -3,22 +3,22 @@ import ChatContact from './ChatContact/ChatContact.js';
 
 function ContactListResults({ contacts, setSelectedUser, setSwitchID }) {
 
-    const [contactList, setContactList] = useState(contacts.map((contact, key) =>
-        <ChatContact
-            contact={contact}
-            setSelectedUser={setSelectedUser}
-            key={key}
-            setSwitchID={setSwitchID} />
-    ))
+    function getContactList() {
+        return (
+            contacts.map((contact, key) =>
+                <ChatContact
+                    contact={contact}
+                    key={key}
+                    setSelectedUser={setSelectedUser}
+                    setSwitchID={setSwitchID} />
+            )
+        )
+    }
+
+    const [contactList, setContactList] = useState(getContactList())
 
     useEffect(() => {
-        setContactList(contacts.map((contact, key) =>
-            <ChatContact
-                contact={contact}
-                setSelectedUser={setSelectedUser}
-                key={key}
-                setSwitchID={setSwitchID} />
-        ))
+        setContactList(getContactList())
     }, [contacts])
 
     return (
