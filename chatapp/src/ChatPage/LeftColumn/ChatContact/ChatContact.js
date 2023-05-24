@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function ChatContact({ contact, setSelectedUser }) {
+function ChatContact({ contact, setSelectedUser, setSwitchID }) {
     const user = contact.user
 
     const getLastMessage = (contact) => {
@@ -41,7 +41,10 @@ function ChatContact({ contact, setSelectedUser }) {
     return (
         <li
             className="list-group-item"
-            onClick={() => setSelectedUser(contact)}
+            onClick={() => {
+                setSelectedUser(contact)
+                setSwitchID(contact.id)
+            }}
         >
             <div className="d-flex flex-row justify-content-between">
                 <div className="d-flex flex-row">

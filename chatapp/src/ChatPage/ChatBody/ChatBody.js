@@ -4,7 +4,7 @@ import SentMessageItem from '../MessageItems/SentMessageItem/SentMessageItem.js'
 import InputMessageForm from './InputMessageForm/InputMessageForm.js'
 import Header from './Header/Header.js';
 
-function ChatBody({ selectedUser, token, setIsNewMessage }) {
+function ChatBody({ selectedUser, token, setIsNewMessage, switchID }) {
     const [messages, setMessages] = useState([]);
     const messageListRef = useRef(null);
     const contact = selectedUser.user
@@ -32,11 +32,11 @@ function ChatBody({ selectedUser, token, setIsNewMessage }) {
         }
     }
 
+    // only fetch messages on the user we switched to
     useEffect(() => {
-        return () => {
+        if (selectedUser.id === switchID)
             fetchMessages()
-        }
-    }, [selectedUser, token])
+    }, [switchID])
 
     useEffect(() => {
         // Scroll to the bottom of the message list when new messages are added
@@ -80,7 +80,7 @@ function ChatBody({ selectedUser, token, setIsNewMessage }) {
         else {
             // Message sent successfuly
             fetchMessages()
-            selectedUser.lastMessage = data.msg
+            // selectedUser.lastMessage = data.msg
             setIsNewMessage(id)
         }
     }
