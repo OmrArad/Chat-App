@@ -33,7 +33,8 @@ function AddContact({ token, setAddedContact }) {
       alert('Something went wrong') // if this case arises it will be added to conditions
     else {
       // Added contact successfuly
-      setAddedContact(true)
+      let data = await res.json()
+      setAddedContact(data.id)
       e.target.reset();
     }
   };

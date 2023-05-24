@@ -10,8 +10,9 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
   const [contacts, setContacts] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [addedContact, setAddedContact] = useState(false);
+  const [addedContact, setAddedContact] = useState('');
   const [isNewMessage, setIsNewMessage] = useState('');
+  const [switchID, setSwitchID] = useState('');
   const navigate = useNavigate();
   const user = userDetails.user
   const token = userDetails.token
@@ -61,7 +62,10 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
           <span className="d-flex flex-column mb-3">
             <LogoutButton logout={logout} />
             <h3 className="text-center">{user.displayName}</h3>
-            <AddContact setContacts={setContacts} token={token} setAddedContact={setAddedContact}/>
+            <AddContact
+              setContacts={setContacts}
+              token={token}
+              setAddedContact={setAddedContact} />
             <img
               src={user.profilePic}
               className="rounded-circle mb-3"
@@ -72,14 +76,22 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
             />
           </span>
           {/* <SearchItem doSearch={doSearch} /> */}
-          <ContactListResults contacts={contacts} setSelectedUser={setSelectedUser} isNewMessage={isNewMessage}/>
+          <ContactListResults
+            contacts={contacts}
+            setSelectedUser={setSelectedUser}
+            isNewMessage={isNewMessage}
+            setSwitchID={setSwitchID} />
         </div>
       </div>
       <div className="col-md-9">
         <div className="card" id='chat-window'>
           {selectedUser && (
             <div>
-              <ChatBody selectedUser={selectedUser} token={token} setIsNewMessage={setIsNewMessage}/>
+              <ChatBody
+                selectedUser={selectedUser}
+                token={token}
+                setIsNewMessage={setIsNewMessage}
+                switchID={switchID} />
             </div>
           )}
         </div>
