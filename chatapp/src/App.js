@@ -23,22 +23,6 @@ function App() {
     setLoggedIn(true);
   }
 
-  /*useEffect(() => {
-    if (currentUser === null) {
-      <Routes>
-        <Route path='/' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
-        <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
-        <Route path='/register' element={<RegistrationPage />} ></Route>
-      </Routes>
-    } else {
-      <Routes>
-        <Route path='/login' element={<LoginPage setUser={setCurrentUser} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} ></Route>
-        <Route path='/register' element={<RegistrationPage setUser={setCurrentUser} />} ></Route>
-        <Route path='/' element={<ChatPage user={currentUser} />} ></Route>
-      </Routes>
-    }
-  })*/
-
   if(loggedIn === false) {
     return (
       <div className="top">
@@ -62,7 +46,7 @@ function App() {
           <Routes>
             <Route path='/login' element={<LoginPage setUser={setCurrentUser} login={doLogin} />} ></Route>
             <Route path='/register' element={<RegistrationPage />} ></Route>
-            <Route path='/' element={<ChatPage user={currentUser} loggedIn={loggedIn} logout={doLogout} />} ></Route>
+            <Route path='/' element={<ChatPage userDetails={currentUser} loggedIn={loggedIn} logout={doLogout} />} ></Route>
           </Routes>
         </Router>
       </div>

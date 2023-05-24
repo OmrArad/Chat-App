@@ -8,13 +8,17 @@ import SentMessageItem from './MessageItems/SentMessageItem/SentMessageItem.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
 
-const ChatPage = ({user, loggedIn, logout}) => {
+const ChatPage = ({userDetails, loggedIn, logout}) => {
 
   const [messages, setMessages] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const messageListRef = useRef(null);
   const navigate = useNavigate();
+  const user = userDetails.user
+  const token = userDetails.token
+
+  
 
   // const doSearch = function (q) {
   //   setContacts(contacts.filter((contact) => contact.name.includes(q)));
@@ -69,10 +73,10 @@ const ChatPage = ({user, loggedIn, logout}) => {
         <div className="card" id="chat-card">
           <span className="d-flex flex-column mb-3">
             <LogoutButton logout={logout} />
-            <h3 className="text-center">{user.displayname}</h3>
+            <h3 className="text-center">{user.displayName}</h3>
             <AddContact setContacts={setContacts}/>
             <img
-              src={user.picture}
+              src={user.profilePic}
               className="rounded-circle mb-3"
               alt="Your Image"
               width="50"

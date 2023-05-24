@@ -4,16 +4,12 @@ function LogoutButton({logout}) {
     const navigate = useNavigate();
 
     function handleLogout(e) {
-
         e.preventDefault();
-
         // logs out user and sets loggedIn state to false
         logout();
-
         // navigate to login page
         navigate('/login');
         alert("Logging out");
-
     }
 
     return (

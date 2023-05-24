@@ -1,17 +1,16 @@
 import './LoginPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
-import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import CheckBox from "./CheckBox";
-import userDatabase from "../user_db";
 import validateLoginForm from "./validateLoginForm";
+import RegisterLink from './RegisterLink';
 
 function LoginPage({ loggedIn, login }) {
   const navigate = useNavigate();
 
   // redirects to chat page if user is logged in
-  if(loggedIn) {
+  if (loggedIn) {
     navigate('/');
   }
 
@@ -21,8 +20,8 @@ function LoginPage({ loggedIn, login }) {
 
   // state variable to hold form validation errors
   const [errors, setError] = useState({
-    'username' : '',
-    'password' : ''
+    'username': '',
+    'password': ''
   });
 
   // flag to track whether form has errors
@@ -42,22 +41,78 @@ function LoginPage({ loggedIn, login }) {
     e.preventDefault();
 
     // validate form input and update errors state variable
-    const validationResult = validateLoginForm({username, password});
+    const validationResult = validateLoginForm({ username, password });
     setError(validationResult.newErrors);
     errorCondition = validationResult.hasError;
 
     // if username and password are correct, logs in user
     if (errorCondition === false) {
-      let user = userDatabase.getUser(username);
-      login(user);
+      
+      const data = {}
+      data.username = username
+      data.password = password
 
-      navigate('/', user);
+      handleLogin(data)
+
     }
   };
 
+  const handleLogin = async (data) => {
+    const res = await fetch('http://localhost:5000/api/Tokens', {
+      'method': 'post',
+      'headers': {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      'body': JSON.stringify(data)
+    })
+
+    if (res.status == 404) {
+      alert('Invalid username and/or password')
+    }
+    else if (res.status != 200)
+      alert('Something went wrong') // if this case arises it will be added to conditions
+    else {
+      // Correct username/password
+      // Fetch user details and navigate to chat page
+      // The server's response
+      const token = await res.json()
+      console.log(token)
+      const loginData = { username, token }
+      fetchUserDetails(loginData)
+
+    }
+  }
+
+  const fetchUserDetails = async (loginData) => {
+    const token = loginData.token
+    const res = await fetch('http://localhost:5000/api/Users/' + loginData.username, {
+      'method': 'get',
+      'headers': {
+        'accept': 'text/plain',
+        'Authorization': 'bearer ' + loginData.token,
+      }
+    })
+
+    if (res.status == 401)
+      alert('Invalid token')
+    else if (res.status == 403)
+      alert('Token required')
+    else if (res.status != 200)
+      alert('Something went wrong') // if this case arises it will be added to conditions
+    else {
+      const user = await res.json()
+      login({ user, token })
+      navigate('/', { user, token }); // attach the token
+      // return user;
+    }
+  }
+
+
+
   return (
     // Login form
-    <form id="login-form" action="" method="post" className="register-card" onSubmit={handleSubmit}>
+    <form id="login-form" action="" method="post" className="register-card">
       <h1>Login</h1>
 
       {/* <!-- ChatApp image --> */}
@@ -65,12 +120,12 @@ function LoginPage({ loggedIn, login }) {
 
       {/* <!-- Username and Password input fields --> */}
       <InputFieldItem title={"Username"} id={"username-input"} type={"text"} placeholder={"Enter username"}
-                      handleBlur={handleUsernameChange} error={errors.username} />
+        handleBlur={handleUsernameChange} error={errors.username} />
       <InputFieldItem title={'Password'} id={'password-input'} type={'password'} placeholder={'Enter password'}
-                      handleBlur={handlePasswordChange} error={errors.password} />
+        handleBlur={handlePasswordChange} error={errors.password} />
       {/* <!-- Login button --> */}
       <div className="d-grid gap-2">
-        <button className="btn btn-primary" type="submit" id="login-button" form="login-form" >Login</button>
+        <button className="btn btn-primary" type="submit" id="login-button" form="login-form" onClick={handleSubmit}>Login</button>
       </div>
 
       {/* <!-- Checkbox to remember user login details --> */}
@@ -81,9 +136,7 @@ function LoginPage({ loggedIn, login }) {
         <div className="psw col">Forgot <a href="#">password?</a></div>
 
         {/* <!-- Link to registration page --> */}
-        <div id="registerlink" className="col">
-          Not registered? <Link to='/register'>Click here</Link> to register
-        </div>
+        <RegisterLink />
       </div>
     </form>
   );

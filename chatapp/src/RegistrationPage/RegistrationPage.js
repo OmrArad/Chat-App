@@ -1,10 +1,13 @@
 import './RegistrationPage.css';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import userDatabase from "../user_db";
 import validateRegistrationForm from "./validateRegistrationForm";
-import RegistrationForm from './RegistrationForm';
+import InputFieldItem from '../InputFieldItem/InputFieldItem';
+import { Link } from 'react-router-dom';
+import SubmitButton from "./SubmitButton/SubmitButton";
+import ProfilePicDisplay from "./ProfilePicDisplay/ProfilePicDisplay";
 
+// Define the logic of the registration form
 function RegistrationPage() {
 
     // state variables to hold form input values and profile picture
@@ -25,6 +28,30 @@ function RegistrationPage() {
         'picture': ''
     });
 
+    // event handlers to update state variables on input change
+    const handleUsernameChange = e => {
+        setUsername(e.target.value);
+    };
+    const handlePasswordChange = e => {
+        setPassword(e.target.value);
+    };
+    const handleVerifyChange = e => {
+        setVerify(e.target.value);
+    };
+    const handleDisplayNameChange = e => {
+        setDisplayName(e.target.value);
+    };
+
+    // function to handle profile picture upload
+    const handlePictureUpload = (event) => {
+        if (event.target.files[0]) {
+            const file = event.target.files[0];
+            const filePath = URL.createObjectURL(file);
+            setPicture_obj(file)
+            setProfilePicPath(filePath);
+        }
+    };
+
     // flag to track whether form has errors
     let errorCondition = false;
 
@@ -39,20 +66,10 @@ function RegistrationPage() {
 
         // if there are no errors, add user to database and navigate to login page
         if (errorCondition === false) {
-            const data = userDatabase.addUser({ username, password, displayName: displayname, picture: profilePicPath });
-            handleRegister(adaptData(data))
+            const data = { username, password, displayName: displayname, profilePic: profilePicPath }
+            handleRegister(data)
         }
     };
-
-    // adapt the data to fit the servers API
-    function adaptData(data) {
-        const newData = {}
-        newData.username = data.username
-        newData.password = data.password
-        newData.displayName = data.displayname
-        newData.profilePic = data.picture
-        return newData
-    }
 
     // function to handle user registration
     async function handleRegister(data) {
@@ -71,9 +88,9 @@ function RegistrationPage() {
         else if (res.status != 200)
             alert('Something went wrong') // if this case arises it will be added to conditions
         else {
-            // Correct username/password
+            // Successful registration
             // Navigate to login page
-            navigate('/login', { state: { username } }); // Remove state once communicating via server
+            navigate('/login');
             alert("Registration successful")
         }
     };
@@ -87,17 +104,41 @@ function RegistrationPage() {
     }
 
     return (
-        <RegistrationForm
-            handleSubmit={handleSubmit}
-            setUsername={setUsername}
-            setPassword={setPassword}
-            setVerify={setVerify}
-            setDisplayName={setDisplayName}
-            setPicture_obj={setPicture_obj}
-            profilePicPath={profilePicPath}
-            setProfilePicPath={setProfilePicPath}
-            errors={errors}
-        />
+        /* Registration form */
+        <form className="register-card">
+            <h1>
+                Register
+            </h1>
+            {/* Input field for username */}
+            <InputFieldItem title={"Username"} type={"text"} id={"username-input"} placeholder={"Enter username"}
+                handleBlur={handleUsernameChange} error={errors.username} />
+            {/* Input field for password */}
+            <InputFieldItem title={"Password"} type={"password"} id={"password-input"} placeholder={"Enter password"}
+                handleBlur={handlePasswordChange} error={errors.password} />
+            {/* Input field for password confirmation */}
+            <InputFieldItem title={"Verify password"} type={"password"} id={"conf-pass-input"} placeholder={"Reenter password"}
+                handleBlur={handleVerifyChange} error={errors.verify} />
+            {/* Input field for display name */}
+            <InputFieldItem title={"Display name"} type={"text"} id={"displayname-input"} placeholder={"Enter display name"}
+                handleBlur={handleDisplayNameChange} error={errors.displayName} />
+            {/* Input field for uploading profile picture */}
+            <InputFieldItem title={"Picture"} type={"file"} id={"upload-picture-input"} placeholder={""}
+                handleChange={handlePictureUpload} error={errors.picture} />
+            {/* Display uploaded image */}
+            <ProfilePicDisplay path={profilePicPath} />
+            {/* Button for registration submission */}
+            <div id="register-row" className="row">
+                <SubmitButton title={"Register"} type={"submit"} id={"register-button"} onSubmit={handleSubmit} />
+                {/* Link for already registered users to login */}
+                <div id="already-registered-txt" className="col text-sm-center">
+                    Already registered?{" "}
+                    <Link id="login-link" to='/login'>
+                        Click here
+                    </Link>{" "}
+                    to login
+                </div>
+            </div>
+        </form>
     );
 }
 

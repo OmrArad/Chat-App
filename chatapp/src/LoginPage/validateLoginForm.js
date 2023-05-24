@@ -1,5 +1,3 @@
-import userDatabase from "../user_db";
-
 function validateLoginForm(values) {
     const newErrors = {};
     let hasError = false;
@@ -14,18 +12,8 @@ function validateLoginForm(values) {
     if (!values.username) {
         newErrors.username = "Username required";
         hasError = true;
-    } else if (!userDatabase.containsUser(values.username)) {
-        newErrors.username = "User " + values.username + " does not exist";
-        hasError = true;
-    } else {
-
-        // check that given password is the same as user's
-        let user = userDatabase.getUser(values.username);
-        if (user.password !== values.password) {
-            newErrors.password = "Password is incorrect"
-            hasError = true;
-        }
     }
+    
     console.log("errors: " + newErrors);
     return {newErrors, hasError};
 }
