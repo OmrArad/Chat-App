@@ -1,27 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ChatPage.css';
-import UserPanel from './UsersPanel/usersPanel.js';
 import AddContact from './LeftColumn/Add/AddContact.js';
 import { useNavigate } from "react-router-dom";
 import LogoutButton from './LogoutButton/LogoutButton';
 import ChatBody from './ChatBody/ChatBody';
-import ChatContact from './ChatContact/ChatContact';
+import ContactListResults from './LeftColumn/ContactListResults/ContactListResults';
 
 const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
   // const [messages, setMessages] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [lastMessage, setLastMessage] = useState('');
-  const messageListRef = useRef(null);
   const navigate = useNavigate();
   const user = userDetails.user
   const token = userDetails.token
-
-  const contactList = contacts.map((contact) =>
-    <ChatContact contact={contact} setSelectedUser={setSelectedUser} />
-  )
-
 
   // const doSearch = function (q) {
   //   setContacts(contacts.filter((contact) => contact.name.includes(q)));
@@ -84,20 +76,14 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
             />
           </span>
           {/* <SearchItem doSearch={doSearch} /> */}
-          <ul className="list list-group">
-            {contactList}
-            {/* <UserPanel
-              contacts={contacts}
-              setSelectedUser={setSelectedUser}
-            /> */}
-          </ul>
+          <ContactListResults contacts={contacts} setSelectedUser={setSelectedUser} />
         </div>
       </div>
       <div className="col-md-9">
         <div className="card" id='chat-window'>
           {selectedUser && (
             <div>
-              <ChatBody selectedUser={selectedUser} token={token} setLastMessage={setLastMessage}/>
+              <ChatBody selectedUser={selectedUser} token={token} />
             </div>
           )}
         </div>

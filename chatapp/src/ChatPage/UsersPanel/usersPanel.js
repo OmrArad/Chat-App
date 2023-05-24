@@ -1,33 +1,38 @@
+// Not in use
+// Instead use ChatContact
+// Do not delete yet
+
 import React, { useEffect, useState } from 'react';
 import './usersPanel.css';
+
 const UsersPanel = ({ contacts, setSelectedUser}) => {
 
-  // const getLastMessage = (contact) => {
-  //   if (contact.lastMessage !== null) {
-  //     const lastMessage = contact.lastMessage;
-  //     const stringDate = isSameDay(new Date(Date.parse(lastMessage.created)), true)
-  //     return {
-  //       content: lastMessage.content,
-  //       time: stringDate,
-  //       unread: false, // New property to determine if the message is unread
-  //     };
-  //   }
-  //   return {
-  //     content: '',
-  //     time: '',
-  //     unread: false, // Default value for unread property
-  //   };
-  // };
+  const getLastMessage = (contact) => {
+    if (contact.lastMessage !== null) {
+      const lastMessage = contact.lastMessage;
+      const stringDate = isSameDay(new Date(Date.parse(lastMessage.created)), true)
+      return {
+        content: lastMessage.content,
+        time: stringDate,
+        unread: false, // New property to determine if the message is unread
+      };
+    }
+    return {
+      content: '',
+      time: '',
+      unread: false, // Default value for unread property
+    };
+  };
 
-  // // Returns time for messages sent today, otherwise returns date
-  // const isSameDay = (date, apply) => {
-  //   if (apply) {
-  //     const now = new Date()
-  //     if (date.toLocaleDateString() == now.toLocaleDateString())
-  //       return date.toLocaleTimeString()
-  //   }
-  //   return date.toLocaleDateString()
-  // }
+  // Returns time for messages sent today, otherwise returns date
+  const isSameDay = (date, apply) => {
+    if (apply) {
+      const now = new Date()
+      if (date.toLocaleDateString() == now.toLocaleDateString())
+        return date.toLocaleTimeString()
+    }
+    return date.toLocaleDateString()
+  }
 
   return (
     <div>

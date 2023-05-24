@@ -1,6 +1,8 @@
 import React from 'react';
 import './AddContact.css';
+
 function AddContact({ setContacts }) {
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value.trim(); // Trim any leading or trailing whitespace

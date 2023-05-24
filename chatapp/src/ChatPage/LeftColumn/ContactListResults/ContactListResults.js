@@ -1,14 +1,18 @@
-import ContactItem from '../../ContactItem/ContactItem';
+import ChatContact from '../../ChatContact/ChatContact.js';
 
-function ContactListResults({ contacts }) {
+function ContactListResults({ contacts, setSelectedUser }) {
 
-    const contactList = contacts.map((contact, key) => {
-        return <ContactItem {...contact} key={key} />
-    });
+    const contactList = contacts.map((contact) =>
+        <ChatContact contact={contact} setSelectedUser={setSelectedUser} />
+    )
 
     return (
-        <ul className="list-group">
+        <ul className="list list-group">
             {contactList}
+            {/* <UserPanel
+              contacts={contacts}
+              setSelectedUser={setSelectedUser}
+            /> */}
         </ul>
     );
 }
