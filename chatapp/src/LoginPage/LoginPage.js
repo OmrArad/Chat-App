@@ -65,10 +65,10 @@ function LoginPage({ loggedIn, login }) {
       'body': JSON.stringify(data)
     })
 
-    if (res.status == 404) {
+    if (res.status === 404) {
       alert('Invalid username and/or password')
     }
-    else if (res.status != 200)
+    else if (res.status !== 200)
       alert('Something went wrong') // if this case arises it will be added to conditions
     else {
       // Correct username/password
@@ -90,11 +90,11 @@ function LoginPage({ loggedIn, login }) {
       }
     })
 
-    if (res.status == 401)
+    if (res.status === 401)
       alert('Login authentication error')
-    else if (res.status == 403)
+    else if (res.status === 403)
       alert('Authentication required')
-    else if (res.status != 200)
+    else if (res.status !== 200)
       alert('Something went wrong') // if this case arises it will be added to conditions
     else {
       const user = await res.json()

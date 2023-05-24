@@ -82,10 +82,10 @@ function RegistrationPage() {
             'body': JSON.stringify(data)
         })
 
-        if (res.status == 409) {
+        if (res.status === 409) {
             existingUserError()
         }
-        else if (res.status != 200)
+        else if (res.status !== 200)
             alert('Something went wrong') // if this case arises it will be added to conditions
         else {
             // Successful registration
