@@ -1,10 +1,17 @@
+import { useEffect, useState } from 'react';
 import ChatContact from '../../ChatContact/ChatContact.js';
 
-function ContactListResults({ contacts, setSelectedUser }) {
+function ContactListResults({ contacts, setSelectedUser, isNewMessage }) {
 
-    const contactList = contacts.map((contact) =>
-        <ChatContact contact={contact} setSelectedUser={setSelectedUser} />
-    )
+    const [contactList, setContactList] = useState(contacts.map((contact, key) =>
+        <ChatContact contact={contact} setSelectedUser={setSelectedUser} key={key} isNewMessage={isNewMessage} />
+    ))
+
+    useEffect(() => {
+        setContactList(contacts.map((contact, key) =>
+            <ChatContact contact={contact} setSelectedUser={setSelectedUser} key={key} isNewMessage={isNewMessage} />
+        ))
+    }, [contacts])
 
     return (
         <ul className="list list-group">

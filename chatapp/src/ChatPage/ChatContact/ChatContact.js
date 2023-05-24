@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-function ChatContact({contact, setSelectedUser}) {
+function ChatContact({ contact, setSelectedUser, isNewMessage }) {
     const user = contact.user
-    // const lastMessage = getLastMessage(contact)
 
     const getLastMessage = (contact) => {
         if (contact.lastMessage !== null) {

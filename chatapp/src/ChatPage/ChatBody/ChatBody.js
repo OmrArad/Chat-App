@@ -4,7 +4,7 @@ import SentMessageItem from '../MessageItems/SentMessageItem/SentMessageItem.js'
 import InputMessageForm from './InputMessageForm/InputMessageForm.js'
 import Header from './Header/Header.js';
 
-function ChatBody({ selectedUser, token }) {
+function ChatBody({ selectedUser, token, setIsNewMessage }) {
     const [messages, setMessages] = useState([]);
     const messageListRef = useRef(null);
     const contact = selectedUser.user
@@ -80,6 +80,8 @@ function ChatBody({ selectedUser, token }) {
         else {
             // Message sent successfuly
             fetchMessages()
+            selectedUser.lastMessage = data.msg
+            setIsNewMessage(id)
         }
     }
 
