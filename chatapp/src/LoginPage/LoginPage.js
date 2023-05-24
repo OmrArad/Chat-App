@@ -48,9 +48,7 @@ function LoginPage({ loggedIn, login }) {
     // if username and password are correct, logs in user
     if (errorCondition === false) {
       
-      const data = {}
-      data.username = username
-      data.password = password
+      const data = { username, password }
 
       handleLogin(data)
 
@@ -77,7 +75,6 @@ function LoginPage({ loggedIn, login }) {
       // Fetch user details and navigate to chat page
       // The server's response
       const token = await res.json()
-      console.log(token)
       const loginData = { username, token }
       fetchUserDetails(loginData)
     }
@@ -94,9 +91,9 @@ function LoginPage({ loggedIn, login }) {
     })
 
     if (res.status == 401)
-      alert('Invalid token')
+      alert('Login authentication error')
     else if (res.status == 403)
-      alert('Token required')
+      alert('Authentication required')
     else if (res.status != 200)
       alert('Something went wrong') // if this case arises it will be added to conditions
     else {
