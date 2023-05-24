@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ChatPage.css';
 import AddContact from './LeftColumn/Add/AddContact.js';
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,6 @@ import ContactListResults from './LeftColumn/ContactListResults/ContactListResul
 
 const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
-  // const [messages, setMessages] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [addedContact, setAddedContact] = useState(false);

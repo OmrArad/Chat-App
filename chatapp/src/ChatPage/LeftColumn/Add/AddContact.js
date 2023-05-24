@@ -3,7 +3,7 @@ import './AddContact.css';
 import Modal from './Modal/Modal';
 import AddButton from './AddButton/AddButton';
 
-function AddContact({ setContacts, token, setAddedContact }) {
+function AddContact({ token, setAddedContact }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,8 +36,6 @@ function AddContact({ setContacts, token, setAddedContact }) {
       setAddedContact(true)
       e.target.reset();
     }
-
-
   };
 
   return (

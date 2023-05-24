@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 
-function ChatContact({ contact, setSelectedUser, isNewMessage }) {
+function ChatContact({ contact, setSelectedUser }) {
     const user = contact.user
 
     const getLastMessage = (contact) => {
         if (contact.lastMessage !== null) {
             const lastMessage = contact.lastMessage;
             const stringDate = isSameDay(new Date(Date.parse(lastMessage.created)), true)
-            const returnMsg = {
-                content: lastMessage.content,
-                time: stringDate,
-                unread: false, // New property to determine if the message is unread
-            }
             return {
                 content: lastMessage.content,
                 time: stringDate,
@@ -37,7 +32,7 @@ function ChatContact({ contact, setSelectedUser, isNewMessage }) {
 
     const [lastMessage, setLastMessage] = useState(getLastMessage(contact))
 
-    // This should update the last message - swagger implementation does not update so no change
+    // Render when received new messages
     useEffect(() => {
         setLastMessage(getLastMessage(contact))
     }, [contact])

@@ -1,4 +1,4 @@
-function Modal({handleSubmit, usernameRef}) {
+function Modal({ handleSubmit }) {
   return (
     <div
       className="modal fade"
@@ -19,7 +19,7 @@ function Modal({handleSubmit, usernameRef}) {
           <div className="modal-body">
             <form onSubmit={handleSubmit}>
               <div className="mb-3 input-group">
-                <input type="text" className="form-control" placeholder="Enter name" name="name" ref={usernameRef}></input>
+                <input type="text" className="form-control" placeholder="Enter name" name="name"></input>
                 <button type="submit" className="btn btn-primary">
                   Add
                 </button>
