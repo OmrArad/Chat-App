@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ChatPage.css';
 import AddContact from './LeftColumn/Add/AddContact.js';
 import { useNavigate } from "react-router-dom";
-import LogoutButton from './LogoutButton/LogoutButton';
+import LogoutButton from './LeftColumn/LogoutButton/LogoutButton';
 import ChatBody from './ChatBody/ChatBody';
 import ContactListResults from './LeftColumn/ContactListResults/ContactListResults';
 
