@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ChatContact from '../ChatContact/ChatContact.js';
+import ChatContact from './ChatContact/ChatContact.js';
 
 function ContactListResults({ contacts, setSelectedUser, setSwitchID }) {
 
