@@ -1,7 +1,7 @@
 import './RegistrationPage.css';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import validateRegistrationForm from "./validateRegistrationForm";
+import validateRegistrationForm from "./ValidateLoginForm/validateRegistrationForm";
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import { Link } from 'react-router-dom';
 import SubmitButton from "./SubmitButton/SubmitButton";
@@ -82,10 +82,10 @@ function RegistrationPage() {
             'body': JSON.stringify(data)
         })
 
-        if (res.status == 409) {
+        if (res.status === 409) {
             existingUserError()
         }
-        else if (res.status != 200)
+        else if (res.status !== 200)
             alert('Something went wrong') // if this case arises it will be added to conditions
         else {
             // Successful registration

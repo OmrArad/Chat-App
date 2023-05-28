@@ -2,9 +2,9 @@ import './LoginPage.css';
 import InputFieldItem from '../InputFieldItem/InputFieldItem';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import CheckBox from "./CheckBox";
-import validateLoginForm from "./validateLoginForm";
-import RegisterLink from './RegisterLink';
+import CheckBox from "./CheckBox/CheckBox";
+import validateLoginForm from "./ValidateLoginForm/validateLoginForm";
+import RegisterLink from './RegisterLink/RegisterLink';
 
 function LoginPage({ loggedIn, login }) {
   const navigate = useNavigate();
@@ -48,9 +48,7 @@ function LoginPage({ loggedIn, login }) {
     // if username and password are correct, logs in user
     if (errorCondition === false) {
       
-      const data = {}
-      data.username = username
-      data.password = password
+      const data = { username, password }
 
       handleLogin(data)
 
@@ -67,20 +65,18 @@ function LoginPage({ loggedIn, login }) {
       'body': JSON.stringify(data)
     })
 
-    if (res.status == 404) {
+    if (res.status === 404) {
       alert('Invalid username and/or password')
     }
-    else if (res.status != 200)
+    else if (res.status !== 200)
       alert('Something went wrong') // if this case arises it will be added to conditions
     else {
       // Correct username/password
       // Fetch user details and navigate to chat page
       // The server's response
       const token = await res.json()
-      console.log(token)
       const loginData = { username, token }
       fetchUserDetails(loginData)
-
     }
   }
 
@@ -94,11 +90,11 @@ function LoginPage({ loggedIn, login }) {
       }
     })
 
-    if (res.status == 401)
-      alert('Invalid token')
-    else if (res.status == 403)
-      alert('Token required')
-    else if (res.status != 200)
+    if (res.status === 401)
+      alert('Login authentication error')
+    else if (res.status === 403)
+      alert('Authentication required')
+    else if (res.status !== 200)
       alert('Something went wrong') // if this case arises it will be added to conditions
     else {
       const user = await res.json()
@@ -107,8 +103,6 @@ function LoginPage({ loggedIn, login }) {
       // return user;
     }
   }
-
-
 
   return (
     // Login form
