@@ -1,8 +1,8 @@
 import express from 'express';
-import { chat } from '../controllers/chat.js';
+import { chat } from '../controller/chat.js';
 
 const router = express.Router();
 
-router.post('/chat', chat)
+router.get('/chat', isLoggedIn, chat)
 
 export default router;
