@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const User = require('./user');
 const Message = require('./message');
+const autoIncrement = require('mongoose-sequence')(mongoose);
+
 
 // Define the Chat schema
 const Chat = new mongoose.Schema({
@@ -17,5 +19,7 @@ const Chat = new mongoose.Schema({
         nullable: true,
     },
 });
+
+Chat.plugin(autoIncrement, { id: 'chat_id', inc_field: 'id' });
 
 module.exports = mongoose.model('Chat', Chat);

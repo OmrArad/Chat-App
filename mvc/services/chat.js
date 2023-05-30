@@ -57,8 +57,31 @@ const addMessageToChat = async (chatId, {messageID, created, sender, content}) =
     }
 }
 
+const getChatMessages = async (chatId) => {
+    try {
+        var chat = await Chat.findOne({ id:chatId });
+    } catch (error) {
+        throw new Error(error.message);
+    }
+    if (!chat) {
+        throw new Error('Chat not found');
+    }
+
+    return chat.messages;
+};
+
+const getUserChats = async (username) => {
+    try {
+        return await Chat.find({ 'users.username': username });
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
 module.exports = {
     createChat,
     addMessageToChat,
+    getChatMessages,
+    getUserChats
     // other CRUD functions...
 }
