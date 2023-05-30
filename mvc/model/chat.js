@@ -9,11 +9,11 @@ const Chat = new mongoose.Schema({
         required: true,
     },
     users: {
-        type: [User],
+        type: [User.schema],
         nullable: true,
     },
     messages: {
-        type: [Message],
+        type: [Message.schema],
         nullable: true,
     },
 });
