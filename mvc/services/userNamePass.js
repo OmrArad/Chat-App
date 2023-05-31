@@ -25,7 +25,7 @@ const findByUsername = async (username) => {
     try {
         return await UserPassName.findOne({ username });
     } catch (error) {
-        throw new Error(error.message);
+        return null;
     }
 };
 
@@ -99,7 +99,7 @@ const deleteByUsername = async (username) => {
     }
 };
 
-module.exports = {
+export default {
     createUser,
     findByUsername,
     updateByUsername,
