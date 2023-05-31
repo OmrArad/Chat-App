@@ -1,6 +1,6 @@
 import express from 'express';
-import { chat } from '../controller/chat.js';
-import { isLoggedIn } from '../controller/login.js';
+import chat from '../controller/chat.js';
+import isLoggedIn from '../controller/login.js';
 
 const router = express.Router();
 

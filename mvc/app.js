@@ -13,7 +13,7 @@ server.use(bodyParser());
 
 server.set('view engine', 'ejs');
 
-server.use('/api/Token', routerLogin);
+server.use('/api/Tokens', routerLogin);
 server.use('/ap', routerUser);
 server.use('/api/Chats', routerChat);
 

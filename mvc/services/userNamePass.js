@@ -1,6 +1,4 @@
-import { countDocuments } from '../model/user';
-
-const UserPassName = require('../model/userNamePass');
+import UserPassName from '../model/userNamePass.js';
 
 // Create a new UserPassName
 const createUser = async (username, password, displayName, profilePic) => {
@@ -101,8 +99,24 @@ const deleteByUsername = async (username) => {
     }
 };
 
+const getUserToLogin = async (username, password) => {
+    try {
+        const user = await findByUsername(username);
+        if (!user) {
+            throw new Error('Invalid username and/or password');
+        }
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            throw new Error('Invalid username and/or password');
+        }
+        return user;
+    }
+    catch (error) {
+        throw new Error(error.message);
+    }
+};
 
-export default {
+export {
     createUser,
     findByUsername,
     updateByUsername,
@@ -110,4 +124,5 @@ export default {
     updateDisplayNameByUsername,
     updateProfilePicByUsername,
     deleteByUsername,
+    getUserToLogin,
 };

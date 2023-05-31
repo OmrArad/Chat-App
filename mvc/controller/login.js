@@ -1,4 +1,4 @@
-import {findByUsername} from '../services/userNamePass.js';
+import getUserToLogin from '../services/userNamePass.js';
 import tokenizer from '../services/jwt.js';
 
 function login(req, res) {
@@ -16,7 +16,7 @@ function isLoggedIn(req, res, next) {
   if (req.cookies.token) {
     next();
   } else {
-    res.status(401).send("unAutorized").redirect('/api/Token');
+    res.status(401).send("unAutorized").redirect('/api/Tokens');
   }
 }
 
