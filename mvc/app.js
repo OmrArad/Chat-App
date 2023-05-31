@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import routerLogin from './routes/login.js';
-import routerRegister from './routes/register.js';
+import routerUser from './routes/user.js';
 import routerChat from './routes/chat.js';
 
 const server = express();
@@ -13,8 +13,8 @@ server.use(bodyParser());
 
 server.set('view engine', 'ejs');
 
-server.use('/', routerLogin);
-server.use('/register', routerRegister);
-server.use('/chat', routerChat);
+server.use('/api/Token', routerLogin);
+server.use('/ap', routerUser);
+server.use('/api/Chats', routerChat);
 
-server.listen(8080);
+server.listen(5000);
