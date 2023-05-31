@@ -1,3 +1,5 @@
+import { countDocuments } from '../model/user';
+
 const UserPassName = require('../model/userNamePass');
 
 // Create a new UserPassName
@@ -98,6 +100,7 @@ const deleteByUsername = async (username) => {
         throw new Error(error.message);
     }
 };
+
 
 export default {
     createUser,
