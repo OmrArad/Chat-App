@@ -54,7 +54,7 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
     }
   })
 
-
+  // should we use 
   return (
     <div className="row">
       <div className="col-md-3">

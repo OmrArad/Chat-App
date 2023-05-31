@@ -99,7 +99,7 @@ const deleteByUsername = async (username) => {
     }
 };
 
-module.exports = {
+export default {
     createUser,
     findByUsername,
     updateByUsername,
