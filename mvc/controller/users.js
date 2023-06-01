@@ -8,7 +8,7 @@ async function register(req, res) {
     res.status(200).json(newUser);
   } catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred during registration.');
+    res.status(401);
   }
 }
 async function fetchUserDetails(req, res) {
