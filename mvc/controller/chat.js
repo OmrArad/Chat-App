@@ -1,5 +1,5 @@
 import getUserChats from "../services/chat.js";
-import decodeToken from "../services/jwt.js";
+import decodeToken from "../services/login.js";
 
 function chat(req, res) {
   if (req.headers.authorization) {

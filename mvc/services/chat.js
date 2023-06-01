@@ -1,6 +1,5 @@
 const Chat = require('../model/chat')
 const User = require('../model/user')
-const UserNamePass = require('../model/userNamePass')
 const Message = require('../model/message')
 const userNamePassService = require('./userNamePass')
 
@@ -78,10 +77,19 @@ const getUserChats = async (username) => {
     }
 };
 
+// Delete a chat by ID
+const deleteChatById = async (chatId) => {
+    try {
+        return await Chat.findOneAndDelete({ id: chatId });
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
 export default {
     createChat,
     addMessageToChat,
     getChatMessages,
-    getUserChats
-    // other CRUD functions...
+    getUserChats,
+    deleteChatById
 }
