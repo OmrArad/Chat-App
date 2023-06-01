@@ -8,7 +8,8 @@ async function register(req, res) {
     res.status(200).json(newUser);
   } catch (error) {
     console.error(error);
-    res.status(401);
+    // CONFLICT
+    res.status(409);
   }
 }
 async function fetchUserDetails(req, res) {
@@ -18,12 +19,14 @@ async function fetchUserDetails(req, res) {
   }
   catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred during registration.');
+    // UNAUTHORIZED
+    res.status(401);
   }
 
 }
 
 
 export default {
-  register
+  register,
+  fetchUserDetails
 };
