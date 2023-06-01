@@ -8,6 +8,7 @@ import routerChat from './routes/chat.js';
 const server = express();
 
 server.use(express.static('public'));
+server.use(express.json());
 server.use(cookieParser());
 server.use(bodyParser());
 
