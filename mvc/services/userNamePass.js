@@ -1,4 +1,5 @@
 import UserPassName from '../model/userNamePass.js';
+import User from '../model/user.js';
 
 // Create a new UserPassName
 const createUser = async (username, password, displayName, profilePic) => {
@@ -28,6 +29,10 @@ const findByUsername = async (username) => {
         throw new Error(error.message);
     }
 };
+// TODO: Update this function to return the user details
+const fetchUserDetails = async (username) => {
+    
+}
 
 // Update a UserPassName by username
 const updateByUsername = async (

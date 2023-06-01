@@ -1,8 +1,11 @@
 import express from 'express';
-import register from '../controller/users.js';
+import {register, fetchUserDetails} from '../controller/users.js';
+
+
 
 const router = express.Router();
 
-router.get('/register', register)
+router.get('/:username', fetchUserDetails)
+router.post('/', register)
 
 export default router;

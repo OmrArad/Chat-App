@@ -14,7 +14,7 @@ server.use(bodyParser());
 server.set('view engine', 'ejs');
 
 server.use('/api/Tokens', routerLogin);
-server.use('/ap', routerUser);
+server.use('/api/Users', routerUser);
 server.use('/api/Chats', routerChat);
 
 server.listen(5000);

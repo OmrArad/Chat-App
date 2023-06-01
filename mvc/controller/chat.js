@@ -1,5 +1,5 @@
 import getUserChats from "../services/chat.js";
-import decodedToken from "../services/jwt.js";
+import decodeToken from "../services/jwt.js";
 
 function chat(req, res) {
   if (req.headers.authorization) {
@@ -25,5 +25,16 @@ function chat(req, res) {
     res.redirect("/login");
   }
 }
+function getMessagesById (req, res) {
+  
+}
+function newMessageById (req, res) {
 
-export default chat;
+}
+
+export default 
+{
+  chat,
+  getMessagesById,
+  newMessageById,
+};
