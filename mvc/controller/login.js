@@ -25,7 +25,12 @@ function isLoggedIn(req, res, next) {
       // Token validation was successful. Continue to the actual function (index)
       return next()
     } catch (err) {
-      return res.status(401).send("Invalid Token");
+      // UnAuthorized
+      res.setHeader("content-length: 0")
+      res.setHeader("date:" + Date.now().toString())
+      res.setHeader("server: Kestrel")
+      res.setHeader("www-authenticate: Bearer")
+      res.status(401);
     }
   } else {
     return res.status(403).send('Token required');
