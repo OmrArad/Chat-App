@@ -11,6 +11,18 @@ async function register(req, res) {
     res.status(500).send('An error occurred during registration.');
   }
 }
+async function fetchUserDetails(req, res) {
+  const username = req.params.username; // Assuming the request body contains the user registration data
+  try {
+    
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred during registration.');
+  }
+
+}
+
 
 export default {
   register

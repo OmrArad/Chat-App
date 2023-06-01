@@ -1,11 +1,11 @@
-import { getUserChats } from "../services/chat.js";
+import getUserChats from "../services/chat.js";
+import decodeToken from "../services/jwt.js";
 
 function chat(req, res) {
   if (req.headers.authorization) {
-    // Retrieve user chats based on the authorization header
-    // fetch the user name from the authorization header
-    let username = req.headers.authorization.split(" ")[1]; //????
-    let chats = getUserChats(req.headers.authorization);
+    let token = req.headers.authorization.split(" ")[1];
+    let decodedToken = decodeToken(token);
+    let chats = getUserChats(decodedToken.username);
     if (chats != null) {
       if (req.method === "GET") {
         // Return all chats
@@ -25,5 +25,16 @@ function chat(req, res) {
     res.redirect("/login");
   }
 }
+function getMessagesById (req, res) {
+  
+}
+function newMessageById (req, res) {
 
-export default chat;
+}
+
+export default 
+{
+  chat,
+  getMessagesById,
+  newMessageById,
+};

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const UserPassName = new mongoose.Schema({
+const UserPassNameSchema = new mongoose.Schema({
     username: {
         type: String,
         nullable: true
@@ -19,5 +19,6 @@ const UserPassName = new mongoose.Schema({
     }
 });
 
+const UserPassName = mongoose.model('UserPassName', UserPassNameSchema);
 
-module.exports = mongoose.model('UserPassName', UserPassName)
+module.exports = UserPassName;

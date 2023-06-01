@@ -78,7 +78,7 @@ const getUserChats = async (username) => {
     }
 };
 
-module.exports = {
+export default {
     createChat,
     addMessageToChat,
     getChatMessages,

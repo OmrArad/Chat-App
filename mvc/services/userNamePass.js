@@ -1,4 +1,5 @@
-const UserPassName = require('../model/userNamePass');
+import UserPassName from '../model/userNamePass.js';
+import User from '../model/user.js';
 
 // Create a new UserPassName
 const createUser = async (username, password, displayName, profilePic) => {
@@ -28,6 +29,10 @@ const findByUsername = async (username) => {
         throw new Error(error.message);
     }
 };
+// TODO: Update this function to return the user details
+const fetchUserDetails = async (username) => {
+    
+}
 
 // Update a UserPassName by username
 const updateByUsername = async (
@@ -99,7 +104,24 @@ const deleteByUsername = async (username) => {
     }
 };
 
-export default {
+const getUserToLogin = async (username, password) => {
+    try {
+        const user = await findByUsername(username);
+        if (!user) {
+            throw new Error('Invalid username and/or password');
+        }
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            throw new Error('Invalid username and/or password');
+        }
+        return user;
+    }
+    catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+export {
     createUser,
     findByUsername,
     updateByUsername,
@@ -107,4 +129,5 @@ export default {
     updateDisplayNameByUsername,
     updateProfilePicByUsername,
     deleteByUsername,
+    getUserToLogin,
 };
