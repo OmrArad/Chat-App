@@ -7,8 +7,8 @@ const userNamePassService = require('./userNamePass')
 // Create a new chat
 const createChat = async (chatID, username1, username2) => {
     try {
-        var userNP1 = await userNamePassService.findByUsername(username1);
-        var userNP2 = await userNamePassService.findByUsername(username2);
+        const userNP1 = await userNamePassService.findByUsername(username1);
+        const userNP2 = await userNamePassService.findByUsername(username2);
     } catch (error) {
         throw new Error(error.message);
     }
