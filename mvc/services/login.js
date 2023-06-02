@@ -18,4 +18,6 @@ const decode = async (token) => {
   }
 };
 
-export default{ tokenizer, decode };
+export default{ 
+  tokenizer, decode,
+};
