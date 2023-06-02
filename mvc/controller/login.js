@@ -1,5 +1,5 @@
 import getUserToLogin from '../services/userNamePass.js';
-import tokenizer from '../services/jwt.js';
+import tokenizer from '../services/login.js';
 
 function login(req, res) {
   try {
@@ -14,7 +14,7 @@ function login(req, res) {
   }
 }
 
-function isLoggedIn(req, res, next) {
+export function isLoggedIn(req, res, next) {
   if (req.headers.authorizations) {
     // Extract the token from that header
     const token = req.headers.authorization.split(" ")[1];
@@ -37,7 +37,4 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-export default {
-  login,
-  isLoggedIn,
-};
+export default { login, isLoggedIn };

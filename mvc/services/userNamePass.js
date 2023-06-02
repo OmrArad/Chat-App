@@ -116,7 +116,7 @@ const getUserToLogin = async (username, password) => {
     }
 };
 
-export {
+export default{
     createUser,
     findByUsername,
     updateByUsername,
@@ -125,4 +125,5 @@ export {
     updateProfilePicByUsername,
     deleteByUsername,
     getUserToLogin,
+
 };

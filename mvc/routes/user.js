@@ -1,6 +1,6 @@
 import express from 'express';
-import {register, fetchUserDetails} from '../controller/users.js';
-import {isLoggedIn} from '../controller/login.js';
+import { register, fetchUserDetails } from '../controller/users.js';
+import { isLoggedIn } from '../controller/login.js';
 
 
 

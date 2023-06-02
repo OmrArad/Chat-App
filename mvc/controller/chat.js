@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Chat = require('./models/Chat'); // Assuming you have a Chat model defined
 
-function chat(req, res) {
+export function chat(req, res) {
   if (req.headers.authorization) {
     let token = req.headers.authorization.split(" ")[1];
     let decodedToken = decodeToken(token);
@@ -33,7 +33,7 @@ function chat(req, res) {
   }
 }
 
-function getMessagesById(req, res) {
+export function getMessagesById(req, res) {
   const chatId = req.params.chatId;
   Chat.findById(chatId)
     .then(chat => {
@@ -48,7 +48,7 @@ function getMessagesById(req, res) {
     });
 }
 
-function newMessageById(req, res) {
+export function newMessageById(req, res) {
   const chatId = req.params.chatId;
   const message = req.body;
   Chat.findByIdAndUpdate(

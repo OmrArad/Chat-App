@@ -1,8 +1,7 @@
 import user from '../model/user.js';
 import createUser from '../services/userNamePass.js';
-const users = require('../services/users.js');
 
-async function register(req, res) {
+export async function register(req, res) {
   const userData = req.body; // Assuming the request body contains the user registration data
   try {
     // Create a new user based on the userData
@@ -14,7 +13,7 @@ async function register(req, res) {
     res.status(409);
   }
 }
-async function fetchUserDetails(req, res) {
+export async function fetchUserDetails(req, res) {
   const username = req.params.username; // Assuming the request body contains the user registration data
   try {
     res.status(200).json(await user.fetchUserDetails(username));
