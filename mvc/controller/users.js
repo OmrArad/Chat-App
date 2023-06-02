@@ -10,12 +10,12 @@ export async function register(req, res) {
   } catch (error) {
     console.error(error);
     // CHECK DIFFERENT CASES OF ERROR
-    // IF..
-    // CONFLICT
-    res.status(409);
-    // IF...
-    // BAD REQUEST
-    // res.status(400).send(...);
+    if (error.message === "User with the given username already exists.")
+      // CONFLICT
+      res.status(409).send();
+    else
+      // BAD REQUEST
+      res.status(400).send();
   }
 }
 export async function fetchUserDetails(req, res) {

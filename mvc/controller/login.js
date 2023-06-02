@@ -1,6 +1,4 @@
 import userNamePass from '../services/userNamePass.js';
-import tokenizer from '../services/login.js';
-import jwt from 'jsonwebtoken';
 import Login from '../services/login.js';
 
 export async function login(req, res) {
