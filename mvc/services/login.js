@@ -5,17 +5,17 @@ const secretKey = crypto.randomBytes(32).toString("hex");
 
 const tokenizer = async (username) => {
   const payload = { username };
-  const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
+  const token = jwt.sign(payload, secretKey);
   return token;
 }
 
-const decodeToken = async (token) => {
+const decode = async (token) => {
   try {
     const decoded = jwt.verify(token, secretKey);
     return decoded;
   } catch (error) {
-    return null;
+    throw error;
   }
 };
 
-export default{ tokenizer, decodeToken };
+export default{ tokenizer, decode };

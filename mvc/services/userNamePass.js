@@ -1,15 +1,20 @@
 import UserPassName from '../model/userNamePass.js';
-import User from '../model/user.js';
+import userPass from './userPass.js';
 
 // Create a new UserPassName
-const createUser = async (username, password, displayName, profilePic) => {
-    // Check if a user with the given username already exists
-    const existingUser = await UserPassName.findOne({ username });
-    if (existingUser) {
-        throw new Error('User with the given username already exists.');
-    }
+const createUser = async (userData) => {
     try {
-        return await new UserPassName({
+        // Check that all values are given
+        username = userData.username;
+        password = userData.password;
+        displayName = userData.displayName;
+        profilePic = userData.ProfilePic;
+        // Check if a user with the given username already exists
+        const existingUser = await UserPassName.findOne({ username });
+        if (existingUser) {
+            throw new Error('User with the given username already exists.');
+        }
+        await new UserPassName({
             username,
             password,
             displayName,
@@ -105,18 +110,18 @@ const getUserToLogin = async (username, password) => {
         if (!user) {
             throw new Error('Invalid username and/or password');
         }
-        const isMatch = await user.comparePassword(password);
-        if (!isMatch) {
+        const token = await userPass.comparePassword(password);
+        if (!token) {
             throw new Error('Invalid username and/or password');
         }
-        return user;
+        return token;
     }
     catch (error) {
         throw new Error(error.message);
     }
 };
 
-export default{
+export default {
     createUser,
     findByUsername,
     updateByUsername,
