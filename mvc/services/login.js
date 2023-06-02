@@ -1,15 +1,19 @@
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-// Generate a secret key
-const secretKey = crypto.randomBytes(32).toString("hex");
+
+// Hardcoded secret key
+
+// there was a prooblem with the secret key, it was not working well becasue on every 
+// import of the file, it was generating a new secret key, so the token was not valid
+const secretKey = "your-secret-key";
 
 const tokenizer = async (username) => {
   const payload = { username };
   const token = jwt.sign(payload, secretKey);
   return token;
-}
+};
 
-const decode = async (token) => {
+export const decode = async (token) => {
   try {
     const decoded = jwt.verify(token, secretKey);
     return decoded;
@@ -18,6 +22,7 @@ const decode = async (token) => {
   }
 };
 
-export default{ 
-  tokenizer, decode,
+export default {
+  tokenizer,
+  decode,
 };
