@@ -1,26 +1,27 @@
-import getUserToLogin from '../services/userNamePass.js';
-import tokenizer from '../services/login.js';
+import userNamePass from '../services/userNamePass.js';
+import Login from '../services/login.js';
 
-export function login(req, res) {
+export async function login(req, res) {
   try {
-    const user = getUserToLogin(req.body.username, req.body.password); // Assuming findByUsername is a function that retrieves user data
+    const token = await userNamePass.
+      getUserToLogin(req.body.username, req.body.password);
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.setHeader('Access-Control-Allow-Origin', '*');
     // Return the token to the browser
-    res.status(200).send(tokenizer(user));
+    await res.status(200).send(token);
     // res.status(200).json({ token });
   } catch (error) {
     res.status(404).send('Invalid username and/or password');
   }
 }
 
-export function isLoggedIn(req, res, next) {
-  if (req.headers.authorizations) {
+export async function isLoggedIn(req, res, next) {
+  if (req.headers.authorization) {
     // Extract the token from that header
     const token = req.headers.authorization.split(" ")[1];
     try {
       // Verify the token is valid
-      const data = jwt.verify(token, key);
+      const data = await Login.decode(token);
       console.log('The logged in user is: ' + data.username);
       // Token validation was successful. Continue to the actual function (index)
       return next()
