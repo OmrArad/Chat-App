@@ -37,7 +37,6 @@ export const createChat = async ( token, username2) => {
             users: [user1, user2],
             messages: [],
         }).save();
-        chatID++;
     } catch (error) {
         throw new Error(error.message);
     }
