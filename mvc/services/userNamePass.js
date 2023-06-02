@@ -1,6 +1,6 @@
 import UserPassName from '../model/userNamePass.js';
 import User from '../model/user.js';
-import userPass from './userPass.js'
+import userPass from './userPass.js';
 
 // Create a new UserPassName
 const createUser = async ({ username, password, displayName, profilePic }) => {

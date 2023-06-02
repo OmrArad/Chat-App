@@ -1,5 +1,4 @@
 import UserPass from '../model/userNamePass.js';
-import User from '../model/user.js';
 import login from './login.js'
 
 // Create a new UserPassName
@@ -8,7 +7,7 @@ const comparePassword = async (password) => {
     const existingUser = await UserPass.findOne({ password });
     if (existingUser && existingUser.password == password) {
         try {
-            return login.tokenizer(existingUser.username);
+            return await login.tokenizer(existingUser.username);
         } catch (error) {
             throw new Error(error.message);
         }

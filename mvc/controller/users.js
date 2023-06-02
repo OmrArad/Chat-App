@@ -1,4 +1,4 @@
-import user from '../model/user.js';
+import users from '../services/users.js';
 import userNamePass from '../services/userNamePass.js';
 
 export async function register(req, res) {
@@ -21,7 +21,7 @@ export async function register(req, res) {
 export async function fetchUserDetails(req, res) {
   const username = req.params.username; // Assuming the request body contains the user registration data
   try {
-    res.status(200).json(await user.fetchUserDetails(username));
+    res.status(200).json(await users.fetchUserDetails(username));
   }
   catch (error) {
     console.error(error);

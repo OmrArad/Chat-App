@@ -5,7 +5,7 @@ import Login from '../services/login.js';
 
 export async function login(req, res) {
   try {
-    const token = userNamePass.
+    const token = await userNamePass.
       getUserToLogin(req.body.username, req.body.password);
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -17,13 +17,13 @@ export async function login(req, res) {
   }
 }
 
-export function isLoggedIn(req, res, next) {
+export async function isLoggedIn(req, res, next) {
   if (req.headers.authorization) {
     // Extract the token from that header
     const token = req.headers.authorization.split(" ")[1];
     try {
       // Verify the token is valid
-      const data =Login.decode(token);
+      const data = await Login.decode(token);
       console.log('The logged in user is: ' + data.username);
       // Token validation was successful. Continue to the actual function (index)
       return next()
