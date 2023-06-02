@@ -7,7 +7,7 @@ const tokenizer = async (username) => {
   const payload = { username };
   const token = jwt.sign(payload, secretKey);
   return token;
-}
+};
 
 const decode = async (token) => {
   try {
@@ -18,6 +18,7 @@ const decode = async (token) => {
   }
 };
 
-export default{ 
-  tokenizer, decode,
+export default {
+  tokenizer,
+  decode,
 };
