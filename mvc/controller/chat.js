@@ -4,7 +4,7 @@ import {getUserChats, createChat, getChatMessages, deleteChat, getChatById} from
 
 export const retriveListOfChats = async (req, res) => {
     try {
-        res.status(200).send(getUserChats(req.Authorization.split(' ')[1]))
+        res.status(200).send(getUserChats(req.headers.authorization.split(' ')[1]))
     } 
     catch (error) {
         res.status(404).json({ message: error.message });
@@ -14,7 +14,7 @@ export const retriveListOfChats = async (req, res) => {
 export const createNewChat = async (req, res) => {
     try {
         const newUserReciver = req.body
-        res.status(200).send(createChat(req.Authorization.split(' ')[1], newUserReciver))
+        res.status(200).send(createChat(req.headers.authorization.split(' ')[1], newUserReciver))
     }
     catch (error) {
         res.status(404).json({ message: error.message });
