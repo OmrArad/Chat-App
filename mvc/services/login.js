@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
-const crypto = require("crypto");
-
+import crypto from 'crypto';
 // Generate a secret key
 const secretKey = crypto.randomBytes(32).toString("hex");
 

@@ -1,7 +1,7 @@
 import getUserToLogin from '../services/userNamePass.js';
-import tokenizer from '../services/jwt.js';
+import tokenizer from '../services/login.js';
 
-function login(req, res) {
+export function login(req, res) {
   try {
     const user = getUserToLogin(req.body.username, req.body.password); // Assuming findByUsername is a function that retrieves user data
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
@@ -14,7 +14,7 @@ function login(req, res) {
   }
 }
 
-function isLoggedIn(req, res, next) {
+export function isLoggedIn(req, res, next) {
   if (req.headers.authorizations) {
     // Extract the token from that header
     const token = req.headers.authorization.split(" ")[1];
@@ -25,7 +25,12 @@ function isLoggedIn(req, res, next) {
       // Token validation was successful. Continue to the actual function (index)
       return next()
     } catch (err) {
-      return res.status(401).send("Invalid Token");
+      // UnAuthorized
+      res.setHeader("content-length: 0")
+      res.setHeader("date:" + Date.now().toString())
+      res.setHeader("server: Kestrel")
+      res.setHeader("www-authenticate: Bearer")
+      res.status(401);
     }
   } else {
     return res.status(403).send('Token required');
@@ -34,5 +39,5 @@ function isLoggedIn(req, res, next) {
 
 export default {
   login,
-  isLoggedIn,
+  isLoggedIn
 };

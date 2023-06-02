@@ -1,6 +1,7 @@
+import user from '../model/user.js';
 import createUser from '../services/userNamePass.js';
 
-async function register(req, res) {
+export async function register(req, res) {
   const userData = req.body; // Assuming the request body contains the user registration data
   try {
     // Create a new user based on the userData
@@ -8,22 +9,29 @@ async function register(req, res) {
     res.status(200).json(newUser);
   } catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred during registration.');
+    // CHECK DIFFERENT CASES OF ERROR
+    // IF..
+    // CONFLICT
+    res.status(409);
+    // IF...
+    // BAD REQUEST
+    // res.status(400).send(...);
   }
 }
-async function fetchUserDetails(req, res) {
+export async function fetchUserDetails(req, res) {
   const username = req.params.username; // Assuming the request body contains the user registration data
   try {
-    
+    res.status(200).json(await user.fetchUserDetails(username));
   }
   catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred during registration.');
+    // UNAUTHORIZED
+    res.status(404);
   }
-
 }
 
 
 export default {
-  register
+  register,
+  fetchUserDetails
 };

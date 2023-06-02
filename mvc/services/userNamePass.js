@@ -8,7 +8,6 @@ const createUser = async (username, password, displayName, profilePic) => {
     if (existingUser) {
         throw new Error('User with the given username already exists.');
     }
-
     try {
         return await new UserPassName({
             username,
@@ -29,10 +28,6 @@ const findByUsername = async (username) => {
         throw new Error(error.message);
     }
 };
-// TODO: Update this function to return the user details
-const fetchUserDetails = async (username) => {
-    
-}
 
 // Update a UserPassName by username
 const updateByUsername = async (
@@ -121,7 +116,7 @@ const getUserToLogin = async (username, password) => {
     }
 };
 
-export {
+export default{
     createUser,
     findByUsername,
     updateByUsername,
@@ -130,4 +125,5 @@ export {
     updateProfilePicByUsername,
     deleteByUsername,
     getUserToLogin,
+
 };
