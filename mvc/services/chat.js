@@ -1,4 +1,4 @@
-import decode from '../services/login.js'
+import Login from '../services/login.js'
 import Chat from '../model/chat.js'
 import  User  from '../model/user.js'
 import Message from '../model/message.js'
@@ -75,7 +75,7 @@ export const getChatMessages = async (chatId) => {
 };
 
 export const getUserChats = async (token) => {
-    decoded = decode(token)
+    decoded = Login.decode(token)
     username = decoded.username
     try {
         return await Chat.find({ 'users.username': username });
