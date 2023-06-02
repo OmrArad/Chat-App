@@ -4,8 +4,11 @@ import cookieParser from 'cookie-parser';
 import routerLogin from './routes/login.js';
 import routerUser from './routes/user.js';
 import routerChat from './routes/chat.js';
+import connection from './db.js'
 
 const server = express();
+
+connection();
 
 server.use(express.static('public'));
 server.use(express.json());
