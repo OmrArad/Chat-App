@@ -4,12 +4,11 @@ import Login from '../services/login.js';
 export async function login(req, res) {
   try {
     const token = await userNamePass.
-      getUserToLogin(req.body.username, req.body.password);
+    getUserToLogin(req.body.username, req.body.password);
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.setHeader('Access-Control-Allow-Origin', '*');
     // Return the token to the browser
     await res.status(200).send(token);
-    // res.status(200).json({ token });
   } catch (error) {
     res.status(404).send('Invalid username and/or password');
   }

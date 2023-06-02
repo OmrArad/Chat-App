@@ -2,7 +2,8 @@ import users from '../services/users.js';
 import userNamePass from '../services/userNamePass.js';
 
 export async function register(req, res) {
-  const userData = req.body // Assuming the request body contains the user registration data
+  const userData = req.body;
+
   try {
     // Create a new user based on the userData
     const newUser = await userNamePass.createUser(userData);

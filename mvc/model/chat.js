@@ -5,7 +5,6 @@ import Inc from 'mongoose-sequence'
 
 const autoIncrement = Inc(mongoose);
 
-
 // Define the Chat schema
 const Chat = new mongoose.Schema({
     id: {

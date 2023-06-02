@@ -5,10 +5,10 @@ import userPass from './userPass.js';
 const createUser = async (userData) => {
     try {
         // Check that all values are given
-        username = userData.username;
-        password = userData.password;
-        displayName = userData.displayName;
-        profilePic = userData.ProfilePic;
+        const username = userData.username;
+        const password = userData.password;
+        const displayName = userData.displayName;
+        const profilePic = userData.ProfilePic;
         // Check if a user with the given username already exists
         const existingUser = await UserPassName.findOne({ username });
         if (existingUser) {
