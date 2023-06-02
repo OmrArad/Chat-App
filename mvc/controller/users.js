@@ -9,8 +9,13 @@ export async function register(req, res) {
     res.status(200).json(newUser);
   } catch (error) {
     console.error(error);
+    // CHECK DIFFERENT CASES OF ERROR
+    // IF..
     // CONFLICT
     res.status(409);
+    // IF...
+    // BAD REQUEST
+    // res.status(400).send(...);
   }
 }
 export async function fetchUserDetails(req, res) {
@@ -20,6 +25,7 @@ export async function fetchUserDetails(req, res) {
   }
   catch (error) {
     console.error(error);
+    // UNAUTHORIZED
     res.status(404);
   }
 }

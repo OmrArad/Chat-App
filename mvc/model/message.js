@@ -1,6 +1,8 @@
-const mongoose = require('mongoose')
-const autoIncrement = require('mongoose-sequence')(mongoose);
-const User = require('./user')
+import mongoose from 'mongoose'
+import User from './user.js'
+import Inc from 'mongoose-sequence'
+
+const autoIncrement = Inc(mongoose);
 
 // Define the Message schema
 const Message = new mongoose.Schema({
@@ -14,7 +16,7 @@ const Message = new mongoose.Schema({
         default: Date.now
     },
     sender: {
-        type: User,
+        type: [User.Schema],
         required: true,
     },
     content: {
@@ -25,4 +27,4 @@ const Message = new mongoose.Schema({
 
 Message.plugin(autoIncrement, { id: 'message_id', inc_field: 'id' });
 
-module.exports = mongoose.model('Message', Message);
+export default mongoose.model('Message', Message);

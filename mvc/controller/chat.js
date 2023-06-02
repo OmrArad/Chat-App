@@ -1,10 +1,11 @@
-const jwt = require('jsonwebtoken');
-const Chat = require('./models/Chat'); // Assuming you have a Chat model defined
+import jwt from 'jsonwebtoken';
+import Chat from '../model/chat.js';
 
 export function chat(req, res) {
   if (req.headers.authorization) {
     let token = req.headers.authorization.split(" ")[1];
-    let decodedToken = decodeToken(token);
+    // let decodedToken = decodeToken(token);
+    let decodedToken = jwt.decode(token);
     let chats = getUserChats(decodedToken.username);
     if (chats != null) {
       if (req.method === "GET") {
