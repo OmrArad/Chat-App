@@ -4,7 +4,6 @@ import User from '../model/userNamePass.js';
 
 const fetchUserDetails = async (username) => {
   const userDetails = await User.findOne({ username });
-  const users = await User.find();
     try {
       return {
         username: userDetails.username,

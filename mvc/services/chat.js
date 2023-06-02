@@ -59,7 +59,7 @@ const addMessageToChat = async (chatId, {messageID, created, sender, content}) =
 
 const getChatMessages = async (chatId) => {
     try {
-        var chat = await Chat.findOne({ id:chatId });
+        const chat = await Chat.findOne({ id:chatId });
     } catch (error) {
         throw new Error(error.message);
     }
