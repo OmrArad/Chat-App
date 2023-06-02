@@ -1,7 +1,7 @@
 import getUserToLogin from '../services/userNamePass.js';
 import tokenizer from '../services/login.js';
 
-function login(req, res) {
+export function login(req, res) {
   try {
     const user = getUserToLogin(req.body.username, req.body.password); // Assuming findByUsername is a function that retrieves user data
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
@@ -37,4 +37,7 @@ export function isLoggedIn(req, res, next) {
   }
 }
 
-export default { login, isLoggedIn };
+export default {
+  login,
+  isLoggedIn
+};
