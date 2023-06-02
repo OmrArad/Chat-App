@@ -1,8 +1,9 @@
 import UserPassName from '../model/userNamePass.js';
 import User from '../model/user.js';
+import userPass from './userPass.js'
 
 // Create a new UserPassName
-const createUser = async (username, password, displayName, profilePic) => {
+const createUser = async ({ username, password, displayName, profilePic }) => {
     // Check if a user with the given username already exists
     const existingUser = await UserPassName.findOne({ username });
     if (existingUser) {
@@ -105,11 +106,11 @@ const getUserToLogin = async (username, password) => {
         if (!user) {
             throw new Error('Invalid username and/or password');
         }
-        const isMatch = await user.comparePassword(password);
-        if (!isMatch) {
+        const token = await userPass.comparePassword(password);
+        if (!token) {
             throw new Error('Invalid username and/or password');
         }
-        return user;
+        return token;
     }
     catch (error) {
         throw new Error(error.message);

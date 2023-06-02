@@ -1,11 +1,11 @@
 import user from '../model/user.js';
-import createUser from '../services/userNamePass.js';
+import userNamePass from '../services/userNamePass.js';
 
 export async function register(req, res) {
-  const userData = req.body; // Assuming the request body contains the user registration data
+  const userData = req.body // Assuming the request body contains the user registration data
   try {
     // Create a new user based on the userData
-    const newUser = await createUser.create(userData);
+    const newUser = await userNamePass.createUser(userData);
     res.status(200).json(newUser);
   } catch (error) {
     console.error(error);
