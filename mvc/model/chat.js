@@ -1,16 +1,16 @@
 import mongoose from 'mongoose'
 import User from './user.js'
 import Message from './message.js'
-import Inc from 'mongoose-sequence'
+
 
 // const autoIncrement = Inc(mongoose);
 
 // Define the Chat schema
 const Chat = new mongoose.Schema({
-    // id: {
-    //     type: Number,
-    //     required: true,
-    // },
+    id: {
+        type: Number,
+        required: true,
+    },
     users: [
         {
             type: [User.schema],

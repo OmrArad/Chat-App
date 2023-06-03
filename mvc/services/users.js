@@ -15,7 +15,6 @@ const fetchUserDetails = async (username) => {
     }
 };
 
-
 export default {
     fetchUserDetails,
 };

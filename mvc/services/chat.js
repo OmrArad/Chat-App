@@ -1,31 +1,32 @@
 import Login from '../services/login.js'
 import Chat from '../model/chat.js'
-import User from '../model/user.js'
 import Message from '../model/message.js'
-import userNamePassService from '../services/userNamePass.js'
-import userNamePass from '../model/userNamePass.js'
+import Users from '../services/users.js'
 
+
+let chatId =  0;
 // Create a new chat
 export const createChat = async (username1, username2) => {
     try {
         // const decoded = await Login.decode(token)
         // const username1 = decoded.username
-        const userNP1 = await userNamePassService.findByUsername(username1.username);
-        const userNP2 = await userNamePassService.findByUsername(username2.username);
+        const userNP1 = await Users.findByUsername(username1.username);
+        const userNP2 = await Users.findByUsername(username2.username);
 
         if (!userNP1 || !userNP2) {
             throw new Error('User not found.');
         }
 
         const newChat = await new Chat({ 
+            id: chatId,
             users: [userNP1, userNP2],
             messages: [],
         }).save();
 
         console.log(newChat);
-
+        chatId++;
         return { userNP2 };
-
+        
     } catch (error) {
         throw new Error(error.message);
     }
