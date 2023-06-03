@@ -1,15 +1,10 @@
-import Login from '../services/login.js'
-import Chat from '../model/chat.js'
-import User from '../model/user.js'
-import Message from '../model/message.js'
-import userNamePassService from '../services/userNamePass.js'
-import userNamePass from '../model/userNamePass.js'
+import Chat from '../model/chat.js';
+import Message from '../model/message.js';
+import userNamePassService from '../services/userNamePass.js';
 
 // Create a new chat
-export const createChat = async (username1, username2) => {
+const createChat = async (username1, username2) => {
     try {
-        // const decoded = await Login.decode(token)
-        // const username1 = decoded.username
         const userNP1 = await userNamePassService.findByUsername(username1.username);
         const userNP2 = await userNamePassService.findByUsername(username2.username);
 
@@ -31,7 +26,7 @@ export const createChat = async (username1, username2) => {
     }
 };
 
-export const addMessageToChat = async (chatId, { messageID, created, sender, content }) => {
+const addMessageToChat = async (chatId, { messageID, created, sender, content }) => {
     try {
         const newMessage = new Message({
             id: messageID,
@@ -50,7 +45,7 @@ export const addMessageToChat = async (chatId, { messageID, created, sender, con
     }
 }
 
-export const getChatMessages = async (chatId) => {
+const getChatMessages = async (chatId) => {
     try {
         const chat = await Chat.findOne({ id: chatId }).messages;
         if (!chat) {
@@ -62,25 +57,25 @@ export const getChatMessages = async (chatId) => {
     }
 };
 
-export const getUserChats = async (token) => {
-    const decoded = await Login.decode(token)
+const getUserChats = async (user) => {
     try {
-        const username = decoded.username
+        const username = user.username
         return await Chat.find({ 'users.username': username });
     } catch (error) {
         throw new Error(error.message);
     }
 };
-export const deleteChat = async (chatId) => {
+
+const deleteChat = async (chatId) => {
     try {
         return await Chat.findByIdAndDelete(chatId);
     }
     catch (error) {
         throw new Error(error.message);
     }
-}
+};
 
-export const getChatById = async (chatId) => {
+const getChatById = async (chatId) => {
     try {
         return await Chat.findById(chatId);
     }
