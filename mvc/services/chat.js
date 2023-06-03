@@ -1,13 +1,15 @@
 import Chat from '../model/chat.js'
 import Message from '../model/message.js'
 import Users from '../services/users.js'
-import User from '../model/user.js'
 
-
-let chatId =  0;
 // Create a new chat
 const createChat = async (username1, username2) => {
     try {
+        let chatId = 0;
+        const lastChat = await Chat.findOne().sort({ id : -1 });
+        if (lastChat)
+            chatId = lastChat.id + 1;
+
         const userNP1 = await Users.fetchUserDetails(username1.username);
         const userNP2 = await Users.fetchUserDetails(username2.username);
 
@@ -28,12 +30,10 @@ const createChat = async (username1, username2) => {
 
         const newChat = await new Chat({
             id: chatId,
-            users: [user1, user2],
-            messages: [],
+            users: user1, user2,
+            messages: null,
         }).save();
 
-        console.log(newChat);
-        chatId++;
         return { "id": chatId, "user": user2 };
         
     } catch (error) {
@@ -75,7 +75,8 @@ const getChatMessages = async (chatId) => {
 const getUserChats = async (user) => {
     try {
         const username = user.username
-        return await Chat.find({ 'users.username': username });
+        const chats = await Chat.find({ user: user});
+        return chats;
     } catch (error) {
         throw new Error(error.message);
     }
