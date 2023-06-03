@@ -8,19 +8,16 @@ const chatID = 0;
 
 // Create a new chat
 export const createChat = async ( token, username2) => {
-    decoded = decode(token)
-    username = decoded.username
+    const decoded = Login.decode(token)
     try {
+        const username1 = decoded.username
         const userNP1 = await userNamePassService.findByUsername(username1);
         const userNP2 = await userNamePassService.findByUsername(username2);
-    } catch (error) {
-        throw new Error(error.message);
-    }
-    if (!userNP1 || !userNP2) {
-        throw new Error('User not found.');
-    }
+    
+        if (!userNP1 || !userNP2) {
+            throw new Error('User not found.');
+        }
 
-    try {
         const user1 = new User({
             username: userNP1.username,
             displayName: userNP1.displayName,
@@ -64,19 +61,19 @@ export const addMessageToChat = async (chatId, {messageID, created, sender, cont
 export const getChatMessages = async (chatId) => {
     try {
         const chat = await Chat.findOne({ id:chatId }).messages;
+        if (!chat) {
+            throw new Error('Chat not found');
+        }
+        return chat.messages;
     } catch (error) {
         throw new Error(error.message);
     }
-    if (!chat) {
-        throw new Error('Chat not found');
-    }
-    return chat.messages;
 };
 
 export const getUserChats = async (token) => {
-    decoded = Login.decode(token)
-    username = decoded.username
+    const decoded = await Login.decode(token)
     try {
+        const username = decoded.username
         return await Chat.find({ 'users.username': username });
     } catch (error) {
         throw new Error(error.message);
