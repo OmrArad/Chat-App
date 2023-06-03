@@ -1,20 +1,27 @@
 import UserPass from '../model/userNamePass.js';
 import login from './login.js'
 
-// Create a new UserPassName
-const comparePassword = async (password) => {
-    // Check if a user with the given username already exists
-    const existingUser = await UserPass.findOne({ password });
-    if (existingUser && existingUser.password == password) {
-        try {
-            return await login.tokenizer(existingUser.username);
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    } else {
-        throw new Error("User Was not found");
+// Find a UserPass by username
+const findByUsername = async (username) => {
+    try {
+        return await UserPass.findOne({ username });
+    } catch (error) {
+        throw new Error(error.message);
     }
-    
 };
 
-export default { comparePassword };
+// Generate token if user exist and password is valid
+const getUserToLogin = async (username, password) => {
+    try {
+        const user = await findByUsername(username);
+        if (!user || user.password !== password) {
+            throw new Error('Invalid username and/or password');
+        }
+        const token = await login.tokenizer(user.username);
+        return token;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export default { getUserToLogin };

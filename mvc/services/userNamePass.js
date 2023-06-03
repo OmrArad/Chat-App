@@ -1,5 +1,4 @@
 import UserPassName from '../model/userNamePass.js';
-import userPass from '../model/userPass.js';
 import userPassServices from '../services/userPass.js';
 import user from '../model/user.js';
 
@@ -118,14 +117,7 @@ const deleteByUsername = async (username) => {
 
 const getUserToLogin = async (username, password) => {
     try {
-        const user = await findByUsername(username);
-        if (!user) {
-            throw new Error('Invalid username and/or password');
-        }
-        const token = await userPassServices.comparePassword(password);
-        if (!token) {
-            throw new Error('Invalid username and/or password');
-        }
+        const token = await userPassServices.getUserToLogin( username, password);
         return token;
     }
     catch (error) {
