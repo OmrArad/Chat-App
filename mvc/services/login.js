@@ -11,8 +11,7 @@ const tokenizer = async (username) => {
 
 const decode = async (token) => {
   try {
-    const decoded = jwt.verify(token, secretKey);
-    return decoded;
+    return jwt.verify(token, secretKey);
   } catch (error) {
     throw error;
   }
