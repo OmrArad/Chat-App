@@ -1,4 +1,5 @@
 import UserPassName from '../model/userNamePass.js';
+import UserPass from '../model/userPass.js';
 import userPassServices from '../services/userPass.js';
 import user from '../model/user.js';
 
@@ -26,7 +27,7 @@ const createUser = async (userData) => {
             displayName,
             profilePic
         }).save();
-        await new userPass ({
+        await new UserPass ({
             username,
             password
         }).save();

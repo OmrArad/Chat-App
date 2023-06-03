@@ -50,11 +50,13 @@ const addMessageToChat = async (chatId, { messageID, created, sender, content })
             content
         });
 
-        return await Chat.findByIdAndUpdate(
-            chatId,
+        const updatedChat = await Chat.findOneAndUpdate(
+            { "id": +chatId },
             { $push: { messages: newMessage } },
             { new: true }
         );
+
+        return updatedChat;
     } catch (error) {
         throw new Error(error.message);
     }
@@ -62,7 +64,7 @@ const addMessageToChat = async (chatId, { messageID, created, sender, content })
 
 const getChatMessages = async (chatId) => {
     try {
-        const chat = await Chat.findOne({ id: chatId }).messages;
+        const chat = await Chat.findOne({ id: +chatId }); // convert chatId to number and find chat
         if (!chat) {
             throw new Error('Chat not found');
         }
@@ -80,8 +82,8 @@ const getUserChats = async (user) => {
         const transformedChats = chats.map((chat) => {
             return {
                 id: chat.id,
-                user: chat.users[0].username == username ? chat.users[1] : chat.users[0], // Assuming the first user is the user
-                lastMessages: chat.messages.length > 0 ? chat.messages[chat.messages.length - 1] : null
+                user: chat.users[0].username == username ? getUserJson(chat.users[1]) : getUserJson(chat.users[0]),
+                lastMessage: chat.messages.length > 0 ? chat.messages[chat.messages.length - 1] : null
             };
         });
 
@@ -93,20 +95,38 @@ const getUserChats = async (user) => {
 
 const deleteChat = async (chatId) => {
     try {
-      return await Chat.findOneAndDelete({ id: chatId });
+        return await Chat.findOneAndDelete({ id: chatId });
     } catch (error) {
-      throw new Error(error.message);
+        throw new Error(error.message);
     }
-};  
+};
 
 const getChatById = async (chatId) => {
     try {
-        return await Chat.findById(chatId);
+        const chat = await Chat.findOne({ "id": +chatId });
+
+        const transformedChat = {
+            id: chat.id,
+            users: chat.users.map((user) => {
+                return getUserJson(user)
+            }),
+            messages: chat.messages
+        };
+
+        return transformedChat;
     }
     catch (error) {
         throw new Error(error.message);
     }
 };
+
+const getUserJson = (user) => {
+    return {
+        username: user.username,
+        displayName: user.displayName,
+        profilePic: user.profilePic
+    }
+}
 
 export default {
     createChat,

@@ -9,8 +9,8 @@ router.get('/', isLoggedIn, chat.retriveListOfChats)
 router.post('/', isLoggedIn, chat.createNewChat)
 router.get('/:id', isLoggedIn, chat.retriveChatById)
 router.delete('/:id', isLoggedIn, chat.deleteChatById)
-router.get('/:id/Messages', isLoggedIn, chat.createNewMessageInChat)
-router.post('/:id/Messages', isLoggedIn, chat.retriveAllMessagesInChat)
+router.get('/:id/Messages', isLoggedIn, chat.retriveAllMessagesInChat)
+router.post('/:id/Messages', isLoggedIn, chat.createNewMessageInChat)
 
 
 export default router;
