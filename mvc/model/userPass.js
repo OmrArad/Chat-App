@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const UserPass = new mongoose.Schema({
+const UserPassSchema = new mongoose.Schema({
     username: {
         type: String,
         nullable: true,
@@ -11,6 +11,6 @@ const UserPass = new mongoose.Schema({
     },
 });
 
-const UserPassSchema = mongoose.model('UserPass', UserPass);
+const UserPass = mongoose.model('UserPass', UserPassSchema);
 
-export default UserPassSchema;
+export default UserPass;
