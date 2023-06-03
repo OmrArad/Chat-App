@@ -83,12 +83,11 @@ const getUserChats = async (user) => {
 
 const deleteChat = async (chatId) => {
     try {
-        return await Chat.findByIdAndDelete(chatId);
+      return await Chat.findOneAndDelete({ id: chatId });
+    } catch (error) {
+      throw new Error(error.message);
     }
-    catch (error) {
-        throw new Error(error.message);
-    }
-};
+};  
 
 const getChatById = async (chatId) => {
     try {
