@@ -21,9 +21,13 @@ export async function isLoggedIn(req, res, next) {
     try {
       // Verify the token is valid
       const data = await Login.decode(token);
-      if (data.username)
+      if (data.username) {
         // Token validation was successful. Continue to the actual function (index)
+        res.locals.user = data;
+        res.locals.authenticated = true;
         return next()
+      }
+       
       else
         throw new Error;
     } catch (err) {

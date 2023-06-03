@@ -16,7 +16,7 @@ const createUser = async (userData) => {
         if (existingUser) {
             throw new Error('User with the given username already exists.');
         }
-        await new UserPassName({
+        const newUser = await new UserPassName({
             username,
             password,
             displayName,

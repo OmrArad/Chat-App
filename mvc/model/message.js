@@ -27,4 +27,6 @@ const Message = new mongoose.Schema({
 
 Message.plugin(autoIncrement, { id: 'message_id', inc_field: 'id' });
 
-export default mongoose.model('Message', Message);
+const MessageSchema = mongoose.model('Message', Message);
+
+export default MessageSchema;
