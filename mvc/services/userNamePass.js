@@ -1,5 +1,5 @@
 import UserPassName from '../model/userNamePass.js';
-import userPass from './userPass.js';
+import userPass from '../model/userPass.js';
 import user from '../model/user.js';
 
 // Create a new UserPassName
@@ -9,7 +9,7 @@ const createUser = async (userData) => {
         const username = userData.username;
         const password = userData.password;
         const displayName = userData.displayName;
-        const profilePic = userData.ProfilePic;
+        const profilePic = userData.profilePic;
         // Check if a user with the given username already exists
         const existingUser = await UserPassName.findOne({ username });
         if (existingUser) {
@@ -19,12 +19,16 @@ const createUser = async (userData) => {
             username,
             password,
             displayName,
-            profilePic,
+            profilePic
         }).save();
         await new user ({
             username,
             displayName,
-            profilePic,
+            profilePic
+        }).save();
+        await new userPass ({
+            username,
+            password
         }).save();
 
     } catch (error) {
