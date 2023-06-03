@@ -14,7 +14,7 @@ export async function register(req, res) {
     if (error.message === "User with the given username already exists.")
       // CONFLICT
       res.status(409).send();
-    else
+    if(error.message === "All fields are required.")
       // BAD REQUEST
       res.status(400).send();
   }

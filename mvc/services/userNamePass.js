@@ -16,6 +16,9 @@ const createUser = async (userData) => {
         if (existingUser) {
             throw new Error('User with the given username already exists.');
         }
+        if (!username || !password || !displayName || !profilePic) {
+            throw new Error('All fields are required.');
+        }
         const newUser = await new UserPassName({
             username,
             password,
