@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {getUserChats, createChat, getChatMessages, deleteChat, getChatById} from '../services/chat.js';
+import {getUserChats, createChat, getChatMessages, deleteChat, getChatById, addMessageToChat} from '../services/chat.js';
 
 
 export const retriveListOfChats = async (req, res) => {

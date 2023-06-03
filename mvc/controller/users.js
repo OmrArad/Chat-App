@@ -19,6 +19,7 @@ export async function register(req, res) {
       res.status(400).send();
   }
 }
+
 export async function fetchUserDetails(req, res) {
   const username = req.params.username; // Assuming the request body contains the user registration data
   try {

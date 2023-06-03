@@ -1,5 +1,6 @@
 import UserPassName from '../model/userNamePass.js';
 import userPass from './userPass.js';
+import user from '../model/user.js';
 
 // Create a new UserPassName
 const createUser = async (userData) => {
@@ -20,6 +21,12 @@ const createUser = async (userData) => {
             displayName,
             profilePic,
         }).save();
+        await new user ({
+            username,
+            displayName,
+            profilePic,
+        }).save();
+
     } catch (error) {
         throw new Error(error.message);
     }

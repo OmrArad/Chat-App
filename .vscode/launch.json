@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/mvc/controller/login.js"
+            "program": "${workspaceFolder}/mvc/app.js"
         }
     ]
 }

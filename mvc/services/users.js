@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-// import User from '../model/user.js';
-import User from '../model/userNamePass.js';
+import User from '../model/user.js';
+
 
 const fetchUserDetails = async (username) => {
   const userDetails = await User.findOne({ username });
@@ -15,6 +15,7 @@ const fetchUserDetails = async (username) => {
       throw error;
     }
 };
+
 
 export default {
     fetchUserDetails,

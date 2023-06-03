@@ -1,8 +1,7 @@
 import Login from '../services/login.js'
 import Chat from '../model/chat.js'
-import  User  from '../model/user.js'
+import  User  from '../services/users.js'
 import Message from '../model/message.js'
-import userNamePassService from '../services/userNamePass.js'
 
 const chatID = 0;
 
@@ -11,23 +10,12 @@ export const createChat = async ( token, username2) => {
     const decoded = Login.decode(token)
     try {
         const username1 = decoded.username
-        const userNP1 = await userNamePassService.findByUsername(username1);
-        const userNP2 = await userNamePassService.findByUsername(username2);
+        const userNP1 = await User.fetchUserDetails(username1);
+        const userNP2 = await User.fetchUserDetails(username2);
     
         if (!userNP1 || !userNP2) {
             throw new Error('User not found.');
         }
-
-        const user1 = new User({
-            username: userNP1.username,
-            displayName: userNP1.displayName,
-            profilePic: userNP1.profilePic
-        })
-        const user2 = new User({
-            username: userNP2.username,
-            displayName: userNP2.displayName,
-            profilePic: userNP2.profilePic
-        })
 
         return await new Chat({ 
             id: chatID,
