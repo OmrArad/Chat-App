@@ -31,7 +31,7 @@ const retriveChatById = async (req, res) => {
 
 const deleteChatById = async (req, res) => {
     try {
-        res.status(200).send(await Chat.deleteChat(req.params.id))
+        res.status(204).send(await Chat.deleteChat(req.params.id))
     }
     catch (error) {
         res.status(404).json({ message: error.message });
