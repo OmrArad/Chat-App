@@ -54,23 +54,51 @@ function RegistrationPage() {
 
     // flag to track whether form has errors
     let errorCondition = false;
-
-    // function to handle form submission
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+      
         // validate form input and update errors state variable
-        const validationResult = validateRegistrationForm({ username, password, verify, displayname, picture: picture_obj });
+        const validationResult = validateRegistrationForm({
+          username,
+          password,
+          verify,
+          displayname,
+          picture: picture_obj,
+        });
         errorCondition = validationResult.hasError;
         setError(validationResult.newErrors);
-
+      
         // if there are no errors, add user to database and navigate to login page
         if (errorCondition === false) {
-            const data = { username, password, displayName: displayname, profilePic: profilePicPath }
-            handleRegister(data)
+          try {
+            const base64Image = await convertToBase64(profilePicPath);
+            const data = {
+              username,
+              password,
+              displayName: displayname,
+              profilePic: base64Image,
+            };
+            handleRegister(data);
+          } catch (error) {
+            console.error('Error converting image to Base64:', error);
+          }
         }
-    };
+      };
+      
+      const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            resolve(reader.result);
+          };
+          reader.onerror = (error) => {
+            reject(error);
+          };
+          reader.readAsDataURL(file);
+        });
+      };
 
+      
     // function to handle user registration
     async function handleRegister(data) {
 
