@@ -1,14 +1,13 @@
 import Chat from '../model/chat.js'
-import Message from '../model/message.js'
-import Users from '../services/users.js'
+import Users from './users.js'
+import Message from './message.js'
 
 // Create a new chat
 const createChat = async (username1, username2) => {
     try {
-        let chatId = 0;
+        // Increment the id for each new chat
         const lastChat = await Chat.findOne().sort({ id: -1 });
-        if (lastChat)
-            chatId = lastChat.id + 1;
+        const chatId = lastChat ? lastChat.id + 1 : 0;
 
         const userNP1 = await Users.fetchUserDetails(username1.username);
         const userNP2 = await Users.fetchUserDetails(username2.username);
@@ -41,22 +40,19 @@ const createChat = async (username1, username2) => {
     }
 };
 
-const addMessageToChat = async (chatId, { messageID, created, sender, content }) => {
+const addMessageToChat = async (chatId, sender, { msg }) => {
     try {
-        const newMessage = new Message({
-            id: messageID,
-            created,
-            sender,
-            content
-        });
+        // add message to Messages
+        const newMessage = await Message.addMessage(sender, msg );
 
-        const updatedChat = await Chat.findOneAndUpdate(
+        await Chat.findOneAndUpdate(
             { "id": +chatId },
             { $push: { messages: newMessage } },
             { new: true }
         );
 
-        return updatedChat;
+        return Message.getMessageJson(newMessage);
+        
     } catch (error) {
         throw new Error(error.message);
     }
@@ -82,7 +78,7 @@ const getUserChats = async (user) => {
         const transformedChats = chats.map((chat) => {
             return {
                 id: chat.id,
-                user: chat.users[0].username == username ? getUserJson(chat.users[1]) : getUserJson(chat.users[0]),
+                user: chat.users[0].username == username ? Users.getUserJson(chat.users[1]) : Users.getUserJson(chat.users[0]),
                 lastMessage: chat.messages.length > 0 ? chat.messages[chat.messages.length - 1] : null
             };
         });
@@ -108,7 +104,7 @@ const getChatById = async (chatId) => {
         const transformedChat = {
             id: chat.id,
             users: chat.users.map((user) => {
-                return getUserJson(user)
+                return Users.getUserJson(user)
             }),
             messages: chat.messages
         };
@@ -119,14 +115,6 @@ const getChatById = async (chatId) => {
         throw new Error(error.message);
     }
 };
-
-const getUserJson = (user) => {
-    return {
-        username: user.username,
-        displayName: user.displayName,
-        profilePic: user.profilePic
-    }
-}
 
 export default {
     createChat,

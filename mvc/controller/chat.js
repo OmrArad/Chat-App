@@ -40,8 +40,9 @@ const deleteChatById = async (req, res) => {
 
 const createNewMessageInChat = async (req, res) => {
     try{
-        const newMessage = req.body
-        res.status(200).send(await Chat.addMessageToChat(req.params.id, newMessage))
+        const msg = req.body
+        const sender = res.locals.user.username
+        res.status(200).send(await Chat.addMessageToChat(req.params.id, sender, msg))
     }
     catch (error) {
         res.status(404).json({ message: error.message });

@@ -16,7 +16,7 @@ const MessageSchema = new mongoose.Schema({
         default: Date.now
     },
     sender: {
-        type: [User.Schema],
+        type: User.schema,
         required: true,
     },
     content: {

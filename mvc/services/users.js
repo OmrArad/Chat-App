@@ -15,6 +15,15 @@ const fetchUserDetails = async (username) => {
     }
 };
 
+export const getUserJson = (user) => {
+  return {
+      username: user.username,
+      displayName: user.displayName,
+      profilePic: user.profilePic
+  }
+}
+
 export default {
     fetchUserDetails,
+    getUserJson
 };
