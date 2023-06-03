@@ -8,23 +8,23 @@ let chatId =  0;
 // Create a new chat
 const createChat = async (username1, username2) => {
     try {
-        const userNP1 = await Users.findByUsername(username1.username);
-        const userNP2 = await Users.findByUsername(username2.username);
+        const userNP1 = await Users.fetchUserDetails(username1.username);
+        const userNP2 = await Users.fetchUserDetails(username2.username);
 
         if (!userNP1 || !userNP2) {
             throw new Error('User not found.');
         }
 
-        const user1 = new User({
+        const user1 = {
             username: userNP1.username,
             displayName: userNP1.displayName,
             profilePic: userNP1.profilePic
-        })
-        const user2 = new User({
+        }
+        const user2 = {
             username: userNP2.username,
             displayName: userNP2.displayName,
             profilePic: userNP2.profilePic
-        })
+        }
 
         const newChat = await new Chat({
             id: chatId,
@@ -34,7 +34,7 @@ const createChat = async (username1, username2) => {
 
         console.log(newChat);
         chatId++;
-        return { chatId, user2 };
+        return { "id": chatId, "user": user2 };
         
     } catch (error) {
         throw new Error(error.message);
