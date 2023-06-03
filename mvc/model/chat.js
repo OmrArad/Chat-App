@@ -11,16 +11,22 @@ const Chat = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    users: {
-        type: [User.schema],
-        nullable: true,
-    },
-    messages: {
-        type: [Message.schema],
-        nullable: true,
-    },
+    users: [
+        {
+            type: [User.schema],
+            nullable: true,
+        }
+    ],
+    messages: [
+        {
+            type: [Message.schema],
+            nullable: true,
+        }
+    ],
 });
 
 Chat.plugin(autoIncrement, { id: 'chat_id', inc_field: 'id' });
 
-export default mongoose.model('Chat', Chat);
+const ChatSchema = mongoose.model('Chat', Chat);
+
+export default ChatSchema;

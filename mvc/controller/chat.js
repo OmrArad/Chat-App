@@ -14,7 +14,8 @@ export const retriveListOfChats = async (req, res) => {
 export const createNewChat = async (req, res) => {
     try {
         const newUserReciver = req.body
-        res.status(200).send(createChat(req.headers.authorization.split(' ')[1], newUserReciver))
+        // res.status(200).send(await createChat(req.headers.authorization.split(' ')[1], newUserReciver))
+        res.status(200).send(await createChat(res.locals.user , newUserReciver))
     }
     catch (error) {
         res.status(404).json({ message: error.message });
