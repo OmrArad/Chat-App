@@ -6,7 +6,7 @@ import Users from '../services/users.js'
 const createChat = async (username1, username2) => {
     try {
         let chatId = 0;
-        const lastChat = await Chat.findOne().sort({ id : -1 });
+        const lastChat = await Chat.findOne().sort({ id: -1 });
         if (lastChat)
             chatId = lastChat.id + 1;
 
@@ -30,12 +30,12 @@ const createChat = async (username1, username2) => {
 
         const newChat = await new Chat({
             id: chatId,
-            users: user1, user2,
-            messages: null,
+            users: [user1, user2],
+            messages: [],
         }).save();
 
         return { "id": chatId, "user": user2 };
-        
+
     } catch (error) {
         throw new Error(error.message);
     }
@@ -75,8 +75,17 @@ const getChatMessages = async (chatId) => {
 const getUserChats = async (user) => {
     try {
         const username = user.username
-        const chats = await Chat.find({ user: user});
-        return chats;
+        const chats = await Chat.find({ "users.username": username });
+
+        const transformedChats = chats.map((chat) => {
+            return {
+                id: chat.id,
+                user: chat.users[0].username == username ? chat.users[1] : chat.users[0], // Assuming the first user is the user
+                lastMessages: chat.messages.length > 0 ? chat.messages[chat.messages.length - 1] : null
+            };
+        });
+
+        return transformedChats;
     } catch (error) {
         throw new Error(error.message);
     }
