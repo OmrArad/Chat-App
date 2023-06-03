@@ -11,18 +11,16 @@ const ChatSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    users: [
-        {
-            type: [User.schema],
-            nullable: true,
-        }
-    ],
-    messages: [
-        {
-            type: [Message.schema],
-            nullable: true,
-        }
-    ],
+    users:
+    {
+        type: [User.schema],
+        nullable: true,
+    },
+    messages:
+    {
+        type: [Message.schema],
+        nullable: true,
+    },
 });
 
 const Chat = mongoose.model('Chat', ChatSchema);
