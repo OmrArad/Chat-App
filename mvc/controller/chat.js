@@ -13,7 +13,6 @@ const retriveListOfChats = async (_, res) => {
 const createNewChat = async (req, res) => {
     try {
         const newUserReciver = req.body
-        // res.status(200).send(await createChat(req.headers.authorization.split(' ')[1], newUserReciver))
         res.status(200).send(await Chat.createChat(res.locals.user , newUserReciver))
     }
     catch (error) {

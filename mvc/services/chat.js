@@ -1,5 +1,6 @@
 import Chat from '../model/chat.js';
 import Message from '../model/message.js';
+import User from '../model/user.js';
 import userNamePassService from '../services/userNamePass.js';
 
 // Create a new chat
@@ -12,14 +13,25 @@ const createChat = async (username1, username2) => {
             throw new Error('User not found.');
         }
 
-        const newChat = await new Chat({ 
-            users: [userNP1, userNP2],
+        const user1 = new User({
+            username: userNP1.username,
+            displayName: userNP1.displayName,
+            profilePic: userNP1.profilePic
+        })
+        const user2 = new User({
+            username: userNP2.username,
+            displayName: userNP2.displayName,
+            profilePic: userNP2.profilePic
+        })
+
+        const newChat = await new Chat({
+            users: [user1, user2],
             messages: [],
         }).save();
 
         console.log(newChat);
 
-        return { userNP2 };
+        return { user2 };
 
     } catch (error) {
         throw new Error(error.message);
