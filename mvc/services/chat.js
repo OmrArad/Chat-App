@@ -60,15 +60,26 @@ const addMessageToChat = async (chatId, sender, { msg }) => {
 
 const getChatMessages = async (chatId) => {
     try {
-        const chat = await Chat.findOne({ id: +chatId }); // convert chatId to number and find chat
-        if (!chat) {
-            throw new Error('Chat not found');
-        }
-        return chat.messages;
+      const chat = await Chat.findOne({ id: +chatId });
+      if (!chat) {
+        throw new Error('Chat not found');
+      }
+  
+      const transformedMessages = chat.messages.map((message) => ({
+        id: message.id,
+        created: message.created,
+        sender: {
+          username: message.sender.username
+        },
+        content: message.content
+      }));
+  
+      return transformedMessages;
     } catch (error) {
-        throw new Error(error.message);
+      throw new Error(error.message);
     }
-};
+  };
+  
 
 const getUserChats = async (user) => {
     try {
