@@ -2,10 +2,10 @@ import mongoose from 'mongoose'
 import User from './user.js'
 import Inc from 'mongoose-sequence'
 
-const autoIncrement = Inc(mongoose);
+// const autoIncrement = Inc(mongoose);
 
 // Define the Message schema
-const Message = new mongoose.Schema({
+const MessageSchema = new mongoose.Schema({
     id: {
         type: Number,
         required: true,
@@ -25,8 +25,8 @@ const Message = new mongoose.Schema({
     },
 });
 
-Message.plugin(autoIncrement, { id: 'message_id', inc_field: 'id' });
+// Message.plugin(autoIncrement, { id: 'message_id', inc_field: 'id' });
 
-const MessageSchema = mongoose.model('Message', Message);
+const Message = mongoose.model('Message', MessageSchema);
 
-export default MessageSchema;
+export default Message;
