@@ -5,8 +5,6 @@ import Message from '../model/message.js'
 import userNamePassService from '../services/userNamePass.js'
 import userNamePass from '../model/userNamePass.js'
 
-const chatID = 0;
-
 // Create a new chat
 export const createChat = async (username1, username2) => {
     try {
@@ -20,14 +18,14 @@ export const createChat = async (username1, username2) => {
         }
 
         const newChat = await new Chat({ 
-            id: chatID,
             users: [userNP1, userNP2],
             messages: [],
         }).save();
 
         console.log(newChat);
 
-        return { chatID , userNP2 };
+        return { userNP2 };
+
     } catch (error) {
         throw new Error(error.message);
     }
