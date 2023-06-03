@@ -1,5 +1,6 @@
 import UserPassName from '../model/userNamePass.js';
 import userPass from '../model/userPass.js';
+import userPassServices from '../services/userPass.js';
 import user from '../model/user.js';
 
 // Create a new UserPassName
@@ -121,7 +122,7 @@ const getUserToLogin = async (username, password) => {
         if (!user) {
             throw new Error('Invalid username and/or password');
         }
-        const token = await userPass.comparePassword(password);
+        const token = await userPassServices.comparePassword(password);
         if (!token) {
             throw new Error('Invalid username and/or password');
         }

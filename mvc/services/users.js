@@ -1,10 +1,9 @@
-import mongoose from 'mongoose';
 import User from '../model/user.js';
 
 
 const fetchUserDetails = async (username) => {
-  const userDetails = await User.findOne({ username });
     try {
+      const userDetails = await User.findOne({ username });
       return {
         username: userDetails.username,
         displayName: userDetails.displayName,

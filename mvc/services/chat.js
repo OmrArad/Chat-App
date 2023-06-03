@@ -17,11 +17,15 @@ export const createChat = async ( token, username2) => {
             throw new Error('User not found.');
         }
 
-        return await new Chat({ 
+        const newChat = await new Chat({ 
             id: chatID,
-            users: [user1, user2],
+            users: [userNP1, userNP2],
             messages: [],
         }).save();
+
+        console.log(newChat);
+
+        return { chatID , userNP2 };
     } catch (error) {
         throw new Error(error.message);
     }
