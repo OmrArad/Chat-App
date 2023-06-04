@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import LogoutButton from './LeftColumn/LogoutButton/LogoutButton';
 import ChatBody from './ChatBody/ChatBody';
 import ContactListResults from './LeftColumn/ContactListResults/ContactListResults';
+import { socketIO } from "../App";
 
 const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
@@ -52,6 +53,12 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
     if (loggedIn === false) {
       navigate('/login');
     }
+  })
+
+  useEffect(() => {
+    socketIO.on('receive_message', (message) => {
+      alert("New message: {message.content}")
+    })
   })
 
   // should we use 

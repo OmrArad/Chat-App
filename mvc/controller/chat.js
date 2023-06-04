@@ -1,7 +1,7 @@
 import Chat from '../services/chat.js';
 
 
-const retriveListOfChats = async (_, res) => {
+const retrieveListOfChats = async (_, res) => {
     try {
         res.status(200).send(await Chat.getUserChats(res.locals.user))
     } 
@@ -12,15 +12,15 @@ const retriveListOfChats = async (_, res) => {
 
 const createNewChat = async (req, res) => {
     try {
-        const newUserReciver = req.body
-        res.status(200).send(await Chat.createChat(res.locals.user , newUserReciver))
+        const newUserReceiver = req.body
+        res.status(200).send(await Chat.createChat(res.locals.user , newUserReceiver))
     }
     catch (error) {
         res.status(404).json({ message: error.message });
     }
 }
 
-const retriveChatById = async (req, res) => {
+const retrieveChatById = async (req, res) => {
     try {
         res.status(200).send(await Chat.getChatById(req.params.id))
     }
@@ -49,7 +49,7 @@ const createNewMessageInChat = async (req, res) => {
     }
 }
 
-const retriveAllMessagesInChat = async (req, res) => {
+const retrieveAllMessagesInChat = async (req, res) => {
     try {
         res.status(200).send(await Chat.getChatMessages(req.params.id))
     }
@@ -59,10 +59,10 @@ const retriveAllMessagesInChat = async (req, res) => {
 }
 
 export default { 
-    retriveListOfChats,
+    retrieveListOfChats,
     createNewChat,
-    retriveChatById,
+    retrieveChatById: retrieveChatById,
     deleteChatById,
     createNewMessageInChat,
-    retriveAllMessagesInChat,
+    retrieveAllMessagesInChat,
 }

@@ -6,6 +6,9 @@ import routerUser from './routes/user.js';
 import routerChat from './routes/chat.js';
 import connection from './db.js'
 import cors from 'cors'
+import http from 'http'
+import {Server} from 'socket.io'
+
 const server = express();
 
 connection();
@@ -22,4 +25,20 @@ server.use('/api/Tokens', routerLogin);
 server.use('/api/Users', routerUser);
 server.use('/api/Chats', routerChat);
 
-server.listen(5000);
+const httpServer = http.createServer(server)
+
+const socketIO = new Server(httpServer, {
+    cors: {
+        origin:'http://localhost:3000',
+        methods: ['GET']
+    }
+});
+
+socketIO.on('connection', (socket) => {
+    socket.on('send_message', (data) => {
+        console.log('message received');
+        socket.emit('receive_message', {content: data.content} );
+    });
+});
+
+httpServer.listen(5000);

@@ -4,6 +4,9 @@ import ChatPage from './ChatPage/ChatPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import React, { useState } from 'react';
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
+import io from 'socket.io-client'
+
+const socketIO = io.connect('http://localhost:5001');
 
 
 function App() {
@@ -55,3 +58,7 @@ function App() {
 }
 
 export default App;
+
+export {
+  socketIO
+}

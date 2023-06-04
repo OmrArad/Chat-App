@@ -15,7 +15,7 @@ const addMessage = async (sender, msg) => {
     });
 
     const didSave = await newMessage.save();
-    console.log(didSave);
+    //console.log(didSave);
     return newMessage;
 }
 
