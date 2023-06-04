@@ -14,7 +14,8 @@ This is a our implementation of a chat app that allows users to register and log
 - HTML
 - CSS
 - JavaScript
-- Node.js (Later)
+- MERN (Mongoose, Express, React, Node.js)
+- WebSockets (Socket.io)
 
 ## Installation
 
@@ -36,11 +37,11 @@ This is a our implementation of a chat app that allows users to register and log
 ## Usage
 
 1. Register a new account by clicking the "Register" button on the login page.
-2. Log in to the app with your email and password.
+2. Log in to the app with your username and password.
 3. Access the chat page and start sending messages.
 
 ## Contributors
 
-- [Erez Gilat](https://github.com/...)
-- [Akiva Zev](https://github.com/...)
+- [Erez Gilat](https://github.com/ErezGilat)
+- [Akiva Zev](https://github.com/akivazev)
 - [Omer Arad](https://github.com/OmrArad)
