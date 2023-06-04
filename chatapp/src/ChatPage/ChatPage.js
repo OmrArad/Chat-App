@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import LogoutButton from './LeftColumn/LogoutButton/LogoutButton';
 import ChatBody from './ChatBody/ChatBody';
 import ContactListResults from './LeftColumn/ContactListResults/ContactListResults';
-import { socketIO } from "../App";
 
 const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
@@ -21,7 +20,6 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
   // const doSearch = function (q) {
   //   setContacts(contacts.filter((contact) => contact.name.includes(q)));
   // };
-
 
   useEffect(() => {
     // Fetch user's contacts from server
@@ -55,13 +53,6 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
     }
   })
 
-  useEffect(() => {
-    socketIO.on('receive_message', (message) => {
-      alert("New message: {message.content}")
-    })
-  })
-
-  // should we use 
   return (
     <div className="row chat-page">
       <div className="col-md-3 chat-card">
