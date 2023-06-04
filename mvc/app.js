@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(bodyParser());
 app.use(
   cors({
-    origin: 'http://127.0.0.1:5000',
+    origin: 'http://localhost:5000',
     methods: ['GET', 'POST'],
     credentials: true, // Enable credentials (cookies, authorization headers, etc)
   })
@@ -33,7 +33,7 @@ const httpServer = http.createServer(app);
 
 const socketIO = new Server(httpServer, {
   cors: {
-    origin: 'http://127.0.0.1:5000',
+    origin: 'http://localhost:5000',
     methods: ['GET', 'POST'],
     credentials: true, // Enable credentials (cookies, authorization headers, etc)
   },
@@ -42,10 +42,12 @@ const socketIO = new Server(httpServer, {
 socketIO.on('connection', (socket) => {
   socket.on('send_message', (data) => {
     console.log('message received');
-    socket.emit('receive_message', { content: data.content });
+    socket.broadcast.emit('receive_message', { content: data.content });
   });
 });
 
-httpServer.listen(5000, () => {
-  console.log('Server running on port 5000');
+app.listen(5000);
+
+httpServer.listen(5001, () => {
+  console.log('Server running on port 5001');
 });
