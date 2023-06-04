@@ -31,7 +31,7 @@ This is a our implementation of a chat app that allows users to register and log
    ```
    npm start
    ```
-4. Open your browser and go to http://localhost:3000 to access the app.
+4. Open your browser and go to http://localhost:5000 to access the app.
 
 ## Usage
 
