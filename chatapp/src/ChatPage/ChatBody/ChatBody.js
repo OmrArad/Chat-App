@@ -3,7 +3,7 @@ import ReceivedMessageItem from '../MessageItems/ReceivedMessageItem/ReceivedMes
 import SentMessageItem from '../MessageItems/SentMessageItem/SentMessageItem.js';
 import InputMessageForm from './InputMessageForm/InputMessageForm.js'
 import Header from './Header/Header.js';
-import { socketIO } from '../../App'
+import { socketIO } from '../../App';
 
 function ChatBody({ selectedUser, token, setIsNewMessage, switchID }) {
     const [messages, setMessages] = useState([]);
