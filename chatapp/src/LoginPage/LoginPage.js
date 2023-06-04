@@ -48,7 +48,10 @@ function LoginPage({ loggedIn, login }) {
     // if username and password are correct, logs in user
     if (errorCondition === false) {
       
-      const data = { username, password }
+      const data = { 
+        username, 
+        password 
+      }
 
       handleLogin(data)
 
@@ -59,12 +62,14 @@ function LoginPage({ loggedIn, login }) {
     const res = await fetch('http://localhost:5000/api/Tokens', {
       'method': 'post',
       'headers': {
-        'accept': 'application/json',
+        'accept': '*/*',
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Credentials': 'true'
       },
       'body': JSON.stringify(data)
     })
-
+    const token = await res.text()
     if (res.status === 404) {
       alert('Invalid username and/or password')
     }
@@ -74,7 +79,6 @@ function LoginPage({ loggedIn, login }) {
       // Correct username/password
       // Fetch user details and navigate to chat page
       // The server's response
-      const token = await res.json()
       const loginData = { username, token }
       fetchUserDetails(loginData)
     }

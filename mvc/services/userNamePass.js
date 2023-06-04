@@ -1,5 +1,7 @@
 import UserPassName from '../model/userNamePass.js';
-import userPass from './userPass.js';
+import UserPass from '../model/userPass.js';
+import userPassServices from '../services/userPass.js';
+import user from '../model/user.js';
 
 // Create a new UserPassName
 const createUser = async (userData) => {
@@ -8,18 +10,31 @@ const createUser = async (userData) => {
         const username = userData.username;
         const password = userData.password;
         const displayName = userData.displayName;
-        const profilePic = userData.ProfilePic;
+        const profilePic = userData.profilePic;
         // Check if a user with the given username already exists
         const existingUser = await UserPassName.findOne({ username });
         if (existingUser) {
             throw new Error('User with the given username already exists.');
         }
-        await new UserPassName({
+        if (!username || !password || !displayName || !profilePic) {
+            throw new Error('All fields are required.');
+        }
+        const newUser = await new UserPassName({
             username,
             password,
             displayName,
-            profilePic,
+            profilePic
         }).save();
+        await new user ({
+            username,
+            displayName,
+            profilePic
+        }).save();
+        await new UserPass ({
+            username,
+            password
+        }).save();
+
     } catch (error) {
         throw new Error(error.message);
     }
@@ -106,14 +121,7 @@ const deleteByUsername = async (username) => {
 
 const getUserToLogin = async (username, password) => {
     try {
-        const user = await findByUsername(username);
-        if (!user) {
-            throw new Error('Invalid username and/or password');
-        }
-        const token = await userPass.comparePassword(password);
-        if (!token) {
-            throw new Error('Invalid username and/or password');
-        }
+        const token = await userPassServices.getUserToLogin( username, password);
         return token;
     }
     catch (error) {

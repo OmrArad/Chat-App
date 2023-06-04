@@ -1,10 +1,9 @@
-import mongoose from 'mongoose';
-// import User from '../model/user.js';
-import User from '../model/userNamePass.js';
+import User from '../model/user.js';
+
 
 const fetchUserDetails = async (username) => {
-  const userDetails = await User.findOne({ username });
     try {
+      const userDetails = await User.findOne({ username });
       return {
         username: userDetails.username,
         displayName: userDetails.displayName,
@@ -12,10 +11,19 @@ const fetchUserDetails = async (username) => {
       };
     } catch (error) {
       console.error('Error fetching user details:', error);
-      throw error;
+      throw new Error(error.message);
     }
 };
 
+export const getUserJson = (user) => {
+  return {
+      username: user.username,
+      displayName: user.displayName,
+      profilePic: user.profilePic
+  }
+}
+
 export default {
     fetchUserDetails,
+    getUserJson
 };

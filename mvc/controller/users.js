@@ -14,11 +14,12 @@ export async function register(req, res) {
     if (error.message === "User with the given username already exists.")
       // CONFLICT
       res.status(409).send();
-    else
+    if(error.message === "All fields are required.")
       // BAD REQUEST
-      res.status(400).send();
+      res.status(400).send(error.message);
   }
 }
+
 export async function fetchUserDetails(req, res) {
   const username = req.params.username; // Assuming the request body contains the user registration data
   try {

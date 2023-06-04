@@ -45,7 +45,7 @@ function ChatBody({ selectedUser, token, setIsNewMessage, switchID }) {
         }
     }, [messages]);
 
-    const messageList = messages.slice(0).reverse().map((message, index) => {
+    const messageList = messages.slice(0).map((message, index) => {
         if (message.sender.username === contact.username) {
             return <ReceivedMessageItem key={index} message={message.content} />; // add time and date to messages
         } else {

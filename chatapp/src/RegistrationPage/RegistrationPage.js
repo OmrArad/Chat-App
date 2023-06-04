@@ -54,23 +54,54 @@ function RegistrationPage() {
 
     // flag to track whether form has errors
     let errorCondition = false;
-
-    // function to handle form submission
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+      
         // validate form input and update errors state variable
-        const validationResult = validateRegistrationForm({ username, password, verify, displayname, picture: picture_obj });
+        const validationResult = validateRegistrationForm({
+          username,
+          password,
+          verify,
+          displayname,
+          picture: picture_obj,
+        });
         errorCondition = validationResult.hasError;
         setError(validationResult.newErrors);
-
+      
         // if there are no errors, add user to database and navigate to login page
         if (errorCondition === false) {
-            const data = { username, password, displayName: displayname, profilePic: profilePicPath }
-            handleRegister(data)
+          try {
+            const base64Image = await convertToBase64(profilePicPath);
+            const data = {
+              username,
+              password,
+              displayName: displayname,
+              profilePic: base64Image,
+            };
+            handleRegister(data);
+          } catch (error) {
+            console.error('Error converting image to Base64:', error);
+          }
         }
-    };
+      };
+      
+      const convertToBase64 = async (file) => {
+        const image = await fetch(file);
+        const blob = await image.blob();
+        // const blob = new Blob([file], {type : 'image/jpeg'});
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            resolve(reader.result);
+          };
+          reader.onerror = (error) => {
+            reject(error);
+          };
+          reader.readAsDataURL(blob);
+        });
+      };
 
+      
     // function to handle user registration
     async function handleRegister(data) {
 
@@ -82,11 +113,11 @@ function RegistrationPage() {
             'body': JSON.stringify(data)
         })
 
-        if (res.status === 409) {
-            existingUserError()
-        }
-        else if (res.status !== 200)
-            alert('Something went wrong') // if this case arises it will be added to conditions
+        if (res.status != 200)
+            if(res.status == 409)
+                existingUserError()
+            else
+                alert('Something went wrong') // if this case arises it will be added to conditions
         else {
             // Successful registration
             // Navigate to login page
@@ -96,10 +127,9 @@ function RegistrationPage() {
     };
 
     function existingUserError() {
-        const newErrors = {}
-        newErrors.username = "User already exists, please choose a different username";
-        setError(newErrors)
-        alert('User already exists, please choose a different username')
+        const newErrors = {};
+        newErrors.username = "User with the given username already exists.";
+        setError(newErrors);
         errorCondition = true;
     }
 
