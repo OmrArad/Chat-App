@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import LogoutButton from './LeftColumn/LogoutButton/LogoutButton';
 import ChatBody from './ChatBody/ChatBody';
 import ContactListResults from './LeftColumn/ContactListResults/ContactListResults';
+import { socketIO } from '../App';
 
 const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
@@ -21,28 +22,29 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
   //   setContacts(contacts.filter((contact) => contact.name.includes(q)));
   // };
 
-  useEffect(() => {
-    // Fetch user's contacts from server
-    const fetchContactList = async () => {
-      const res = await fetch('http://localhost:5000/api/Chats/', {
-        'method': 'get',
-        'headers': {
-          'accept': 'text/plain',
-          'Authorization': 'bearer ' + token,
-        }
-      })
-
-      if (res.status == 401)
-        alert('Invalid token')
-      else if (res.status == 403)
-        alert('Token required')
-      else if (res.status != 200)
-        alert('Something went wrong') // if this case arises it will be added to conditions
-      else {
-        const contactList = await res.json()
-        setContacts(contactList)
+  // Fetch user's contacts from server
+  const fetchContactList = async () => {
+    const res = await fetch('http://localhost:5000/api/Chats/', {
+      'method': 'get',
+      'headers': {
+        'accept': 'text/plain',
+        'Authorization': 'bearer ' + token,
       }
+    })
+
+    if (res.status == 401)
+      alert('Invalid token')
+    else if (res.status == 403)
+      alert('Token required')
+    else if (res.status != 200)
+      alert('Something went wrong') // if this case arises it will be added to conditions
+    else {
+      const contactList = await res.json()
+      setContacts(contactList)
     }
+  }
+
+  useEffect(() => {
     fetchContactList();
   }, [addedContact, isNewMessage])
 
@@ -52,6 +54,12 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
       navigate('/login');
     }
   })
+
+  useEffect(() => {
+    socketIO.on('receive_message', () => {
+      fetchContactList();
+    })
+  }, [])
 
   return (
     <div className="row chat-page">
