@@ -64,8 +64,8 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
   // should we use 
   return (
     <div className="row chat-page">
-      <div className="col-md-3" id="chat-card">
-        <div className="card">
+      <div className="col-md-3 chat-card">
+        <div className="card contacts">
           <span className="d-flex flex-column mb-3">
             <LogoutButton logout={logout} />
             <AddContact
@@ -92,16 +92,16 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
             setSwitchID={setSwitchID} />
         </div>
       </div>
-      <div className="col-md-9" id='chat-window'>
-        <div className="card" >
+      <div className="col-md-9 chat-window">
+        <div className="card chat-window" >
           {selectedUser && (
-            <div>
-              <ChatBody
-                selectedUser={selectedUser}
-                token={token}
-                setIsNewMessage={setIsNewMessage}
-                switchID={switchID} />
-            </div>
+
+            <ChatBody
+              selectedUser={selectedUser}
+              token={token}
+              setIsNewMessage={setIsNewMessage}
+              switchID={switchID} />
+
           )}
         </div>
       </div>
