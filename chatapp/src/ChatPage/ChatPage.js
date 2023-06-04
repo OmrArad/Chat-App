@@ -21,7 +21,6 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
   //   setContacts(contacts.filter((contact) => contact.name.includes(q)));
   // };
 
-
   useEffect(() => {
     // Fetch user's contacts from server
     const fetchContactList = async () => {
@@ -54,7 +53,6 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
     }
   })
 
-  // should we use 
   return (
     <div className="row chat-page">
       <div className="col-md-3 chat-card">

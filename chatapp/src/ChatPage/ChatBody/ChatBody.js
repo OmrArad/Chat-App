@@ -3,6 +3,7 @@ import ReceivedMessageItem from '../MessageItems/ReceivedMessageItem/ReceivedMes
 import SentMessageItem from '../MessageItems/SentMessageItem/SentMessageItem.js';
 import InputMessageForm from './InputMessageForm/InputMessageForm.js'
 import Header from './Header/Header.js';
+import { socketIO } from '../../App'
 
 function ChatBody({ selectedUser, token, setIsNewMessage, switchID }) {
     const [messages, setMessages] = useState([]);
@@ -37,6 +38,12 @@ function ChatBody({ selectedUser, token, setIsNewMessage, switchID }) {
         if (selectedUser.id === switchID)
             fetchMessages()
     }, [switchID])
+
+    useEffect(() => {
+        socketIO.on('receive_message', () => {
+            fetchMessages()
+        })
+    }, [])
 
     useEffect(() => {
         // Scroll to the bottom of the message list when new messages are added
@@ -79,6 +86,7 @@ function ChatBody({ selectedUser, token, setIsNewMessage, switchID }) {
             alert('Something went wrong') // if this case arises it will be added to conditions
         else {
             // Message sent successfuly
+            socketIO.emit('send_message', data);
             fetchMessages()
             // selectedUser.lastMessage = data.msg
             setIsNewMessage(id)
