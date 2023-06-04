@@ -5,7 +5,7 @@ import routerLogin from './routes/login.js';
 import routerUser from './routes/user.js';
 import routerChat from './routes/chat.js';
 import connection from './db.js'
-
+import cors from 'cors'
 const server = express();
 
 connection();
@@ -14,8 +14,9 @@ server.use(express.static('public'));
 server.use(express.json());
 server.use(cookieParser());
 server.use(bodyParser());
+server.use(cors());
 
-server.set('view engine', 'ejs');
+// server.set('view engine', 'ejs');
 
 server.use('/api/Tokens', routerLogin);
 server.use('/api/Users', routerUser);
