@@ -87,8 +87,8 @@ body {
 
 #chat-card {
     flex: 0 0 340px;
-    height: 100vh;
-    min-width: 260px;
+    height: 96vh;
+    min-width: 240px;
 }
 
 .chat-window {
@@ -127,6 +127,6 @@ body {
 }
 
 #message-list {
-    height: 78vh;
+    height: 70vh;
     overflow-y: auto;
 }
