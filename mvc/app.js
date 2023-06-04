@@ -41,7 +41,6 @@ const socketIO = new Server(httpServer, {
 
 socketIO.on('connection', (socket) => {
   socket.on('send_message', (data) => {
-    console.log('message received');
     socket.broadcast.emit('receive_message', { content: data.content });
   });
 });
@@ -49,5 +48,5 @@ socketIO.on('connection', (socket) => {
 app.listen(5000);
 
 httpServer.listen(5001, () => {
-  console.log('Server running on port 5001');
+  console.log('Server listening on port 5001');
 });
