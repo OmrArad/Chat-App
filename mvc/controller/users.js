@@ -16,7 +16,7 @@ export async function register(req, res) {
       res.status(409).send();
     if(error.message === "All fields are required.")
       // BAD REQUEST
-      res.status(400).send();
+      res.status(400).send(error.message);
   }
 }
 
