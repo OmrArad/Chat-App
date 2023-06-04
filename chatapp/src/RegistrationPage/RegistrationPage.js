@@ -85,7 +85,10 @@ function RegistrationPage() {
         }
       };
       
-      const convertToBase64 = (file) => {
+      const convertToBase64 = async (file) => {
+        const image = await fetch(file);
+        const blob = await image.blob();
+        // const blob = new Blob([file], {type : 'image/jpeg'});
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.onload = () => {
@@ -94,7 +97,7 @@ function RegistrationPage() {
           reader.onerror = (error) => {
             reject(error);
           };
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(blob);
         });
       };
 
@@ -110,11 +113,11 @@ function RegistrationPage() {
             'body': JSON.stringify(data)
         })
 
-        if (res.status === 409) {
-            existingUserError()
-        }
-        else if (res.status !== 200)
-            alert('Something went wrong') // if this case arises it will be added to conditions
+        if (res.status != 200)
+            if(res.status == 409)
+                existingUserError()
+            else
+                alert('Something went wrong') // if this case arises it will be added to conditions
         else {
             // Successful registration
             // Navigate to login page
@@ -124,10 +127,9 @@ function RegistrationPage() {
     };
 
     function existingUserError() {
-        const newErrors = {}
-        newErrors.username = "User already exists, please choose a different username";
-        setError(newErrors)
-        alert('User already exists, please choose a different username')
+        const newErrors = {};
+        newErrors.username = "User with the given username already exists.";
+        setError(newErrors);
         errorCondition = true;
     }
 
