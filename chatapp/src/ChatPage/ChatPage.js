@@ -85,8 +85,8 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
             setSwitchID={setSwitchID} />
         </div>
       </div>
-      <div className="col-md-9" id='chat-window'>
-        <div className="card" >
+      <div className="col-md-9 chat-window">
+        <div className="card chat-window" >
           {selectedUser && (
             <div>
               <ChatBody

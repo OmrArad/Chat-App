@@ -91,10 +91,9 @@ body {
     min-width: 260px;
 }
 
-#chat-window {
+.chat-window {
     flex: 1;
-    height: 100vh;
-    min-height: calc(96vh - 0px);
+    height: 96vh;
     position: relative;
     min-width: 200px;
 }
@@ -102,7 +101,6 @@ body {
 .chat-page {
     display: flex;
     flex-wrap: wrap;
-    height: 100vh;
 }
 
 #chat-window:img {
@@ -129,6 +127,6 @@ body {
 }
 
 #message-list {
-    height: calc(100vh - 205px);
+    height: 78vh;
     overflow-y: auto;
 }
