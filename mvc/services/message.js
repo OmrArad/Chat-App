@@ -19,7 +19,7 @@ const addMessage = async (sender, msg) => {
     return newMessage;
 }
 
-const getMessageJson = async (msg) => {
+const getMessageJson = (msg) => {
     return {
         id: msg.id,
         created: msg.created,

@@ -64,7 +64,11 @@ const getChatMessages = async (chatId) => {
         if (!chat) {
             throw new Error('Chat not found');
         }
-        return chat.messages;
+        const transformedMessages = chat.messages.map((message) => {
+            return Message.getMessageJson(message)
+        });
+
+        return transformedMessages;
     } catch (error) {
         throw new Error(error.message);
     }
