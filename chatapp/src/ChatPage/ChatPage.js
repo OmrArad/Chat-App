@@ -56,16 +56,17 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
 
   // should we use 
   return (
-    <div className="row">
-      <div className="col-md-3">
-        <div className="card" id="chat-card">
+    <div className="row chat-page">
+      <div className="col-md-3" id="chat-card">
+        <div className="card">
           <span className="d-flex flex-column mb-3">
             <LogoutButton logout={logout} />
-            <h3 className="text-center">{user.displayName}</h3>
             <AddContact
               setContacts={setContacts}
               token={token}
               setAddedContact={setAddedContact} />
+          </span>
+          <span className="d-flex flex-column mb-3">
             <img
               src={user.profilePic}
               className="rounded-circle mb-3"
@@ -74,6 +75,7 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
               height="50"
               id="user-picture"
             />
+            <h3 className="text-center">{user.displayName}</h3>
           </span>
           {/* <SearchItem doSearch={doSearch} /> */}
           <ContactListResults
@@ -83,8 +85,8 @@ const ChatPage = ({ userDetails, loggedIn, logout }) => {
             setSwitchID={setSwitchID} />
         </div>
       </div>
-      <div className="col-md-9">
-        <div className="card" id='chat-window'>
+      <div className="col-md-9" id='chat-window'>
+        <div className="card" >
           {selectedUser && (
             <div>
               <ChatBody

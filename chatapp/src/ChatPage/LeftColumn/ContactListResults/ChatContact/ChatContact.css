@@ -6,3 +6,7 @@
 .time {
     text-align: right;
 }
+
+.contact:hover {
+    cursor: pointer;
+}

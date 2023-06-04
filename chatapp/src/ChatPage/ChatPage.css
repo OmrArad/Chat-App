@@ -86,19 +86,23 @@ body {
 }
 
 #chat-card {
-    height: calc(100vh - 30px);
-    min-width: 240px;
-    max-width: 320px;
+    flex: 0 0 340px;
+    height: 100vh;
+    min-width: 260px;
 }
 
 #chat-window {
+    flex: 1;
+    height: 100vh;
     min-height: calc(96vh - 0px);
     position: relative;
-    min-width: 300px;
+    min-width: 200px;
 }
 
-.chat-window {
-    min-width: 300px;
+.chat-page {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
 }
 
 #chat-window:img {

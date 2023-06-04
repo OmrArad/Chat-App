@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import './ChatContact.css'
 
 function ChatContact({ contact, setSelectedUser, setSwitchID }) {
     const user = contact.user
@@ -40,7 +41,7 @@ function ChatContact({ contact, setSelectedUser, setSwitchID }) {
 
     return (
         <li
-            className="list-group-item"
+            className="list-group-item contact"
             onClick={() => {
                 setSelectedUser(contact)
                 setSwitchID(contact.id)
