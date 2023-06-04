@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import RegistrationPage from "./RegistrationPage/RegistrationPage";
 import io from 'socket.io-client'
 
-const socketIO = io.connect('http://localhost:5001');
+const socketIO = io.connect('http://localhost:5000');
 
 
 function App() {
