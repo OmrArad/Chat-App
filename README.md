@@ -25,11 +25,12 @@ This is a our implementation of a chat app that allows users to register and log
    ```
 2. Install the dependencies:
    ```
-   cd Chat-app
+   cd Chat-app/mvc
    npm install
    ```
 3. Start the server:
    ```
+   cd Chat-app/mvc
    npm start
    ```
 4. Open your browser and go to http://localhost:5000 to access the app.
