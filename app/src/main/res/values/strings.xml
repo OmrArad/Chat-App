@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Chat-app</string>
+    <string name="username">Username</string>
+    <string name="password">password</string>
+    <string name="btnLogin">Login</string>
+    <string name="logo">logo</string>
+    <string name="chat_app">Chat-app</string>
+    <string name="btnRegister">Register</string>
+</resources>
