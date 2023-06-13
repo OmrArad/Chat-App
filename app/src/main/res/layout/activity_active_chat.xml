@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Contacts Header -->
+        <LinearLayout
+            android:id="@+id/contactsHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#7E2264AD"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/active_chat_profile_image"
+                android:src="@drawable/my_pic"
+                />
+
+            <TextView
+                android:id="@+id/tvDisplayName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/display_name"
+                android:textColor="#2264AD"
+                android:textSize="22sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
+        <!-- Messages List -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messagesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_above="@+id/inputLayout"
+            android:layout_below="@+id/contactsHeader"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@android:color/darker_gray"
+            android:scrollbarSize="8dp"
+            android:scrollbarStyle="outsideOverlay"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/inputLayout"
+            app:layout_constraintTop_toBottomOf="@id/contactsHeader"
+            app:layout_constraintVertical_weight="1" />
+
+        <!-- Input Field -->
+        <LinearLayout
+            android:id="@+id/inputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#322264AD"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/etMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/enter_message" />
+
+            <ImageButton
+                android:id="@+id/btnSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#2264AD"
+                android:contentDescription="@string/send_button"
+                android:src="@drawable/ic_send" />
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
