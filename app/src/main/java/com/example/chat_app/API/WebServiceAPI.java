@@ -21,4 +21,6 @@ public interface WebServiceAPI {
     @DELETE("chats/{id}")
     Call<Void> deleteContact(@Path("id") int id);
 
+    ////////// implement all API methods like the ones above ///////////
+
 }
