@@ -69,6 +69,16 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
                 contactClickListener.onContactClick(contact);
             }
         });
+
+        // Set the click listener for the contact item
+        holder.itemView.setOnLongClickListener(v -> {
+            // Handle the click event for the contact item
+            if (contactClickListener != null) {
+                contactClickListener.onContactLongClick(contact);
+                notifyDataSetChanged();
+            }
+            return true;
+        });
     }
 
     @Override
@@ -93,5 +103,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     // Interface for contact click listener
     public interface OnContactClickListener {
         void onContactClick(Contact contact);
+        void onContactLongClick(Contact contact);
     }
 }

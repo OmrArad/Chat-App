@@ -34,13 +34,6 @@ public class ContactRepository {
                 contactListData.postValue(contactDao.index());
             }).start();
         }
-
-        public void insert(Contact contact) {
-            List<Contact> contacts = getValue();
-            assert contacts != null;
-            contacts.add(contact);
-            postValue(contacts);
-        }
     }
 
     public LiveData<List<Contact>> getAllContacts() {
@@ -50,6 +43,11 @@ public class ContactRepository {
     public void insert(Contact contact) {
         // Perform the insert operation in the background thread
         AsyncTask.execute(() -> contactDao.insert(contact));
+    }
+
+    public void delete(Contact contact) {
+        // Perform the insert operation in the background thread
+        AsyncTask.execute(() -> contactDao.delete(contact));
     }
 }
 

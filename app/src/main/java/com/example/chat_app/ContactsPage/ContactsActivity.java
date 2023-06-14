@@ -30,17 +30,11 @@ public class ContactsActivity extends AppCompatActivity
     private ActivityContactsBinding binding;
     private ContactsViewModel contactsViewModel;
     private ContactsAdapter contactAdapter;
-    private AppDB db;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityContactsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        db = Room.databaseBuilder(getApplicationContext(), AppDB.class, "ContactsDB")
-                .allowMainThreadQueries()
-                .build();
 
         // Set up ViewModel and observe changes
         contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
@@ -71,6 +65,11 @@ public class ContactsActivity extends AppCompatActivity
         Intent intent = new Intent(this, ActiveChatActivity.class);
         intent.putExtra("contact", contact);
         startActivity(intent);
+    }
+
+    @Override
+    public void onContactLongClick(Contact contact) {
+        contactsViewModel.delete(contact);
     }
 
     public void showNoticeDialog() {

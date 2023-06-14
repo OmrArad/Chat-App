@@ -4,7 +4,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
 import com.example.chat_app.ContactsPage.Contact;
 import com.example.chat_app.Repositories.ContactRepository;
 
@@ -28,10 +27,10 @@ public class ContactsViewModel extends AndroidViewModel {
     public void insert(Contact contact) {
         contactRepository.insert(contact);
     }
-//
-//    public void delete(Contact contact) {
-//        contactRepository.delete(contact);
-//    }
+
+    public void delete(Contact contact) {
+        contactRepository.delete(contact);
+    }
 //
 //    public void reload(Contact contact) {
 //        contactRepository.reload(contact);
