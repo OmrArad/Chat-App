@@ -68,4 +68,15 @@ public class Contact implements Serializable {
     public void setProfilePic(int profilePic) {
         this.profilePic = profilePic;
     }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", displayName='" + displayName + '\'' +
+                ", profilePic=" + profilePic +
+                ", lastMessage='" + lastMessage + '\'' +
+                ", when='" + when + '\'' +
+                '}';
+    }
 }

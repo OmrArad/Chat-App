@@ -1,5 +1,6 @@
 package com.example.chat_app.ContactsPage;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -19,12 +20,12 @@ public interface ContactDao {
 
 
     @Insert
-    void insert(Contact... posts);
+    void insert(Contact... contacts);
 
     @Update
-    void update(Contact... posts);
+    void update(Contact... contacts);
 
     @Delete
-    void delete(Contact... posts);
+    void delete(Contact... contacts);
 }
 

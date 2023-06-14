@@ -1,31 +1,44 @@
-package com.example.chat_app.ContactsPage;
+package com.example.chat_app.Adapters;
 
-import android.content.Context;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chat_app.ActiveChatActivity;
+import com.example.chat_app.ContactsPage.Contact;
 import com.example.chat_app.R;
 
 import java.util.List;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactViewHolder> {
-    
+
     List<Contact> contacts;
 
-    private Context context;
-    
-    public ContactsAdapter(Context context, List<Contact> contacts) {
-        this.context = context;
+    private OnContactClickListener contactClickListener;
+
+    public ContactsAdapter(OnContactClickListener contactClickListener) {
+        this.contactClickListener = contactClickListener;
+    }
+
+    // Setter for the contact click listener
+    public void setOnContactClickListener(OnContactClickListener listener) {
+        contactClickListener = listener;
+    }
+
+    // Setter for the contact list
+    @SuppressLint("NotifyDataSetChanged")
+    public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
+        notifyDataSetChanged();
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
     }
 
     @NonNull
@@ -52,7 +65,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         // Set the click listener for the contact item
         holder.itemView.setOnClickListener(v -> {
             // Handle the click event for the contact item
-            onContactClicked(contact);
+            if (contactClickListener != null) {
+                contactClickListener.onContactClick(contact);
+            }
         });
     }
 
@@ -62,15 +77,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     }
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
-
         TextView displayName;
-
         TextView lastMessage;
-
         TextView when;
-
         ImageView profilePic;
-
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);
             displayName = itemView.findViewById(R.id.tvDisplayName);
@@ -80,12 +90,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         }
     }
 
-    private void onContactClicked(Contact contact) {
-        // Handle the click event for the contact item
-        // Perform any necessary actions here, such as opening the chat page
-        // Pass the selected contact's details to the chat page
-        Intent intent = new Intent(context, ActiveChatActivity.class);
-        intent.putExtra("contact", contact);
-        context.startActivity(intent);
+    // Interface for contact click listener
+    public interface OnContactClickListener {
+        void onContactClick(Contact contact);
     }
 }

@@ -1,20 +1,19 @@
 package com.example.chat_app.ContactsPage;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
 import android.os.Bundle;
-
 import com.example.chat_app.AppDB;
-import com.example.chat_app.R;
+import com.example.chat_app.ViewModels.ContactsViewModel;
 import com.example.chat_app.databinding.ActivityAddContactBinding;
 
 public class AddContactActivity extends AppCompatActivity {
 
-    private AppDB db;
     private ActivityAddContactBinding binding;
     private Contact contact;
-    private ContactDao contactDao;
+    private ContactsViewModel contactsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,37 +22,27 @@ public class AddContactActivity extends AppCompatActivity {
         binding = ActivityAddContactBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        db = Room.databaseBuilder(getApplicationContext(), AppDB.class, "AppDB")
-                .allowMainThreadQueries()
-                .build();
-        contactDao = db.contactDao();
+        contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
 
         handleSave();
-
-        if (getIntent().getExtras() != null) {
-
-            ///////////// add contact to screen //////////////
-
-            int id = getIntent().getExtras().getInt("id");
-            contact = contactDao.get(id);
-
-            binding.etContent.setText(contact.getDisplayName());
-        }
     }
 
     private void handleSave() {
-        binding.btnSave.setOnClickListener(view -> {
+        binding.btnAdd.setOnClickListener(view -> {
             if (contact == null) {
-                String displayName = binding.etContent.getText().toString();
+                String displayName = binding.etContent.getText().toString().trim();
                 int profilePicId = getResources().getIdentifier("p1", "drawable", getPackageName());
+
+                if (displayName.isEmpty()) {
+                    binding.etContent.setError("Please enter a display name");
+                    binding.etContent.requestFocus();
+                    return;
+                }
+
                 contact = new Contact(profilePicId, displayName, "goodbye", "yesterday 11:14");
-                contactDao.insert(contact);
+                contactsViewModel.insert(contact);
             } else {
-
                 ///////////////// do something here ///////////////////
-
-//                contact.setSomething(binding.etContent.getText().toString());
-//                contactDao.update(contact);
             }
 
             finish();
