@@ -1,4 +1,4 @@
-package com.example.chat_app;
+package com.example.chat_app.ChatPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.chat_app.ContactsPage.Contact;
+import com.example.chat_app.R;
 
 public class ActiveChatActivity extends AppCompatActivity {
 

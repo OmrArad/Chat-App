@@ -9,7 +9,11 @@ import android.view.View;
 import com.example.chat_app.ContactsPage.ContactsActivity;
 import com.example.chat_app.databinding.ActivityLoginBinding;
 
+
 public class LoginActivity extends AppCompatActivity {
+
+    String server_url = "http://localhost:5001";
+
 
     private ActivityLoginBinding binding;
 
@@ -24,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
 //        Button btnLogin = findViewById(R.id.btnLogin);
         binding.btnLogin.setOnClickListener(v -> {
+
 
             ////////////////////// validate here ////////////////////////
 
