@@ -24,7 +24,7 @@
             android:exported="false"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".ActiveChatActivity"
+            android:name=".ChatPage.ActiveChatActivity"
             android:exported="false" />
         <activity
             android:name=".ContactsPage.ContactsActivity"
