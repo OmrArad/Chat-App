@@ -31,8 +31,8 @@ public class ContactsViewModel extends AndroidViewModel {
     public void delete(Contact contact) {
         contactRepository.delete(contact);
     }
-//
-//    public void reload(Contact contact) {
-//        contactRepository.reload(contact);
-//    }
+
+    public void reload() {
+        contactRepository.reload();
+    }
 }

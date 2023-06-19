@@ -75,7 +75,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
             // Handle the click event for the contact item
             if (contactClickListener != null) {
                 contactClickListener.onContactLongClick(contact);
-                notifyDataSetChanged();
             }
             return true;
         });

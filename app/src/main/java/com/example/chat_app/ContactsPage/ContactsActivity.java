@@ -70,6 +70,7 @@ public class ContactsActivity extends AppCompatActivity
     @Override
     public void onContactLongClick(Contact contact) {
         contactsViewModel.delete(contact);
+        contactsViewModel.reload();
     }
 
     public void showNoticeDialog() {
