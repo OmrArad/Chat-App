@@ -15,9 +15,9 @@ public class Chat {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private Contact chatContact;
+    Contact chatContact;
 
-    private List<Message> messages;
+    List<Message> messages;
 
     public Chat(Contact chatContact, List<Message> messages) {
         this.chatContact = chatContact;

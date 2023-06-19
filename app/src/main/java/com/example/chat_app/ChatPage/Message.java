@@ -11,11 +11,11 @@ public class Message {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private Instant created;
+    Instant created;
 
-    private String sender;
+    String sender;
 
-    private String content;
+    String content;
 
     public Message(Instant created, String sender, String content) {
         this.created = created;
