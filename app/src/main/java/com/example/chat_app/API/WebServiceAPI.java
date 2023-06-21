@@ -21,6 +21,9 @@ public interface WebServiceAPI {
     @DELETE("chats/{id}")
     Call<Void> deleteContact(@Path("id") int id);
 
+    @POST("Tokens")
+    Call<String> login(AuthRequest authRequest);
+
     ////////// implement all API methods like the ones above ///////////
 
 }
