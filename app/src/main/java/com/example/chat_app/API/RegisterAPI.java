@@ -1,6 +1,7 @@
 package com.example.chat_app.API;
 
-import com.example.chat_app.API.Auth.AuthUtil;
+import com.example.chat_app.API.Entities.UserDetails;
+import com.example.chat_app.API.Entities.UserNamePass;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
 

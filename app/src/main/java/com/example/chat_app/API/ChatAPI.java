@@ -1,7 +1,5 @@
 package com.example.chat_app.API;
 
-import android.app.Application;
-
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.chat_app.API.Auth.AuthUtil;
@@ -37,7 +35,7 @@ public class ChatAPI {
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
-    public void get() {
+    public void getChatList() {
         Call<List<Contact>> call = webServiceAPI.getContacts();
         call.enqueue(new Callback<List<Contact>>() {
             @Override
@@ -54,6 +52,10 @@ public class ChatAPI {
                 // Handle failure
             }
         });
+    }
+
+    public void getChatById(int id) {
+
     }
 }
 

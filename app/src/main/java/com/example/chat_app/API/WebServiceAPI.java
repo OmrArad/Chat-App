@@ -1,5 +1,8 @@
 package com.example.chat_app.API;
 
+import com.example.chat_app.API.Entities.UserDetails;
+import com.example.chat_app.API.Entities.UserNamePass;
+import com.example.chat_app.API.Entities.UserPass;
 import com.example.chat_app.ContactsPage.Contact;
 
 import java.util.List;
@@ -17,6 +20,8 @@ public interface WebServiceAPI {
 
     @POST("Chats")
     Call<Void> addContact(@Body Contact contact);
+
+
 
     @DELETE("Chats/{id}")
     Call<Void> deleteContact(@Path("id") int id);
