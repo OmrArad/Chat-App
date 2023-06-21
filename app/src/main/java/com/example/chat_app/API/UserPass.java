@@ -1,12 +1,12 @@
 package com.example.chat_app.API;
 
-public class AuthRequest {
+public class UserPass {
 
     private final String username;
 
     private final String password;
 
-    public AuthRequest(String username, String password) {
+    public UserPass(String username, String password) {
         this.username = username;
         this.password = password;
     }

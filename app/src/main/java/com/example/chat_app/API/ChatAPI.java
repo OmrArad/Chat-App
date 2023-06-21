@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.chat_app.API.Auth.AuthUtil;
 import com.example.chat_app.ContactsPage.Contact;
 import com.example.chat_app.ContactsPage.ContactDao;
 import com.example.chat_app.MyApplication;
@@ -30,6 +31,7 @@ public class ChatAPI {
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(AuthUtil.createOkHttpClient())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }

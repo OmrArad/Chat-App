@@ -1,5 +1,6 @@
 package com.example.chat_app.API;
 
+import com.example.chat_app.API.Auth.TokenManager;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
 
@@ -30,7 +31,7 @@ public class LoginAPI {
     public void login(String username, String password) {
         // Create a request object containing the username and password
         // Make the API call to log in the user
-        Call<String> call = webServiceAPI.login(new AuthRequest(username, password));
+        Call<String> call = webServiceAPI.login(new UserPass(username, password));
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

@@ -1,4 +1,4 @@
-package com.example.chat_app.API;
+package com.example.chat_app.API.Auth;
 
 public class TokenManager {
     private static String token = null;

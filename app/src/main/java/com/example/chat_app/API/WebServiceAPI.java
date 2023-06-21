@@ -22,7 +22,7 @@ public interface WebServiceAPI {
     Call<Void> deleteContact(@Path("id") int id);
 
     @POST("Tokens")
-    Call<String> login(AuthRequest authRequest);
+    Call<String> login(UserPass userPass);
 
     ////////// implement all API methods like the ones above ///////////
 
