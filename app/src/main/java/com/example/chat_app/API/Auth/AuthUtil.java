@@ -13,8 +13,9 @@ public class AuthUtil {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request originalRequest = chain.request();
+            // TODO: parameterize TokenManager instance for modularity
             Request.Builder requestBuilder = originalRequest.newBuilder()
-                    .header("Authorization", "Bearer " + TokenManager.getToken())
+                    .header("Authorization", "Bearer " + TokenManager.getInstance().getToken())
                     .method(originalRequest.method(), originalRequest.body());
 
             Request request = requestBuilder.build();

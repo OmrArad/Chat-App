@@ -12,17 +12,23 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface WebServiceAPI {
-    @GET("chats")
+    @GET("Chats")
     Call<List<Contact>> getContacts();
 
-    @POST("chats")
+    @POST("Chats")
     Call<Void> addContact(@Body Contact contact);
 
-    @DELETE("chats/{id}")
+    @DELETE("Chats/{id}")
     Call<Void> deleteContact(@Path("id") int id);
 
     @POST("Tokens")
-    Call<String> login(UserPass userPass);
+    Call<String> authenticate(UserPass userPass);
+
+    @GET("Users/{username}")
+    Call<UserDetails> getUserDetails(@Path("username") String username);
+
+    @POST("Users")
+    Call<UserDetails> register(UserNamePass formData);
 
     ////////// implement all API methods like the ones above ///////////
 

@@ -33,6 +33,7 @@ public class ChatAPI {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(AuthUtil.createOkHttpClient())
                 .build();
+
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
