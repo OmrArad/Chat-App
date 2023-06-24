@@ -56,8 +56,7 @@ public class ContactRepository {
     }
 
     public void reload() {
-        api.get();
+        api.getChatList();
     }
 }
-
 

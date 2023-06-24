@@ -1,9 +1,8 @@
 package com.example.chat_app.API;
 
-import android.app.Application;
-
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.chat_app.API.Auth.AuthUtil;
 import com.example.chat_app.ContactsPage.Contact;
 import com.example.chat_app.ContactsPage.ContactDao;
 import com.example.chat_app.MyApplication;
@@ -30,11 +29,13 @@ public class ChatAPI {
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(AuthUtil.createOkHttpClient())
                 .build();
+
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
-    public void get() {
+    public void getChatList() {
         Call<List<Contact>> call = webServiceAPI.getContacts();
         call.enqueue(new Callback<List<Contact>>() {
             @Override
@@ -51,6 +52,10 @@ public class ChatAPI {
                 // Handle failure
             }
         });
+    }
+
+    public void getChatById(int id) {
+
     }
 }
 
