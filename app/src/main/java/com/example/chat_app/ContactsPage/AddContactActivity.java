@@ -38,9 +38,9 @@ public class AddContactActivity extends AppCompatActivity {
                     binding.etContent.requestFocus();
                     return;
                 }
+                // search the contact in the db by display name and add it to the contacts activity
 
-                contact = new Contact(profilePicId, displayName, "goodbye", "yesterday 11:14");
-                contactsViewModel.insert(contact);
+
             } else {
                 ///////////////// do something here ///////////////////
             }

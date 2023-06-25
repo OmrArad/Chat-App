@@ -7,14 +7,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.chat_app.API.Entities.UserDetails;
+import com.example.chat_app.API.Entities.UserNamePass;
+import com.example.chat_app.API.Entities.UserPass;
+import com.example.chat_app.API.RegisterAPI;
+import com.example.chat_app.API.WebServiceAPI;
 import com.example.chat_app.databinding.ActivityLoginBinding;
 import com.example.chat_app.databinding.ActivityRegisterBinding;
+
+import retrofit2.Call;
 
 
 public class RegisterActivity extends AppCompatActivity {
 
+
     private ActivityRegisterBinding binding;
 
+    private RegisterAPI registerAPI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +35,23 @@ public class RegisterActivity extends AppCompatActivity {
         binding.btnRegister.setOnClickListener(v -> {
             // Perform validation here
             if (validateForm()) {
-                // Validation passed, proceed with registration logic
+                // use the API to register the user
+                String username = binding.etUsername.getText().toString().trim();
+                String password = binding.etPassword.getText().toString().trim();
+                String displayName = binding.etDisplayName.getText().toString().trim();
+                String picture = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50";
+
+                // Create a new user object
+                UserDetails user = new UserDetails(username, password, displayName);
+                UserNamePass user1 = new UserNamePass(username, password, displayName, picture);
+                UserPass user2 = new UserPass(username, password);
+
+                // Call the API
+
+
+
+                // Handle the response
+
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
             }
