@@ -21,6 +21,7 @@ public class RegisterAPI {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
@@ -34,6 +35,8 @@ public class RegisterAPI {
                     // Handle successful response
                     UserDetails userDetails = response.body();
                     // TODO: Process the user details
+                    
+
                 } else {
                     // Handle unsuccessful response
                     String errorMessage = response.message();
@@ -45,6 +48,7 @@ public class RegisterAPI {
             public void onFailure(Call<UserDetails> call, Throwable t) {
                 // Handle failure
                 // TODO: Handle the failure appropriately
+
             }
         });
     }
