@@ -1,5 +1,7 @@
 package com.example.chat_app.API.Entities;
 
+import androidx.annotation.NonNull;
+
 public class UserNamePass {
 
     private String username;
@@ -50,5 +52,15 @@ public class UserNamePass {
 
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
+    }
+
+    @NonNull
+    public String toJsonString() {
+        return "{" +
+                "\"username\":\"" + username + '\"' +
+                ", \"password\":\"" + password + '\"' +
+                ", \"displayName\":\"" + displayName + '\"' +
+                ", \"profilePic\":\"" + profilePic + '\"' +
+                '}';
     }
 }
