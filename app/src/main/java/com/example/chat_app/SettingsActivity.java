@@ -17,7 +17,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.settings, new SettingsFragment())
+                    //.replace(R.id.settings, new SettingsFragment())
                     .commit();
         }
         ActionBar actionBar = getSupportActionBar();
@@ -41,9 +41,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey);
-            sharedPreferences = getPreferenceManager().getSharedPreferences();
-            sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+            // setPreferencesFromResource(R.xml.root_preferences, rootKey);
+            // sharedPreferences = getPreferenceManager().getSharedPreferences();
+            // sharedPreferences.registerOnSharedPreferenceChangeListener(this);
         }
 
         @Override
