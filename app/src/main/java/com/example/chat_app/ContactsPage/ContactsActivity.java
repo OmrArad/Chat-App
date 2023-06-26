@@ -4,26 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.room.Room;
+
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import androidx.appcompat.widget.Toolbar;
+
 
 import com.example.chat_app.ActiveChatActivity;
 import com.example.chat_app.Adapters.ContactsAdapter;
-import com.example.chat_app.AppDB;
+
+import com.example.chat_app.BaseActivity;
 import com.example.chat_app.Dialogs.AddContactDialogFragment;
-import com.example.chat_app.Repositories.ContactRepository;
+import com.example.chat_app.R;
 import com.example.chat_app.SettingsActivity;
 import com.example.chat_app.ViewModels.ContactsViewModel;
 import com.example.chat_app.databinding.ActivityContactsBinding;
-import com.example.chat_app.databinding.FragmentAddContactBinding;
 
-import java.util.List;
-
-public class ContactsActivity extends AppCompatActivity
+public class ContactsActivity extends BaseActivity
         implements ContactsAdapter.OnContactClickListener,
         AddContactDialogFragment.AddContactDialogListener {
 
@@ -57,6 +55,9 @@ public class ContactsActivity extends AppCompatActivity
             Intent i = new Intent(this, AddContactActivity.class);
             startActivity(i);
         });
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
     }
 

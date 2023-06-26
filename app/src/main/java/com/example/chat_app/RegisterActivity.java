@@ -18,18 +18,17 @@ import com.example.chat_app.databinding.ActivityRegisterBinding;
 import retrofit2.Call;
 
 
-public class RegisterActivity extends AppCompatActivity {
-
+public class RegisterActivity extends BaseActivity {
 
     private ActivityRegisterBinding binding;
 
     private RegisterAPI registerAPI;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
 
         binding.btnRegister.setOnClickListener(v -> {
@@ -39,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String username = binding.etUsername.getText().toString().trim();
                 String password = binding.etPassword.getText().toString().trim();
                 String displayName = binding.etDisplayName.getText().toString().trim();
+                //replace with the picture from the user
                 String picture = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50";
 
                 // Create a new user object
@@ -112,8 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Validate picture
-        // Assuming the picture field is not implemented in the code provided
-        // Adjust the validation logic accordingly if the picture field is present
+
 
         return !hasError;
     }

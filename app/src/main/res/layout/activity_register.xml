@@ -92,6 +92,7 @@
         <Button
             android:id="@+id/btnRegister"
             style="@style/Widget.Material3.Button"
+            android:textColor="#2264AD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

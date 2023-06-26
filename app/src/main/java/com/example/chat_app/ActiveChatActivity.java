@@ -1,6 +1,5 @@
 package com.example.chat_app;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +8,10 @@ import android.widget.TextView;
 
 import com.example.chat_app.ContactsPage.Contact;
 
-public class ActiveChatActivity extends AppCompatActivity {
+public class ActiveChatActivity extends BaseActivity {
 
     private ImageView profilePic;
     private TextView displayName;
-
-    ///// add message list /////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,7 +10,7 @@ import android.widget.EditText;
 import com.example.chat_app.ContactsPage.ContactsActivity;
 import com.example.chat_app.databinding.ActivityLoginBinding;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private ActivityLoginBinding binding;
 
@@ -19,8 +19,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
-
-//        setContentView(R.layout.activity_login);
         setContentView(binding.getRoot());
 
 //        Button btnLogin = findViewById(R.id.btnLogin);

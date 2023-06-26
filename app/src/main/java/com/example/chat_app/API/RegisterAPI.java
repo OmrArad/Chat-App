@@ -20,8 +20,6 @@ public class RegisterAPI {
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
@@ -35,7 +33,6 @@ public class RegisterAPI {
                     // Handle successful response
                     UserDetails userDetails = response.body();
                     // TODO: Process the user details
-                    
 
                 } else {
                     // Handle unsuccessful response
