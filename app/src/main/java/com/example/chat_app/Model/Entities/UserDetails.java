@@ -1,13 +1,12 @@
-package com.example.chat_app.Models.ChatModel.Entities;
+package com.example.chat_app.Model.Entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
-
 @Entity
-public class UserDetails implements Serializable {
+public class UserDetails {
 
+    @PrimaryKey
     private String username;
 
     private String displayName;

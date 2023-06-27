@@ -1,15 +1,14 @@
-package com.example.chat_app.Models.ChatModel.Entities;
+package com.example.chat_app.Model.Entities;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
 import java.time.Instant;
 
 @Entity(tableName = "messages")
-public class Message implements Serializable {
-    @PrimaryKey(autoGenerate = true)
+public class Message {
+    @PrimaryKey
     private int id;
 
     private int chatId;
@@ -21,7 +20,8 @@ public class Message implements Serializable {
     @Embedded
     private UserDetails sender;
 
-    public Message(int chatId, Instant created, String content, UserDetails sender) {
+    public Message(int id, int chatId, Instant created, String content, UserDetails sender) {
+        this.id = id;
         this.chatId = chatId;
         this.created = created;
         this.content = content;

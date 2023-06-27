@@ -1,4 +1,4 @@
-package com.example.chat_app;
+package com.example.chat_app.Model;
 
 import android.content.Context;
 
@@ -8,17 +8,24 @@ import androidx.room.RoomDatabase;
 
 import com.example.chat_app.ContactsPage.Contact;
 import com.example.chat_app.ContactsPage.ContactDao;
-import com.example.chat_app.Models.ChatModel.ChatDao;
-import com.example.chat_app.Models.ChatModel.Entities.Chat;
-import com.example.chat_app.Models.ChatModel.Entities.Message;
-import com.example.chat_app.Models.ChatModel.Entities.UserDetails;
+import com.example.chat_app.Model.DAOs.ChatDao;
+import com.example.chat_app.Model.DAOs.MessageDao;
+import com.example.chat_app.Model.Entities.Chat;
+import com.example.chat_app.Model.Entities.Message;
 
-@Database(entities = {Contact.class, Chat.class, Message.class, UserDetails.class}, version = 1)
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+@Database(entities = {Contact.class, Chat.class, Message.class}, version = 1)
 public abstract class AppDB extends RoomDatabase {
 
     private static AppDB instance;
+
+    private Executor databaseExecutor = Executors.newSingleThreadExecutor();
+
     public abstract ContactDao contactDao();
     public abstract ChatDao chatDao();
+    public abstract MessageDao messageDao();
 
     public static synchronized AppDB getInstance(Context context) {
         if (instance == null) {
@@ -30,5 +37,7 @@ public abstract class AppDB extends RoomDatabase {
         return instance;
     }
 
-
+    public Executor getDatabaseExecutor() {
+        return databaseExecutor;
+    }
 }

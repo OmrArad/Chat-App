@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.chat_app.API.ChatAPI;
-import com.example.chat_app.AppDB;
+import com.example.chat_app.Model.AppDB;
 import com.example.chat_app.ContactsPage.Contact;
 import com.example.chat_app.ContactsPage.ContactDao;
 import java.util.ArrayList;
