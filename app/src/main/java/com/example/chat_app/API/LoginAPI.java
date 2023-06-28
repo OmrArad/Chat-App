@@ -2,10 +2,11 @@ package com.example.chat_app.API;
 
 import com.example.chat_app.API.Auth.AuthUtil;
 import com.example.chat_app.API.Auth.TokenManager;
-import com.example.chat_app.API.Entities.UserDetails;
+import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserPass;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
+import com.example.chat_app.SessionInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,6 +20,7 @@ public class LoginAPI {
     private Retrofit retrofit;
 
     private WebServiceAPI webServiceAPI;
+
 
     public LoginAPI() {
 
@@ -72,7 +74,8 @@ public class LoginAPI {
                 if (response.isSuccessful()) {
                     // Handle successful response
                     UserDetails userDetails = response.body();
-                    // TODO: Process the user details
+                    SessionInfo.setCurrentUser(userDetails);
+
                 } else {
                     // TODO: Handle unsuccessful response
                     // Extract the error message from the response if available

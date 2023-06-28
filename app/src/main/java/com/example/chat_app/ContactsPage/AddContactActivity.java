@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
+import com.example.chat_app.Model.Entities.Contact;
 import com.example.chat_app.ViewModels.ContactsViewModel;
 import com.example.chat_app.databinding.ActivityAddContactBinding;
 

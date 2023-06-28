@@ -1,13 +1,16 @@
 package com.example.chat_app.API;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.example.chat_app.API.Auth.AuthUtil;
-import com.example.chat_app.ContactsPage.Contact;
-import com.example.chat_app.ContactsPage.ContactDao;
+import com.example.chat_app.API.Entities.ApiMessage;
+import com.example.chat_app.API.Entities.ChatResponse;
+import com.example.chat_app.Model.Entities.Chat;
+import com.example.chat_app.Model.Entities.Message;
+import com.example.chat_app.Model.Repositories.ChatRepository;
+import com.example.chat_app.Model.Repositories.MessageRepository;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,14 +20,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatAPI {
-    private MutableLiveData<List<Contact>> contactListData;
-    private ContactDao dao;
+
     private Retrofit retrofit;
+
     private WebServiceAPI webServiceAPI;
 
-    public ChatAPI(MutableLiveData<List<Contact>> contactListData, ContactDao dao) {
-        this.contactListData = contactListData;
-        this.dao = dao;
+    private ChatRepository chatRepository;
+
+    private MessageRepository messageRepository;
+
+    public ChatAPI(ChatRepository chatRepository) {
+        this.chatRepository = chatRepository;
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
@@ -35,27 +41,138 @@ public class ChatAPI {
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
-    public void getChatList() {
-        Call<List<Contact>> call = webServiceAPI.getContacts();
-        call.enqueue(new Callback<List<Contact>>() {
+    public void getAllChats() {
+        // Create a request to get chats
+        Call<List<Chat>> call = webServiceAPI.getChats();
+
+        // Enqueue the request
+        call.enqueue(new Callback<List<Chat>>() {
             @Override
-            public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
-                new Thread(() -> {
-//                    dao.clear();
-//                    dao.insertList(response.body());
-                    contactListData.postValue(response.body());
-                }).start();
+            public void onResponse(Call<List<Chat>> call, Response<List<Chat>> response) {
+                if (response.isSuccessful()) {
+                    // Handle successful response
+                    List<Chat> chats = response.body();
+                    chatRepository.insertChats(chats);
+                } else {
+                    //TODO: Handle failure response
+                    // You can access the error message using response.errorBody()
+                }
             }
 
             @Override
-            public void onFailure(Call<List<Contact>> call, Throwable t) {
-                // Handle failure
+            public void onFailure(Call<List<Chat>> call, Throwable t) {
+                // Handle failure in making the request or network issues
             }
         });
     }
 
-    public void getChatById(int id) {
+    private List<Message> responseToMessageList(ChatResponse response) {
+        int chatId = response.getId();
+        List<Message> newMessageList = new ArrayList<>();
 
+        List<ApiMessage> responseMsgs = response.getMessages();
+
+        for (ApiMessage msg : responseMsgs) {
+            newMessageList.add(new Message(msg.getId(), chatId, msg.getCreated(), msg.getContent(),
+                    msg.getSender()));
+        }
+        return newMessageList;
     }
-}
 
+    // possibly unnecessary function - getChatMessages is better
+    public void getChatById(int id) {
+        // Issue the network request
+        Call<ChatResponse> call = webServiceAPI.getChatById(id);
+
+        // Enqueue the request
+        call.enqueue(new Callback<ChatResponse>() {
+            @Override
+            public void onResponse(Call<ChatResponse> call, Response<ChatResponse> response) {
+                if (response.isSuccessful()) {
+                    ChatResponse chatResponse = response.body();
+                    if (chatResponse != null) {
+                        List<Message> messages = responseToMessageList(chatResponse);
+                        messageRepository.insertMessages(messages);
+                    }
+                } else {
+                    // TODO: Handle unsuccessful response
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ChatResponse> call, Throwable t) {
+                // TODO: Handle network failure
+            }
+        });
+    }
+
+    public void getChatMessages(int chatId) {
+        Call<List<ApiMessage>> call = webServiceAPI.getChatMessages(chatId);
+        // Enqueue the request
+        call.enqueue(new Callback<List<ApiMessage>>() {
+            @Override
+            public void onResponse(Call<List<ApiMessage>> call, Response<List<ApiMessage>> response) {
+                if (response.isSuccessful()) {
+                    List<ApiMessage> apiMessages = response.body();
+                    if (apiMessages != null) {
+                        // convert list of API messages to database messages
+                        List<Message> messages = new ArrayList<>();
+                        for (ApiMessage apiMsg : apiMessages) {
+                            messages.add(new Message(chatId, apiMsg));
+                        }
+
+                        // add new list to repository
+                        messageRepository.insertMessages(messages);
+                    }
+                } else {
+                    // TODO: Handle unsuccessful response
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ApiMessage>> call, Throwable t) {
+                // TODO: Handle network failure
+            }
+        });
+    }
+
+    public void deleteChatById(int id) {
+        Call<Void> call = webServiceAPI.deleteChatById(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // Handle successful deletion
+                } else {
+                    // Handle unsuccessful response
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Handle network failure
+            }
+        });
+    }
+
+    public void addMessageToChat(Message newMessage) {
+        Call<Void> call = webServiceAPI.addMessageToChat(newMessage.getId(), new ApiMessage(newMessage));
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // Handle successful insertion
+                } else {
+                    // Handle unsuccessful response
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Handle network failure
+            }
+        });
+    }
+
+}

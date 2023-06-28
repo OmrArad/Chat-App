@@ -1,8 +1,11 @@
 package com.example.chat_app.API.Entities;
 
+import com.example.chat_app.Model.Entities.Message;
+import com.example.chat_app.Model.Entities.UserDetails;
+
 import java.time.Instant;
 
-public class Message {
+public class ApiMessage {
 
     private int id;
 
@@ -12,11 +15,18 @@ public class Message {
 
     private String content;
 
-    public Message(int id, Instant created, UserDetails sender, String content) {
+    public ApiMessage(int id, Instant created, UserDetails sender, String content) {
         this.id = id;
         this.created = created;
         this.sender = sender;
         this.content = content;
+    }
+
+    public ApiMessage(Message message) {
+        this.id = message.getId();
+        this.created = message.getCreated();
+        this.sender = message.getSender();
+        this.content = message.getContent();
     }
 
     public int getId() {

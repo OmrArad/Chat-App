@@ -15,6 +15,9 @@ public interface MessageDao {
     @Insert
     void insertMessage(Message message);
 
+    @Insert
+    void insertMessages(List<Message> messages);
+
     @Delete
     void deleteMessage(Message message);
 
@@ -26,6 +29,9 @@ public interface MessageDao {
 
     @Query("SELECT * FROM messages WHERE chatId = :chatId")
     LiveData<List<Message>> getMessagesByChatId(int chatId);
+
+    @Query("DELETE FROM messages WHERE chatId = :chatId")
+    void deleteMessagesByChatId(int chatId);
 }
 
 

@@ -4,6 +4,8 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.chat_app.API.Entities.ApiMessage;
+
 import java.time.Instant;
 
 @Entity(tableName = "messages")
@@ -26,6 +28,14 @@ public class Message {
         this.created = created;
         this.content = content;
         this.sender = sender;
+    }
+
+    public Message(int chatId, ApiMessage apiMessage) {
+        this.id = apiMessage.getId();
+        this.chatId = chatId;
+        this.created = apiMessage.getCreated();
+        this.content = apiMessage.getContent();
+        this.sender = apiMessage.getSender();
     }
 
     public int getChatId() {

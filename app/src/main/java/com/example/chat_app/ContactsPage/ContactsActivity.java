@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.example.chat_app.ActiveChatActivity;
 import com.example.chat_app.Adapters.ContactsAdapter;
 import com.example.chat_app.Dialogs.AddContactDialogFragment;
+import com.example.chat_app.Model.Entities.Contact;
 import com.example.chat_app.SettingsActivity;
 import com.example.chat_app.ViewModels.ContactsViewModel;
 import com.example.chat_app.databinding.ActivityContactsBinding;

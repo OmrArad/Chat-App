@@ -12,12 +12,24 @@ public class Chat {
     @Embedded
     private UserDetails contact;
 
-    public Chat(int id, UserDetails contact) {
+    @Embedded(prefix = "lm_")
+    private Message lastMessage;
+
+    public Chat(int id, UserDetails contact, Message lastMessage) {
         this.id = id;
         this.contact = contact;
+        this.lastMessage = lastMessage;
     }
 
     public int getId() {
         return id;
+    }
+
+    public UserDetails getContact() {
+        return contact;
+    }
+
+    public Message getLastMessage() {
+        return lastMessage;
     }
 }

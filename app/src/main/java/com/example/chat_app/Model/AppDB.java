@@ -6,8 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.chat_app.ContactsPage.Contact;
-import com.example.chat_app.ContactsPage.ContactDao;
+import com.example.chat_app.Model.Entities.Contact;
+import com.example.chat_app.Model.DAOs.ContactDao;
 import com.example.chat_app.Model.DAOs.ChatDao;
 import com.example.chat_app.Model.DAOs.MessageDao;
 import com.example.chat_app.Model.Entities.Chat;

@@ -7,15 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.chat_app.API.Entities.UserDetails;
+import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserNamePass;
 import com.example.chat_app.API.Entities.UserPass;
 import com.example.chat_app.API.RegisterAPI;
-import com.example.chat_app.API.WebServiceAPI;
-import com.example.chat_app.databinding.ActivityLoginBinding;
 import com.example.chat_app.databinding.ActivityRegisterBinding;
-
-import retrofit2.Call;
 
 
 public class RegisterActivity extends AppCompatActivity {

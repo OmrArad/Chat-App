@@ -28,12 +28,22 @@ public class MessageRepository {
         dbExecutor.execute(() -> messageDao.insertMessage(message));
     }
 
+    public void insertMessages(List<Message> messages) {
+        dbExecutor.execute(() -> messageDao.insertMessages(messages));
+    }
+
     public void deleteMessage(Message message) {
         dbExecutor.execute(() -> messageDao.deleteMessage(message));
     }
 
+    public void deleteMessagesByChatId(int chatId) {
+        dbExecutor.execute(() -> messageDao.deleteMessagesByChatId(chatId));
+        // TODO: delete from server
+    }
+
     public void deleteAllMessages() {
         dbExecutor.execute(messageDao::deleteAllMessages);
+        // TODO: delete from server
     }
 
     public LiveData<List<Message>> getAllMessages() {

@@ -15,13 +15,16 @@ public interface ChatDao {
     @Insert
     void insertChat(Chat chat);
 
+    @Insert
+    void insertChats(List<Chat> chats);
+
     @Delete
-    void deleteChat(Chat chat);
+    void deleteChatById(int id);
 
     @Query("DELETE FROM chats")
     void deleteAllChats();
 
-    @Query("SELECT * FROM chats")
+    @Query("SELECT * FROM chats ORDER BY lm_created DESC")
     LiveData<List<Chat>> getAllChats();
 
     @Query("SELECT * FROM chats WHERE id = :chatId")
