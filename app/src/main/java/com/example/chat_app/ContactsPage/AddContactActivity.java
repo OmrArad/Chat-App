@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
 import android.os.Bundle;
-import com.example.chat_app.AppDB;
+import com.example.chat_app.Model.AppDB;
 import com.example.chat_app.BaseActivity;
 
 import com.example.chat_app.Model.Entities.Contact;
