@@ -26,6 +26,7 @@ public class ContactsActivity extends BaseActivity
         implements ContactsAdapter.OnContactClickListener,
         AddContactDialogFragment.AddContactDialogListener {
 
+    private static final int SETTINGS_REQUEST_CODE = 1;
     private ActivityContactsBinding binding;
     private ContactsViewModel contactsViewModel;
     private ContactsAdapter contactAdapter;
@@ -44,8 +45,7 @@ public class ContactsActivity extends BaseActivity
         binding.recyclerViewContacts.setAdapter(contactAdapter);
         binding.recyclerViewContacts.setLayoutManager(new LinearLayoutManager(this));
 
-        contactsViewModel.getAllContacts().observe(this,
-                contacts -> contactAdapter.setContacts(contacts));
+        contactsViewModel.getAllContacts().observe(this, contacts -> contactAdapter.setContacts(contacts));
 
         contactAdapter.setOnContactClickListener(this);
 
@@ -78,7 +78,7 @@ public class ContactsActivity extends BaseActivity
             return true;
         } else if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, SETTINGS_REQUEST_CODE);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -110,5 +110,16 @@ public class ContactsActivity extends BaseActivity
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         // Handle negative dialog click
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SETTINGS_REQUEST_CODE && resultCode == RESULT_OK) {
+            boolean themeChanged = data.getBooleanExtra("themeChanged", false);
+            if (themeChanged) {
+                recreate(); // Recreate the activity to apply the theme change
+            }
+        }
     }
 }

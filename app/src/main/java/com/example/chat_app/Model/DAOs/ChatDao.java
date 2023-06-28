@@ -18,7 +18,7 @@ public interface ChatDao {
     @Insert
     void insertChats(List<Chat> chats);
 
-    @Delete
+    @Query("DELETE FROM chats WHERE id = :id")
     void deleteChatById(int id);
 
     @Query("DELETE FROM chats")

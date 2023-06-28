@@ -14,13 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chat_app.Settings.GlobalVariables;
 
-public class SettingsActivity extends AppCompatActivity {
-
+public class SettingsActivity extends BaseActivity {
     private Switch themeSwitch;
     private EditText serverInput;
     private Button saveButton;
     private String updatedServerUrl;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +33,6 @@ public class SettingsActivity extends AppCompatActivity {
         themeSwitch = findViewById(R.id.themeSwitch);
         serverInput = findViewById(R.id.serverInput);
         serverInput.setText(GlobalVariables.getServerBaseUrl(this));
-
 
         // Set the initial state of the switch based on the saved preference
         themeSwitch.setChecked(isDarkTheme);
@@ -62,6 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
                 recreate();
             }
         });
+
         saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(v -> saveServerUrl());
 
@@ -79,18 +77,15 @@ public class SettingsActivity extends AppCompatActivity {
             resultIntent.putExtra("themeChanged", true);
             setResult(RESULT_OK, resultIntent);
 
-            onBackPressed();
+            finish(); // Finish the activity instead of calling onBackPressed()
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void saveServerUrl() {
         updatedServerUrl = serverInput.getText().toString();
         GlobalVariables.setServerBaseUrl(updatedServerUrl);
         Toast.makeText(this, "Server URL saved: " + updatedServerUrl, Toast.LENGTH_SHORT).show();
     }
-
-
 }
-
-

@@ -1,10 +1,16 @@
 package com.example.chat_app.Model.Entities;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
 import com.example.chat_app.API.Entities.ApiMessage;
+import com.example.chat_app.Model.Entities.UserDetails;
 
 import java.time.Instant;
 
@@ -15,14 +21,15 @@ public class Message {
 
     private int chatId;
 
-    private Instant created;
+    @TypeConverters({InstantConverter.class})
+    private Long created; // Converted to Long
 
     private String content;
 
     @Embedded
     private UserDetails sender;
 
-    public Message(int id, int chatId, Instant created, String content, UserDetails sender) {
+    public Message(int id, int chatId, Long created, String content, UserDetails sender) {
         this.id = id;
         this.chatId = chatId;
         this.created = created;
@@ -30,6 +37,7 @@ public class Message {
         this.sender = sender;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Message(int chatId, ApiMessage apiMessage) {
         this.id = apiMessage.getId();
         this.chatId = chatId;
@@ -46,7 +54,7 @@ public class Message {
         return id;
     }
 
-    public Instant getCreated() {
+    public Long getCreated() {
         return created;
     }
 
@@ -56,5 +64,17 @@ public class Message {
 
     public UserDetails getSender() {
         return sender;
+    }
+
+    public static class InstantConverter {
+        @TypeConverter
+        public static Instant fromTimestamp(Long value) {
+            return value == null ? null : Instant.ofEpochMilli(value);
+        }
+
+        @TypeConverter
+        public static Long toTimestamp(Instant instant) {
+            return instant == null ? null : instant.toEpochMilli();
+        }
     }
 }

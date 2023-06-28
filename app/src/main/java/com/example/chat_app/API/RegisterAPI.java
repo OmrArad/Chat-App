@@ -4,6 +4,7 @@ import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserNamePass;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
+import com.example.chat_app.Settings.GlobalVariables;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,7 +18,7 @@ public class RegisterAPI {
 
     public RegisterAPI() {
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                .baseUrl(GlobalVariables.getServerBaseUrl(MyApplication.context))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
@@ -32,12 +33,12 @@ public class RegisterAPI {
                 if (response.isSuccessful()) {
                     // Handle successful response
                     UserDetails userDetails = response.body();
-                    // TODO: Process the user details
+                    System.out.println(userDetails);
 
                 } else {
                     // Handle unsuccessful response
                     String errorMessage = response.message();
-                    // TODO: Handle the error appropriately
+                    System.out.println(errorMessage);
                 }
             }
 
@@ -45,7 +46,8 @@ public class RegisterAPI {
             public void onFailure(Call<UserDetails> call, Throwable t) {
                 // Handle failure
                 // TODO: Handle the failure appropriately
-
+                String errorMessage = t.getMessage();
+                System.out.println(errorMessage);
             }
         });
     }

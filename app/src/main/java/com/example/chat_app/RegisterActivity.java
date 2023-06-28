@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.EditText;
 
@@ -18,10 +19,12 @@ public class RegisterActivity extends BaseActivity {
 
     private ActivityRegisterBinding binding;
 
-    private RegisterAPI registerAPI;
+    private RegisterAPI registerAPI = new RegisterAPI();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
@@ -34,20 +37,9 @@ public class RegisterActivity extends BaseActivity {
                 String username = binding.etUsername.getText().toString().trim();
                 String password = binding.etPassword.getText().toString().trim();
                 String displayName = binding.etDisplayName.getText().toString().trim();
-                //replace with the picture from the user
-                String picture = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50";
-
-                // Create a new user object
-                UserDetails user = new UserDetails(username, password, displayName);
-                UserNamePass user1 = new UserNamePass(username, password, displayName, picture);
-                UserPass user2 = new UserPass(username, password);
-
-                // Call the API
-
-
-
-                // Handle the response
-
+                String picture = binding.imageViewProfile.toString().trim();
+                registerAPI.register(new UserNamePass(username, password, displayName, picture));
+                // Go to login page
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
             }

@@ -53,7 +53,7 @@ public interface WebServiceAPI {
     Call<UserDetails> getUserDetails(@Path("username") String username);
 
     @POST("Users")
-    Call<UserDetails> register(UserNamePass formData);
+    Call<UserDetails> register(@Body UserNamePass formData);
 
     ////////// implement all API methods like the ones above ///////////
 

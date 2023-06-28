@@ -9,13 +9,13 @@ public class ApiMessage {
 
     private int id;
 
-    private Instant created;
+    private Long created;
 
     private UserDetails sender;
 
     private String content;
 
-    public ApiMessage(int id, Instant created, UserDetails sender, String content) {
+    public ApiMessage(int id, Long created, UserDetails sender, String content) {
         this.id = id;
         this.created = created;
         this.sender = sender;
@@ -33,7 +33,7 @@ public class ApiMessage {
         return id;
     }
 
-    public Instant getCreated() {
+    public Long getCreated() {
         return created;
     }
 

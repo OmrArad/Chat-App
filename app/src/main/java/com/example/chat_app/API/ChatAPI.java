@@ -1,5 +1,9 @@
 package com.example.chat_app.API;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.example.chat_app.API.Auth.AuthUtil;
 import com.example.chat_app.API.Entities.ApiMessage;
 import com.example.chat_app.API.Entities.ChatResponse;
@@ -9,6 +13,7 @@ import com.example.chat_app.Model.Repositories.ChatRepository;
 import com.example.chat_app.Model.Repositories.MessageRepository;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
+import com.example.chat_app.Settings.GlobalVariables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +38,7 @@ public class ChatAPI {
         this.chatRepository = chatRepository;
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                .baseUrl(GlobalVariables.getServerBaseUrl(MyApplication.context))
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(AuthUtil.createOkHttpClient())
                 .build();
@@ -110,6 +115,7 @@ public class ChatAPI {
         Call<List<ApiMessage>> call = webServiceAPI.getChatMessages(chatId);
         // Enqueue the request
         call.enqueue(new Callback<List<ApiMessage>>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<List<ApiMessage>> call, Response<List<ApiMessage>> response) {
                 if (response.isSuccessful()) {
@@ -120,12 +126,12 @@ public class ChatAPI {
                         for (ApiMessage apiMsg : apiMessages) {
                             messages.add(new Message(chatId, apiMsg));
                         }
-
                         // add new list to repository
                         messageRepository.insertMessages(messages);
                     }
                 } else {
                     // TODO: Handle unsuccessful response
+
                 }
             }
 

@@ -8,7 +8,7 @@ public class GlobalVariables {
 
     public static String getServerBaseUrl(Context context) {
         if (serverBaseUrl == null) {
-            serverBaseUrl = context.getResources().getString(R.string.serverBaseUrl);
+            serverBaseUrl = "http://localhost:5000/api/";
         }
         return serverBaseUrl;
     }
