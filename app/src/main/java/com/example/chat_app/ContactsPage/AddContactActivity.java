@@ -2,14 +2,17 @@ package com.example.chat_app.ContactsPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
 import android.os.Bundle;
+import com.example.chat_app.AppDB;
+import com.example.chat_app.BaseActivity;
 
 import com.example.chat_app.Model.Entities.Contact;
 import com.example.chat_app.ViewModels.ContactsViewModel;
 import com.example.chat_app.databinding.ActivityAddContactBinding;
 
-public class AddContactActivity extends AppCompatActivity {
+public class AddContactActivity extends BaseActivity {
 
     private ActivityAddContactBinding binding;
     private Contact contact;
@@ -39,7 +42,6 @@ public class AddContactActivity extends AppCompatActivity {
                     return;
                 }
                 // search the contact in the db by display name and add it to the contacts activity
-
 
             } else {
                 ///////////////// do something here ///////////////////

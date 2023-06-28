@@ -17,7 +17,6 @@ public class AuthUtil {
             Request.Builder requestBuilder = originalRequest.newBuilder()
                     .header("Authorization", "Bearer " + TokenManager.getInstance().getToken())
                     .method(originalRequest.method(), originalRequest.body());
-
             Request request = requestBuilder.build();
             return chain.proceed(request);
         }

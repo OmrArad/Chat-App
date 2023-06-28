@@ -3,45 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.02"
-            android:background="#DA2264AD"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/textViewTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:text="@string/chat_app"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:textStyle="bold|italic" />
-
-            <ImageButton
-                android:id="@+id/btnSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:backgroundTint="#002264AD"
-                android:contentDescription="@string/settings_button"
-                android:scaleX="1.5"
-                android:scaleY="1.5"
-                android:src="@drawable/ic_settings" />
-
-        </RelativeLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -79,6 +47,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
