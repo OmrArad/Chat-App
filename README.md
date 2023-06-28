@@ -33,6 +33,25 @@ To use the Chat App, you need to configure the following:
 The following dependencies are used in this project:
 
 - [Firebase Realtime Database](https://firebase.google.com/docs/database)
+- [de.hdodenhof:circleimageview:3.1.0](https://github.com/hdodenhof/CircleImageView)
+- [androidx.room:room-compiler:2.5.1](https://developer.android.com/jetpack/androidx/releases/room)
+- [com.squareup.retrofit2:retrofit:2.9.0](https://square.github.io/retrofit/)
+- [com.squareup.retrofit2:converter-gson:2.5.0](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)
+- [com.google.code.gson:gson:2.9.0](https://github.com/google/gson)
+- [androidx.room:room-runtime:2.5.1](https://developer.android.com/jetpack/androidx/releases/room)
+- [androidx.room:room-common:2.5.1](https://developer.android.com/jetpack/androidx/releases/room)
+- [androidx.appcompat:appcompat:1.6.1](https://developer.android.com/jetpack/androidx/releases/appcompat)
+- [com.google.android.material:material:1.5.0](https://developer.android.com/jetpack/androidx/releases/material)
+- [androidx.constraintlayout:constraintlayout:2.1.4](https://developer.android.com/jetpack/androidx/releases/constraintlayout)
+- [androidx.annotation:annotation:1.3.0](https://developer.android.com/jetpack/androidx/releases/annotation)
+- [androidx.lifecycle:lifecycle-livedata-ktx:2.4.1](https://developer.android.com/jetpack/androidx/releases/lifecycle)
+- [androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1](https://developer.android.com/jetpack/android
+
+x/releases/lifecycle)
+- [androidx.preference:preference:1.2.0](https://developer.android.com/jetpack/androidx/releases/preference)
+- [junit:junit:4.13.2](https://junit.org/junit4/)
+- [androidx.test.ext:junit:1.1.5](https://developer.android.com/training/testing/set-up-project#add-dependencies)
+- [androidx.test.espresso:espresso-core:3.5.1](https://developer.android.com/training/testing/set-up-project#add-dependencies)
 
 Make sure to include these dependencies in your build.gradle file.
 
