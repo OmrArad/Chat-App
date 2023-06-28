@@ -34,8 +34,8 @@ public class ChatRepository {
         dbExecutor.execute(() -> chatDao.insertChats(chats));
     }
 
-    public void deleteChatById(int id) {
-        dbExecutor.execute(() -> chatDao.deleteChatById(id));
+    public void deleteChat(Chat chat) {
+        dbExecutor.execute(() -> chatDao.deleteChat(chat));
     }
 
     public void deleteAllChats() {

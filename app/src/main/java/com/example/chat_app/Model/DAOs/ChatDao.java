@@ -19,7 +19,7 @@ public interface ChatDao {
     void insertChats(List<Chat> chats);
 
     @Delete
-    void deleteChatById(int id);
+    void deleteChat(Chat chat);
 
     @Query("DELETE FROM chats")
     void deleteAllChats();

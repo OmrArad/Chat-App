@@ -6,8 +6,6 @@ import androidx.room.PrimaryKey;
 
 import com.example.chat_app.API.Entities.ApiMessage;
 
-import java.time.Instant;
-
 @Entity(tableName = "messages")
 public class Message {
     @PrimaryKey
@@ -15,14 +13,14 @@ public class Message {
 
     private int chatId;
 
-    private Instant created;
+    private String created;
 
     private String content;
 
     @Embedded
     private UserDetails sender;
 
-    public Message(int id, int chatId, Instant created, String content, UserDetails sender) {
+    public Message(int id, int chatId, String created, String content, UserDetails sender) {
         this.id = id;
         this.chatId = chatId;
         this.created = created;
@@ -46,7 +44,7 @@ public class Message {
         return id;
     }
 
-    public Instant getCreated() {
+    public String getCreated() {
         return created;
     }
 
