@@ -5,21 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import com.example.chat_app.LoginActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
-import androidx.appcompat.widget.Toolbar;
-
-
 import com.example.chat_app.ActiveChatActivity;
 import com.example.chat_app.Adapters.ContactsAdapter;
-
 import com.example.chat_app.BaseActivity;
 import com.example.chat_app.Dialogs.AddContactDialogFragment;
+import com.example.chat_app.LoginActivity;
 import com.example.chat_app.R;
 import com.example.chat_app.SettingsActivity;
 import com.example.chat_app.ViewModels.ContactsViewModel;
@@ -51,16 +47,8 @@ public class ContactsActivity extends BaseActivity
                 contacts -> contactAdapter.setContacts(contacts));
 
         contactAdapter.setOnContactClickListener(this);
-//        ImageButton btnLogout = findViewById(R.id.btnLogout);
-//        btnLogout.setOnClickListener(v -> {
-//            // Perform the desired action, such as logging out and starting the LoginActivity
-//            Intent intent = new Intent(this, LoginActivity.class);
-//            startActivity(intent);
-//        });
-
 
         binding.fabAddContact.setOnClickListener(v -> {
-//            showNoticeDialog();
             Intent i = new Intent(this, AddContactActivity.class);
             startActivity(i);
         });
@@ -69,35 +57,31 @@ public class ContactsActivity extends BaseActivity
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_settings);
         actionBar.setDisplayShowHomeEnabled(true);
-        // show logout button
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setCustomView(R.layout.action_bar_logout);
         ImageButton btnLogout = actionBar.getCustomView().findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(v -> {
-            // Perform the desired action, such as logging out and starting the LoginActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            recreate(); // Recreate the activity after logging out
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_bar_logout) {
-            // Handle the logout button click
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            recreate(); // Recreate the activity after logging out
             return true;
         } else if (item.getItemId() == android.R.id.home) {
-            // Handle the up button click, which is equivalent to the settings button
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
     @Override
     public void onContactClick(Contact contact) {
@@ -113,18 +97,17 @@ public class ContactsActivity extends BaseActivity
     }
 
     public void showNoticeDialog() {
-        // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new AddContactDialogFragment();
         dialog.show(getSupportFragmentManager(), "AddContactDialogFragment");
     }
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-
+        // Handle positive dialog click
     }
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-
+        // Handle negative dialog click
     }
 }

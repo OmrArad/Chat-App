@@ -5,6 +5,7 @@
         <item name="android:windowActionBar">false</item>
     </style>
 
+
     <!-- Light Theme -->
     <style name="AppTheme.Light" parent="Theme.AppCompat.Light">
         <!-- Customize theme attributes -->
@@ -12,6 +13,10 @@
 
     <!-- Dark Theme -->
     <style name="AppTheme.Dark" parent="Theme.AppCompat">
-        <!-- Customize theme attributes -->
+        <!-- Customize your dark theme attributes -->
+        <item name="android:windowBackground">#BA454545</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Add more dark theme attributes as needed -->
     </style>
+
 </resources>
