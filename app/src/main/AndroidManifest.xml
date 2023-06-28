@@ -31,7 +31,8 @@
         <activity
             android:name=".ContactsPage.ContactsActivity"
             android:windowNoTitle="true"
-            android:label="Contacts"/>
+            android:label="Contacts"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
 
         <activity
