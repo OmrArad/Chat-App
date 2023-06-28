@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.chat_app.ContactsPage.Contact;
+import com.example.chat_app.Model.Entities.Contact;
 
 public class ActiveChatActivity extends AppCompatActivity {
 

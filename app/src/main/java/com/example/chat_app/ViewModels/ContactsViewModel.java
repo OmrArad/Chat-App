@@ -4,8 +4,8 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import com.example.chat_app.ContactsPage.Contact;
-import com.example.chat_app.Repositories.ContactRepository;
+import com.example.chat_app.Model.Entities.Contact;
+import com.example.chat_app.Model.Repositories.ContactRepository;
 
 import java.util.List;
 

@@ -2,10 +2,10 @@ package com.example.chat_app.ContactsPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Room;
 
 import android.os.Bundle;
-import com.example.chat_app.AppDB;
+
+import com.example.chat_app.Model.Entities.Contact;
 import com.example.chat_app.ViewModels.ContactsViewModel;
 import com.example.chat_app.databinding.ActivityAddContactBinding;
 

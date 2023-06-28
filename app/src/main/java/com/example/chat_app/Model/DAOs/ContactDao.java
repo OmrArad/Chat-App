@@ -1,21 +1,22 @@
-package com.example.chat_app.ContactsPage;
+package com.example.chat_app.Model.DAOs;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.chat_app.Model.Entities.Contact;
+
 import java.util.List;
 
 @Dao
 public interface ContactDao {
 
-    @Query("SELECT * FROM contact")
+    @Query("SELECT * FROM contacts")
     List<Contact> index();
 
-    @Query("SELECT * FROM contact WHERE id = :id")
+    @Query("SELECT * FROM contacts WHERE id = :id")
     Contact get(int id);
 
 

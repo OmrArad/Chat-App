@@ -1,4 +1,4 @@
-package com.example.chat_app.API.Entities;
+package com.example.chat_app.Model.Entities;
 
 public class UserDetails {
     private String username;

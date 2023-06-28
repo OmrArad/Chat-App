@@ -1,15 +1,16 @@
-package com.example.chat_app.ContactsPage;
+package com.example.chat_app.Model.Entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity
+@Entity(tableName = "contacts")
 public class Contact implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+
 
     private String displayName;
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chat_app.ContactsPage.Contact;
+import com.example.chat_app.Model.Entities.Contact;
 import com.example.chat_app.R;
 
 import java.util.List;
