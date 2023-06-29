@@ -80,11 +80,12 @@ public class SettingsActivity extends AppCompatActivity {
             resultIntent.putExtra("themeChanged", true);
             setResult(RESULT_OK, resultIntent);
 
-            onBackPressed();
+            finish(); // Finish the activity instead of calling onBackPressed()
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void saveServerUrl() {
         updatedServerUrl = serverInput.getText().toString();
         GlobalVariables.setServerBaseUrl(updatedServerUrl);

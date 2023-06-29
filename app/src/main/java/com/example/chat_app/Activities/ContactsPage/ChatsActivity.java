@@ -24,7 +24,7 @@ import com.example.chat_app.databinding.ActivityChatsBinding;
 
 public class ChatsActivity extends BaseActivity
         implements ChatsAdapter.OnContactClickListener{
-
+    private static final int SETTINGS_REQUEST_CODE = 1;
     private ActivityChatsBinding binding;
     private ChatsViewModel chatsViewModel;
     private ChatsAdapter chatAdapter;
@@ -71,17 +71,13 @@ public class ChatsActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_bar_logout) {
-            // logout current user
-            SessionManager.logout();
-
-            // return to login activity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             recreate(); // Recreate the activity after logging out
             return true;
         } else if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, SETTINGS_REQUEST_CODE);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -102,5 +98,15 @@ public class ChatsActivity extends BaseActivity
             Log.e(this.getClass().getSimpleName(), e.getMessage());
         }
         chatsViewModel.reload();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SETTINGS_REQUEST_CODE && resultCode == RESULT_OK) {
+            boolean themeChanged = data.getBooleanExtra("themeChanged", false);
+            if (themeChanged) {
+                recreate(); // Recreate the activity to apply the theme change
+            }
+        }
     }
 }
