@@ -10,18 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.Contact;
+import com.example.chat_app.Model.Entities.Message;
+import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.R;
 
 import java.util.List;
 
-public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactViewHolder> {
+public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ContactViewHolder> {
 
-    List<Contact> contacts;
+//    List<Contact> Chats;
+    List<Chat> chats;
 
     private OnContactClickListener contactClickListener;
 
-    public ContactsAdapter(OnContactClickListener contactClickListener) {
+    public ChatsAdapter(OnContactClickListener contactClickListener) {
         this.contactClickListener = contactClickListener;
     }
 
@@ -32,13 +36,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     // Setter for the contact list
     @SuppressLint("NotifyDataSetChanged")
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
+    public void setChats(List<Chat> chats) {
+        this.chats = chats;
         notifyDataSetChanged();
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
+    public List<Chat> getChats() {
+        return chats;
     }
 
     @NonNull
@@ -53,20 +57,23 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
         // Get the contact at the current position
-        Contact contact = contacts.get(position);
+//        Contact contact = chats.get(position);
+        Chat chat = chats.get(position);
+        UserDetails contact = chat.getContact();
+        Message lastMessage = chat.getLastMessage();
 
         // Bind the contact data to the views
         holder.displayName.setText(contact.getDisplayName());
-        holder.when.setText(contact.getWhen());
-        holder.lastMessage.setText(contact.getLastMessage());
-        holder.profilePic.setImageResource(contact.getProfilePic());
+        holder.when.setText(lastMessage.getCreated());
+        holder.lastMessage.setText(lastMessage.getContent());
+        holder.profilePic.setImageResource(contact.getProfilePic()); // fix profile pic
 
 
         // Set the click listener for the contact item
         holder.itemView.setOnClickListener(v -> {
             // Handle the click event for the contact item
             if (contactClickListener != null) {
-                contactClickListener.onContactClick(contact);
+                contactClickListener.onContactClick(chat);
             }
         });
 
@@ -74,7 +81,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         holder.itemView.setOnLongClickListener(v -> {
             // Handle the click event for the contact item
             if (contactClickListener != null) {
-                contactClickListener.onContactLongClick(contact);
+                contactClickListener.onContactLongClick(chat);
             }
             return true;
         });
@@ -82,7 +89,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     @Override
     public int getItemCount() {
-        return contacts.size();
+        return chats.size();
     }
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
@@ -101,7 +108,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     // Interface for contact click listener
     public interface OnContactClickListener {
-        void onContactClick(Contact contact);
-        void onContactLongClick(Contact contact);
+        void onContactClick(Chat chat);
+        void onContactLongClick(Chat chat);
     }
 }
