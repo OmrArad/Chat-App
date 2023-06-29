@@ -10,6 +10,8 @@ import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
 import com.example.chat_app.SessionManager;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,16 +56,15 @@ public class LoginAPI {
                                 .client(AuthUtil.createOkHttpClient())
                                 .build();
                     } else {
-                        // Handle login failure
                         // You can extract the error message from the response if available
                         String errorMessage = response.message();
-                        // Handle the error appropriately
+                        throw new RuntimeException("authentication error" + errorMessage);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    // Handle failure
+                    throw new RuntimeException("authentication error: network failure");
                 }
             });
         } catch (Exception e) {
@@ -88,15 +89,13 @@ public class LoginAPI {
                     // Extract the error message from the response if available
                     String errorMessage = response.message();
                     // Log the error message
-                    System.out.println("Error: " + errorMessage);
+                    throw new RuntimeException("login error: " + errorMessage);
                 }
             }
 
             @Override
             public void onFailure(Call<UserDetails> call, Throwable t) {
-                // TODO: Handle failure
-                // Log the failure message
-                System.out.println("Failure: " + t.getMessage());
+                throw new RuntimeException("login error: " + t.getMessage());
             }
         });
     }

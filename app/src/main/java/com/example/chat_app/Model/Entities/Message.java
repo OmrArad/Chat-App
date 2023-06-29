@@ -28,13 +28,13 @@ public class Message {
         this.sender = sender;
     }
 
-    public Message(int chatId, ApiMessage apiMessage) {
-        this.id = apiMessage.getId();
-        this.chatId = chatId;
-        this.created = apiMessage.getCreated();
-        this.content = apiMessage.getContent();
-        this.sender = apiMessage.getSender();
-    }
+//    public Message(int chatId, ApiMessage apiMessage) {
+//        this.id = apiMessage.getId();
+//        this.chatId = chatId;
+//        this.created = apiMessage.getCreated();
+//        this.content = apiMessage.getContent();
+//        this.sender = apiMessage.getSender();
+//    }
 
     public int getChatId() {
         return chatId;

@@ -9,9 +9,9 @@ public class ChatResponse {
 
     private List<UserDetails> users;
 
-    private List<ApiMessage> apiMessages;
+    private List<ApiChatMessage> apiMessages;
 
-    public ChatResponse(int id, List<UserDetails> users, List<ApiMessage> messages) {
+    public ChatResponse(int id, List<UserDetails> users, List<ApiChatMessage> messages) {
         this.id = id;
         this.users = users;
         this.apiMessages = messages;
@@ -25,7 +25,7 @@ public class ChatResponse {
         return users;
     }
 
-    public List<ApiMessage> getMessages() {
+    public List<ApiChatMessage> getMessages() {
         return apiMessages;
     }
 }

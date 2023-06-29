@@ -2,6 +2,7 @@ package com.example.chat_app.API;
 
 import com.example.chat_app.API.Entities.ApiMessage;
 import com.example.chat_app.API.Entities.ApiNewContact;
+import com.example.chat_app.API.Entities.ChatResponse;
 import com.example.chat_app.API.Entities.SendMessage;
 import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.UserDetails;
@@ -30,8 +31,8 @@ public interface WebServiceAPI {
     @POST("Chats")
     Call<Void> addContact(@Body ApiNewContact newContact);
 
-//    @GET("Chats/{id}")
-//    Call<ChatResponse> getChatById(@Path("id") int id);
+    @GET("Chats/{id}")
+    Call<ChatResponse> getChatById(@Path("id") int id);
 
     @GET("Chats/{id}/Messages")
     Call<List<ApiMessage>> getChatMessages(@Path("id") int id);
