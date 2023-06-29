@@ -8,7 +8,8 @@ public class GlobalVariables {
 
     public static String getServerBaseUrl(Context context) {
         if (serverBaseUrl == null) {
-            serverBaseUrl = context.getResources().getString(R.string.serverBaseUrl);
+            // change it to your server ip
+            serverBaseUrl = "http://192.168.4.115:5000/api/";
         }
         return serverBaseUrl;
     }
