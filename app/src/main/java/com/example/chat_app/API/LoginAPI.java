@@ -9,6 +9,7 @@ import com.example.chat_app.API.Entities.UserPass;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
 import com.example.chat_app.SessionManager;
+import com.example.chat_app.Settings.GlobalVariables;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +30,7 @@ public class LoginAPI {
         tokenManager = TokenManager.getInstance();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                .baseUrl(GlobalVariables.getServerBaseUrl(MyApplication.context))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -49,7 +50,7 @@ public class LoginAPI {
                         tokenManager.setToken(token);
                         // rebuild retrofit object using authorization interceptor
                         retrofit = new Retrofit.Builder()
-                                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                                .baseUrl(GlobalVariables.getServerBaseUrl(MyApplication.context))
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .client(AuthUtil.createOkHttpClient())
                                 .build();

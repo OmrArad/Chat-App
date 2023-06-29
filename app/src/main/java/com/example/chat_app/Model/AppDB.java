@@ -14,7 +14,7 @@ import com.example.chat_app.Model.Entities.Message;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Chat.class, Message.class}, version = 2)
+@Database(entities = {Chat.class, Message.class}, version = 3)
 public abstract class AppDB extends RoomDatabase {
 
     private static AppDB instance;

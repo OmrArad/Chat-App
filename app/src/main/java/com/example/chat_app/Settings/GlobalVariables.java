@@ -1,7 +1,6 @@
 package com.example.chat_app.Settings;
 
 import android.content.Context;
-import com.example.chat_app.R;
 
 public class GlobalVariables {
     private static String serverBaseUrl;
