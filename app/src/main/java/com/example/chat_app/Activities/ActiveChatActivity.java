@@ -1,9 +1,9 @@
-package com.example.chat_app;
+package com.example.chat_app.Activities;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +16,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chat_app.Activities.ContactsPage.ChatsActivity;
 import com.example.chat_app.Adapters.ChatsAdapter;
 import com.example.chat_app.Adapters.MessageAdapter;
 import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.Contact;
 import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Entities.UserDetails;
+import com.example.chat_app.R;
 import com.example.chat_app.ViewModels.MessageViewModel;
 import com.example.chat_app.databinding.ActivityActiveChatBinding;
 
@@ -67,7 +69,7 @@ public class ActiveChatActivity extends AppCompatActivity {
         // Get the selected contact from the intent
         Intent intent = getIntent();
         if (intent != null) {
-            Chat chat = (Chat) intent.getSerializableExtra("contact");
+            Chat chat = (Chat) intent.getSerializableExtra("chat");
 
             if (chat != null) {
                 UserDetails contact = chat.getContact();
@@ -75,7 +77,15 @@ public class ActiveChatActivity extends AppCompatActivity {
                 profilePic.setImageResource(getResources().getIdentifier(
                         contact.getProfilePic(), "drawable", getPackageName()));
                 displayName.setText(contact.getDisplayName());
+            } else {
+                // go back to chats page in case of null chat
+                Log.e(this.getClass().getSimpleName(), "error: null chat object");
+                startActivity(new Intent(this, ChatsActivity.class));
             }
+        } else {
+            // go back to chats page in case of null intent
+            Log.e(this.getClass().getSimpleName(), "error: null intent");
+            startActivity(new Intent(this, ChatsActivity.class));
         }
 
         // Set up click listener for the send button

@@ -2,6 +2,7 @@ package com.example.chat_app.API;
 
 import com.example.chat_app.API.Auth.AuthUtil;
 import com.example.chat_app.API.Entities.ApiMessage;
+import com.example.chat_app.API.Entities.ApiNewContact;
 import com.example.chat_app.API.Entities.ChatResponse;
 import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.Message;
@@ -173,6 +174,27 @@ public class ChatAPI {
                 // Handle network failure
             }
         });
+    }
+
+        public void addContact(String username) {
+            ApiNewContact newContact = new ApiNewContact(username);
+        Call<Void> call = webServiceAPI.addContact(newContact);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    chatRepository.reload();
+                } else {
+                    throw new RuntimeException("error adding new contact");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                throw new RuntimeException("error: network failure");
+            }
+        });
+
     }
 
 }

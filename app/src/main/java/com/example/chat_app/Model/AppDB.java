@@ -6,8 +6,6 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.chat_app.Model.Entities.Contact;
-import com.example.chat_app.Model.DAOs.ContactDao;
 import com.example.chat_app.Model.DAOs.ChatDao;
 import com.example.chat_app.Model.DAOs.MessageDao;
 import com.example.chat_app.Model.Entities.Chat;
@@ -16,14 +14,13 @@ import com.example.chat_app.Model.Entities.Message;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Contact.class, Chat.class, Message.class}, version = 1)
+@Database(entities = {Chat.class, Message.class}, version = 1)
 public abstract class AppDB extends RoomDatabase {
 
     private static AppDB instance;
 
     private Executor databaseExecutor = Executors.newSingleThreadExecutor();
 
-    public abstract ContactDao contactDao();
     public abstract ChatDao chatDao();
     public abstract MessageDao messageDao();
 

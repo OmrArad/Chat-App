@@ -37,14 +37,14 @@ public class RegisterAPI {
                 } else {
                     // Handle unsuccessful response
                     String errorMessage = response.message();
-                    // TODO: Handle the error appropriately
+                    throw new RuntimeException("Registration failed: " + errorMessage);
                 }
             }
 
             @Override
             public void onFailure(Call<UserDetails> call, Throwable t) {
-                // Handle failure
-                // TODO: Handle the failure appropriately
+                // Handle network failure
+                throw new RuntimeException("Registration failed: network error");
 
             }
         });

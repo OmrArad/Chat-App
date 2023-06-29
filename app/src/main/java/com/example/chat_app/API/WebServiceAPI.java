@@ -1,13 +1,12 @@
 package com.example.chat_app.API;
 
 import com.example.chat_app.API.Entities.ApiMessage;
+import com.example.chat_app.API.Entities.ApiNewContact;
 import com.example.chat_app.API.Entities.ChatResponse;
 import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserNamePass;
 import com.example.chat_app.API.Entities.UserPass;
-import com.example.chat_app.Model.Entities.Contact;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,16 +19,16 @@ import retrofit2.http.Path;
 public interface WebServiceAPI {
 
 //    @GET("Chats")
-    Call<List<Contact>> getContacts();
+//    Call<List<Contact>> getContacts();
 
     @GET("Chats")
     Call<List<Chat>> getChats();
 
-    @POST("Chats")
-    Call<Void> addContact(@Body Contact contact);
-
 //    @POST("Chats")
-//    Call<Void> addChat(@Body Chat chat);
+    //Call<Void> addContact(@Body Contact contact);
+
+    @POST("Chats")
+    Call<Void> addContact(@Body ApiNewContact newContact);
 
     @GET("Chats/{id}")
     Call<ChatResponse> getChatById(@Path("id") int id);

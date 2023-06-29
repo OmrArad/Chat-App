@@ -1,16 +1,20 @@
-package com.example.chat_app;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.chat_app.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.chat_app.ContactsPage.ContactsActivity;
+import com.example.chat_app.API.Entities.UserPass;
+import com.example.chat_app.API.LoginAPI;
+import com.example.chat_app.Activities.ContactsPage.ChatsActivity;
+import com.example.chat_app.R;
 import com.example.chat_app.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends BaseActivity {
+
+    private static LoginAPI loginAPI = new LoginAPI();
 
     private ActivityLoginBinding binding;
 
@@ -21,13 +25,25 @@ public class LoginActivity extends BaseActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        Button btnLogin = findViewById(R.id.btnLogin);
         binding.btnLogin.setOnClickListener(v -> {
-
-            ////////////////////// validate here ////////////////////////
             if(validateForm()) {
-                Intent i = new Intent(this, ContactsActivity.class);
-                startActivity(i);
+                EditText etUsername = findViewById(R.id.etUsername);
+                EditText etPassword = findViewById(R.id.etPassword);
+
+                String username = etUsername.getText().toString().trim();
+                String password = etPassword.getText().toString().trim();
+
+                UserPass loginDetails = new UserPass(username, password);
+
+                // authenticate user with api method, then save user details for session
+                try {
+                    loginAPI.authenticate(loginDetails);
+                    loginAPI.getUserDetails(username);
+                    Intent i = new Intent(this, ChatsActivity.class);
+                    startActivity(i);
+                } catch (Exception e) {
+                    Log.e("LoginActivity", e.getMessage());
+                }
             }
         });
 
