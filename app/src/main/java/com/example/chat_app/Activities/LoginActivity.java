@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.example.chat_app.API.Entities.UserPass;
 import com.example.chat_app.API.LoginAPI;
 import com.example.chat_app.Activities.ContactsPage.ChatsActivity;
+import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.R;
 import com.example.chat_app.databinding.ActivityLoginBinding;
 
@@ -40,6 +41,8 @@ public class LoginActivity extends BaseActivity {
                     loginAPI.authenticate(loginDetails);
                     loginAPI.getUserDetails(username);
                     Intent i = new Intent(this, ChatsActivity.class);
+                    // TODO: pass UserDetails as extra
+//                    i.putExtra("userDetails", UserDetails);
                     startActivity(i);
                 } catch (Exception e) {
                     Log.e("LoginActivity", e.getMessage());

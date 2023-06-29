@@ -45,8 +45,8 @@ public interface WebServiceAPI {
     @POST("Chats/{id}/Messages")
     Call<Void> addMessageToChat(@Path("id") int id, ApiMessage message);
 
-    @POST("Tokens")
-    Call<String> authenticate(UserPass userPass);
+    @POST("api/Tokens")
+    Call<String> authenticate(@Body UserPass userPass);
 
     @GET("Users/{username}")
     Call<UserDetails> getUserDetails(@Path("username") String username);

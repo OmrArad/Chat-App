@@ -53,10 +53,10 @@
     <string name="tv_add_contact">ADD CONTACT</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
-    <string name="BaseUrl">http://10.0.2.2:5000/api/</string>
+    <string name="BaseUrl">https://192.168.1.158:5000/api/</string>
     <string name="theme_title" />
     <string name="theme_header" />
     <string name="profile_header" />
     <string name="server_header" />
-    <string name="serverBaseUrl">https://127.0.0.1:5000</string>
+    <string name="serverBaseUrl">https://192.168.1.158:5000/api/</string>
 </resources>

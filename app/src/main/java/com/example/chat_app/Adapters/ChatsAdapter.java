@@ -16,6 +16,7 @@ import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ContactViewHolder> {
@@ -30,6 +31,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ContactViewH
     public ChatsAdapter(Context context, OnContactClickListener contactClickListener) {
         this.context = context;
         this.contactClickListener = contactClickListener;
+        this.chats = new ArrayList<>();
     }
 
     // Setter for the contact click listener
