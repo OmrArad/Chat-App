@@ -50,7 +50,7 @@ public class LoginAPI {
                         tokenManager.setToken(token);
                         // rebuild retrofit object using authorization interceptor
                         retrofit = new Retrofit.Builder()
-                                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                                .baseUrl(GlobalVariables.getServerBaseUrl(MyApplication.context))
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .client(AuthUtil.createOkHttpClient())
                                 .build();
