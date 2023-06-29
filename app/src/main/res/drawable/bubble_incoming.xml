@@ -1,0 +1,16 @@
+<!-- bubble_incoming.xml -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<corners
+    android:topLeftRadius="8dp"
+    android:topRightRadius="8dp"
+    android:bottomLeftRadius="8dp"
+    android:bottomRightRadius="0dp" />
+<solid android:color="#98BDEB" />
+<padding
+    android:left="12dp"
+    android:top="8dp"
+    android:right="12dp"
+    android:bottom="8dp" />
+</shape>
+
