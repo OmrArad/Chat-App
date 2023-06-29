@@ -1,7 +1,6 @@
 package com.example.chat_app.API.Entities;
 
 import com.example.chat_app.Model.Entities.Message;
-import com.example.chat_app.Model.Entities.UserDetails;
 
 
 public class ApiMessage {
@@ -10,11 +9,11 @@ public class ApiMessage {
 
     private String created;
 
-    private UserDetails sender;
+    private ApiUsername sender;
 
     private String content;
 
-    public ApiMessage(int id, String created, UserDetails sender, String content) {
+    public ApiMessage(int id, String created, ApiUsername sender, String content) {
         this.id = id;
         this.created = created;
         this.sender = sender;
@@ -24,7 +23,7 @@ public class ApiMessage {
     public ApiMessage(Message message) {
         this.id = message.getId();
         this.created = message.getCreated();
-        this.sender = message.getSender();
+        this.sender = new ApiUsername(message.getSender().getUsername());
         this.content = message.getContent();
     }
 
@@ -36,7 +35,7 @@ public class ApiMessage {
         return created;
     }
 
-    public UserDetails getSender() {
+    public ApiUsername getSender() {
         return sender;
     }
 
