@@ -4,6 +4,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.R;
+import com.example.chat_app.SessionInfo;
 
 import java.util.List;
 
@@ -41,24 +43,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         if (messageList != null && position < messageList.size()) {
             Message message = messageList.get(position);
 
-            // Bind the message data to the views in the ViewHolder
-            holder.tvTextMessage.setText(message.getContent());
-            holder.tvTime.setText(message.getCreated());
+            if (message.getSender().getUsername() == SessionInfo.getCurrentUser().getUsername()) {
+                // Outgoing message
+                holder.layoutIncoming.setVisibility(View.GONE);
+                holder.layoutOutgoing.setVisibility(View.VISIBLE);
+                holder.tvOutgoingTextMessage.setText(message.getContent());
+                holder.tvOutgoingTime.setText(message.getCreated());
 
-            // TODO: Set the appropriate background and alignment based on the sender
-            if (message.getSender()==sender) {
-                // Incoming message styling
-                holder.itemView.setBackgroundResource(R.drawable.bubble_incoming);
-                // Set alignment, e.g., left-aligned for incoming messages
-                holder.itemView.setForegroundGravity(Gravity.END);
-                holder.itemView.setVisibility(View.VISIBLE);
-                // holder.tvTextMessage.setGravity(Gravity.START);
             } else {
-                // Outgoing message styling
-                holder.itemView.setBackgroundResource(R.drawable.bubble_outgoing);
-                holder.itemView.setVisibility(View.VISIBLE);
-                // Set alignment, e.g., right-aligned for outgoing messages
-                // holder.tvTextMessage.setGravity(Gravity.END);
+                // Incoming message styling
+                holder.layoutIncoming.setVisibility(View.VISIBLE);
+                holder.layoutOutgoing.setVisibility(View.GONE);
+                holder.tvIncomingTextMessage.setText(message.getContent());
+                holder.tvIncomingTime.setText(message.getCreated());
             }
         }
 
@@ -70,13 +67,21 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     static class MessageViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTextMessage;
-        TextView tvTime;
+        LinearLayout layoutIncoming;
+        LinearLayout layoutOutgoing;
+        TextView tvIncomingTextMessage;
+        TextView tvIncomingTime;
+        TextView tvOutgoingTextMessage;
+        TextView tvOutgoingTime;
 
         MessageViewHolder(View itemView) {
             super(itemView);
-            tvTextMessage = itemView.findViewById(R.id.tvTextMessage);
-            tvTime = itemView.findViewById(R.id.tvTime);
+            layoutIncoming = itemView.findViewById(R.id.layoutIncoming);
+            layoutOutgoing = itemView.findViewById(R.id.layoutOutgoing);
+            tvIncomingTextMessage = itemView.findViewById(R.id.tvIncomingTextMessage);
+            tvIncomingTime = itemView.findViewById(R.id.tvIncomingTime);
+            tvOutgoingTextMessage = itemView.findViewById(R.id.tvOutgoingTextMessage);
+            tvOutgoingTime = itemView.findViewById(R.id.tvOutgoingTime);
         }
     }
 }
