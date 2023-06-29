@@ -1,6 +1,7 @@
 package com.example.chat_app.Adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,12 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ContactViewH
 //    List<Contact> Chats;
     List<Chat> chats;
 
+    private Context context;
+
     private OnContactClickListener contactClickListener;
 
-    public ChatsAdapter(OnContactClickListener contactClickListener) {
+    public ChatsAdapter(Context context, OnContactClickListener contactClickListener) {
+        this.context = context;
         this.contactClickListener = contactClickListener;
     }
 
@@ -66,7 +70,9 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ContactViewH
         holder.displayName.setText(contact.getDisplayName());
         holder.when.setText(lastMessage.getCreated());
         holder.lastMessage.setText(lastMessage.getContent());
-        holder.profilePic.setImageResource(contact.getProfilePic()); // fix profile pic
+        holder.profilePic.setImageResource(
+                context.getResources().getIdentifier(
+                        contact.getProfilePic(), "drawable", context.getPackageName()));
 
 
         // Set the click listener for the contact item

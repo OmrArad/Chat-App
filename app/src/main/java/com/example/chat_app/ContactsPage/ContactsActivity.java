@@ -37,7 +37,7 @@ public class ContactsActivity extends BaseActivity
         chatsViewModel = new ViewModelProvider(this).get(ChatsViewModel.class);
 
         // Create the adapter and attach it to the RecyclerView
-        chatAdapter = new ChatsAdapter(this);
+        chatAdapter = new ChatsAdapter(getApplicationContext(), this);
         binding.recyclerViewContacts.setAdapter(chatAdapter);
         binding.recyclerViewContacts.setLayoutManager(new LinearLayoutManager(this));
 
