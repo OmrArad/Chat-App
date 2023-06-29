@@ -107,36 +107,6 @@ public class ChatAPI {
         });
     }
 
-    public void getChatMessages(int chatId) {
-        Call<List<ApiMessage>> call = webServiceAPI.getChatMessages(chatId);
-        // Enqueue the request
-        call.enqueue(new Callback<List<ApiMessage>>() {
-            @Override
-            public void onResponse(Call<List<ApiMessage>> call, Response<List<ApiMessage>> response) {
-                if (response.isSuccessful()) {
-                    List<ApiMessage> apiMessages = response.body();
-                    if (apiMessages != null) {
-                        // convert list of API messages to database messages
-                        List<Message> messages = new ArrayList<>();
-                        for (ApiMessage apiMsg : apiMessages) {
-                            messages.add(new Message(chatId, apiMsg));
-                        }
-
-                        // add new list to repository
-                        messageRepository.insertMessages(messages);
-                    }
-                } else {
-                    // TODO: Handle unsuccessful response
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<ApiMessage>> call, Throwable t) {
-                // TODO: Handle network failure
-            }
-        });
-    }
-
     public void deleteChatById(int id) {
         Call<Void> call = webServiceAPI.deleteChatById(id);
         call.enqueue(new Callback<Void>() {
@@ -156,44 +126,24 @@ public class ChatAPI {
         });
     }
 
-    public void addMessageToChat(Message newMessage) {
-        Call<Void> call = webServiceAPI.addMessageToChat(newMessage.getId(), new ApiMessage(newMessage));
-
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    // Handle successful insertion
-                } else {
-                    // Handle unsuccessful response
-                }
+    public void addContact(String username) {
+        ApiNewContact newContact = new ApiNewContact(username);
+    Call<Void> call = webServiceAPI.addContact(newContact);
+    call.enqueue(new Callback<Void>() {
+        @Override
+        public void onResponse(Call<Void> call, Response<Void> response) {
+            if (response.isSuccessful()) {
+                chatRepository.reload();
+            } else {
+                throw new RuntimeException("error adding new contact");
             }
+        }
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                // Handle network failure
-            }
-        });
-    }
-
-        public void addContact(String username) {
-            ApiNewContact newContact = new ApiNewContact(username);
-        Call<Void> call = webServiceAPI.addContact(newContact);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    chatRepository.reload();
-                } else {
-                    throw new RuntimeException("error adding new contact");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                throw new RuntimeException("error: network failure");
-            }
-        });
+        @Override
+        public void onFailure(Call<Void> call, Throwable t) {
+            throw new RuntimeException("error: network failure");
+        }
+    });
 
     }
 
