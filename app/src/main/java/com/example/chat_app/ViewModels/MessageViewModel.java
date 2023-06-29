@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData;
 import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Repositories.MessageRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MessageViewModel extends AndroidViewModel {
@@ -17,10 +16,20 @@ public class MessageViewModel extends AndroidViewModel {
     private MessageRepository messageRepository;
     private LiveData<List<Message>> messageListData;
 
+    private int chatId;
+
+//    public int getChatId() {
+//        return chatId;
+//    }
+
+    public void loadChatMessages(int chatId) {
+        this.chatId = chatId;
+        this.reload();
+    }
+
     public MessageViewModel(@NonNull Application application) {
         super(application);
         messageRepository = new MessageRepository(application);
-        messageListData = messageRepository.getAllMessages();
         // Initialize the message list or fetch it from the database
     }
 
@@ -37,15 +46,17 @@ public class MessageViewModel extends AndroidViewModel {
 //        messageListData.setValue(messageList);
 //    }
 
-    public void insert(Message message) {
-        messageRepository.insertMessage(message);
+    public void sendMessage(String messageContent) {
+        messageRepository.sendMessage(chatId, messageContent);
+        this.reload();
     }
 
-    public void delete(Message message) {
-        messageRepository.deleteMessage(message);
-    }
-
-    // TODO: public void reload() {
-//        messageRepository.reload;
+//    public void delete(Message message) {
+//        messageRepository.deleteMessage(message);
 //    }
+
+
+    public void reload() {
+        messageListData = messageRepository.getMessagesByChatId(chatId);
+    }
 }

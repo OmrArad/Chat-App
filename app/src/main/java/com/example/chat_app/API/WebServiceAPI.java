@@ -3,6 +3,7 @@ package com.example.chat_app.API;
 import com.example.chat_app.API.Entities.ApiMessage;
 import com.example.chat_app.API.Entities.ApiNewContact;
 import com.example.chat_app.API.Entities.ChatResponse;
+import com.example.chat_app.API.Entities.SendMessage;
 import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserNamePass;
@@ -36,14 +37,15 @@ public interface WebServiceAPI {
     @GET("Chats/{id}/Messages")
     Call<List<ApiMessage>> getChatMessages(@Path("id") int id);
 
+    @POST("Chats/{id}/Messages")
+    Call<Void> sendMessage(@Path("id") int id, @Body SendMessage message);
+
     @DELETE("Chats/{id}")
     Call<Void> deleteContact(@Path("id") int id);
 
     //@DELETE("Chats/{id}")
     Call<Void> deleteChatById(@Path("id") int id);
 
-    @POST("Chats/{id}/Messages")
-    Call<Void> addMessageToChat(@Path("id") int id, ApiMessage message);
 
     @POST("api/Tokens")
     Call<String> authenticate(@Body UserPass userPass);
