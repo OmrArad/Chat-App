@@ -38,27 +38,30 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-        Message message = messageList.get(position);
+        if (messageList != null && position < messageList.size()) {
+            Message message = messageList.get(position);
 
-        // Bind the message data to the views in the ViewHolder
-        holder.tvTextMessage.setText(message.getContent());
-        holder.tvTime.setText(message.getCreated());
+            // Bind the message data to the views in the ViewHolder
+            holder.tvTextMessage.setText(message.getContent());
+            holder.tvTime.setText(message.getCreated());
 
-        // Set the appropriate background and alignment based on the message type
-        if (message.getSender()) {
-            // Incoming message styling
-            holder.itemView.setBackgroundResource(R.drawable.bubble_incoming);
-            // Set alignment, e.g., left-aligned for incoming messages
-            holder.itemView.setForegroundGravity(Gravity.END);
-            holder.itemView.setVisibility(View.VISIBLE);
-            // holder.tvTextMessage.setGravity(Gravity.START);
-        } else {
-            // Outgoing message styling
-            holder.itemView.setBackgroundResource(R.drawable.bubble_outgoing);
-            holder.itemView.setVisibility(View.VISIBLE);
-            // Set alignment, e.g., right-aligned for outgoing messages
-            // holder.tvTextMessage.setGravity(Gravity.END);
+            // TODO: Set the appropriate background and alignment based on the sender
+            if (message.getSender()==sender) {
+                // Incoming message styling
+                holder.itemView.setBackgroundResource(R.drawable.bubble_incoming);
+                // Set alignment, e.g., left-aligned for incoming messages
+                holder.itemView.setForegroundGravity(Gravity.END);
+                holder.itemView.setVisibility(View.VISIBLE);
+                // holder.tvTextMessage.setGravity(Gravity.START);
+            } else {
+                // Outgoing message styling
+                holder.itemView.setBackgroundResource(R.drawable.bubble_outgoing);
+                holder.itemView.setVisibility(View.VISIBLE);
+                // Set alignment, e.g., right-aligned for outgoing messages
+                // holder.tvTextMessage.setGravity(Gravity.END);
+            }
         }
+
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.Contact;
 import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Entities.UserDetails;
+import com.example.chat_app.ViewModels.MessageViewModel;
 import com.example.chat_app.databinding.ActivityActiveChatBinding;
 
 import java.util.ArrayList;
@@ -101,24 +102,26 @@ public class ActiveChatActivity extends AppCompatActivity {
     }
 
     // Helper method to create a list of messages (example)
-    private List<Message> createMessageList() {
-        // TODO: Implement your logic to retrieve the list of messages
-        // For now, let's create a dummy list for testing
-        List<Message> messages = new ArrayList<>();
-        messages.add(new Message("Hello!", "12:30 PM"));
-        messages.add(new Message("How are you?", "12:35 PM"));
-        messages.add(new Message("I'm good, thanks!", "12:40 PM"));
-        //...
-        return messages;
-    }
+//    private List<Message> createMessageList() {
+//        // optional TODO: Implement your logic to retrieve the list of messages
+//        // For now, let's create a dummy list for testing
+//        List<Message> messages = new ArrayList<>();
+//        messages.add(new Message("Hello!", "12:30 PM"));
+//        messages.add(new Message("How are you?", "12:35 PM"));
+//        messages.add(new Message("I'm good, thanks!", "12:40 PM"));
+//        //...
+//        return messages;
+//    }
 
     private void sendMessageToRecipient(String message) {
+        // TODO
         // Perform actions to send the message to the recipient
         // For example, make a network request or update the database
         // Implement your specific logic here
     }
 
     private void updateChatViewWithSentMessage(String message) {
+        // TODO
         // Update the UI to display the sent message
         // For example, append the message to a RecyclerView or update a TextView
         // Implement your specific logic here

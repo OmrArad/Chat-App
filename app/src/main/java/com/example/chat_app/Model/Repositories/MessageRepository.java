@@ -22,6 +22,7 @@ public class MessageRepository {
         messageDao = appDB.messageDao();
         allMessages = messageDao.getAllMessages();
         dbExecutor = appDB.getDatabaseExecutor();
+        // TODO: use ChatAPI instead of messageDAO
     }
 
     public void insertMessage(Message message) {
@@ -49,6 +50,11 @@ public class MessageRepository {
     public LiveData<List<Message>> getAllMessages() {
         return allMessages;
     }
+
+    // TODO: use ChatAPI
+//    public void reload() {
+//        chatAPI.getChatMessages();
+//    }
 
     public LiveData<List<Message>> getMessagesByChatId(int chatId) {
         return messageDao.getMessagesByChatId(chatId);
