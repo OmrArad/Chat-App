@@ -26,10 +26,6 @@ public class ChatsViewModel extends AndroidViewModel {
         return allChatsLiveData;
     }
 
-//    public void insert(Chat chat) {
-//        chatRepository.insertChat(chat);
-//    }
-
     public void addContact(String username) {
         chatRepository.addContact(username);
     }

@@ -7,6 +7,7 @@ import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Repositories.MessageRepository;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
+import com.example.chat_app.Settings.GlobalVariables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class MessageAPI {
         this.messageRepository = messageRepository;
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                .baseUrl(GlobalVariables.getServerBaseUrl(MyApplication.context))
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(AuthUtil.createOkHttpClient())
                 .build();
