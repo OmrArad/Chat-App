@@ -1,4 +1,4 @@
-package com.example.chat_app.ContactsPage;
+package com.example.chat_app.Activities.ContactsPage;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,28 +9,29 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
-import com.example.chat_app.ActiveChatActivity;
+import com.example.chat_app.Activities.ActiveChatActivity;
 import com.example.chat_app.Adapters.ChatsAdapter;
-import com.example.chat_app.BaseActivity;
+import com.example.chat_app.Activities.BaseActivity;
 //import com.example.chat_app.Dialogs.AddContactDialogFragment;
 import com.example.chat_app.Model.Entities.Chat;
-import com.example.chat_app.LoginActivity;
+import com.example.chat_app.Activities.LoginActivity;
 import com.example.chat_app.R;
-import com.example.chat_app.SettingsActivity;
+import com.example.chat_app.SessionManager;
+import com.example.chat_app.Activities.SettingsActivity;
 import com.example.chat_app.ViewModels.ChatsViewModel;
-import com.example.chat_app.databinding.ActivityContactsBinding;
+import com.example.chat_app.databinding.ActivityChatsBinding;
 
-public class ContactsActivity extends BaseActivity
+public class ChatsActivity extends BaseActivity
         implements ChatsAdapter.OnContactClickListener{
 
-    private ActivityContactsBinding binding;
+    private ActivityChatsBinding binding;
     private ChatsViewModel chatsViewModel;
     private ChatsAdapter chatAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityContactsBinding.inflate(getLayoutInflater());
+        binding = ActivityChatsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Set up ViewModel and observe changes
@@ -38,8 +39,8 @@ public class ContactsActivity extends BaseActivity
 
         // Create the adapter and attach it to the RecyclerView
         chatAdapter = new ChatsAdapter(getApplicationContext(), this);
-        binding.recyclerViewContacts.setAdapter(chatAdapter);
-        binding.recyclerViewContacts.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerViewChats.setAdapter(chatAdapter);
+        binding.recyclerViewChats.setLayoutManager(new LinearLayoutManager(this));
 
         chatsViewModel.getAllChats().observe(this,
                 chats -> chatAdapter.setChats(chats));
@@ -69,6 +70,10 @@ public class ContactsActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_bar_logout) {
+            // logout current user
+            SessionManager.logout();
+
+            // return to login activity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             recreate(); // Recreate the activity after logging out

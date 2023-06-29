@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chat_app.Model.Entities.Chat;
-import com.example.chat_app.Model.Entities.Contact;
 import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.R;
