@@ -47,8 +47,8 @@ public interface WebServiceAPI {
     Call<Void> deleteChatById(@Path("id") int id);
 
 
-    @POST("Tokens")
-    Call<String> authenticate(UserPass userPass);
+    @POST("api/Tokens")
+    Call<String> authenticate(@Body UserPass userPass);
 
     @GET("Users/{username}")
     Call<UserDetails> getUserDetails(@Path("username") String username);

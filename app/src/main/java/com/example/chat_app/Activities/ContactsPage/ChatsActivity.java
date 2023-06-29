@@ -103,19 +103,4 @@ public class ChatsActivity extends BaseActivity
         }
         chatsViewModel.reload();
     }
-
-//    public void showNoticeDialog() {
-//        DialogFragment dialog = new AddContactDialogFragment();
-//        dialog.show(getSupportFragmentManager(), "AddContactDialogFragment");
-//    }
-
-//    @Override
-//    public void onDialogPositiveClick(DialogFragment dialog) {
-//        // Handle positive dialog click
-//    }
-
-//    @Override
-//    public void onDialogNegativeClick(DialogFragment dialog) {
-//        // Handle negative dialog click
-//    }
 }

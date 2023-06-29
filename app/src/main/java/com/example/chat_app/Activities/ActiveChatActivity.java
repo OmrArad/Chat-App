@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,12 +17,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chat_app.Activities.ContactsPage.ChatsActivity;
+import com.example.chat_app.Adapters.ChatsAdapter;
 import com.example.chat_app.Adapters.MessageAdapter;
 import com.example.chat_app.Model.Entities.Chat;
+import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.R;
 import com.example.chat_app.ViewModels.MessageViewModel;
 import com.example.chat_app.databinding.ActivityActiveChatBinding;
+
+import java.util.List;
 
 public class ActiveChatActivity extends AppCompatActivity {
 

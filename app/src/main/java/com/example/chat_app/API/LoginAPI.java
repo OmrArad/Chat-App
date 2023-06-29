@@ -1,5 +1,7 @@
 package com.example.chat_app.API;
 
+import android.util.Log;
+
 import com.example.chat_app.API.Auth.AuthUtil;
 import com.example.chat_app.API.Auth.TokenManager;
 import com.example.chat_app.Model.Entities.UserDetails;
@@ -38,31 +40,36 @@ public class LoginAPI {
     public void authenticate(UserPass loginDetails) {
         // Make the API call to log in the user
         Call<String> call = webServiceAPI.authenticate(loginDetails);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
-                    String token = response.body();
-                    tokenManager.setToken(token);
-                    // rebuild retrofit object using authorization interceptor
-                    retrofit = new Retrofit.Builder()
-                            .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .client(AuthUtil.createOkHttpClient())
-                            .build();
-                } else {
-                    // Handle login failure
-                    // You can extract the error message from the response if available
-                    String errorMessage = response.message();
-                    // Handle the error appropriately
+        try {
+            call.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.isSuccessful()) {
+                        String token = response.body();
+                        tokenManager.setToken(token);
+                        // rebuild retrofit object using authorization interceptor
+                        retrofit = new Retrofit.Builder()
+                                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .client(AuthUtil.createOkHttpClient())
+                                .build();
+                    } else {
+                        // Handle login failure
+                        // You can extract the error message from the response if available
+                        String errorMessage = response.message();
+                        // Handle the error appropriately
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                // Handle failure
-            }
-        });
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    // Handle failure
+                }
+            });
+        } catch (Exception e) {
+            Log.e("LoginAPI", e.getMessage());
+        }
+
     }
 
     public void getUserDetails(String username) {
