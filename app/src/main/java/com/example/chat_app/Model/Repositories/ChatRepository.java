@@ -63,11 +63,7 @@ public class ChatRepository {
             // delete chat from room
             chatDao.deleteChat(chat);
             // delete chat from server
-            try {
-                chatAPI.deleteChatById(chat.getId());
-            } catch (Exception e) {
-                Log.e(this.getClass().getSimpleName(), e.getMessage());
-            }
+            chatAPI.deleteChatById(chat.getId());
             this.reload();
         });
     }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
@@ -95,7 +96,11 @@ public class ChatsActivity extends BaseActivity
 
     @Override
     public void onContactLongClick(Chat chat) {
-        chatsViewModel.delete(chat);
+        try {
+            chatsViewModel.delete(chat);
+        } catch (Exception e) {
+            Log.e(this.getClass().getSimpleName(), e.getMessage());
+        }
         chatsViewModel.reload();
     }
 
