@@ -18,9 +18,9 @@ public class MessageViewModel extends AndroidViewModel {
 
     private int chatId;
 
-    public int getChatId() {
-        return chatId;
-    }
+//    public int getChatId() {
+//        return chatId;
+//    }
 
     public void loadChatMessages(int chatId) {
         this.chatId = chatId;
@@ -51,9 +51,9 @@ public class MessageViewModel extends AndroidViewModel {
         this.reload();
     }
 
-    public void delete(Message message) {
-        messageRepository.deleteMessage(message);
-    }
+//    public void delete(Message message) {
+//        messageRepository.deleteMessage(message);
+//    }
 
 
     public void reload() {
