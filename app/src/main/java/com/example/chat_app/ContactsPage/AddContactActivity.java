@@ -1,22 +1,20 @@
 package com.example.chat_app.ContactsPage;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Room;
 
 import android.os.Bundle;
-import com.example.chat_app.Model.AppDB;
+
 import com.example.chat_app.BaseActivity;
 
 import com.example.chat_app.Model.Entities.Contact;
-import com.example.chat_app.ViewModels.ContactsViewModel;
+import com.example.chat_app.ViewModels.ChatsViewModel;
 import com.example.chat_app.databinding.ActivityAddContactBinding;
 
 public class AddContactActivity extends BaseActivity {
 
     private ActivityAddContactBinding binding;
     private Contact contact;
-    private ContactsViewModel contactsViewModel;
+    private ChatsViewModel chatsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +23,7 @@ public class AddContactActivity extends BaseActivity {
         binding = ActivityAddContactBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
+        chatsViewModel = new ViewModelProvider(this).get(ChatsViewModel.class);
 
         handleSave();
     }
