@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,18 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chat_app.Activities.ContactsPage.ChatsActivity;
-import com.example.chat_app.Adapters.ChatsAdapter;
 import com.example.chat_app.Adapters.MessageAdapter;
 import com.example.chat_app.Model.Entities.Chat;
-import com.example.chat_app.Model.Entities.Contact;
-import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.R;
 import com.example.chat_app.ViewModels.MessageViewModel;
 import com.example.chat_app.databinding.ActivityActiveChatBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ActiveChatActivity extends AppCompatActivity {
 
@@ -43,7 +36,6 @@ public class ActiveChatActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewMessages;
 
-    private List<Message> messageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +43,6 @@ public class ActiveChatActivity extends AppCompatActivity {
         binding = ActivityActiveChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Set up ViewModel and observe changes
-        messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
-
-        // Create the adapter and attach it to the RecyclerView
-        messageAdapter = new MessageAdapter(messageList);
-        binding.messagesRecyclerView.setAdapter(messageAdapter);
-        binding.messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        messageViewModel.getAllMessages().observe(this,
-                messages -> messageAdapter.setMessages(messages));
-
-        // Initialize views
-        profilePic = findViewById(R.id.ivProfile);
-        displayName = findViewById(R.id.tvDisplayName);
 
         // Get the selected contact from the intent
         Intent intent = getIntent();
@@ -72,6 +50,14 @@ public class ActiveChatActivity extends AppCompatActivity {
             Chat chat = (Chat) intent.getSerializableExtra("chat");
 
             if (chat != null) {
+                // Set up ViewModel and observe changes
+                messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
+                messageViewModel.loadChatMessages(chat.getId());
+
+                // Initialize views
+                profilePic = findViewById(R.id.ivProfile);
+                displayName = findViewById(R.id.tvDisplayName);
+
                 UserDetails contact = chat.getContact();
                 // Display the contact details on the screen
                 profilePic.setImageResource(getResources().getIdentifier(
@@ -88,6 +74,15 @@ public class ActiveChatActivity extends AppCompatActivity {
             startActivity(new Intent(this, ChatsActivity.class));
         }
 
+        // Create the adapter and attach it to the RecyclerView
+        messageAdapter = new MessageAdapter();
+        binding.messagesRecyclerView.setAdapter(messageAdapter);
+        binding.messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        messageViewModel.getAllMessages().observe(this,
+                messages -> messageAdapter.setMessages(messages));
+
+
         // Set up click listener for the send button
         ImageButton sendButton = findViewById(R.id.btnSend);
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -99,13 +94,14 @@ public class ActiveChatActivity extends AppCompatActivity {
 
                 // Check if the message text is not empty
                 if (!messageText.isEmpty()) {
-                    sendMessageToRecipient(messageText);
+                    try {
+                        messageViewModel.sendMessage(messageText);
+                        // Clear the input field after sending the message
+                        messageEditText.setText("");
+                    } catch (Exception e) {
+                        Log.e(this.getClass().toString(), e.getMessage());
+                    }
 
-                    // Update the UI to display the sent message
-                    updateChatViewWithSentMessage(messageText);
-
-                    // Clear the input field after sending the message
-                    messageEditText.setText("");
                 }
             }
         });
@@ -122,20 +118,5 @@ public class ActiveChatActivity extends AppCompatActivity {
 //        //...
 //        return messages;
 //    }
-
-    private void sendMessageToRecipient(String message) {
-        // TODO
-        // Perform actions to send the message to the recipient
-        // For example, make a network request or update the database
-        // Implement your specific logic here
-    }
-
-    private void updateChatViewWithSentMessage(String message) {
-        // TODO
-        // Update the UI to display the sent message
-        // For example, append the message to a RecyclerView or update a TextView
-        // Implement your specific logic here
-    }
-
 
 }

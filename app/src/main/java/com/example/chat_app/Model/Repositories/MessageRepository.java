@@ -30,8 +30,15 @@ public class MessageRepository {
         // TODO: use ChatAPI instead of messageDAO
     }
 
-    public void insertMessage(Message message) {
-        dbExecutor.execute(() -> messageDao.insertMessage(message));
+//    public void insertMessage(Message message) {
+//        dbExecutor.execute(() -> messageDao.insertMessage(message));
+//    }
+
+    public void sendMessage(int chatId, String message) {
+        dbExecutor.execute(() -> {
+            messageAPI.sendMessage(chatId, message);
+            reloadChatMessages(chatId);
+        });
     }
 
     public void insertMessages(List<Message> messages) {
@@ -62,6 +69,7 @@ public class MessageRepository {
 //    }
 
     public LiveData<List<Message>> getMessagesByChatId(int chatId) {
+        reloadChatMessages(chatId);
         return messageDao.getMessagesByChatId(chatId);
     }
     public void reloadChatMessages(int chatId) {
@@ -70,11 +78,5 @@ public class MessageRepository {
         });
     }
 
-    public void sendMessage(Message message) {
-        dbExecutor.execute(() -> {
-            messageAPI.sendMessage(message);
-            reloadChatMessages(message.getChatId());
-        });
-    }
 }
 

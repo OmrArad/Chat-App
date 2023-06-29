@@ -2,6 +2,7 @@ package com.example.chat_app.API;
 
 import com.example.chat_app.API.Auth.AuthUtil;
 import com.example.chat_app.API.Entities.ApiMessage;
+import com.example.chat_app.API.Entities.SendMessage;
 import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Repositories.MessageRepository;
 import com.example.chat_app.MyApplication;
@@ -65,23 +66,21 @@ public class MessageAPI {
         });
     }
 
-    public void sendMessage(Message newMessage) {
-        Call<Void> call = webServiceAPI.addMessageToChat(newMessage.getId(), new ApiMessage(newMessage));
+    public void sendMessage(int chatId, String content) {
+        Call<Void> call = webServiceAPI.sendMessage(chatId, new SendMessage(content));
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    // Handle successful insertion
-                } else {
-                    // Handle unsuccessful response
+                if (!response.isSuccessful()) {
+                    // throw exception on unsuccessful request
+                    throw new RuntimeException("error: message not sent");
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Handle network failure
-            }
+                throw new RuntimeException("error: network failure");            }
         });
     }
 }
