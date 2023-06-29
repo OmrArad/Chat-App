@@ -51,6 +51,7 @@ public class LoginActivity extends BaseActivity {
         });
 
     }
+
     private boolean validateForm() {
         EditText etUsername = findViewById(R.id.etUsername);
         EditText etPassword = findViewById(R.id.etPassword);
