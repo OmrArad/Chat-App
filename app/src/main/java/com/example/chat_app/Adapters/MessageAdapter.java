@@ -1,6 +1,5 @@
 package com.example.chat_app.Adapters;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.R;
-import com.example.chat_app.SessionInfo;
+import com.example.chat_app.SessionManager;
 
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         if (messageList != null && position < messageList.size()) {
             Message message = messageList.get(position);
 
-            if (message.getSender().getUsername() == SessionInfo.getCurrentUser().getUsername()) {
+            if (message.getSender().getUsername() == SessionManager.getCurrentUser().getUsername()) {
                 // Outgoing message
                 holder.layoutIncoming.setVisibility(View.GONE);
                 holder.layoutOutgoing.setVisibility(View.VISIBLE);
