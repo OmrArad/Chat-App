@@ -1,6 +1,8 @@
 package com.example.chat_app.Model.Entities;
 
-public class UserDetails {
+import java.io.Serializable;
+
+public class UserDetails implements Serializable {
     private String username;
     private String displayName;
     private String profilePic;

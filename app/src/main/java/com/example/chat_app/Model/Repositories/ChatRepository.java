@@ -1,6 +1,7 @@
 package com.example.chat_app.Model.Repositories;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -34,37 +35,57 @@ public class ChatRepository {
         dbExecutor.execute(() -> chatDao.insertChat(chat));
     }
 
+    public void addContact(String username) {
+        dbExecutor.execute(() -> {
+            try {
+                chatAPI.addContact(username);
+                chatAPI.getAllChats();
+            } catch (Exception e) {
+                Log.e(this.getClass().getSimpleName(), e.getMessage());
+            }
+        });
+    }
+
     public void insertChats(List<Chat> chats) {
         // use chatApi
         dbExecutor.execute(() -> chatDao.insertChats(chats));
     }
 
-    public void deleteChatById(int chatId) {
-        dbExecutor.execute(() -> {
-            Chat chat = chatDao.getChatById(chatId).getValue();
-            chatDao.deleteChat(chat);
-        });
-    }
+//    public void deleteChatById(int chatId) {
+//        dbExecutor.execute(() -> {
+//            Chat chat = chatDao.getChatById(chatId).getValue();
+//            chatDao.deleteChat(chat);
+//        });
+//    }
 
     public void deleteChat(Chat chat) {
-        // use chatApi
-        dbExecutor.execute(() -> chatDao.deleteChat(chat));
+        dbExecutor.execute(() -> {
+            // delete chat from room
+            chatDao.deleteChat(chat);
+            // delete chat from server
+            try {
+                chatAPI.deleteChatById(chat.getId());
+            } catch (Exception e) {
+                Log.e(this.getClass().getSimpleName(), e.getMessage());
+            }
+            this.reload();
+        });
     }
 
     public void reload() {
         chatAPI.getAllChats();
     }
 
-    public void deleteAllChats() {
-        dbExecutor.execute(chatDao::deleteAllChats);
-    }
+//    public void deleteAllChats() {
+//        dbExecutor.execute(chatDao::deleteAllChats);
+//    }
 
     public LiveData<List<Chat>> getAllChats() {
         return allChats;
     }
 
-    public LiveData<Chat> getChatById(int chatId) {
-        return chatDao.getChatById(chatId);
-    }
+//    public LiveData<Chat> getChatById(int chatId) {
+//        return chatDao.getChatById(chatId);
+//    }
 }
 

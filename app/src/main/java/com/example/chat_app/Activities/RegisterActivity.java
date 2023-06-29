@@ -1,15 +1,12 @@
-package com.example.chat_app;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.chat_app.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserNamePass;
-import com.example.chat_app.API.Entities.UserPass;
 import com.example.chat_app.API.RegisterAPI;
 import com.example.chat_app.databinding.ActivityRegisterBinding;
 
@@ -18,7 +15,7 @@ public class RegisterActivity extends BaseActivity {
 
     private ActivityRegisterBinding binding;
 
-    private RegisterAPI registerAPI;
+    private static RegisterAPI registerAPI = new RegisterAPI();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +23,7 @@ public class RegisterActivity extends BaseActivity {
 
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         binding.btnRegister.setOnClickListener(v -> {
             // Perform validation here
@@ -38,15 +36,18 @@ public class RegisterActivity extends BaseActivity {
                 String picture = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50";
 
                 // Create a new user object
-                UserDetails user = new UserDetails(username, password, displayName);
-                UserNamePass user1 = new UserNamePass(username, password, displayName, picture);
-                UserPass user2 = new UserPass(username, password);
+                UserNamePass newUser = new UserNamePass(username, password, displayName, picture);
 
                 // Call the API
+                try {
+                    registerAPI.register(newUser);
+                } catch (Exception e) {
+                    // log the error
+                    Log.e("RegisterActivity", e.getMessage());
+                    // TODO: display error to user
+                }
 
-
-
-                // Handle the response
+                // TODO: Handle the response
 
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);

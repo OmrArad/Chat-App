@@ -10,40 +10,40 @@
         <!-- Activities -->
 
         <activity
-            android:name=".ContactsPage.AddContactActivity"
+            android:name=".Activities.ContactsPage.AddContactActivity"
             android:exported="false"
             android:windowNoTitle="true"
             android:label="Add Contact"/>
 
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Activities.SettingsActivity"
             android:exported="false"
             android:windowNoTitle="true"
             android:label="Settings"/>
 
         <activity
-            android:name=".ActiveChatActivity"
+            android:name=".Activities.ActiveChatActivity"
             android:exported="false"
             android:windowNoTitle="true"
             android:label="Chat"/>
 
         <activity
-            android:name=".ContactsPage.ContactsActivity"
+            android:name=".Activities.ContactsPage.ChatsActivity"
             android:windowNoTitle="true"
             android:label="Contacts"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
 
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:exported="false"
             android:windowNoTitle="true"
             android:label="Register"
             />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:label="Login"
             android:exported="true">
             <intent-filter>

@@ -6,7 +6,7 @@ import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserPass;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
-import com.example.chat_app.SessionInfo;
+import com.example.chat_app.SessionManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,7 +74,7 @@ public class LoginAPI {
                 if (response.isSuccessful()) {
                     // Handle successful response
                     UserDetails userDetails = response.body();
-                    SessionInfo.setCurrentUser(userDetails);
+                    SessionManager.setCurrentUser(userDetails);
 
                 } else {
                     // TODO: Handle unsuccessful response
