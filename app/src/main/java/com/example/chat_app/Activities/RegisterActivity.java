@@ -28,12 +28,10 @@ public class RegisterActivity extends BaseActivity {
         binding.btnRegister.setOnClickListener(v -> {
             // Perform validation here
             if (validateForm()) {
-                // use the API to register the user
                 String username = binding.etUsername.getText().toString().trim();
                 String password = binding.etPassword.getText().toString().trim();
                 String displayName = binding.etDisplayName.getText().toString().trim();
-                //replace with the picture from the user
-                String picture = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50";
+                String picture = binding.imageViewProfile.toString().trim();
 
                 // Create a new user object
                 UserNamePass newUser = new UserNamePass(username, password, displayName, picture);
@@ -46,9 +44,7 @@ public class RegisterActivity extends BaseActivity {
                     Log.e("RegisterActivity", e.getMessage());
                     // TODO: display error to user
                 }
-
                 // TODO: Handle the response
-
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
             }

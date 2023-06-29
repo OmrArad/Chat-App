@@ -20,7 +20,7 @@ import com.example.chat_app.Activities.ContactsPage.ChatsActivity;
 import com.example.chat_app.Adapters.ChatsAdapter;
 import com.example.chat_app.Adapters.MessageAdapter;
 import com.example.chat_app.Model.Entities.Chat;
-import com.example.chat_app.Model.Entities.Contact;
+
 import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.R;
