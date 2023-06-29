@@ -10,7 +10,6 @@ import android.widget.EditText;
 
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserNamePass;
-import com.example.chat_app.API.Entities.UserPass;
 import com.example.chat_app.API.RegisterAPI;
 import com.example.chat_app.databinding.ActivityRegisterBinding;
 
@@ -19,14 +18,12 @@ public class RegisterActivity extends BaseActivity {
 
     private ActivityRegisterBinding binding;
 
-    private RegisterAPI registerAPI = new RegisterAPI();;
+    private RegisterAPI registerAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
-
+        registerAPI = new RegisterAPI();
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -49,95 +46,30 @@ public class RegisterActivity extends BaseActivity {
     private boolean validateForm() {
         EditText etUsername = binding.etUsername;
         EditText etPassword = binding.etPassword;
-        EditText etVerifyPassword = binding.etVerifyPassword;
         EditText etDisplayName = binding.etDisplayName;
 
-        String username = etUsername.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-        String verifyPassword = etVerifyPassword.getText().toString().trim();
-        String displayName = etDisplayName.getText().toString().trim();
-
-        boolean hasError = false;
-
-        // Validate username
-        if (username.isEmpty()) {
-            etUsername.setError("Username required");
-            etUsername.requestFocus();
-            hasError = true;
-        } else if (username.length() < 5) {
-            etUsername.setError("Name must contain at least 5 characters");
-            etUsername.requestFocus();
-            hasError = true;
-        } // User-Already-Exists case is handled in handleRegistration
-
-        // Validate password
-        if (password.isEmpty()) {
-            etPassword.setError("Password required");
-            etPassword.requestFocus();
-            hasError = true;
-        } else if (password.length() < 8) {
-            etPassword.setError("Password must contain 8 characters");
-            etPassword.requestFocus();
-            hasError = true;
+        // Validate the fields (you can add more validation rules if needed)
+        if (etUsername.getText().toString().isEmpty()) {
+            etUsername.setError("Please enter a username");
+            return false;
         }
 
-        // Verify password
-        if (verifyPassword.isEmpty()) {
-            etVerifyPassword.setError("Please verify password");
-            etVerifyPassword.requestFocus();
-            hasError = true;
-        } else if (!password.equals(verifyPassword)) {
-            etVerifyPassword.setError("Given passwords do not match");
-            etVerifyPassword.requestFocus();
-            hasError = true;
+        if (etPassword.getText().toString().isEmpty()) {
+            etPassword.setError("Please enter a password");
+            return false;
         }
 
-        // Validate display name
-        if (displayName.isEmpty()) {
-            etDisplayName.setError("Display name required");
-            etDisplayName.requestFocus();
-            hasError = true;
+        if (etDisplayName.getText().toString().isEmpty()) {
+            etDisplayName.setError("Please enter a display name");
+            return false;
         }
 
-        // Validate picture
-
-
-        return !hasError;
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
+        return true;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    public void onLoginClicked(View view) {
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
+        binding = null;
     }
 }

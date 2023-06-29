@@ -13,6 +13,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -56,6 +58,15 @@ public interface WebServiceAPI {
     Call<UserDetails> register(@Body UserNamePass formData);
 
     ////////// implement all API methods like the ones above ///////////
-
+    @FormUrlEncoded
+    @POST("Users")
+    default Call<UserDetails> register(
+            @Field("username") String username,
+            @Field("password") String password,
+            @Field("display_name") String displayName,
+            @Field("picture") String picture
+    ) {
+        return null;
+    }
 
 }
