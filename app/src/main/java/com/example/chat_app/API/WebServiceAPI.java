@@ -51,8 +51,9 @@ public interface WebServiceAPI {
     @GET("Users/{username}")
     Call<UserDetails> getUserDetails(@Path("username") String username);
 
+
     @POST("Users")
-    Call<UserDetails> register(UserNamePass formData);
+    Call<UserDetails> register(@Body UserNamePass userNamePass);
 
     ////////// implement all API methods like the ones above ///////////
 

@@ -1,5 +1,9 @@
 package com.example.chat_app.API;
 
+import static android.util.Log.e;
+
+import android.util.Log;
+
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserNamePass;
 import com.example.chat_app.MyApplication;
@@ -11,7 +15,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 public class RegisterAPI {
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
@@ -41,13 +44,14 @@ public class RegisterAPI {
                     throw new RuntimeException("Registration failed: " + errorMessage);
                 }
             }
+
             @Override
             public void onFailure(Call<UserDetails> call, Throwable t) {
                 // Handle network failure
+                String errorMessage = "Registration failed: " + t.getMessage();
+                e("RegisterAPI", errorMessage);
                 throw new RuntimeException("Registration failed: network error");
             }
         });
     }
-
-
 }
