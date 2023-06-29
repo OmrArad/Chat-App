@@ -4,9 +4,11 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "chats")
-public class Chat {
-    @PrimaryKey
+public class Chat implements Serializable {
+    @PrimaryKey//(autoGenerate = true)
     private int id;
 
     @Embedded

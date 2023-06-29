@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.chat_app.Model.Entities.Chat;
 import com.example.chat_app.Model.Entities.Contact;
 
 public class ActiveChatActivity extends BaseActivity {
@@ -25,12 +26,12 @@ public class ActiveChatActivity extends BaseActivity {
         // Get the selected contact from the intent
         Intent intent = getIntent();
         if (intent != null) {
-            Contact contact = (Contact) intent.getSerializableExtra("contact");
+            Chat contact = (Chat) intent.getSerializableExtra("contact");
 
             if (contact != null) {
                 // Display the contact details on the screen
-                profilePic.setImageResource(contact.getProfilePic());
-                displayName.setText(contact.getDisplayName());
+                profilePic.setImageResource(contact.getContact().getProfilePic()); // fix profile pic
+                displayName.setText(contact.getContact().getDisplayName());
             }
         }
     }
