@@ -59,13 +59,13 @@ public class LoginAPI {
                     } else {
                         // You can extract the error message from the response if available
                         String errorMessage = response.message();
-                        throw new RuntimeException("authentication error" + errorMessage);
+                        throw new RuntimeException("authentication error: " + errorMessage);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    throw new RuntimeException("authentication error: network failure");
+                    throw new RuntimeException("authentication failure: " + t.getMessage());
                 }
             });
         } catch (Exception e) {
@@ -90,7 +90,7 @@ public class LoginAPI {
                     // Extract the error message from the response if available
                     String errorMessage = response.message();
                     // Log the error message
-                    throw new RuntimeException("login error: " + errorMessage);
+                    throw new RuntimeException("login unsuccessful: " + errorMessage);
                 }
             }
 
