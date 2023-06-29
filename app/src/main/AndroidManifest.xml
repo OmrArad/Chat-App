@@ -22,7 +22,11 @@
             android:exported="false"
             android:windowNoTitle="true"
             android:label="Settings"/>
-
+        <activity
+            android:name=".Activities.SettingsActivityPreLogin"
+            android:exported="false"
+            android:windowNoTitle="true"
+            android:label="Settings"/>
         <activity
             android:name=".Activities.ActiveChatActivity"
             android:exported="false"
