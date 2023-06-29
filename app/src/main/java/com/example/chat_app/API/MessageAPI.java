@@ -1,7 +1,9 @@
 package com.example.chat_app.API;
 
 import com.example.chat_app.API.Auth.AuthUtil;
+import com.example.chat_app.API.Entities.ApiChatMessage;
 import com.example.chat_app.API.Entities.ApiMessage;
+import com.example.chat_app.API.Entities.ChatResponse;
 import com.example.chat_app.API.Entities.SendMessage;
 import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Repositories.MessageRepository;
@@ -37,22 +39,61 @@ public class MessageAPI {
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
-    public void getChatMessages(int chatId) {
-        Call<List<ApiMessage>> call = webServiceAPI.getChatMessages(chatId);
-        // Enqueue the request
-        call.enqueue(new Callback<List<ApiMessage>>() {
-            @Override
-            public void onResponse(Call<List<ApiMessage>> call, Response<List<ApiMessage>> response) {
-                if (response.isSuccessful()) {
-                    List<ApiMessage> apiMessages = response.body();
-                    if (apiMessages != null) {
-                        // convert list of API messages to database messages
-                        List<Message> messages = new ArrayList<>();
-                        for (ApiMessage apiMsg : apiMessages) {
-                            messages.add(new Message(chatId, apiMsg));
-                        }
+//    public void getChatMessages(int chatId) {
+//        Call<List<ApiMessage>> call = webServiceAPI.getChatMessages(chatId);
+//        // Enqueue the request
+//        call.enqueue(new Callback<List<ApiMessage>>() {
+//            @Override
+//            public void onResponse(Call<List<ApiMessage>> call, Response<List<ApiMessage>> response) {
+//                if (response.isSuccessful()) {
+//                    List<ApiMessage> apiMessages = response.body();
+//                    if (apiMessages != null) {
+//                        // convert list of API messages to database messages
+//                        List<Message> messages = new ArrayList<>();
+//                        for (ApiMessage apiMsg : apiMessages) {
+//                            messages.add(new Message(chatId, apiMsg));
+//                        }
+//
+//                        // add new list to repository
+//                        messageRepository.insertMessages(messages);
+//                    }
+//                } else {
+//                    // TODO: Handle unsuccessful response
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<ApiMessage>> call, Throwable t) {
+//                // TODO: Handle network failure
+//            }
+//        });
+//    }
 
-                        // add new list to repository
+        private List<Message> responseToMessageList(ChatResponse response) {
+        int chatId = response.getId();
+        List<Message> newMessageList = new ArrayList<>();
+
+        List<ApiChatMessage> responseMsgs = response.getMessages();
+
+        for (ApiChatMessage msg : responseMsgs) {
+            newMessageList.add(new Message(msg.getId(), chatId, msg.getCreated(), msg.getContent(),
+                    msg.getSender()));
+        }
+        return newMessageList;
+    }
+
+        public void getChatMessages(int chatId) {
+        // Issue the network request
+        Call<ChatResponse> call = webServiceAPI.getChatById(chatId);
+
+        // Enqueue the request
+        call.enqueue(new Callback<ChatResponse>() {
+            @Override
+            public void onResponse(Call<ChatResponse> call, Response<ChatResponse> response) {
+                if (response.isSuccessful()) {
+                    ChatResponse chatResponse = response.body();
+                    if (chatResponse != null) {
+                        List<Message> messages = responseToMessageList(chatResponse);
                         messageRepository.insertMessages(messages);
                     }
                 } else {
@@ -61,11 +102,12 @@ public class MessageAPI {
             }
 
             @Override
-            public void onFailure(Call<List<ApiMessage>> call, Throwable t) {
+            public void onFailure(Call<ChatResponse> call, Throwable t) {
                 // TODO: Handle network failure
             }
         });
     }
+
 
     public void sendMessage(int chatId, String content) {
         Call<Void> call = webServiceAPI.sendMessage(chatId, new SendMessage(content));

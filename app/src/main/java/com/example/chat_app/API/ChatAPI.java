@@ -1,18 +1,14 @@
 package com.example.chat_app.API;
 
 import com.example.chat_app.API.Auth.AuthUtil;
-import com.example.chat_app.API.Entities.ApiMessage;
 import com.example.chat_app.API.Entities.ApiNewContact;
-import com.example.chat_app.API.Entities.ChatResponse;
 import com.example.chat_app.Model.Entities.Chat;
-import com.example.chat_app.Model.Entities.Message;
 import com.example.chat_app.Model.Repositories.ChatRepository;
 import com.example.chat_app.Model.Repositories.MessageRepository;
 import com.example.chat_app.MyApplication;
 import com.example.chat_app.R;
 import com.example.chat_app.Settings.GlobalVariables;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -68,45 +64,45 @@ public class ChatAPI {
         });
     }
 
-    private List<Message> responseToMessageList(ChatResponse response) {
-        int chatId = response.getId();
-        List<Message> newMessageList = new ArrayList<>();
-
-        List<ApiMessage> responseMsgs = response.getMessages();
-
-        for (ApiMessage msg : responseMsgs) {
-            newMessageList.add(new Message(msg.getId(), chatId, msg.getCreated(), msg.getContent(),
-                    msg.getSender()));
-        }
-        return newMessageList;
-    }
+//    private List<Message> responseToMessageList(ChatResponse response) {
+//        int chatId = response.getId();
+//        List<Message> newMessageList = new ArrayList<>();
+//
+//        List<ApiMessage> responseMsgs = response.getMessages();
+//
+//        for (ApiMessage msg : responseMsgs) {
+//            newMessageList.add(new Message(msg.getId(), chatId, msg.getCreated(), msg.getContent(),
+//                    msg.getSender()));
+//        }
+//        return newMessageList;
+//    }
 
     // possibly unnecessary function - getChatMessages is better
-    public void getChatById(int id) {
-        // Issue the network request
-        Call<ChatResponse> call = webServiceAPI.getChatById(id);
-
-        // Enqueue the request
-        call.enqueue(new Callback<ChatResponse>() {
-            @Override
-            public void onResponse(Call<ChatResponse> call, Response<ChatResponse> response) {
-                if (response.isSuccessful()) {
-                    ChatResponse chatResponse = response.body();
-                    if (chatResponse != null) {
-                        List<Message> messages = responseToMessageList(chatResponse);
-                        messageRepository.insertMessages(messages);
-                    }
-                } else {
-                    // TODO: Handle unsuccessful response
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ChatResponse> call, Throwable t) {
-                // TODO: Handle network failure
-            }
-        });
-    }
+//    public void getChatById(int id) {
+//        // Issue the network request
+//        Call<ChatResponse> call = webServiceAPI.getChatById(id);
+//
+//        // Enqueue the request
+//        call.enqueue(new Callback<ChatResponse>() {
+//            @Override
+//            public void onResponse(Call<ChatResponse> call, Response<ChatResponse> response) {
+//                if (response.isSuccessful()) {
+//                    ChatResponse chatResponse = response.body();
+//                    if (chatResponse != null) {
+//                        List<Message> messages = responseToMessageList(chatResponse);
+//                        messageRepository.insertMessages(messages);
+//                    }
+//                } else {
+//                    // TODO: Handle unsuccessful response
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ChatResponse> call, Throwable t) {
+//                // TODO: Handle network failure
+//            }
+//        });
+//    }
 
     public void deleteChatById(int id) {
         Call<Void> call = webServiceAPI.deleteChatById(id);

@@ -40,10 +40,10 @@ public interface WebServiceAPI {
     @POST("Chats/{id}/Messages")
     Call<Void> sendMessage(@Path("id") int id, @Body SendMessage message);
 
-    @DELETE("Chats/{id}")
+    //@DELETE("Chats/{id}")
     Call<Void> deleteContact(@Path("id") int id);
 
-    //@DELETE("Chats/{id}")
+    @DELETE("Chats/{id}")
     Call<Void> deleteChatById(@Path("id") int id);
 
 

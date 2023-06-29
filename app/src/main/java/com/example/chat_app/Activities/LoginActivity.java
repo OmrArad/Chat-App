@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity {
                     // TODO: pass UserDetails as extra
 //                    i.putExtra("userDetails", UserDetails);
                     startActivity(i);
-                } catch (Exception e) {
+                } catch (RuntimeException e) {
                     Log.e("LoginActivity", e.getMessage());
                 }
             }

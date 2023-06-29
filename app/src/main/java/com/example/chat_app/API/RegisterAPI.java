@@ -2,10 +2,10 @@ package com.example.chat_app.API;
 
 import static android.util.Log.e;
 
+
 import com.example.chat_app.Model.Entities.UserDetails;
 import com.example.chat_app.API.Entities.UserNamePass;
 import com.example.chat_app.MyApplication;
-
 import com.example.chat_app.Settings.GlobalVariables;
 
 import retrofit2.Call;

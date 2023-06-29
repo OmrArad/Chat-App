@@ -1,29 +1,29 @@
 package com.example.chat_app.API.Entities;
 
 import com.example.chat_app.Model.Entities.Message;
+import com.example.chat_app.Model.Entities.UserDetails;
 
-
-public class ApiMessage {
+public class ApiChatMessage {
 
     private int id;
 
     private String created;
 
-    private ApiUsername sender;
+    private UserDetails sender;
 
     private String content;
 
-    public ApiMessage(int id, String created, ApiUsername sender, String content) {
+    public ApiChatMessage(int id, String created, UserDetails sender, String content) {
         this.id = id;
         this.created = created;
         this.sender = sender;
         this.content = content;
     }
 
-    public ApiMessage(Message message) {
+    public ApiChatMessage(Message message) {
         this.id = message.getId();
         this.created = message.getCreated();
-        this.sender = new ApiUsername(message.getSender().getUsername());
+        this.sender = message.getSender();
         this.content = message.getContent();
     }
 
@@ -35,7 +35,7 @@ public class ApiMessage {
         return created;
     }
 
-    public ApiUsername getSender() {
+    public UserDetails getSender() {
         return sender;
     }
 
